@@ -285,14 +285,14 @@ Function Generate-PnPSitePermissionRpt()
 $TenantAdminURL = "https://mstestmaadaruh-admin.sharepoint.com"
 Connect-PnPOnline -Url $TenantAdminURL -Interactive -ClientId 74a6b427-e380-4d01-a58f-f49ff95145b9   
 #Get All Site collections - Exclude: Seach Center, Redirect site, Mysite Host, App Catalog, Content Type Hub, eDiscovery and Bot Sites
-$SitesCollections = Get-PnPTenantSite -Identity "https://mstestmaadaruh.sharepoint.com/sites/Training" 
-#$SitesCollections = Get-PnPTenantSite | Where-Object -Property Template -NotIn ("SRCHCEN#0","REDIRECTSIT##E#0", "SPSMSITEHOST#0", "APPCATALOG#0", "POINTPUBLISHINGHUB#0", "EDISC#0", "STS#-1")
+#$SitesCollections = Get-PnPTenantSite -Identity "https://mstestmaadaruh.sharepoint.com/sites/Training" 
+$SitesCollections = Get-PnPTenantSite | Where-Object -Property Template -NotIn ("SRCHCEN#0","REDIRECTSIT##E#0", "SPSMSITEHOST#0", "APPCATALOG#0", "POINTPUBLISHINGHUB#0", "EDISC#0", "STS#-1")
    
 #Loop through each site collection
 ForEach($Site in $SitesCollections)
 {
     #Connect to site collection
-    $SiteConn = Connect-PnPOnline -Url $Site.Url -Interactive -ClientId 74a6b427-e380-4d01-a58f-f49ff95145b9 
+    Connect-PnPOnline -Url $Site.Url -Interactive -ClientId 74a6b427-e380-4d01-a58f-f49ff95145b9 
     Write-host "Generating Report for Site:"$Site.Url
  
     #Call the Function for site collection
