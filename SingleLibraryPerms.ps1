@@ -20,10 +20,10 @@ Function Get-PnPFolderPermission([Microsoft.SharePoint.Client.Folder]$Folder)
             {     
                 #Get the Principal Type: User, SP Group, AD Group  
                 $PermissionType = $RoleAssignment.Member.PrincipalType  
-                $PermissionLevels = $RoleAssignment.RoleDefinitionBindings | Select -ExpandProperty Name  
+                $PermissionLevels = $RoleAssignment.RoleDefinitionBindings | Select-Object -ExpandProperty Name  
     
                 #Remove Limited Access  
-                $PermissionLevels = ($PermissionLevels | Where { $_ -ne "Limited Access"}) -join ","  
+                $PermissionLevels = ($PermissionLevels | Where-Object { $_ -ne "Limited Access"}) -join ","  
                 If($PermissionLevels.Length -eq 0) {Continue}  
     
                 #Get SharePoint group members  
@@ -35,7 +35,7 @@ Function Get-PnPFolderPermission([Microsoft.SharePoint.Client.Folder]$Folder)
                     
                     #Leave Empty Groups  
                     If($GroupMembers.count -eq 0){Continue}  
-                    If($GroupName -notlike "*System Account*" -and $GroupName -notlike "*SharingLinks*" -and $GroupName -notlike "*tenant*" -and $GroupName -notlike `  
+                    If($GroupName -notlike "*System Account*" -and $GroupName -notlike "*SharingLinks*" -and $GroupName -notlike "*tenant*" -and $GroupName -notlike `
                         "Excel Services Viewers" -and $GroupName -notlike "Restricted Readers" -and  $GroupName -notlike "Records Center Web Service Submitters for records")  
                     {  
                         ForEach($User in $GroupMembers)  
