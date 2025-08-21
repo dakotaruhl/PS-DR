@@ -83,9 +83,12 @@ Function Get-PnPFolderPermission([Microsoft.SharePoint.Client.Folder]$Folder)
 # Parameters  
 $SiteURL="https://enchantedrock.sharepoint.com/sites/erintranet"
 $ReportFile="C:\Users\DakotaRuhl\Documents\PnP\SingleSitePerms.csv"  
-$FolderSiteRelativeURL = "/Human Resources"  #Folder Site Relative URL (e.g. for 'https://contoso.sharepoint.com/sites/test/Shared Documents/General', it is '/Shared Documents/General')
+$FolderSiteRelativeURL = "/Events Library"  #Folder Site Relative URL (e.g. for 'https://contoso.sharepoint.com/sites/test/Shared Documents/General', it is '/Shared Documents/General')
     
-#Connect to the Site collection  
+#Connect to the Site collection
+
+#May need to connect Admin Site first? 
+#Connect-PnPOnline -URL "https://enchantedrock-admin.sharepoint.com" -Interactive -ClientId 4ac6eede-e81e-4d22-abad-0d43c51486f2
 Connect-PnPOnline -URL $SiteURL -Interactive -ClientId 4ac6eede-e81e-4d22-abad-0d43c51486f2
    
 #Delete the file, If already exist!  
@@ -96,5 +99,5 @@ $Folder = Get-PnPFolder -Url $FolderSiteRelativeURL
 $SubFolders = Get-PnPFolderItem -FolderSiteRelativeUrl $FolderSiteRelativeURL -ItemType Folder -Recursive  
    
 #Call the function to generate folder permission report  
-Get-PnPFolderPermission $Folder  
+Get-PnPFolderPermission $Folder
 $SubFolders | ForEach-Object { Get-PnPFolderPermission $_ }
