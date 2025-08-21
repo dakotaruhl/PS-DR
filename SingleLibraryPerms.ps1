@@ -2,6 +2,10 @@
 Function Get-PnPFolderPermission([Microsoft.SharePoint.Client.Folder]$Folder)  
 {  
     Try {  
+
+        #load folder collection
+        $folder.RefreshLoad()
+
         #Get permissions assigned to the Folder  
         Get-PnPProperty -ClientObject $Folder.ListItemAllFields -Property HasUniqueRoleAssignments, RoleAssignments  
     
@@ -77,18 +81,18 @@ Function Get-PnPFolderPermission([Microsoft.SharePoint.Client.Folder]$Folder)
 }  
       
 # Parameters  
-$SiteURL="https://mstestmaadaruh.sharepoint.com/sites/Training"  
-$ReportFile="C:\Users\dakot\Documents\PnP\Libraries\FolderPermissionRpt.csv"  
-$FolderSiteRelativeURL = "/Shared Documents"  #Folder Site Relative URL (e.g. for 'https://contoso.sharepoint.com/sites/test/Shared Documents/General', it is '/Shared Documents/General')
+$SiteURL="https://enchantedrock.sharepoint.com/sites/erintranet"
+$ReportFile="C:\Users\DakotaRuhl\Documents\PnP\SingleSitePerms.csv"  
+$FolderSiteRelativeURL = "/Human Resources"  #Folder Site Relative URL (e.g. for 'https://contoso.sharepoint.com/sites/test/Shared Documents/General', it is '/Shared Documents/General')
     
 #Connect to the Site collection  
-Connect-PnPOnline -URL $SiteURL -Interactive -ClientId 74a6b427-e380-4d01-a58f-f49ff95145b9
+Connect-PnPOnline -URL $SiteURL -Interactive -ClientId 4ac6eede-e81e-4d22-abad-0d43c51486f2
    
 #Delete the file, If already exist!  
 If (Test-Path $ReportFile) { Remove-Item $ReportFile }  
    
 #Get the Folder and all Subfolders from URL  
-$Folder = Get-PnPFolder -Url $FolderSiteRelativeURL  
+$Folder = Get-PnPFolder -Url $FolderSiteRelativeURL
 $SubFolders = Get-PnPFolderItem -FolderSiteRelativeUrl $FolderSiteRelativeURL -ItemType Folder -Recursive  
    
 #Call the function to generate folder permission report  

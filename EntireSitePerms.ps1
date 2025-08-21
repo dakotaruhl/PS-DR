@@ -282,8 +282,8 @@ Function Generate-PnPSitePermissionRpt()
    }
 }
 #Connect to Admin Center
-$TenantAdminURL = "https://mstestmaadaruh-admin.sharepoint.com"
-Connect-PnPOnline -Url $TenantAdminURL -Interactive -ClientId 74a6b427-e380-4d01-a58f-f49ff95145b9   
+$TenantAdminURL = "https://enchantedrock-admin.sharepoint.com/"
+Connect-PnPOnline -Url $TenantAdminURL -Interactive -ClientId 4ac6eede-e81e-4d22-abad-0d43c51486f2 
 #Get All Site collections - Exclude: Seach Center, Redirect site, Mysite Host, App Catalog, Content Type Hub, eDiscovery and Bot Sites
 #$SitesCollections = Get-PnPTenantSite -Identity "https://mstestmaadaruh.sharepoint.com/sites/Training" 
 $SitesCollections = Get-PnPTenantSite | Where-Object -Property Template -NotIn ("SRCHCEN#0","REDIRECTSIT##E#0", "SPSMSITEHOST#0", "APPCATALOG#0", "POINTPUBLISHINGHUB#0", "EDISC#0", "STS#-1")
