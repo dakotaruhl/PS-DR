@@ -7,7 +7,9 @@ Function Get-PnPFolderPermission([Microsoft.SharePoint.Client.Folder]$Folder)
         $folder.RefreshLoad()
 
         #Get permissions assigned to the Folder  
-        Get-PnPProperty -ClientObject $Folder.ListItemAllFields -Property HasUniqueRoleAssignments, RoleAssignments  
+        #Get-PnPProperty -ClientObject $Folder.ListItemAllFields -Property HasUniqueRoleAssignments, RoleAssignments
+        Get-PnPProperty -ClientObject $Folder.ListItemAllFields -Property RoleAssignments
+        Get-PnPProperty -ClientObject $Folder.ListItemAllFields.RoleAssignments -Property RoleDefinitionBindings, Member
     
         #Check if Folder has unique permissions  
         $HasUniquePermissions = $Folder.ListItemAllFields.HasUniqueRoleAssignments  
@@ -83,7 +85,7 @@ Function Get-PnPFolderPermission([Microsoft.SharePoint.Client.Folder]$Folder)
 # Parameters  
 $SiteURL="https://enchantedrock.sharepoint.com/sites/erintranet"
 $ReportFile="C:\Users\DakotaRuhl\Documents\PnP\SingleSitePerms.csv"  
-$FolderSiteRelativeURL = "/Events Library"  #Folder Site Relative URL (e.g. for 'https://contoso.sharepoint.com/sites/test/Shared Documents/General', it is '/Shared Documents/General')
+$FolderSiteRelativeURL = "IT Corporate/ERP Selection"  #Folder Site Relative URL (e.g. for 'https://contoso.sharepoint.com/sites/test/Shared Documents/General', it is '/Shared Documents/General')
     
 #Connect to the Site collection
 
@@ -96,8 +98,8 @@ If (Test-Path $ReportFile) { Remove-Item $ReportFile }
    
 #Get the Folder and all Subfolders from URL  
 $Folder = Get-PnPFolder -Url $FolderSiteRelativeURL
-$SubFolders = Get-PnPFolderItem -FolderSiteRelativeUrl $FolderSiteRelativeURL -ItemType Folder -Recursive  
-   
+$SubFolders = Get-PnPFolderItem -FolderSiteRelativeUrl $FolderSiteRelativeURL -ItemType Folder -Recursive
+
 #Call the function to generate folder permission report  
 Get-PnPFolderPermission $Folder
 $SubFolders | ForEach-Object { Get-PnPFolderPermission $_ }
