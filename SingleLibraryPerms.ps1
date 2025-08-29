@@ -85,7 +85,8 @@ Function Get-PnPFolderPermission([Microsoft.SharePoint.Client.Folder]$Folder)
 # Parameters  
 $SiteURL="https://enchantedrock.sharepoint.com/sites/erintranet"
 $ReportFile="C:\Users\DakotaRuhl\Documents\PnP\SingleSitePerms.csv"  
-$FolderSiteRelativeURL = "IT Corporate/ERP Selection"  #Folder Site Relative URL (e.g. for 'https://contoso.sharepoint.com/sites/test/Shared Documents/General', it is '/Shared Documents/General')
+#Folder Site Relative URL (e.g. for 'https://contoso.sharepoint.com/sites/test/Shared Documents/General', it is '/Shared Documents/General')
+$FolderSiteRelativeURL = "/Tech Wiki"  
     
 #Connect to the Site collection
 
