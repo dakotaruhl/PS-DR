@@ -2,7 +2,7 @@
 Import-Module Microsoft.Online.SharePoint.PowerShell -UseWindowsPowerShell
 
 #Connect SPO Site
-Connect-SPOService -Url https://enchantedrock-admin.sharepoint.com -Credential admin-dr@enchantedrock.com
+Connect-SPOService -Url https://enchantedrock-admin.sharepoint.com
 
 #Generate a version storage usage report for a site or OneDrive account 	
 New-SPOSiteFileVersionExpirationReportJob -Identity $siteUrl -ReportUrl $reportUrl
