@@ -21,7 +21,6 @@ $Schedule |
   To run this report, include mandatory parameters for ImportPath and ExportPath. Example:
     .\ScheduleUpdate_Auto.ps1 -ImportPath "C:\Path\To\VersionUsageReport.csv" -ExportPath "C:\Path\To\ScheduleUpdateReport.csv"
 
-
+    .\ScheduleUpdate_Auto.ps1 -ImportPath "C:\Users\DakotaRuhl\Documents\Reports\VersionStorageUsageReport.csv" -ExportPath "C:\Users\DakotaRuhl\Documents\Reports\WhatIfAutoVH.csv"
   #>
 
-.\ScheduleUpdate_Auto.ps1 -ImportPath "C:\Users\DakotaRuhl\Documents\Reports\VersionStorageUsageReport.csv" -ExportPath "C:\Users\DakotaRuhl\Documents\Reports\WhatIfAutoVH.csv"
