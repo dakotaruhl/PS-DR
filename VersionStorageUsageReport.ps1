@@ -4,10 +4,8 @@ Import-Module Microsoft.Online.SharePoint.PowerShell -UseWindowsPowerShell
 #Connect SPO Site
 Connect-SPOService -Url https://enchantedrock-admin.sharepoint.com
 
-#Configure Target Site and Report URL
+#Configure Target Site
 $siteUrl = "https://enchantedrock.sharepoint.com/sites/erintranet"
-$reportUrl = "https://enchantedrock.sharepoint.com/sites/erintranet/IT Corporate/Reports in progress - restricted/VersionStorageUsageReport_EPCLibrary.csv"
-$libName = "EPC"
 
 <#
 #Generate a version storage usage report for a site or OneDrive account 	
@@ -31,6 +29,7 @@ New-SPOListFileVersionExpirationReportJob -Site $siteUrl -List $libName -ReportU
 
 $libName = "EPC"
 $reportUrl = "https://enchantedrock.sharepoint.com/sites/erintranet/IT Corporate/Reports in progress - restricted/VersionStorageUsageReport_EPCLibrary.csv"
+Get-SPOListFileVersionExpirationReportJobProgress -Site $siteUrl -List $libName -ReportUrl $reportUrl
 $libName = "O&M"	
 $reportUrl = "https://enchantedrock.sharepoint.com/sites/erintranet/IT Corporate/Reports in progress - restricted/VersionStorageUsageReport_OMLibrary.csv"
 Get-SPOListFileVersionExpirationReportJobProgress -Site $siteUrl -List $libName -ReportUrl $reportUrl
