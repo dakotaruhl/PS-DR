@@ -26,11 +26,13 @@ New-SPOListFileVersionExpirationReportJob -Site $siteUrl -List $libName -ReportU
 
 #Track progress of the job to generate report for a library 
 #Current Jobs
-
 $libName = "EPC"
 $reportUrl = "https://enchantedrock.sharepoint.com/sites/erintranet/IT Corporate/Reports in progress - restricted/VersionStorageUsageReport_EPCLibrary.csv"
 Get-SPOListFileVersionExpirationReportJobProgress -Site $siteUrl -List $libName -ReportUrl $reportUrl
+
+<#Completed Jobs
 $libName = "O&M"	
 $reportUrl = "https://enchantedrock.sharepoint.com/sites/erintranet/IT Corporate/Reports in progress - restricted/VersionStorageUsageReport_OMLibrary.csv"
 Get-SPOListFileVersionExpirationReportJobProgress -Site $siteUrl -List $libName -ReportUrl $reportUrl
+#>
 
