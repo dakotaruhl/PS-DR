@@ -7,9 +7,6 @@ Function Get-PnPFolderPermission([Microsoft.SharePoint.Client.Folder]$Folder)
         $ctx.Load($folder.ListItemAllFields)
         $ctx.ExecuteQuery()
 
-        $folder.ListItemAllFields
-
-
         # Then load HasUniqueRoleAssignments and RoleAssignments
         Get-PnPProperty -ClientObject $Folder.ListItemAllFields -Property HasUniqueRoleAssignments
         Get-PnPProperty -ClientObject $Folder.ListItemAllFields -Property RoleAssignments
@@ -90,23 +87,35 @@ Function Get-PnPFolderPermission([Microsoft.SharePoint.Client.Folder]$Folder)
     
     
 # Parameters
-$CurrentFolder = "test"
-$ReportFile="C:\Users\DakotaRuhl\Documents\PnPFolderPermissionRpt" + $CurrentFolder + ".csv"
-#Site URL and Folder Relative URL
+
+#Site URL and document library 
 $SiteURL="https://enchantedrock.sharepoint.com/sites/erintranet/"
-$FolderSiteRelativeURL = "/IT Corporate/2. SDSONE"
-  
+$FolderSiteRelativeURL = "/IT Corporate" 
+
 #Connect to the Site collection
 Connect-PnPOnline -URL $SiteURL -Interactive -ClientId 4ac6eede-e81e-4d22-abad-0d43c51486f2
- 
-#Delete the file, If already exist!
-If (Test-Path $ReportFile) { Remove-Item $ReportFile }
- 
-#Get the Folder and all Subfolders from URL
+
+
+#Initialize collection of library, removed -recursive to get top level folders only
 $Folder = Get-PnPFolder -Url $FolderSiteRelativeURL
-$SubFolders = Get-PnPFolderItem -FolderSiteRelativeUrl $FolderSiteRelativeURL -ItemType Folder -Recursive
+$SubFolders = Get-PnPFolderItem -FolderSiteRelativeUrl $FolderSiteRelativeURL -ItemType Folder
+
+#Run permission report function for each top level folder
+foreach ($SubFolder in $SubFolders) {
+    $FolderSiteRelativeURL = "/IT Corporate/" + $SubFolder.Name
+    $ReportFile="C:\Users\DakotaRuhl\Documents\PnPFolderPermissionRpt" + ($SubFolder.Name -replace " ", "_") + ".csv"
+    write-host -f Yellow "`nGenerating Permission Report for Folder '$($SubFolder.Name)' at '$($FolderSiteRelativeURL)'"
+
+    #Delete the file, If already exist!
+    If (Test-Path $ReportFile) { Remove-Item $ReportFile }
+
+    #Get the Folder and all Subfolders from URL
+    $Folder = Get-PnPFolder -Url $FolderSiteRelativeURL
+    $SubFoldersRecursive = Get-PnPFolderItem -FolderSiteRelativeUrl $FolderSiteRelativeURL -ItemType Folder -Recursive
  
-#Call the function to generate folder permission report
-Get-PnPFolderPermission $Folder
-$SubFolders | ForEach-Object { Get-PnPFolderPermission $_ }
+    #Call the function to generate folder permission report
+    Get-PnPFolderPermission $Folder
+    $SubFoldersRecursive | ForEach-Object { Get-PnPFolderPermission $_ }
+}
+
 
