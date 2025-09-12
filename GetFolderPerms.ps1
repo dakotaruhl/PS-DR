@@ -116,6 +116,7 @@ function Merge-CsvFiles
     $combinedData | Export-Csv -Path $outputFilePath -NoTypeInformation
 }      
 ##Parameters
+##  install-module sharepointpnpPowerShellOnline -scope currentuser -allowclobber (maybe required old version?)
 #Site URL and document library (Change the value for relativeURL to the targeted Doc Library)
 $SiteURL="https://enchantedrock.sharepoint.com/sites/erintranet/"
 $FolderSiteRelativeURL = "/IT Corporate" 
