@@ -1,64 +1,110 @@
-#Load SharePoint CSOM Assemblies
-Add-Type -Path "C:\Program Files\Common Files\Microsoft Shared\Web Server Extensions\16\ISAPI\Microsoft.SharePoint.Client.dll"
-Add-Type -Path "C:\Program Files\Common Files\Microsoft Shared\Web Server Extensions\16\ISAPI\Microsoft.SharePoint.Client.Runtime.dll"
-  
-#Function to Get Folder Permissions
-Function Get-SPOFolderPermission([String]$SiteURL, [String]$FolderRelativeURL)
+#Function to Get Permissions Applied on a particular Folder
+Function Get-PnPFolderPermission([Microsoft.SharePoint.Client.Folder]$Folder)
 {
-    Try{
-        #Setup the context
-        $Ctx = New-Object Microsoft.SharePoint.Client.ClientContext($SiteURL)
-        $Ctx.Credentials = New-Object Microsoft.SharePoint.Client.SharePointOnlineCredentials($Cred.Username, $Cred.Password)
-      
-        #Get the Folder
-        $Folder = $Ctx.Web.GetFolderByServerRelativeUrl($FolderRelativeURL)
-        $Ctx.Load($Folder)
-        $Ctx.ExecuteQuery()
- 
-        #Get permissions assigned to the Folder
-        $RoleAssignments = $Folder.ListItemAllFields.RoleAssignments
-        $Ctx.Load($RoleAssignments)
-        $Ctx.ExecuteQuery()
- 
+    Try {
+        # Load ListItemAllFields first
+        $ctx = Get-PnPContext
+        $ctx.Load($folder.ListItemAllFields)
+        $ctx.ExecuteQuery()
+
+        $folder.ListItemAllFields
+
+
+        # Then load HasUniqueRoleAssignments and RoleAssignments
+        Get-PnPProperty -ClientObject $Folder.ListItemAllFields -Property HasUniqueRoleAssignments
+        Get-PnPProperty -ClientObject $Folder.ListItemAllFields -Property RoleAssignments
+
+
+        $RAList = $Folder.ListItemAllFields.RoleAssignments
+
+        #Check if Folder has unique permissions
+        $HasUniquePermissions = $Folder.ListItemAllFields.HasUniqueRoleAssignments
+     
         #Loop through each permission assigned and extract details
         $PermissionCollection = @()
-        Foreach($RoleAssignment in $RoleAssignments)
-        { 
-            $Ctx.Load($RoleAssignment.Member)
-            $Ctx.executeQuery()
+        Foreach($RoleAssignment in $RAList)
+        {
+            #Get the Permission Levels assigned and Member
+            Get-PnPProperty -ClientObject $RoleAssignment -Property RoleDefinitionBindings, Member
  
-            #Get the User Type
-            $PermissionType = $RoleAssignment.Member.PrincipalType
- 
-            #Get the Permission Levels assigned
-            $Ctx.Load($RoleAssignment.RoleDefinitionBindings)
-            $Ctx.ExecuteQuery()
-            $PermissionLevels = ($RoleAssignment.RoleDefinitionBindings | Select-Object -ExpandProperty Name) -join ","
-             
-            #Get the User/Group Name
-            $Name = $RoleAssignment.Member.Title # $RoleAssignment.Member.LoginName
- 
-            #Add the Data to Object
-            $Permissions = New-Object PSObject
-            $Permissions | Add-Member NoteProperty Name($Name)
-            $Permissions | Add-Member NoteProperty Type($PermissionType)
-            $Permissions | Add-Member NoteProperty PermissionLevels($PermissionLevels)
-            $PermissionCollection += $Permissions
+            #Leave the Hidden Permissions
+            If($RoleAssignment.Member.IsHiddenInUI -eq $False)
+            {    
+                #Get the Principal Type: User, SP Group, AD Group
+                $PermissionType = $RoleAssignment.Member.PrincipalType
+                $PermissionLevels = $RoleAssignment.RoleDefinitionBindings | Select -ExpandProperty Name
+  
+                #Remove Limited Access
+                $PermissionLevels = ($PermissionLevels | Where { $_ -ne "Limited Access"}) -join ","
+                If($PermissionLevels.Length -eq 0) {Continue}
+  
+                #Get SharePoint group members
+                If($PermissionType -eq "SharePointGroup")
+                {
+                    #Get Group Members
+                    $GroupName = $RoleAssignment.Member.LoginName
+                    $GroupMembers = Get-PnPGroupMember -Identity $GroupName
+                  
+                    #Leave Empty Groups
+                    If($GroupMembers.count -eq 0){Continue}
+                    If($GroupName -notlike "*System Account*" -and $GroupName -notlike "*SharingLinks*" -and $GroupName -notlike "*tenant*" -and $GroupName -notlike `
+                        "Excel Services Viewers" -and $GroupName -notlike "Restricted Readers" -and  $GroupName -notlike "Records Center Web Service Submitters for records")
+                    { 
+                        ForEach($User in $GroupMembers)
+                        {
+                            #Add the Data to Folder
+                            $Permissions = New-Object PSObject
+                            $Permissions | Add-Member NoteProperty FolderName($Folder.Name)
+                            $Permissions | Add-Member NoteProperty FolderURL($Folder.ServerRelativeUrl)
+                            $Permissions | Add-Member NoteProperty User($User.Title)
+                            $Permissions | Add-Member NoteProperty Type($PermissionType)
+                            $Permissions | Add-Member NoteProperty Permissions($PermissionLevels)
+                            $Permissions | Add-Member NoteProperty GrantedThrough("SharePoint Group: $($RoleAssignment.Member.LoginName)")
+                            $PermissionCollection += $Permissions
+                        }
+                    }
+                }
+                Else
+                {
+                    #Add the Data to Folder
+                    $Permissions = New-Object PSObject
+                    $Permissions | Add-Member NoteProperty FolderName($Folder.Name)
+                    $Permissions | Add-Member NoteProperty FolderURL($Folder.ServerRelativeUrl)
+                    $Permissions | Add-Member NoteProperty User($RoleAssignment.Member.Title)
+                    $Permissions | Add-Member NoteProperty Type($PermissionType)
+                    $Permissions | Add-Member NoteProperty Permissions($PermissionLevels)
+                    $Permissions | Add-Member NoteProperty GrantedThrough("Direct Permissions")
+                    $PermissionCollection += $Permissions
+                }
+            }
         }
-        Return $PermissionCollection
+        #Export Permissions to CSV File
+        $PermissionCollection | Export-CSV $ReportFile -NoTypeInformation -Append
+        Write-host -f Green "`n*** Permissions of Folder '$($Folder.Name)' at '$($Folder.ServerRelativeUrl)' Exported Successfully!***"
+    }   
+        Catch 
+        {
+        write-host -f Red "Error Generating Folder Permission Report!" $_.Exception.Message
+        }
     }
-    Catch {
-    write-host -f Red "Error Getting Folder Permissions!" $_.Exception.Message
-    }
-}
+    
+    
+# Parameters
+$SiteURL="https://enchantedrock.sharepoint.com/sites/erintranet/"
+$ReportFile="C:\Users\DakotaRuhl\Documents\PnPFolderPermissionRpt.csv"
+$FolderSiteRelativeURL = "/IT Corporate/2. SDSONE"
   
-#Set Config Parameters
-#$SiteURL="https://Crescent.sharepoint.com/sites/Marketing"
-$SiteURL="https://enchantedrock.sharepoint.com/sites/erintranet"
-$FolderRelativeURL="/sites/erintranet/Tech Wiki"
-  
-#Get Credentials to connect
-$Cred= Get-Credential
-  
-#Call the function to Get Folder Permissions
-Get-SPOFolderPermission $SiteURL $FolderRelativeURL
+#Connect to the Site collection
+Connect-PnPOnline -URL $SiteURL -Interactive -ClientId 4ac6eede-e81e-4d22-abad-0d43c51486f2
+ 
+#Delete the file, If already exist!
+If (Test-Path $ReportFile) { Remove-Item $ReportFile }
+ 
+#Get the Folder and all Subfolders from URL
+$Folder = Get-PnPFolder -Url $FolderSiteRelativeURL
+$SubFolders = Get-PnPFolderItem -FolderSiteRelativeUrl $FolderSiteRelativeURL -ItemType Folder -Recursive
+ 
+#Call the function to generate folder permission report
+Get-PnPFolderPermission $Folder
+$SubFolders | ForEach-Object { Get-PnPFolderPermission $_ }
+
