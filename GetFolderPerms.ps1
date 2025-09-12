@@ -1,15 +1,16 @@
 #Function to Get Permissions Applied on a particular Folder
 Function Get-PnPFolderPermission([Microsoft.SharePoint.Client.Folder]$Folder)
 {
-    Try {
+    Try 
+    {
         # Load ListItemAllFields first
         $ctx = Get-PnPContext
         $ctx.Load($folder.ListItemAllFields)
         $ctx.ExecuteQuery()
 
         # Then load HasUniqueRoleAssignments and RoleAssignments
-        Get-PnPProperty -ClientObject $Folder.ListItemAllFields -Property HasUniqueRoleAssignments
-        Get-PnPProperty -ClientObject $Folder.ListItemAllFields -Property RoleAssignments
+        $LoadHasUnique = Get-PnPProperty -ClientObject $Folder.ListItemAllFields -Property HasUniqueRoleAssignments
+        $LoadRoleAssignments = Get-PnPProperty -ClientObject $Folder.ListItemAllFields -Property RoleAssignments
 
 
         $RAList = $Folder.ListItemAllFields.RoleAssignments
@@ -22,7 +23,7 @@ Function Get-PnPFolderPermission([Microsoft.SharePoint.Client.Folder]$Folder)
         Foreach($RoleAssignment in $RAList)
         {
             #Get the Permission Levels assigned and Member
-            Get-PnPProperty -ClientObject $RoleAssignment -Property RoleDefinitionBindings, Member
+            $loadPermissionLevel = Get-PnPProperty -ClientObject $RoleAssignment -Property RoleDefinitionBindings, Member
  
             #Leave the Hidden Permissions
             If($RoleAssignment.Member.IsHiddenInUI -eq $False)
@@ -83,20 +84,46 @@ Function Get-PnPFolderPermission([Microsoft.SharePoint.Client.Folder]$Folder)
         {
         write-host -f Red "Error Generating Folder Permission Report!" $_.Exception.Message
         }
-    }
-    
-    
-# Parameters
+}
 
-#Site URL and document library 
+function Merge-CsvFiles 
+{
+    param 
+    (
+        [string]$csvFolderPath,
+        [string]$outputFilePath
+    )
+    #Delete the file, If already exist!
+    If (Test-Path $outputFilePath) { Remove-Item $outputFilePath }
+
+    # Get all CSV files in the specified folder
+    $csvFiles = Get-ChildItem -Path $csvFolderPath -Filter "*.csv"
+
+    # Initialize an empty array to store the combined data
+    $combinedData = @()
+
+    # Loop through each CSV file
+    foreach ($file in $csvFiles) {
+        # Import the content of each CSV file
+        $data = Import-Csv -Path $file.FullName
+
+        # Add the imported data to the combined data array
+        $combinedData += $data
+    }
+
+    # Export the combined data to a new CSV file
+    # -NoTypeInformation prevents the addition of a "#TYPE System.Management.Automation.PSCustomObject" line
+    $combinedData | Export-Csv -Path $outputFilePath -NoTypeInformation
+}      
+##Parameters
+#Site URL and document library (Change the value for relativeURL to the targeted Doc Library)
 $SiteURL="https://enchantedrock.sharepoint.com/sites/erintranet/"
 $FolderSiteRelativeURL = "/IT Corporate" 
 
 #Connect to the Site collection
 Connect-PnPOnline -URL $SiteURL -Interactive -ClientId 4ac6eede-e81e-4d22-abad-0d43c51486f2
 
-
-#Initialize collection of library, removed -recursive to get top level folders only
+#Initialize collection of library. Removed -recursive to get top level folders only
 $Folder = Get-PnPFolder -Url $FolderSiteRelativeURL
 $SubFolders = Get-PnPFolderItem -FolderSiteRelativeUrl $FolderSiteRelativeURL -ItemType Folder
 
@@ -114,8 +141,18 @@ foreach ($SubFolder in $SubFolders) {
     $SubFoldersRecursive = Get-PnPFolderItem -FolderSiteRelativeUrl $FolderSiteRelativeURL -ItemType Folder -Recursive
  
     #Call the function to generate folder permission report
-    Get-PnPFolderPermission $Folder
-    $SubFoldersRecursive | ForEach-Object { Get-PnPFolderPermission $_ }
+    if ($subfolder.Name -ne "Forms") 
+    {
+        Get-PnPFolderPermission $Folder
+        $SubFoldersRecursive | ForEach-Object { Get-PnPFolderPermission $_ }
+    }
 }
 
+#Merge all CSV files into one
+# Define the path to the folder containing your CSV files
+$csvFolderPath = "C:\Users\DakotaRuhl\Documents\Reports\Permission Reports\IT Corporate"
 
+# Define the path and name for the merged output file
+$outputFilePath = "C:\Users\DakotaRuhl\Documents\Reports\Permission Reports\IT Corporate\MergedPermissionsFile.csv"
+
+Merge-CsvFiles -csvFolderPath $csvFolderPath -outputFilePath $outputFilePath
