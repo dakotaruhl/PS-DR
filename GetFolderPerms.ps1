@@ -119,7 +119,7 @@ function Merge-CsvFiles
 ##  install-module sharepointpnpPowerShellOnline -scope currentuser -allowclobber (maybe required old version?)
 #Site URL and document library (Change the value for relativeURL to the targeted Doc Library)
 $SiteURL="https://enchantedrock.sharepoint.com/sites/erintranet/"
-$FolderSiteRelativeURL = "/IT Corporate" 
+$FolderSiteRelativeURL = "/Tech Wiki" 
 
 #Connect to the Site collection
 Connect-PnPOnline -URL $SiteURL -Interactive -ClientId 4ac6eede-e81e-4d22-abad-0d43c51486f2
@@ -127,11 +127,16 @@ Connect-PnPOnline -URL $SiteURL -Interactive -ClientId 4ac6eede-e81e-4d22-abad-0
 #Initialize collection of library. Removed -recursive to get top level folders only
 $Folder = Get-PnPFolder -Url $FolderSiteRelativeURL
 $SubFolders = Get-PnPFolderItem -FolderSiteRelativeUrl $FolderSiteRelativeURL -ItemType Folder
+$TargetLib = $Folder.Name 
+
+#Set initial report path to Doc Library name (make sure to create this folder first, probably?)
+$ReportLibrary = $Folder.Name -replace " ", "_"
+$ReportFileSubString ="C:\Users\DakotaRuhl\Documents\Reports\Permission Reports\$ReportLibrary\PnPFolderPermissionRpt"
 
 #Run permission report function for each top level folder
 foreach ($SubFolder in $SubFolders) {
-    $FolderSiteRelativeURL = "/IT Corporate/" + $SubFolder.Name
-    $ReportFile="C:\Users\DakotaRuhl\Documents\PnPFolderPermissionRpt" + ($SubFolder.Name -replace " ", "_") + ".csv"
+    $FolderSiteRelativeURL = "$TargetLib/" + $SubFolder.Name
+    $ReportFile = $ReportFileSubString + ($SubFolder.Name -replace " ", "_") + ".csv"
     write-host -f Yellow "`nGenerating Permission Report for Folder '$($SubFolder.Name)' at '$($FolderSiteRelativeURL)'"
 
     #Delete the file, If already exist!
@@ -142,18 +147,26 @@ foreach ($SubFolder in $SubFolders) {
     $SubFoldersRecursive = Get-PnPFolderItem -FolderSiteRelativeUrl $FolderSiteRelativeURL -ItemType Folder -Recursive
  
     #Call the function to generate folder permission report
-    if ($subfolder.Name -ne "Forms") 
+    if ($subfolder.Name -ne "Forms" -or $Folder.Name -ne "Forms") 
     {
         Get-PnPFolderPermission $Folder
         $SubFoldersRecursive | ForEach-Object { Get-PnPFolderPermission $_ }
+    }
+    elseif ($Folder.Name -eq "Forms" -or $subfolder.Name -eq "Forms") 
+    {
+        write-host -f Red "`nSkipping Folder at '$($FolderSiteRelativeURL)' as it is a forms folder"
+    } 
+    elseif ($SubFoldersRecursive.Count -eq 0) 
+    {
+        write-host -f Red "`nNo remaining folders found at '$($FolderSiteRelativeURL)'"
     }
 }
 
 #Merge all CSV files into one
 # Define the path to the folder containing your CSV files
-$csvFolderPath = "C:\Users\DakotaRuhl\Documents\Reports\Permission Reports\IT Corporate"
+$csvFolderPath = "C:\Users\DakotaRuhl\Documents\Reports\Permission Reports\$ReportLibrary"
 
 # Define the path and name for the merged output file
-$outputFilePath = "C:\Users\DakotaRuhl\Documents\Reports\Permission Reports\IT Corporate\MergedPermissionsFile.csv"
+$outputFilePath = "C:\Users\DakotaRuhl\Documents\Reports\Permission Reports\$ReportLibrary\MergedPermissionsFile.csv"
 
 Merge-CsvFiles -csvFolderPath $csvFolderPath -outputFilePath $outputFilePath

@@ -1,8 +1,8 @@
 #import PS7 version
-Import-Module Microsoft.Online.SharePoint.PowerShell -UseWindowsPowerShell
+#Import-Module Microsoft.Online.SharePoint.PowerShell -UseWindowsPowerShell
 
 #Connect SPO Site
-Connect-SPOService -Url https://enchantedrock-admin.sharepoint.com
+#Connect-SPOService -Url https://enchantedrock-admin.sharepoint.com
 
 #Configure Target Site
 $siteUrl = "https://enchantedrock.sharepoint.com/sites/erintranet"
