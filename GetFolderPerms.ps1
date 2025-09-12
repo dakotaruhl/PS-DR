@@ -119,7 +119,7 @@ function Merge-CsvFiles
 ##  install-module sharepointpnpPowerShellOnline -scope currentuser -allowclobber (maybe required old version?)
 #Site URL and document library (Change the value for relativeURL to the targeted Doc Library)
 $SiteURL="https://enchantedrock.sharepoint.com/sites/erintranet/"
-$FolderSiteRelativeURL = "/Tech Wiki" 
+$FolderSiteRelativeURL = "/IT Corporate" 
 
 #Connect to the Site collection
 Connect-PnPOnline -URL $SiteURL -Interactive -ClientId 4ac6eede-e81e-4d22-abad-0d43c51486f2
@@ -131,7 +131,7 @@ $TargetLib = $Folder.Name
 
 #Set initial report path to Doc Library name (make sure to create this folder first, probably?)
 $ReportLibrary = $Folder.Name -replace " ", "_"
-$ReportFileSubString ="C:\Users\DakotaRuhl\Documents\Reports\Permission Reports\$ReportLibrary\PnPFolderPermissionRpt"
+$ReportFileSubString ="C:\Users\DakotaRuhl\Documents\Reports\Permission Reports\$ReportLibrary\PnPFolderPermissionRpt_"
 
 #Run permission report function for each top level folder
 foreach ($SubFolder in $SubFolders) {
@@ -169,4 +169,12 @@ $csvFolderPath = "C:\Users\DakotaRuhl\Documents\Reports\Permission Reports\$Repo
 # Define the path and name for the merged output file
 $outputFilePath = "C:\Users\DakotaRuhl\Documents\Reports\Permission Reports\$ReportLibrary\MergedPermissionsFile.csv"
 
-Merge-CsvFiles -csvFolderPath $csvFolderPath -outputFilePath $outputFilePath
+try 
+{
+    Merge-CsvFiles -csvFolderPath $csvFolderPath -outputFilePath $outputFilePath
+    Write-Host -ForegroundColor Yellow "`nMerged CSV File Created Successfully at '$outputFilePath'"
+}
+catch 
+{
+    Write-Host -ForegroundColor Red "`nError Merging CSV Files: $_.Exception.Message"
+}
