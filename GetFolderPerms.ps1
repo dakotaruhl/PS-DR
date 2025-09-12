@@ -90,8 +90,10 @@ Function Get-PnPFolderPermission([Microsoft.SharePoint.Client.Folder]$Folder)
     
     
 # Parameters
+$CurrentFolder = "test"
+$ReportFile="C:\Users\DakotaRuhl\Documents\PnPFolderPermissionRpt" + $CurrentFolder + ".csv"
+#Site URL and Folder Relative URL
 $SiteURL="https://enchantedrock.sharepoint.com/sites/erintranet/"
-$ReportFile="C:\Users\DakotaRuhl\Documents\PnPFolderPermissionRpt.csv"
 $FolderSiteRelativeURL = "/IT Corporate/2. SDSONE"
   
 #Connect to the Site collection
