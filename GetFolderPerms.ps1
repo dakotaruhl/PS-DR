@@ -33,7 +33,7 @@ Function Get-SPOFolderPermission([String]$SiteURL, [String]$FolderRelativeURL)
             #Get the Permission Levels assigned
             $Ctx.Load($RoleAssignment.RoleDefinitionBindings)
             $Ctx.ExecuteQuery()
-            $PermissionLevels = ($RoleAssignment.RoleDefinitionBindings | Select -ExpandProperty Name) -join ","
+            $PermissionLevels = ($RoleAssignment.RoleDefinitionBindings | Select-Object -ExpandProperty Name) -join ","
              
             #Get the User/Group Name
             $Name = $RoleAssignment.Member.Title # $RoleAssignment.Member.LoginName
@@ -53,8 +53,9 @@ Function Get-SPOFolderPermission([String]$SiteURL, [String]$FolderRelativeURL)
 }
   
 #Set Config Parameters
-$SiteURL="https://Crescent.sharepoint.com/sites/Marketing"
-$FolderRelativeURL="/sites/Marketing/Shared Documents/2018"
+#$SiteURL="https://Crescent.sharepoint.com/sites/Marketing"
+$SiteURL="https://enchantedrock.sharepoint.com/sites/erintranet"
+$FolderRelativeURL="/sites/erintranet/Tech Wiki"
   
 #Get Credentials to connect
 $Cred= Get-Credential
