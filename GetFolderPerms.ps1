@@ -86,6 +86,7 @@ Function Get-PnPFolderPermission([Microsoft.SharePoint.Client.Folder]$Folder)
         }
 }
 
+#Function to Merge CSV Files
 function Merge-CsvFiles 
 {
     param 
@@ -119,7 +120,7 @@ function Merge-CsvFiles
 ##  install-module sharepointpnpPowerShellOnline -scope currentuser -allowclobber (maybe required old version?)
 #Site URL and document library (Change the value for relativeURL to the targeted Doc Library)
 $SiteURL="https://enchantedrock.sharepoint.com/sites/erintranet/"
-$FolderSiteRelativeURL = "/IT Corporate" 
+$FolderSiteRelativeURL = "/Human Resources" 
 
 #Connect to the Site collection
 Connect-PnPOnline -URL $SiteURL -Interactive -ClientId 4ac6eede-e81e-4d22-abad-0d43c51486f2
@@ -167,7 +168,7 @@ foreach ($SubFolder in $SubFolders) {
 $csvFolderPath = "C:\Users\DakotaRuhl\Documents\Reports\Permission Reports\$ReportLibrary"
 
 # Define the path and name for the merged output file
-$outputFilePath = "C:\Users\DakotaRuhl\Documents\Reports\Permission Reports\$ReportLibrary\MergedPermissionsFile.csv"
+$outputFilePath = "C:\Users\DakotaRuhl\Documents\Reports\Permission Reports\$ReportLibrary\MergedPermissionsFile_$ReportLibrary.csv"
 
 try 
 {
