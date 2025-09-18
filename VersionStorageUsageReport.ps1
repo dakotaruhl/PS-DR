@@ -12,32 +12,43 @@ $siteUrl = "https://enchantedrock.sharepoint.com/sites/erintranet"
 New-SPOSiteFileVersionExpirationReportJob -Identity $siteUrl -ReportUrl $reportUrl 
 #>
 
-
+<#
 #Track progress of the job to generate report for a site or OneDrive account 
 #Current Jobs
 $reportUrl = "https://enchantedrock.sharepoint.com/sites/erintranet/IT Corporate/Reports in progress - restricted/VersionStorageUsageReport_FullSite.csv"	
 Get-SPOSiteFileVersionExpirationReportJobProgress -Identity $siteUrl -ReportUrl $reportUrl
+#>
 
 
-<#
-#Generate a version storage usage report for a library 	
+<#Generate a version storage usage report for a library 
+$libName = "Marketing"
+$reportUrl = "https://enchantedrock.sharepoint.com/sites/erintranet/IT Corporate/Reports in progress - restricted/VersionStorageUsageReport_Marketing.csv"
 New-SPOListFileVersionExpirationReportJob -Site $siteUrl -List $libName -ReportUrl $reportUrl
 #>
 
 #Track progress of the job to generate report for a library 
 #Current Jobs
-#$libName = "EPC"
-#$reportUrl = "https://enchantedrock.sharepoint.com/sites/erintranet/IT Corporate/Reports in progress - restricted/VersionStorageUsageReport_EPCLibrary.csv"
-#Get-SPOListFileVersionExpirationReportJobProgress -Site $siteUrl -List $libName -ReportUrl $reportUrl
+$libName = "Marketing"
+Get-SPOListFileVersionExpirationReportJobProgress -Site $siteUrl -List $libName -ReportUrl $reportUrl
+
+
+
 
 <#Completed Jobs
+#Libraries
 $libName = "O&M"	
 $reportUrl = "https://enchantedrock.sharepoint.com/sites/erintranet/IT Corporate/Reports in progress - restricted/VersionStorageUsageReport_OMLibrary.csv"
+#$libName = "EPC"
+#$reportUrl = "https://enchantedrock.sharepoint.com/sites/erintranet/IT Corporate/Reports in progress - restricted/VersionStorageUsageReport_EPCLibrary.csv"
 Get-SPOListFileVersionExpirationReportJobProgress -Site $siteUrl -List $libName -ReportUrl $reportUrl
+
+#Sites
+$reportUrl = "https://enchantedrock.sharepoint.com/sites/erintranet/IT Corporate/Reports in progress - restricted/VersionStorageUsageReport_FullSite.csv"	
+Get-SPOSiteFileVersionExpirationReportJobProgress -Identity $siteUrl -ReportUrl $reportUrl
 #>
 
 #Trim Versions using Automatic Policy for a library 
-#$libName = "O&M"
+#$libName =
 #New-SPOListFileVersionBatchDeleteJob -Site $siteUrl -List $libName -Automatic
 
 #Stop processing an in-progress library level trim job:
