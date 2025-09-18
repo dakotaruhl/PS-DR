@@ -230,7 +230,7 @@ foreach ($Drive in $Drives) {
 }
 #>
 
-# Request which drive to use instead of all drives
+# Only process a single drive as selected by the user instead of all drives
 Write-Host "Select a document library to process:"
 [int]$i = 1
 foreach ($DriveOption in $Drives) {
