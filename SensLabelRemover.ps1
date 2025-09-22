@@ -8,7 +8,7 @@
 #Requires -Modules Microsoft.Graph.Sites
 
 # Report-SPOFilesDocumentLibrary.PS1
-# Updated: Iterate all drives automatically and only include files with valid Sensitivity labels (excluding "No label" and "General")
+# Updated: Runs for a single library only, selected by user at runetime. Only include files with valid Sensitivity labels (excluding "No label" and "General")
 
 Param (
     [Parameter(Mandatory = $true)]
