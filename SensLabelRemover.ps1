@@ -73,7 +73,7 @@ function Get-DriveItems {
                 $RetentionLabelName = $RetentionLabelInfo.name
             }
             catch {
-                Write-Host ("Error reading retention label data from file {0}" -f $File.Name)
+                Write-Host ("Error reading retention label data from file {0}. Error: {1}" -f $File.Name, $_.Exception.Message)
             }
         }
 

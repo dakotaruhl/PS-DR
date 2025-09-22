@@ -66,7 +66,7 @@ if (($Answer -gt 0) -and ($Answer -le $i)) {
     Write-Host ("OK. Selected document library is {0}" -f $Drives[$Si].Name)
     $DriveId = $Drives[$Si].Id
     Write-Host "Fetching file information from drive:" $DriveName
-    Get-DriveItems -Drive $DriveId -FolderId "root"
+    #Get-DriveItems -Drive $DriveId -FolderId "root"
 }
 else {
     Write-Host "Invalid selection - exiting"
