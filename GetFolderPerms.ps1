@@ -137,6 +137,9 @@ $ReportFileSubString ="C:\Users\DakotaRuhl\Documents\Reports\Permission Reports\
 
 #Run permission report function for each top level folder
 foreach ($SubFolder in $SubFolders) {
+
+    If($SubFolder.Name -ne "Environmental" -or $SubFolder.Name -ne "Safety")
+    {
     $FolderSiteRelativeURL = "$TargetLib/" + $SubFolder.Name
     $ReportFile = $ReportFileSubString + ($SubFolder.Name -replace " ", "_") + ".csv"
     write-host -f Yellow "`nGenerating Permission Report for Folder '$($SubFolder.Name)' at '$($FolderSiteRelativeURL)'"
@@ -162,6 +165,7 @@ foreach ($SubFolder in $SubFolders) {
     {
         write-host -f Red "`nNo remaining folders found at '$($FolderSiteRelativeURL)'"
     }
+}
 }
 
 #Merge all CSV files into one

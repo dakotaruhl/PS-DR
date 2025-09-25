@@ -1,7 +1,9 @@
-Install-Module Microsoft.Graph 
-Import-Module Microsoft.Graph
-Update-Module -Name Microsoft.Graph
-Connect-MgGraph -Scopes "Group.Read.All", "User.Read.All"
+#Install-Module Microsoft.Graph 
+#Import-Module Microsoft.Graph
+#Update-Module -Name Microsoft.Graph
+#PNP PowerShell uses outdated graph module for some commands. If previously using PNP in your session, you must kill terminal and re-import these to work properly
+Import-Module Microsoft.Graph.Authentication
+Import-Module Microsoft.Graph.Groups
 
 # Connect to Microsoft Graph
 Connect-MgGraph -Scopes "Group.Read.All", "User.Read.All"

@@ -7,4 +7,7 @@ $destinationPath = "C:\Users\$env:USERNAME\AppData\Local\Temp\DVR2400_2500_Porta
 Invoke-WebRequest -Uri $sourceUrl -OutFile $destinationPath
 
 # Install the MSI
-msiexec.exe /i $destinationPath /qn /norestart /L*v "C:\Users\$env:USERNAME\AppData\Local\Temp\DVR2400_2500_Portal_2_1_Setup.log"
+msiexec.exe /i $destinationPath /qn /norestart /L*v "C:\Users\$env:USERNAME\AppData\Local\Temp\DVR2400_2500_Portal_2_1_Setup.log" 
+
+#Install .exe?
+Start-Process -FIlePath "C:\Users\DakotaRuhl\Downloads\CDM21226_Setup.exe" -ArgumentList "/S" -NoNewWindow -Wait
