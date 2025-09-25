@@ -14,15 +14,15 @@ $groups = Get-MgGroup -Filter "groupTypes/any(c:c eq 'Unified')" -All
 # Create an array to store results
 $results = @()
 
-foreach ($group in $groups) {
+foreach ($group in $groups) 
+{
     $owners = Get-MgGroupOwner -GroupId $group.Id
-
     foreach ($owner in $owners) {
         $results += [PSCustomObject]@{
             GroupName   = $group.DisplayName
             GroupId     = $group.Id
-            OwnerName   = $owner.DisplayName
-            OwnerEmail  = $owner.Mail
+            OwnerName   = Get-MgUser -UserId $owner.Id | Select-Object -ExpandProperty DisplayName
+            OwnerEmail  = Get-MgUser -userId $owner.Id | Select-Object -ExpandProperty Mail
         }
     }
 }
@@ -31,3 +31,11 @@ foreach ($group in $groups) {
 $results | Export-Csv -Path "C:\Users\DakotaRuhl\Documents\Reports\SiteLifeCyclePolicy\M365GroupOwnersGraph.csv" -NoTypeInformation
 
 Write-Host "Export complete. File saved as M365GroupOwnersGraph.csv"
+
+<#Debug
+Get-MgGroupOwner -GroupId c3efcd87-457a-4741-9f44-b34dda0cade3
+    ccfe1420-b7d9-4d70-b347-372997c770e7
+Get-MgGroup -GroupId c3efcd87-457a-4741-9f44-b34dda0cade3 | fl
+
+Get-MgUser -UserId ccfe1420-b7d9-4d70-b347-372997c770e7 | Select-Object -ExpandProperty Mail
+#>
