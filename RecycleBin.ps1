@@ -14,18 +14,19 @@ $recycleBinItemsSecondStage = Get-PnPRecycleBinItem -SecondStage
 # Where-Object { $_.Title -or $_.DeletedByName -or $_.DeletedDate -or $_.ItemType -or $_.DirName -or $_.Size } 
 #>
 
-<# 
+ 
 # Sort by Name of person who deleted item
 $deletedBy = "Tyler Lauw"
-$recycleBinItemsFirstStage | Where-Object { $_.DeletedByName -eq $deletedBy} | Export-Excel -Path "$ReportFile_$($deletedBy -replace ' ','-').xlsx" -WorkSheetname 'FirstStage'
-$recycleBinItemsSecondStage | Where-Object { $_.DeletedByName -eq $deletedBy} | Export-Excel -Path "$ReportFile_$($deletedBy -replace ' ','-').xlsx" -WorkSheetname 'SecondStage'
-#>
+$recycleBinItemsFirstStage | Where-Object { $_.DeletedByName -eq $deletedBy} | Export-Excel -Path "$ReportFile-$($deletedBy -replace ' ','-').xlsx" -WorkSheetname 'FirstStage'
+$recycleBinItemsSecondStage | Where-Object { $_.DeletedByName -eq $deletedBy} | Export-Excel -Path "$ReportFile-$($deletedBy -replace ' ','-').xlsx" -WorkSheetname 'SecondStage'
+
 
 <# 
 # Sort by directory path of deleted items
-$directory = "sites/erintranet/Sales  Marketing/Branding"
-$recycleBinItemsFirstStage | Where-Object { $_.DirName -eq $directory} | Export-Excel -Path "$ReportFile_$($directory -replace '/','-').xlsx" -WorkSheetname 'FirstStage'
-$recycleBinItemsSecondStage | Where-Object { $_.DirName -eq $directory} | Export-Excel -Path "$ReportFile_$($directory -replace '/','-').xlsx" -WorkSheetname 'SecondStage'
+$directory = "sites/erintranet/"
+$library = "Sales  Marketing/Branding"
+$recycleBinItemsFirstStage | Where-Object { $_.DirName -eq $directory$library} | Export-Excel -Path "$ReportFile-$($library -replace '/','-').xlsx" -WorkSheetname 'FirstStage'
+$recycleBinItemsSecondStage | Where-Object { $_.DirName -eq $directory$library} | Export-Excel -Path "$ReportFile-$($library -replace '/','-').xlsx" -WorkSheetname 'SecondStage'
 #>
 
 # Restore all items from First Stage bin based on filters selected above in the export-csv commands
