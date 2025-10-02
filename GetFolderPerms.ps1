@@ -121,7 +121,7 @@ function Merge-CsvFiles
 ##  install-module sharepointpnpPowerShellOnline -scope currentuser -allowclobber (maybe required old version?)
 #Site URL and document library (Change the value for relativeURL to the targeted Doc Library)
 $SiteURL="https://enchantedrock.sharepoint.com/sites/erintranet/"
-$FolderSiteRelativeURL = "/Safety Portal" 
+$FolderSiteRelativeURL = "/Sales  Marketing" 
 
 #Connect to the Site collection
 Connect-PnPOnline -URL $SiteURL -Interactive -ClientId 4ac6eede-e81e-4d22-abad-0d43c51486f2
@@ -138,8 +138,6 @@ $ReportFileSubString ="C:\Users\DakotaRuhl\Documents\Reports\Permission Reports\
 #Run permission report function for each top level folder
 foreach ($SubFolder in $SubFolders) {
 
-    If($SubFolder.Name -ne "Environmental" -or $SubFolder.Name -ne "Safety")
-    {
     $FolderSiteRelativeURL = "$TargetLib/" + $SubFolder.Name
     $ReportFile = $ReportFileSubString + ($SubFolder.Name -replace " ", "_") + ".csv"
     write-host -f Yellow "`nGenerating Permission Report for Folder '$($SubFolder.Name)' at '$($FolderSiteRelativeURL)'"
@@ -165,7 +163,6 @@ foreach ($SubFolder in $SubFolders) {
     {
         write-host -f Red "`nNo remaining folders found at '$($FolderSiteRelativeURL)'"
     }
-}
 }
 
 #Merge all CSV files into one

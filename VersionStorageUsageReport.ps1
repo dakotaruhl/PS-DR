@@ -52,13 +52,32 @@ $reportUrl = "https://enchantedrock.sharepoint.com/sites/erintranet/IT Corporate
 Get-SPOSiteFileVersionExpirationReportJobProgress -Identity $siteUrl -ReportUrl $reportUrl
 #>
 
+<#
 #Trim Versions using Automatic Policy for a library 
-$libName = "Marketing"
+$libName = "EPC"
 New-SPOListFileVersionBatchDeleteJob -Site $siteUrl -List $libName -Automatic
+#>
 
 #Stop processing an in-progress library level trim job:
 #Remove-SPOListFileVersionBatchDeleteJob -Site $siteUrl -List $libName
 
 #Get status of a library level trimming job:
-$libName = "Marketing"
+$libName = "EPC"
 Get-SPOListFileVersionBatchDeleteJobProgress -Site $siteUrl -List $libName
+
+<#
+#Set Automatic version history limits on a site
+$siteUrl = "https://enchantedrock.sharepoint.com/sites/MarketingTeamExternal"
+Set-SPOSite -Identity $siteUrl -EnableAutoExpirationVersionTrim $true
+
+The setting for new document libraries takes effect immediately. Please run Get-SPOSite to check the newly set values on properties EnableAutoExpirationVersionTrim, ExpireVersionsAfterDays,
+MajorVersionLimit. The setting for existing document libraries may take 24 hours to take effect. Please run Get-SPOSiteVersionPolicyJobProgress to check the progress. The setting for existing libraries 
+does not trim existing versions to meet the newly set limits.
+#>
+
+<#
+#Get status of site level version policy job:
+$siteUrl = "https://enchantedrock.sharepoint.com/sites/MarketingTeam"
+Get-SPOSiteVersionPolicyJobProgress -Identity $siteUrl
+Get-SPOSite -Identity $siteUrl | Select-Object EnableAutoExpirationVersionTrim, ExpireVersionsAfterDays, MajorVersionLimit
+#>
