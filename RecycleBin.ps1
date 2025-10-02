@@ -16,7 +16,7 @@ $recycleBinItemsSecondStage = Get-PnPRecycleBinItem -SecondStage
 
 <# 
 # Sort by Name of person who deleted item
-$deletedBy = "Maria Landa"
+$deletedBy = "Tyler Lauw"
 $recycleBinItemsFirstStage | Where-Object { $_.DeletedByName -eq $deletedBy} | Export-Excel -Path "$ReportFile_$($deletedBy -replace ' ','-').xlsx" -WorkSheetname 'FirstStage'
 $recycleBinItemsSecondStage | Where-Object { $_.DeletedByName -eq $deletedBy} | Export-Excel -Path "$ReportFile_$($deletedBy -replace ' ','-').xlsx" -WorkSheetname 'SecondStage'
 #>
