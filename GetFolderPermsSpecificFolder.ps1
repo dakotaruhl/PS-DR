@@ -128,7 +128,7 @@ Connect-PnPOnline -URL $SiteURL -Interactive -ClientId 4ac6eede-e81e-4d22-abad-0
 
 #Initialize collection of library. Removed -recursive to get top level folders only
 $Folder = Get-PnPFolder -Url $FolderSiteRelativeURL
-$SubFolders = Get-PnPFolderItem -FolderSiteRelativeUrl $FolderSiteRelativeURL -ItemType Folder
+$SubFoldersRecursive = Get-PnPFolderItem -FolderSiteRelativeUrl $FolderSiteRelativeURL -ItemType Folder -Recursive
 $TargetLib = $Folder.Name 
 
 #Set initial report path to Doc Library name (make sure to create this folder first, probably?)
@@ -139,17 +139,13 @@ $ReportFileSubString ="C:\Users\DakotaRuhl\Documents\Reports\Permission Reports\
 #Run permission report function for each top level folder
 foreach ($SubFolder in $SubFolders) {
 
-    $FolderSiteRelativeURL = "$TargetLib/" + $SubFolder.Name
+    #$FolderSiteRelativeURL = "$TargetLib/" + $SubFolder.Name
     $ReportFile = $ReportFileSubString + ($SubFolder.Name -replace " ", "_") + ".csv"
     write-host -f Yellow "`nGenerating Permission Report for Folder '$($SubFolder.Name)' at '$($FolderSiteRelativeURL)'"
 
     #Delete the file, If already exist!
     If (Test-Path $ReportFile) { Remove-Item $ReportFile }
-
-    #Get the Folder and all Subfolders from URL
-    $Folder = Get-PnPFolder -Url $FolderSiteRelativeURL
-    $SubFoldersRecursive = Get-PnPFolderItem -FolderSiteRelativeUrl $FolderSiteRelativeURL -ItemType Folder -Recursive
- 
+    
     #Call the function to generate folder permission report
     if ($subfolder.Name -ne "Forms" -or $Folder.Name -ne "Forms") 
     {
