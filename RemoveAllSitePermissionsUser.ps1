@@ -112,6 +112,5 @@ $Sites | ForEach-Object {
         #>
     }
 } 
-Connect-ExchangeOnline
-Set-UnifiedGroup -Identity 2775d79c-5894-4306-89ce-b033b32a78b2 -HiddenFromExchangeClientsEnabled:$false -HiddenFromAddressListsEnabled:$false
+
 
