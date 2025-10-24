@@ -28,9 +28,9 @@ foreach ($group in $groups)
 }
 
 # Export to CSV
-$results | Export-Csv -Path "C:\Users\DakotaRuhl\Documents\Reports\SiteLifeCyclePolicy\M365GroupOwnersGraph.csv" -NoTypeInformation
+$results | Export-Csv -Path "C:\Users\DakotaRuhl\Documents\Reports\SiteLifeCyclePolicy\M365GroupOwnersGraphP2.csv" -NoTypeInformation
 
-Write-Host "Export complete. File saved as M365GroupOwnersGraph.csv"
+Write-Host "Export complete. File saved as M365GroupOwnersGraphP2.csv"
 
 <#Debug
 Get-MgGroupOwner -GroupId c3efcd87-457a-4741-9f44-b34dda0cade3
