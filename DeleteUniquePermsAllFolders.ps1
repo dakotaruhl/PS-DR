@@ -1,6 +1,6 @@
 #Set Variables
 $SiteURL = "https://enchantedrock.sharepoint.com/sites/erintranet"
-$FolderURL = "/Facilities/Shared All Employees" 
+$FolderURL = "/Events Library" 
  
 #Connect to PnP Online
 Connect-PnPOnline -URL $SiteURL -Interactive -ClientId 4ac6eede-e81e-4d22-abad-0d43c51486f2
