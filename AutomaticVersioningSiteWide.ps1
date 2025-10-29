@@ -2,7 +2,7 @@ Import-Module Microsoft.Online.SharePoint.PowerShell -UseWindowsPowerShell
 Connect-SPOService -Url https://enchantedrock-admin.sharepoint.com
 
 #Set site URL
-$siteUrl = "https://enchantedrock.sharepoint.com/sites/contenttesting"
+$siteUrl = "https://enchantedrock.sharepoint.com/sites/marketing2"
 
 #View version history limits set on a site
 Get-SPOSite -Identity $siteUrl | fl Url, EnableAutoExpirationVersionTrim, ExpireVersionsAfterDays, MajorVersionLimit
@@ -21,3 +21,4 @@ Get-SPOSiteVersionPolicyJobProgress -Identity $siteUrl
   CompleteWithFailure   The update request is completed, but setting update on some document libraries has failed.
 #>
 
+Set-SPOSite -Identity https://enchantedrock-my.sharepoint.com/personal/camthor_enchantedrock_com -DefaultShareLinkRole Edit
