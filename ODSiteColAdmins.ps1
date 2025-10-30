@@ -1,8 +1,8 @@
-#Import-Module Microsoft.Online.SharePoint.PowerShell -UseWindowsPowerShell
-#Connect-SPOService -Url https://enchantedrock-admin.sharepoint.com
+Import-Module Microsoft.Online.SharePoint.PowerShell -UseWindowsPowerShell
+Connect-SPOService -Url https://enchantedrock-admin.sharepoint.com
 
 $OneDriveSites = Get-SPOSite -IncludePersonalSite $true -Limit All -Template "SPSPERS"
-$UserToRemove = "admin-dr@enchantedrock.com"
+$UserToRemove = "admin-jo@enchantedrock.com"
 
 $results = @()
 foreach ($site in $OneDriveSites) 
@@ -16,6 +16,8 @@ foreach ($site in $OneDriveSites)
             Set-SPOUser -Site $site.Url -LoginName $UserToRemove -IsSiteCollectionAdmin $false -ErrorAction Stop
             Write-Host "Removed $UserToRemove as site admin for $($site.Url)."
         }
+        #Recalculate site admins after potential removal
+        $siteAdmins = Get-SPOUser -Site $site.Url -Limit All -ErrorAction Stop | Where-Object { $_.IsSiteAdmin -eq $True }
         $results += [PSCustomObject]@{
             SiteUrl      = $site.Url
             SiteAdminNames  = ($siteAdmins | Select-Object -ExpandProperty DisplayName) -join "; " 
@@ -35,6 +37,6 @@ foreach ($site in $OneDriveSites)
     }
 }
 
-$results | Export-Csv -Path "C:\Users\DakotaRuhl\Documents\Reports\OneDrive Admins\AllOneDriveSiteAdmins.csv" -NoTypeInformation
+$results | Export-Csv -Path "C:\Users\DakotaRuhl\Documents\Reports\OneDrive Admins\AdminJOAllOneDriveSiteAdmins.csv" -NoTypeInformation
 
 #Get-SPOUser -Site https://enchantedrock-my.sharepoint.com/personal/slong_enchantedrock_com -Limit All | Where-Object {$_.IsSiteAdmin -eq $True} | Select-Object -ExpandProperty DisplayName

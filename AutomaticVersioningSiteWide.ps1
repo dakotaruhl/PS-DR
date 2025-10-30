@@ -20,5 +20,3 @@ Get-SPOSiteVersionPolicyJobProgress -Identity $siteUrl
   CompleteSuccess       The update request is completed successfully.
   CompleteWithFailure   The update request is completed, but setting update on some document libraries has failed.
 #>
-
-Set-SPOSite -Identity https://enchantedrock-my.sharepoint.com/personal/camthor_enchantedrock_com -DefaultShareLinkRole Edit

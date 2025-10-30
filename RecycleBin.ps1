@@ -17,7 +17,7 @@ $recycleBinItemsSecondStage = Get-PnPRecycleBinItem -SecondStage
 
  
 # Sort by Name of person who deleted item
-$deletedBy = "John Brandenburg"
+$deletedBy = "Jennifer McQuilken"
 $recycleBinItemsFirstStage | Where-Object { $_.DeletedByName -eq $deletedBy} | Export-Excel -Path "$ReportFile-$($deletedBy -replace ' ','-').xlsx" -WorkSheetname 'FirstStage'
 $recycleBinItemsSecondStage | Where-Object { $_.DeletedByName -eq $deletedBy} | Export-Excel -Path "$ReportFile-$($deletedBy -replace ' ','-').xlsx" -WorkSheetname 'SecondStage'
 
@@ -25,10 +25,11 @@ $recycleBinItemsSecondStage | Where-Object { $_.DeletedByName -eq $deletedBy} | 
 
 # Sort by directory path of deleted items
 $directory = "sites/erintranet/"
-$library = "OM/8. Commissioning/Operational Files/HEB/HEB00731"
+$library = "Sales  Marketing/Corporate Communications"
 $recycleBinItemsFirstStage | Where-Object { $_.DirName -eq "$directory$library" } | Export-Excel -Path "$ReportFile-$($library -replace '/','-').xlsx" -WorkSheetname 'FirstStage'
 $recycleBinItemsSecondStage | Where-Object { $_.DirName -eq "$directory$library" } | Export-Excel -Path "$ReportFile-$($library -replace '/','-').xlsx" -WorkSheetname 'SecondStage'
 
+$recycleBinItemsFirstStage | Where-Object { $_.DirName -eq "$directory$library/Special Projects/2024 Employee Video Project" }
 
 # Restore all items from First Stage bin based on filters selected above in the export-csv commands
 Foreach ($item in $recycleBinItemsFirstStage) {
@@ -43,3 +44,19 @@ Foreach ($item in $recycleBinItemsSecondStage) {
 }
 
 
+##Special scenario restores##
+
+#Restore 2024 Employee Video Project files
+Restore-PnPRecycleBinItem -Identity 12cc6036-8bc7-4c0a-ac95-ac781f8f6621 -Force
+#Restore Special Projects Folder
+Restore-PnPRecycleBinItem -Identity cc2bfcea-0b01-494d-a08a-610e8167cf70 -Force
+
+#all items under the special projects 2024 employee video project folder
+$RestoreItems = $recycleBinItemsFirstStage | Where-Object { $_.DirName -eq "$directory$library/Special Projects/2024 Employee Video Project/2024 Employee Videos" }
+foreach ($item in $RestoreItems) {
+    $subfolder = "$directory$library/Special Projects/2024 Employee Video Project/2024 Employee Videos/$($item.Title)"
+    foreach ($subitem in $recycleBinItemsFirstStage | Where-Object { $_.DirName -eq $subfolder }) {
+        Write-Host "Title: $($subitem.Title), Deleted By: $($subitem.DeletedByName), Deleted Date: $($subitem.DeletedDate), Item Type: $($subitem.ItemType), Dir Name: $($subitem.DirName), Size: $($subitem.Size), Id: $($subitem.Id)"
+        Restore-PnPRecycleBinItem -Identity $subitem.Id -Force
+    }
+}
