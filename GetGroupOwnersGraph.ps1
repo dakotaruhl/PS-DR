@@ -4,9 +4,11 @@
 #PNP PowerShell uses outdated graph module for some commands. If previously using PNP in your session, you must kill terminal and re-import these to work properly
 Import-Module Microsoft.Graph.Authentication
 Import-Module Microsoft.Graph.Groups
+Import-Module Microsoft.Graph.Sites
 
 # Connect to Microsoft Graph
-Connect-MgGraph -Scopes "Group.Read.All", "User.Read.All"
+Connect-MgGraph -Scopes "Group.ReadWrite.All", "User.Read.All", "Sites.Read.All"
+
 
 # Get all M365 groups
 $groups = Get-MgGroup -Filter "groupTypes/any(c:c eq 'Unified')" -All

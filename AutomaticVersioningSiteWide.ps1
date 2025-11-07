@@ -2,7 +2,7 @@ Import-Module Microsoft.Online.SharePoint.PowerShell -UseWindowsPowerShell
 Connect-SPOService -Url https://enchantedrock-admin.sharepoint.com
 
 #Set site URL
-$siteUrl = "https://enchantedrock.sharepoint.com/sites/marketing2"
+$siteUrl = "https://enchantedrock.sharepoint.com/sites/erintranet"
 
 #View version history limits set on a site
 Get-SPOSite -Identity $siteUrl | fl Url, EnableAutoExpirationVersionTrim, ExpireVersionsAfterDays, MajorVersionLimit
