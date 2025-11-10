@@ -2,7 +2,7 @@ Import-Module Microsoft.Online.SharePoint.PowerShell -UseWindowsPowerShell
 Connect-SPOService -Url https://enchantedrock-admin.sharepoint.com
 
 #Get all Team Sites
-$LoginName = "c:0-.f|rolemanager|SharePointSiteCollectionAdmins"
+$LoginName = "admin-dr@enchantedrock.com"
 $SearchTerm = "HEB"
 $Sites = Get-SPOSite -limit all -Template "GROUP#0" | Where-Object { $_.Url -like "*$SearchTerm*" -and $_.IsTeamsConnected -eq $true }
 
