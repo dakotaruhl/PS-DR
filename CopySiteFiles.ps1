@@ -1,7 +1,9 @@
+#Set up Excel module and read in file 
 Import-Module ImportExcel
 $filePath = "C:\Users\DakotaRuhl\Documents\Reports\GroupsCreatedByApp\Plans with TeamsURL.xlsx"
-$columnName = "ItemUrl"
-$excelData = Import-Excel -Path $filePath
+$Worksheet = "Sheet2"
+$columnName = "UniqueGroupsWithExclusions"
+$excelData = Import-Excel -Path $filePath -WorksheetName $Worksheet
 $columnValues = $excelData | Select-Object -ExpandProperty $columnName
 
 # Connect to SharePoint Online
@@ -22,68 +24,77 @@ $reportPath = "C:\Users\DakotaRuhl\Documents\Reports\ProjectManagement"
 #$SearchTerm = "HEB"
 #$SitesCollections = Get-PnPTenantSite | Where-Object {$_.Template -eq "GROUP#0" -and $_.Url -like "*$SearchTerm*"}
 
+# $testCollections = @()
+# $j = 0
+# while ($j -lt 4) 
+# {
+#     Write-Output -ForegroundColor Yellow "Adding test site collection number $j" 
+#     $testSite = $SitesCollections[$j]
+#     $testCollections += $testSite
+#     $j++
+# } 
+ 
+# $SitesCollections = @()
+# foreach ($item in $columnValues) 
+# {
+#     <# Old way of getting groupId from Teams ItemID. Now getting directly from Excel column with exclusions applied
+#     $startIndex = $item.IndexOf("groupId=") + 8
+#     $endIndex = $item.IndexOf("&tenantId")
+#     $length = $endIndex - $startIndex
+#     $groupdId = $item.Substring($startIndex, $length)
+#     #>
+#     try 
+#     {
+#         $groupdId = $item
+#         $CurrentSite = Get-PnPTenantSite | Where-Object {$_.RelatedGroupID -eq $groupdId} -ErrorAction Stop
+#         $SitesCollections += $CurrentSite
+#         Write-Host -ForegroundColor Green "Added Site Collection for GroupID: $groupdId, and Site URL: $($CurrentSite.Url)"
+#     }
+#     catch 
+#     {
+#         Write-Host -ForegroundColor Red "Site for $groupdId not found. Skipping."
+#     }
+# }
 
-
-
-
-$SitesCollections = @()
-foreach ($item in $columnValues) 
-{
-    $startIndex = $item.IndexOf("groupId=") + 8
-    $endIndex = $item.IndexOf("&tenantId")
-    $length = $endIndex - $startIndex
-    $groupdId = $item.Substring($startIndex, $length)
-
-    try {
-        $SitesCollections += Get-PnPTenantSite | Where-Object {$_.RelatedGroupID -eq $groupdId} -ErrorAction Stop
-    }
-    catch {
-        Write-Host -ForegroundColor Red "Site for $groupdId not found. Skipping."
-    }
-}
-
-$siteCollectionsResults = @()
-
-#Initialize collections to store found and missing files
+#Initialize collections to store found and missing files, and overall report
 $missingFilesCollection = @()
 $foundFilesCollection = @()
+$siteCollectionsResults = @()
 
-foreach ($Site in $SitesCollections) 
+foreach ($Site in $testCollections) 
 {
     ##Just getting names of folders here to create report paths
     #Get batch number if it exists
     $SiteName = $Site.Url.Split("/")[-1]
     $split = $SiteName.Split("-")
-    $batchNumber = $split[1]
+    $batchNumber = $split[1] #Second element should be batch number "ABC-HEB7-EFGHIJ.."
 
     if ($SiteName -contains "HEB")
     {
         $topFolder = "HEB"
+        #Is a number, Set destination to OnePlan Sites/TopFolder/BatchNumber/SiteName
+        if ($batchNumber -match "\d$") #Ends with a digit 0-9 "HEB7"
+        {
+            $BatchName = $batchNumber
+            $DestFolder = "EPC/ERE/00 ERE Projects/OnePlan Sites/$topFolder/$BatchName/$SiteName"
+            Write-Host -foregroundcolor Green "$SiteName - Found Batch Number: $batchNumber, Destination Folder set to: $DestFolder"
+        }
     }
     elseif ($SiteName -contains "Wal" -and ($SiteName -notcontains "HEB" -or $SiteName -notcontains "Bucee"))
     {
         $topFolder = "Walmart"
+        $BatchName = "Unknown Batch"
+        $DestFolder = "EPC/ERE/00 ERE Projects/OnePlan Sites/$topFolder/$BatchName/$SiteName"
+        Write-Host -foregroundcolor Yellow "$SiteName - No valid batch number found. Destination Folder set to: $DestFolder"
     }
     else 
     {
         $topFolder = "Other"
-    }
-
-    #Is a number, Set destination to OnePlan Sites/TopFolder/BatchNumber/SiteName
-    if ($batchNumber -match "\d$")  
-    {
-        $BatchName = $batchNumber
-        $DestFolder = "EPC/ERE/00 ERE Projects/OnePlan Sites/$topFolder/$BatchName/$SiteName"
-        Write-Host -foregroundcolor Green "$SiteName - Found Batch Number: $batchNumber, Destination Folder set to: $DestFolder"
-            
-    }
-    #Is not a number, Set destination to OnePlan Sites/TopFolder/Unknown Batch/SiteName
-    else         
-    {
         $BatchName = "Unknown Batch"
         $DestFolder = "EPC/ERE/00 ERE Projects/OnePlan Sites/$topFolder/$BatchName/$SiteName"
         Write-Host -foregroundcolor Yellow "$SiteName - No valid batch number found. Destination Folder set to: $DestFolder"
-    }    
+    }
+
 
     $updatedReportPath = Join-Path -Path $reportPath -ChildPath $topFolder -AdditionalChildPath $BatchName -AdditionalChildPath $SiteName
     $DestBatchFolder = "EPC/ERE/00 ERE Projects/OnePlan Sites/$topFolder/$BatchName"
@@ -96,10 +107,13 @@ foreach ($Site in $SitesCollections)
     Write-Host -ForegroundColor Yellow "`nProcessing Site Collection: $($Site.Url)"
     Connect-PnPOnline -Url $Site.Url -Interactive -ClientId 4ac6eede-e81e-4d22-abad-0d43c51486f2
     $FilesList = Get-PnPFolderInFolder -FolderSiteRelativeUrl $SiteLibrary | Get-PnPFileInFolder -Recurse -ExcludeSystemFolders | Where-Object {$_.Name -notlike "*.aspx" -and $_.Name -notlike "*.dotx" }
+    $i = 0
     foreach ($File in $FilesList) 
     {
+        $i++
+        Write-Host -ForegroundColor Cyan "`n Checking File number $i of $($FilesList.Count)"
         foreach ($EREFile in $EREFilesList) 
-        {
+        {   
             if ($File.Name -eq $EREFile.Name) 
             {
                 Write-Host -ForegroundColor Green "File '$($EREFile.Name)' exists in both Site Collection '$($Site.Url)' and ERE Library."
@@ -128,7 +142,7 @@ foreach ($Site in $SitesCollections)
             }
     }
 
-    #Connect back to Intranet site to copy files, and check if foleders exist
+    #Connect back to Intranet site to copy files, and check if folders exist
     Connect-PnPOnline -Url $targetSiteUrl -Interactive -ClientId 4ac6eede-e81e-4d22-abad-0d43c51486f2
 
     #Only copy if we have missing files 
