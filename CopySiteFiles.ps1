@@ -1,3 +1,9 @@
+Import-Module ImportExcel
+$filePath = "C:\Users\DakotaRuhl\Documents\Reports\GroupsCreatedByApp\Plans with TeamsURL.xlsx"
+$columnName = "ItemUrl"
+$excelData = Import-Excel -Path $filePath
+$columnValues = $excelData | Select-Object -ExpandProperty $columnName
+
 # Connect to SharePoint Online
 $TenantAdminURL = "https://enchantedrock-admin.sharepoint.com/"
 Connect-PnPOnline -Url $TenantAdminURL -Interactive -ClientId 4ac6eede-e81e-4d22-abad-0d43c51486f2 
@@ -5,14 +11,36 @@ Connect-PnPOnline -Url $TenantAdminURL -Interactive -ClientId 4ac6eede-e81e-4d22
 #Get files from Target Site and Folder
 $targetSiteUrl = "https://enchantedrock.sharepoint.com/sites/erintranet"
 $TargetFolder = "/EPC/ERE/00 ERE Projects"
-$reportPath = "C:\Users\DakotaRuhl\Documents\Reports\ProjectManagement"
 Connect-PnPOnline -Url $targetSiteUrl -Interactive -ClientId 4ac6eede-e81e-4d22-abad-0d43c51486f2
-#$EREFilesList = Get-PnPFolderInFolder -FolderSiteRelativeUrl $TargetFolder | Get-PnPFileInFolder -Recurse -ExcludeSystemFolders | Where-Object {$_.Name -notlike "*.aspx" -and $_.Name -notlike "*.dotx" }
+$EREFilesList = Get-PnPFolderInFolder -FolderSiteRelativeUrl $TargetFolder | Get-PnPFileInFolder -Recurse -ExcludeSystemFolders | Where-Object {$_.Name -notlike "*.aspx" -and $_.Name -notlike "*.dotx" }
 
+#Set base report path
+$reportPath = "C:\Users\DakotaRuhl\Documents\Reports\ProjectManagement"
+
+#Testing
 #Get sites collections to check files against
 #$SearchTerm = "HEB"
 #$SitesCollections = Get-PnPTenantSite | Where-Object {$_.Template -eq "GROUP#0" -and $_.Url -like "*$SearchTerm*"}
-$SitesCollections = Get-PnPTenantSite | Where-Object {$_.URL -eq "https://enchantedrock.sharepoint.com/sites/GN1-HEB7-0798-TX"}
+
+
+
+
+
+$SitesCollections = @()
+foreach ($item in $columnValues) 
+{
+    $startIndex = $item.IndexOf("groupId=") + 8
+    $endIndex = $item.IndexOf("&tenantId")
+    $length = $endIndex - $startIndex
+    $groupdId = $item.Substring($startIndex, $length)
+
+    try {
+        $SitesCollections += Get-PnPTenantSite | Where-Object {$_.RelatedGroupID -eq $groupdId} -ErrorAction Stop
+    }
+    catch {
+        Write-Host -ForegroundColor Red "Site for $groupdId not found. Skipping."
+    }
+}
 
 $siteCollectionsResults = @()
 
@@ -22,12 +50,48 @@ $foundFilesCollection = @()
 
 foreach ($Site in $SitesCollections) 
 {
+    ##Just getting names of folders here to create report paths
     #Get batch number if it exists
     $SiteName = $Site.Url.Split("/")[-1]
     $split = $SiteName.Split("-")
     $batchNumber = $split[1]
 
-    #Set target folder to check for files
+    if ($SiteName -contains "HEB")
+    {
+        $topFolder = "HEB"
+    }
+    elseif ($SiteName -contains "Wal" -and ($SiteName -notcontains "HEB" -or $SiteName -notcontains "Bucee"))
+    {
+        $topFolder = "Walmart"
+    }
+    else 
+    {
+        $topFolder = "Other"
+    }
+
+    #Is a number, Set destination to OnePlan Sites/TopFolder/BatchNumber/SiteName
+    if ($batchNumber -match "\d$")  
+    {
+        $BatchName = $batchNumber
+        $DestFolder = "EPC/ERE/00 ERE Projects/OnePlan Sites/$topFolder/$BatchName/$SiteName"
+        Write-Host -foregroundcolor Green "$SiteName - Found Batch Number: $batchNumber, Destination Folder set to: $DestFolder"
+            
+    }
+    #Is not a number, Set destination to OnePlan Sites/TopFolder/Unknown Batch/SiteName
+    else         
+    {
+        $BatchName = "Unknown Batch"
+        $DestFolder = "EPC/ERE/00 ERE Projects/OnePlan Sites/$topFolder/$BatchName/$SiteName"
+        Write-Host -foregroundcolor Yellow "$SiteName - No valid batch number found. Destination Folder set to: $DestFolder"
+    }    
+
+    $updatedReportPath = Join-Path -Path $reportPath -ChildPath $topFolder -AdditionalChildPath $BatchName -AdditionalChildPath $SiteName
+    $DestBatchFolder = "EPC/ERE/00 ERE Projects/OnePlan Sites/$topFolder/$BatchName"
+    $DestTopFolder = "EPC/ERE/00 ERE Projects/OnePlan Sites/$topFolder"
+
+    #Done checking paths and updating names
+
+    #Set target folder to check for files in current site target
     $SiteLibrary = "/Shared Documents"
     Write-Host -ForegroundColor Yellow "`nProcessing Site Collection: $($Site.Url)"
     Connect-PnPOnline -Url $Site.Url -Interactive -ClientId 4ac6eede-e81e-4d22-abad-0d43c51486f2
@@ -71,29 +135,7 @@ foreach ($Site in $SitesCollections)
     if ($missingFilesCollection.Count -eq 0) 
     {
         Write-Host -ForegroundColor Green "`nNo missing files to copy for Site Collection: $($Site.Url). Moving to next site."
-        if ($batchNumber -match "\d$")  #Create in OnePlan Sites/BatchNumber/SiteName
-        {
-            $DestFolder = "EPC/ERE/00 ERE Projects/OnePlan Sites/$batchNumber/$SiteName"
-            Write-Host -foregroundcolor Green "Found Batch Number: $batchNumber"
-            $BatchName = $batchNumber
-        }
-        else 
-        {
-            $DestFolder = "EPC/ERE/00 ERE Projects/OnePlan Sites/Unknown Batch/$SiteName"
-            Write-Host -foregroundcolor Yellow "No valid batch number found. Adding to unknown batch."
-            $BatchName = "Unknown Batch"
-        }
-        $updatedReportPath = Join-Path -Path $reportPath -ChildPath $BatchName -AdditionalChildPath $SiteName
-        # Check if folder exists
-        if (-not (Test-Path -Path $updatedReportPath)) 
-        {
-            New-Item -Path $updatedReportPath -ItemType Directory
-            Write-Host "Folder created at: $updatedReportPath"
-        } 
-        else 
-        {
-            Write-Host "Folder already exists at: $updatedReportPath"
-        }
+        #Export found files to CSV
         $foundFilesCollection | Export-Csv -Path "$updatedReportPath\FilesFoundReport.csv" -NoTypeInformation
         $siteCollectionsResults += [PSCustomObject]@{
                     SiteCollection = $Site.Url
@@ -102,89 +144,77 @@ foreach ($Site in $SitesCollections)
         
         continue
     }
+    else #loop didn't exit early, so we have missing files to copy. Report site as not all files found.
+    {
+        $siteCollectionsResults += [PSCustomObject]@{
+                    SiteCollection = $Site.Url
+                    AllFilesFound  = "False"
+                }
+    }
 
-    #loop didn't exit early, so we have missing files to copy. Report site as not all files found.
-    $siteCollectionsResults += [PSCustomObject]@{
-                SiteCollection = $Site.Url
-                AllFilesFound  = "False"
-            }
-    #Check batch number ends with a number
-    if ($batchNumber -match "\d$")  #Create in OnePlan Sites/BatchNumber/SiteName
+    #Check what folder levels exist, create as needed
+    $siteFolderExists = Get-PnPFolder -Url $DestFolder -ErrorAction SilentlyContinue
+    $batchFolderExists = Get-PnPFolder -Url $DestBatchFolder -ErrorAction SilentlyContinue
+    $topFolderExists = Get-PnPFolder -Url $DestTopFolder -ErrorAction SilentlyContinue
+
+    #Full SiteName folder exists
+    if ($null -ne $siteFolderExists) 
     {
-        $DestFolder = "EPC/ERE/00 ERE Projects/OnePlan Sites/$batchNumber"
-        Write-Host -foregroundcolor Green "Found Batch Number: $batchNumber"
-        #Update report path
-        $updatedReportPath = Join-Path -Path $reportPath -ChildPath $batchNumber -AdditionalChildPath $SiteName
-        #Check if folder exists
-        $folderExists = Get-PnPFolder -Url $DestFolder -ErrorAction SilentlyContinue
-        if ($null -ne $folderExists) 
+        Write-Host -ForegroundColor Green "`nSite Name '$SiteName' exists in Folder '$DestBatchFolder'. Skipping copy, we must have already done this one."
+    }
+    #Top Folder/Batch folder exists, but not site name folder
+    elseif ($null -ne $batchFolderExists)  
+    {
+        Write-Host -ForegroundColor Red "`nSite Name '$SiteName' does NOT exist in Folder '$DestBatchFolder', but batch folder does exist."
+        Write-host -ForegroundColor Green "`nCreating Site Name folder '$SiteName' in '$DestBatchFolder'."
+        Add-PnPFolder -Name $SiteName -Folder $DestBatchFolder
+
+        #Copy Files to target folder
+        foreach ($MissingFile in $MissingFilesCollection) 
         {
-            #Found Folder
-            Write-Host -ForegroundColor Green "`nFolder '$DestFolder' exists in Site Collection: $($Site.Url)."
-            #Check if Site Name folder exists
-            $siteFolderExists = Get-PnPFolder -Url "$DestFolder/$SiteName" -ErrorAction SilentlyContinue
-            if ($null -ne $siteFolderExists) {
-                Write-Host -ForegroundColor Green "`nSite Name '$SiteName' exists in Folder '$DestFolder'."
-            }
-            else {
-                Write-Host -ForegroundColor Red "`nSite Name '$SiteName' does NOT exist in Folder '$DestFolder'. Creating folder."
-                Add-PnPFolder -Name $SiteName -Folder $DestFolder
-            }
-            #Copy Files to target folder
-            foreach ($MissingFile in $MissingFilesCollection) 
-            {
-                Write-Host -ForegroundColor Cyan "Copying File '$($MissingFile.FileName)' to ERE Library Folder '$DestFolder'."
-                Copy-PnPFile -SourceUrl $MissingFile.FileURL -TargetUrl "$DestFolder/$SiteName"
-            }
-        }
-        else 
+            Write-Host -ForegroundColor Cyan "Copying File '$($MissingFile.FileName)' to ERE Library Folder '$DestFolder'."
+            Copy-PnPFile -SourceUrl $MissingFile.FileURL -TargetUrl "$DestFolder" -Force -IgnoreVersionHistory 
+        }        
+    }        
+    #Only Top Folder exists
+    elseif ($null -eq $topFolderExists)
+    {
+        Write-Host -ForegroundColor Red "`nFolder '$DestBatchFolder' does NOT exist in Folder '$DestTopFolder', but top folder does exist."
+        Write-host -ForegroundColor Green "`nCreating Batch Folder '$batchName' in '$DestTopFolder'."
+        Add-PnPFolder -Name $BatchName -Folder $DestTopFolder
+        Write-host -ForegroundColor Green "`nCreating Site Name folder '$SiteName' in '$DestBatchFolder'."
+        Add-PnPFolder -Name $SiteName -Folder $DestBatchFolder
+
+        #Copy Files to target folder
+        foreach ($MissingFile in $MissingFilesCollection) 
         {
-            Write-Host -ForegroundColor Red "`nFolder '$DestFolder' does NOT exist. Creating folder for found batch number."
-            Add-PnPFolder -Name $batchNumber -Folder "EPC/ERE/00 ERE Projects/OnePlan Sites"
-            Add-PnPFolder -Name $SiteName -Folder $DestFolder
-            #Copy Files to target folder
-            foreach ($MissingFile in $MissingFilesCollection) 
-            {
-                Write-Host -ForegroundColor Cyan "Copying File '$($MissingFile.FileName)' to ERE Library Folder '$DestFolder'. "
-                Copy-PnPFile -SourceUrl $MissingFile.FileURL -TargetUrl "$DestFolder/$SiteName"
-            }
+            Write-Host -ForegroundColor Cyan "Copying File '$($MissingFile.FileName)' to ERE Library Folder '$DestFolder'. "
+            Copy-PnPFile -SourceUrl $MissingFile.FileURL -TargetUrl "$DestFolder" -Force -IgnoreVersionHistory
         }
     }
-    else #Create in OnePlan/SiteName if no valid batch number found
+    #No top folder exists, create all levels
+    else 
     {
-        Write-Host -ForegroundColor Red "`nNo valid batch number found. Adding to unknown batch."
-        $DestFolder = "EPC/ERE/00 ERE Projects/OnePlan Sites/Unknown Batch/"
-        $folderExists = Get-PnPFolder -Url "$DestFolder/$SiteName" -ErrorAction SilentlyContinue
-        $updatedReportPath = Join-Path -Path $reportPath -ChildPath "Unknown Batch" -AdditionalChildPath $SiteName
-        if ($null -ne $folderExists) 
+        Write-Host -ForegroundColor Red "`nTop Folder '$topFolder' does NOT exist."
+        Write-host -ForegroundColor Green "`nCreating Top Folder '$topFolder' in 'EPC/ERE/00 ERE Projects/OnePlan Sites'."
+        Add-PnPFolder -Name $topFolder -Folder "EPC/ERE/00 ERE Projects/OnePlan Sites"
+        Write-host -ForegroundColor Green "`nCreating Batch Folder '$batchName' in '$DestTopFolder'."
+        Add-PnPFolder -Name $BatchName -Folder $DestTopFolder
+        Write-host -ForegroundColor Green "`nCreating Site Name folder '$SiteName' in '$DestBatchFolder'."
+        Add-PnPFolder -Name $SiteName -Folder $DestBatchFolder
+
+        #Copy Files to target folder
+        foreach ($MissingFile in $MissingFilesCollection) 
         {
-            #Found Folder
-            Write-Host -ForegroundColor Green "`nFolder '$DestFolder' exists."
-            #Copy Files to target folder
-            foreach ($MissingFile in $MissingFilesCollection) 
-            {
-                Write-Host -ForegroundColor Cyan "Copying File '$($MissingFile.FileName)' to ERE Library Folder '$DestFolder'."
-                Copy-PnPFile -SourceUrl $MissingFile.FileURL -TargetUrl "$DestFolder/$SiteName"
-            }
-        }
-        else 
-        {
-            Write-Host -ForegroundColor Red "`nFolder '$DestFolder' does NOT exist. Creating folder in OnePlan Sites."
-            Add-PnPFolder -Name $SiteName -Folder $DestFolder
-            #Copy Files to target folder
-            foreach ($MissingFile in $MissingFilesCollection) 
-            {
-                Write-Host -ForegroundColor Cyan "Copying File '$($MissingFile.FileName)' to ERE Library Folder '$DestFolder'."
-                Copy-PnPFile -SourceUrl $MissingFile.FileURL -TargetUrl "$DestFolder/$SiteName"
-            }
+            Write-Host -ForegroundColor Cyan "Copying File '$($MissingFile.FileName)' to ERE Library Folder '$DestFolder'. "
+            Copy-PnPFile -SourceUrl $MissingFile.FileURL -TargetUrl "$DestFolder" -Force -IgnoreVersionHistory
         }
     }
+
 #Export found and missing files to CSV
-
-
 if (-not (Test-Path -Path $updatedReportPath)) 
 {
-    New-Item -Path $updatedReportPath -ItemType Directory
+    New-Item -Path $updatedReportPath -ItemType Directory | Out-Null #Supress output
     Write-Host "Folder created at: $updatedReportPath"
 } 
 else 
@@ -192,10 +222,12 @@ else
     Write-Host "Folder already exists at: $updatedReportPath"
 }
 
+#Export found and missing files to CSV, then upload to destination folder
 $foundFilesCollection | Export-Csv -Path "$updatedReportPath\FilesFoundReport.csv" -NoTypeInformation      
 $missingFilesCollection | Export-Csv -Path "$updatedReportPath\FilesMissingReport.csv" -NoTypeInformation
-$siteCollectionsResults | Export-Csv -Path "$updatedReportPath\SiteCollectionsFilesCheckReport.csv" -NoTypeInformation
-Add-PnPFile -Path "$updatedReportPath\FilesMissingReport.csv" -Folder "$DestFolder/$SiteName"
-Add-PnPFile -Path "$updatedReportPath\FilesFoundReport.csv" -Folder "$DestFolder/$SiteName"
+Add-PnPFile -Path "$updatedReportPath\FilesMissingReport.csv" -Folder "$DestFolder"
+Add-PnPFile -Path "$updatedReportPath\FilesFoundReport.csv" -Folder "$DestFolder"
 }
 
+#Overall report of site collections and if all files were found
+$siteCollectionsResults | Export-Csv -Path "$updatedReportPath\SiteCollectionsFilesCheckReport.csv" -NoTypeInformation
