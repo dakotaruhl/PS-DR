@@ -283,6 +283,10 @@ foreach ($Site in $testCollections)
 
     Add-PnPFile -Path "$updatedReportPath\FilesMissingReport.csv" -Folder "$DestFolder/Reports" | Out-Null #Supress output
     Add-PnPFile -Path "$updatedReportPath\FilesFoundReport.csv" -Folder "$DestFolder/Reports" | Out-Null #Supress output
+
+    #Lock site access after files have been copied
+    Set-PnPTenantSite -Url $Site.Url -LockState "ReadOnly"
+    Write-Host -ForegroundColor Yellow "`nSite Collection '$($Site.Url)' has been locked to Read-Only access after file copy completed."
 }
 
 #Overall report of site collections and if all files were found
