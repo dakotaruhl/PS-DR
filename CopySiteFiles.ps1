@@ -14,12 +14,12 @@ Connect-PnPOnline -Url $TenantAdminURL -Interactive -ClientId 4ac6eede-e81e-4d22
 
 #Get files from Target Site and Folder
 $targetSiteUrl = "https://enchantedrock.sharepoint.com/sites/erintranet"
-#$TargetFolder = "/EPC/ERE/00 ERE Projects"
+$TargetFolder = "/EPC/ERE/00 ERE Projects"
 Connect-PnPOnline -Url $targetSiteUrl -Interactive -ClientId 4ac6eede-e81e-4d22-abad-0d43c51486f2
-#$EREFilesList = Get-PnPFolderInFolder -FolderSiteRelativeUrl $TargetFolder | Get-PnPFileInFolder -Recurse -ExcludeSystemFolders | Where-Object {$_.Name -notlike "*.aspx" -and $_.Name -notlike "*.dotx" }
+$EREFilesList = Get-PnPFolderInFolder -FolderSiteRelativeUrl $TargetFolder | Get-PnPFileInFolder -Recurse -ExcludeSystemFolders | Where-Object {$_.Name -notlike "*.aspx" -and $_.Name -notlike "*.dotx" }
 
 #Set base report path
-$reportPath = "C:\Users\DakotaRuhl\Documents\Reports\ProjectManagement"
+$reportPath = "C:\Users\DakotaRuhl\Documents\ProjectManagement"
 
 #Testing
 #Get sites collections to check files against
@@ -39,37 +39,31 @@ $reportPath = "C:\Users\DakotaRuhl\Documents\Reports\ProjectManagement"
 #     $j++
 # } 
  
-# $SitesCollections = @()
-# foreach ($item in $columnValues) 
-# {
-#     <# Old way of getting groupId from Teams ItemID. Now getting directly from Excel column with exclusions applied
-#     $startIndex = $item.IndexOf("groupId=") + 8
-#     $endIndex = $item.IndexOf("&tenantId")
-#     $length = $endIndex - $startIndex
-#     $groupdId = $item.Substring($startIndex, $length)
-#     #>
-#     try 
-#     {
-#         $groupdId = $item
-#         $CurrentSite = Get-PnPTenantSite | Where-Object {$_.RelatedGroupID -eq $groupdId} -ErrorAction Stop
-#         $SitesCollections += $CurrentSite
-#         Write-Host -ForegroundColor Green "Added Site Collection for GroupID: $groupdId, and Site URL: $($CurrentSite.Url)"
-#     }
-#     catch 
-#     {
-#         Write-Host -ForegroundColor Red "Site for $groupdId not found. Skipping."
-#     }
-# }
+$SitesCollections = @()
+foreach ($item in $columnValues) 
+{
+    try 
+    {
+        $item
+        $CurrentSite = Get-PnPTenantSite | Where-Object {$_.RelatedGroupID -eq $item} -ErrorAction Stop
+        $SitesCollections += $CurrentSite
+        Write-Host -ForegroundColor Green "Added Site Collection for GroupID: $item, and Site URL: $($CurrentSite.Url)"
+    }
+    catch 
+    {
+        Write-Host -ForegroundColor Red "Site for $item not found. Skipping."
+    }
+}
 
 #Initialize collections to store found and missing files, and overall report
 $missingFilesCollection = @()
 $foundFilesCollection = @()
 $siteCollectionsResults = @()
 $s = 0
-foreach ($Site in $testCollections) 
+foreach ($Site in $SitesCollections) 
 {
     $s++
-    Write-Host -foregroundcolor Magenta "`nProcessing Site Collection number $s of $($testCollections.Count)"
+    Write-Host -foregroundcolor Magenta "`nProcessing Site Collection number $s of $($SitesCollections.Count)"
     ##Just getting names of folders here to create report paths
     #Get batch number if it exists
     $SiteName = $Site.Url.Split("/")[-1]
@@ -290,6 +284,6 @@ foreach ($Site in $testCollections)
 }
 
 #Overall report of site collections and if all files were found
-$siteCollectionsResults | Export-Csv -Path "$updatedReportPath\SiteCollectionsFilesCheckReport.csv" -NoTypeInformation
+$siteCollectionsResults | Export-Csv -Path "$reportPath\SiteCollectionsFilesCheckReport.csv" -NoTypeInformation
 Stop-Transcript
 #$SitesCollections | Export-Csv -Path "$reportPath\AllSitesReport.csv" -NoTypeInformation 
