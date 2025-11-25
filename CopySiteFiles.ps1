@@ -1,12 +1,12 @@
 Start-Transcript -Path "C:\Users\DakotaRuhl\Documents\ProjectManagement\CopySiteFiles_Transcript_$(Get-Date -Format 'yyyyMMdd_HHmmss').txt" -Append 
 
 #Set up Excel module and read in file 
-Import-Module ImportExcel
-$filePath = "C:\Users\DakotaRuhl\Documents\Reports\GroupsCreatedByApp\Plans with TeamsURL.xlsx"
-$Worksheet = "Sheet2"
-$columnName = "UniqueGroupsWithExclusions"
-$excelData = Import-Excel -Path $filePath -WorksheetName $Worksheet
-$columnValues = $excelData | Select-Object -ExpandProperty $columnName
+# Import-Module ImportExcel
+# $filePath = "C:\Users\DakotaRuhl\Documents\Reports\GroupsCreatedByApp\Plans with TeamsURL.xlsx"
+# $Worksheet = "Sheet2"
+# $columnName = "UniqueGroupsWithExclusions"
+# $excelData = Import-Excel -Path $filePath -WorksheetName $Worksheet
+# $columnValues = $excelData | Select-Object -ExpandProperty $columnName
 
 # Connect to SharePoint Online
 $TenantAdminURL = "https://enchantedrock-admin.sharepoint.com/"
@@ -14,9 +14,10 @@ Connect-PnPOnline -Url $TenantAdminURL -Interactive -ClientId 4ac6eede-e81e-4d22
 
 #Get files from Target Site and Folder
 $targetSiteUrl = "https://enchantedrock.sharepoint.com/sites/erintranet"
-$TargetFolder = "/EPC/ERE/00 ERE Projects"
+#$TargetFolder = "/EPC/ERE/00 ERE Projects"
 Connect-PnPOnline -Url $targetSiteUrl -Interactive -ClientId 4ac6eede-e81e-4d22-abad-0d43c51486f2
-$EREFilesList = Get-PnPFolderInFolder -FolderSiteRelativeUrl $TargetFolder | Get-PnPFileInFolder -Recurse -ExcludeSystemFolders | Where-Object {$_.Name -notlike "*.aspx" -and $_.Name -notlike "*.dotx" }
+#Write-Host -ForegroundColor Yellow "`nConnected to Target Site: $targetSiteUrl`nGetting all files from Target Folder: $TargetFolder"
+#$EREFilesList = Get-PnPFolderInFolder -FolderSiteRelativeUrl $TargetFolder | Get-PnPFileInFolder -Recurse -ExcludeSystemFolders | Where-Object {$_.Name -notlike "*.aspx" -and $_.Name -notlike "*.dotx" }
 
 #Set base report path
 $reportPath = "C:\Users\DakotaRuhl\Documents\ProjectManagement"
@@ -39,31 +40,31 @@ $reportPath = "C:\Users\DakotaRuhl\Documents\ProjectManagement"
 #     $j++
 # } 
  
-$SitesCollections = @()
-foreach ($item in $columnValues) 
-{
-    try 
-    {
-        $item
-        $CurrentSite = Get-PnPTenantSite | Where-Object {$_.RelatedGroupID -eq $item} -ErrorAction Stop
-        $SitesCollections += $CurrentSite
-        Write-Host -ForegroundColor Green "Added Site Collection for GroupID: $item, and Site URL: $($CurrentSite.Url)"
-    }
-    catch 
-    {
-        Write-Host -ForegroundColor Red "Site for $item not found. Skipping."
-    }
-}
+# $SitesCollections = @()
+# foreach ($item in $columnValues) 
+# {
+#     try 
+#     {
+#         $CurrentSite = Get-PnPTenantSite | Where-Object {$_.RelatedGroupID -eq $item} -ErrorAction Stop
+#         $SitesCollections += $CurrentSite
+#         Write-Host -ForegroundColor Green "Added Site Collection for GroupID: $item, and Site URL: $($CurrentSite.Url)"
+#     }
+#     catch 
+#     {
+#         Write-Host -ForegroundColor Red "Site for $item not found. Skipping."
+#     }
+# }
 
 #Initialize collections to store found and missing files, and overall report
-$missingFilesCollection = @()
-$foundFilesCollection = @()
 $siteCollectionsResults = @()
 $s = 0
-foreach ($Site in $SitesCollections) 
+foreach ($Site in $contSiteCollections) 
 {
     $s++
-    Write-Host -foregroundcolor Magenta "`nProcessing Site Collection number $s of $($SitesCollections.Count)"
+    Write-Host -foregroundcolor Magenta "`nProcessing Site Collection number $s of $($contSiteCollections.Count)"
+    $missingFilesCollection = @()
+    $foundFilesCollection = @()
+    
     ##Just getting names of folders here to create report paths
     #Get batch number if it exists
     $SiteName = $Site.Url.Split("/")[-1]
@@ -115,6 +116,7 @@ foreach ($Site in $SitesCollections)
     foreach ($File in $FilesList) 
     {
         $i++
+
         Write-Host -ForegroundColor Cyan "`nChecking File number $i of $($FilesList.Count)"
         foreach ($EREFile in $EREFilesList) 
         {   
@@ -257,7 +259,7 @@ foreach ($Site in $SitesCollections)
     if (-not (Test-Path -Path $updatedReportPath)) 
     {
         New-Item -Path $updatedReportPath -ItemType Directory | Out-Null #Supress output
-        Write-Host -ForegroundColor Green"`nFolder created at: $updatedReportPath"
+        Write-Host -ForegroundColor Green "`nFolder created at: $updatedReportPath"
     } 
     else 
     {
@@ -287,3 +289,21 @@ foreach ($Site in $SitesCollections)
 $siteCollectionsResults | Export-Csv -Path "$reportPath\SiteCollectionsFilesCheckReport.csv" -NoTypeInformation
 Stop-Transcript
 #$SitesCollections | Export-Csv -Path "$reportPath\AllSitesReport.csv" -NoTypeInformation 
+
+
+
+#debug and unlock
+# for ($i = 15; $i -lt 20; $i++) {
+#     write-host "Site collection url: $($sitescollections[$i].Url)"
+#     set-pnptenantsite $sitescollections[20] -lockstate "unlock"
+# }
+#set-pnptenantsite $sitescollections[2].Url -lockstate "unlock"
+#get-pnptenantsite $sitescollections[113].Url | Select-Object lockstate
+
+#remove element at index 1 
+#$SitesCollections = $SitesCollections | Where-Object { $_ -ne $SitesCollections[1] }
+
+#remove files where path includes GN1-HEB7-0801Alliance
+#$EREFilesList = $EREFilesList | Where-Object { $_.ServerRelativeUrl -notlike "*OnePlan Sites/HEB/HEB7/GN1-HEB7-0801Alliance*" }
+
+#$contSiteCollections = $SitesCollections[113..($SitesCollections.Count - 1)]

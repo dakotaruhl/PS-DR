@@ -25,7 +25,7 @@ $recycleBinItemsSecondStage | Where-Object { $_.DeletedByName -eq $deletedBy} | 
 
 # Sort by directory path of deleted items
 $directory = "sites/erintranet/"
-$library = "Sales  Marketing/Corporate Communications"
+$library = "OM"
 $recycleBinItemsFirstStage | Where-Object { $_.DirName -eq "$directory$library" } | Export-Excel -Path "$ReportFile-$($library -replace '/','-').xlsx" -WorkSheetname 'FirstStage'
 $recycleBinItemsSecondStage | Where-Object { $_.DirName -eq "$directory$library" } | Export-Excel -Path "$ReportFile-$($library -replace '/','-').xlsx" -WorkSheetname 'SecondStage'
 
