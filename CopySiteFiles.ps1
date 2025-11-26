@@ -1,3 +1,9 @@
+<#
+This script copies files from various OnePlan SharePoint Site Collections ($SitesCollections) into a central ERE Projects SharePoint Library.
+It checks for missing files in the target library and copies them over, organizing them into folders based on site names and batch numbers.
+It also generates reports on found and missing files for each site collection processed. Once all files are copied, it then locks the site collection to Read-Only access.
+#>
+
 Start-Transcript -Path "C:\Users\DakotaRuhl\Documents\ProjectManagement\CopySiteFiles_Transcript_$(Get-Date -Format 'yyyyMMdd_HHmmss').txt" -Append 
 
 #Set up Excel module and read in file 
@@ -152,7 +158,7 @@ foreach ($Site in $contSiteCollections)
     #Connect back to Intranet site to copy files, and check if folders exist
     Connect-PnPOnline -Url $targetSiteUrl -Interactive -ClientId 4ac6eede-e81e-4d22-abad-0d43c51486f2
 
-    #Only copy if we have missing files 
+    #Update sitecollectionresults based on found/missing files 
     if ($missingFilesCollection.Count -eq 0) 
     {
         Write-Host -ForegroundColor Yellow "`nAll Files in Site Collection: $($Site.Url) exist in ERE Library"
@@ -162,6 +168,19 @@ foreach ($Site in $contSiteCollections)
                     AllFilesFound  = "True"
                 }
     }
+    #If no files found in either collection, lock site and skip to next site
+    else if($missingFilesCollection.count -eq 0 -and $foundFilesCollection.count -eq 0) 
+    {
+        Write-Host -ForegroundColor Yellow "`nNo files found in Site Collection: $($Site.Url). Skipping to next site."
+        Set-PnPTenantSite -Url $Site.Url -LockState "ReadOnly"
+        Write-Host -ForegroundColor Yellow "`nSite Collection '$($Site.Url)' has been locked to Read-Only access after file copy completed."
+        $siteCollectionsResults += [PSCustomObject]@{
+                    SiteCollection = $Site.Url
+                    AllFilesFound  = "Empty Site"
+                }
+
+        continue
+    }
     else #We have missing files to copy. Report site as not all files found.
     {
         $siteCollectionsResults += [PSCustomObject]@{
@@ -169,6 +188,9 @@ foreach ($Site in $contSiteCollections)
                     AllFilesFound  = "False"
                 }
     }
+
+    
+    
 
     #Check what folder levels exist, create as needed
     $siteFolderExists = Get-PnPFolder -Url $DestFolder -ErrorAction SilentlyContinue
@@ -306,4 +328,4 @@ Stop-Transcript
 #remove files where path includes GN1-HEB7-0801Alliance
 #$EREFilesList = $EREFilesList | Where-Object { $_.ServerRelativeUrl -notlike "*OnePlan Sites/HEB/HEB7/GN1-HEB7-0801Alliance*" }
 
-#$contSiteCollections = $SitesCollections[113..($SitesCollections.Count - 1)]
+#$contSiteCollections = $contSiteCollections[4..($contSiteCollections.Count - 1)]
