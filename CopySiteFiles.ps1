@@ -64,10 +64,10 @@ $reportPath = "C:\Users\DakotaRuhl\Documents\ProjectManagement"
 #Initialize collections to store found and missing files, and overall report
 $siteCollectionsResults = @()
 $s = 0
-foreach ($Site in $contSiteCollections) 
+foreach ($Site in $SitesCollections) 
 {
     $s++
-    Write-Host -foregroundcolor Magenta "`nProcessing Site Collection number $s of $($contSiteCollections.Count)"
+    Write-Host -foregroundcolor Magenta "`nProcessing Site Collection number $s of $($SitesCollections.Count)"
     $missingFilesCollection = @()
     $foundFilesCollection = @()
     
@@ -159,7 +159,7 @@ foreach ($Site in $contSiteCollections)
     Connect-PnPOnline -Url $targetSiteUrl -Interactive -ClientId 4ac6eede-e81e-4d22-abad-0d43c51486f2
 
     #Update sitecollectionresults based on found/missing files 
-    if ($missingFilesCollection.Count -eq 0) 
+    if ($missingFilesCollection.Count -eq 0 -and $foundFilesCollection.count -gt 0) 
     {
         Write-Host -ForegroundColor Yellow "`nAll Files in Site Collection: $($Site.Url) exist in ERE Library"
         #Export found files to CSV
@@ -169,11 +169,11 @@ foreach ($Site in $contSiteCollections)
                 }
     }
     #If no files found in either collection, lock site and skip to next site
-    else if($missingFilesCollection.count -eq 0 -and $foundFilesCollection.count -eq 0) 
+    elseif($missingFilesCollection.count -eq 0 -and $foundFilesCollection.count -eq 0) 
     {
         Write-Host -ForegroundColor Yellow "`nNo files found in Site Collection: $($Site.Url). Skipping to next site."
-        Set-PnPTenantSite -Url $Site.Url -LockState "ReadOnly"
-        Write-Host -ForegroundColor Yellow "`nSite Collection '$($Site.Url)' has been locked to Read-Only access after file copy completed."
+        #Set-PnPTenantSite -Url $Site.Url -LockState "ReadOnly"
+        #Write-Host -ForegroundColor Yellow "`nSite Collection '$($Site.Url)' has been locked to Read-Only access after file copy completed."
         $siteCollectionsResults += [PSCustomObject]@{
                     SiteCollection = $Site.Url
                     AllFilesFound  = "Empty Site"
@@ -191,7 +191,7 @@ foreach ($Site in $contSiteCollections)
 
     
     
-
+<#
     #Check what folder levels exist, create as needed
     $siteFolderExists = Get-PnPFolder -Url $DestFolder -ErrorAction SilentlyContinue
     if ($SiteName -like "*HEB*")
@@ -301,10 +301,10 @@ foreach ($Site in $contSiteCollections)
 
     Add-PnPFile -Path "$updatedReportPath\FilesMissingReport.csv" -Folder "$DestFolder/Reports" | Out-Null #Supress output
     Add-PnPFile -Path "$updatedReportPath\FilesFoundReport.csv" -Folder "$DestFolder/Reports" | Out-Null #Supress output
-
+#>
     #Lock site access after files have been copied
-    Set-PnPTenantSite -Url $Site.Url -LockState "ReadOnly"
-    Write-Host -ForegroundColor Yellow "`nSite Collection '$($Site.Url)' has been locked to Read-Only access after file copy completed."
+#    Set-PnPTenantSite -Url $Site.Url -LockState "ReadOnly"
+#    Write-Host -ForegroundColor Yellow "`nSite Collection '$($Site.Url)' has been locked to Read-Only access after file copy completed."
 }
 
 #Overall report of site collections and if all files were found
@@ -319,6 +319,9 @@ Stop-Transcript
 #     write-host "Site collection url: $($sitescollections[$i].Url)"
 #     set-pnptenantsite $sitescollections[20] -lockstate "unlock"
 # }
+
+#set-pnptenantsite "https://enchantedrock.sharepoint.com/sites/HEBFreshPlantPhaseI" -lockstate "readonly"
+
 #set-pnptenantsite $sitescollections[2].Url -lockstate "unlock"
 #get-pnptenantsite $sitescollections[113].Url | Select-Object lockstate
 
