@@ -6,7 +6,7 @@ It also generates reports on found and missing files for each site collection pr
 
 Start-Transcript -Path "C:\Users\DakotaRuhl\Documents\ProjectManagement\CopySiteFiles_Transcript_$(Get-Date -Format 'yyyyMMdd_HHmmss').txt" -Append 
 
-#Set up Excel module and read in file 
+# Set up Excel module and read in file 
 # Import-Module ImportExcel
 # $filePath = "C:\Users\DakotaRuhl\Documents\Reports\GroupsCreatedByApp\Plans with TeamsURL.xlsx"
 # $Worksheet = "Sheet2"
@@ -134,6 +134,7 @@ foreach ($Site in $SitesCollections)
                 $foundFile | Add-Member NoteProperty FileURL($EREFile.ServerRelativeUrl)
                 $foundFile | Add-Member NoteProperty Created($EREFile.TimeCreated)
                 $foundFile | Add-Member NoteProperty Modified($EREFile.TimeLastModified)
+                $foundFile | Add-Member NoteProperty SourceFilePath($Site.Url + $File.ServerRelativeUrl)
                 $foundFilesCollection += $foundFile
                 $found = $true
                 break
@@ -274,6 +275,7 @@ foreach ($Site in $SitesCollections)
     foreach ($foundFile in $foundFilesCollection) 
     {
         Write-Host -ForegroundColor Cyan "Copying Found File '$($foundFile.FileName)' to ERE Library Folder '$DestFolder/duplicates'."
+        Write-Host -ForegroundColor Cyan "Source File Path: $($foundFile.SourceFilePath)"
         Copy-PnPFile -SourceUrl $foundFile.FileURL -TargetUrl "$DestFolder/duplicates" -Force -IgnoreVersionHistory -Overwrite
     }
 
@@ -332,3 +334,21 @@ Stop-Transcript
 #$EREFilesList = $EREFilesList | Where-Object { $_.ServerRelativeUrl -notlike "*OnePlan Sites/HEB/HEB7/GN1-HEB7-0801Alliance*" }
 
 #$contSiteCollections = $contSiteCollections[4..($contSiteCollections.Count - 1)]
+
+
+$siteCollectionsResults = @()
+$i = 0
+foreach ($site in $SitesCollections) {
+    write-host -foregroundcolor Green "Processing site number $i" 
+    write-host $site.url
+    $siteCollectionsResults += [PSCustomObject]@{
+                    SiteName = $Site.Url.Split("/")[-1]
+                    LockState  = (Get-PnPTenantSite -Url $Site.Url).LockState
+                    RelatedGroup = (Get-PnPTenantSite -Url $Site.Url).RelatedGroupID
+                    SiteTemplate = (Get-PnPTenantSite -Url $Site.Url).Template
+                    StorageUsed = (Get-PnPTenantSite -Url $Site.Url).StorageUsageCurrent
+                }
+    $i++
+}
+
+$siteCollectionsResults | Export-Excel -Path "$reportPath\SiteCollectionsLockStateReport.xlsx"
