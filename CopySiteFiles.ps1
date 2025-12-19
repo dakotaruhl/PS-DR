@@ -324,7 +324,7 @@ Stop-Transcript
 
 #set-pnptenantsite "https://enchantedrock.sharepoint.com/sites/HEBFreshPlantPhaseI" -lockstate "readonly"
 
-set-pnptenantsite "https://enchantedrock.sharepoint.com/sites/WistronEagle35" -lockstate "unlock"
+set-pnptenantsite "https://enchantedrock.sharepoint.com/sites/CPS-SAWSMaintenanceAgreement" -lockstate "unlock"
 #get-pnptenantsite $sitescollections[113].Url | Select-Object lockstate
 
 
