@@ -9,15 +9,29 @@ Import-Module Microsoft.Graph.Sites
 # Connect to Microsoft Graph
 Connect-MgGraph -Scopes "Group.ReadWrite.All", "User.Read.All", "Sites.Read.All"
 
+#Setup file path
+$date = Get-Date -Format "MM_dd_yyyy"
+$folder = "C:\Users\DakotaRuhl\Documents\Reports\SiteLifeCyclePolicy"
+$fileName = "M365GroupOwnersGraphP2$($date).csv"
+$path = Join-Path $folder $fileName
 
 # Get all M365 groups
 $groups = Get-MgGroup -Filter "groupTypes/any(c:c eq 'Unified')" -All
+$totalGroups = $groups.Count
+Write-Host "Total M365 Groups Found: $totalGroups"
 
 # Create an array to store results
 $results = @()
 
+$count = 0
+# Loop through each group to get owners
 foreach ($group in $groups) 
-{
+{   
+    #Write Progress 
+    $count++
+    $percent = [math]::Round(($count / $totalGroups) * 100, 2)
+    Write-Progress -Activity "Processing Groups" -Status "Processing group $count of $totalGroups ($percent`%)" -PercentComplete $percent
+
     $owners = Get-MgGroupOwner -GroupId $group.Id
     foreach ($owner in $owners) {
         $results += [PSCustomObject]@{
@@ -29,10 +43,12 @@ foreach ($group in $groups)
     }
 }
 
-# Export to CSV
-$results | Export-Csv -Path "C:\Users\DakotaRuhl\Documents\Reports\SiteLifeCyclePolicy\M365GroupOwnersGraphP2.csv" -NoTypeInformation
+#Dismiss progress bar
+Write-Progress -Activity "Processing Data" -Status "Complete" -Completed
 
-Write-Host "Export complete. File saved as M365GroupOwnersGraphP2.csv"
+# Export to CSV
+$results | Export-Csv -Path $path -NoTypeInformation
+Write-Host "Export complete. File saved as $fileName"
 
 <#Debug
 Get-MgGroupOwner -GroupId c3efcd87-457a-4741-9f44-b34dda0cade3
