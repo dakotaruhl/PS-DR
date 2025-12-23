@@ -78,11 +78,10 @@ Function Get-PnPFolderPermission([Microsoft.SharePoint.Client.Folder]$Folder)
         }
         #Export Permissions to CSV File
         $PermissionCollection | Export-CSV $ReportFile -NoTypeInformation -Append
-        Write-host -f Green "`n*** Permissions of Folder '$($Folder.Name)' at '$($Folder.ServerRelativeUrl)' Exported Successfully!***"
     }   
         Catch 
         {
-        write-host -f Red "Error Generating Folder Permission Report!" $_.Exception.Message
+        write-host -f Red "Error Generating Folder Permission Report for '$($Folder.Name)' at '$($Folder.ServerRelativeUrl)'" $_.Exception.Message
         }
 }
 
@@ -121,7 +120,7 @@ function Merge-CsvFiles
 ##  install-module sharepointpnpPowerShellOnline -scope currentuser -allowclobber (maybe required old version?)
 #Site URL and document library (Change the value for relativeURL to the targeted Doc Library)
 $SiteURL="https://enchantedrock.sharepoint.com/sites/erintranet"
-$FolderSiteRelativeURL = "/Sales  Marketing" 
+$FolderSiteRelativeURL = "/Events Library" 
 
 #Connect to the Site collection
 Connect-PnPOnline -URL $SiteURL -Interactive -ClientId 4ac6eede-e81e-4d22-abad-0d43c51486f2
@@ -131,17 +130,23 @@ $Folder = Get-PnPFolder -Url $FolderSiteRelativeURL
 $SubFolders = Get-PnPFolderItem -FolderSiteRelativeUrl $FolderSiteRelativeURL -ItemType Folder
 $TargetLib = $Folder.Name 
 
+#Display total folders
+Write-Host -f Green "Total Top Level Folders Found in Document Library '$($TargetLib)': $($SubFolders.Count)"
+
 #Set initial report path to Doc Library name (make sure to create this folder first, probably?)
 $ReportLibrary = $Folder.Name -replace " ", "_"
 $ReportFileSubString ="C:\Users\DakotaRuhl\Documents\Reports\Permission Reports\$ReportLibrary\PnPFolderPermissionRpt_"
 
-#Left off at Marketing/Budget, Planning & Admin/Marketing Plans/Program Roadmaps/Corporate Marketing/2023
 #Run permission report function for each top level folder
+$TLCount = 0
 foreach ($SubFolder in $SubFolders) {
 
     $FolderSiteRelativeURL = "$TargetLib/" + $SubFolder.Name
     $ReportFile = $ReportFileSubString + ($SubFolder.Name -replace " ", "_") + ".csv"
-    write-host -f Yellow "`nGenerating Permission Report for Folder '$($SubFolder.Name)' at '$($FolderSiteRelativeURL)'"
+
+    #Track progress of top level folders
+    write-host -f Blue "Generating Permission Report for Top Level Folder '$($SubFolder.Name)' ($($TLCount)/$($SubFolders.Count))"
+    $TLCount++
 
     #Delete the file, If already exist!
     If (Test-Path $ReportFile) { Remove-Item $ReportFile }
@@ -149,12 +154,39 @@ foreach ($SubFolder in $SubFolders) {
     #Get the Folder and all Subfolders from URL
     $Folder = Get-PnPFolder -Url $FolderSiteRelativeURL
     $SubFoldersRecursive = Get-PnPFolderItem -FolderSiteRelativeUrl $FolderSiteRelativeURL -ItemType Folder -Recursive
- 
+
+    #Initiate progress of subfolders under Top Level Folder
+    $SFCount = 0
+    $SFTotal = $SubFoldersRecursive.Count
+
     #Call the function to generate folder permission report
     if ($subfolder.Name -ne "Forms" -or $Folder.Name -ne "Forms") 
     {
-        Get-PnPFolderPermission $Folder
-        $SubFoldersRecursive | ForEach-Object { Get-PnPFolderPermission $_ }
+        $start = Get-Date
+        $SubFoldersRecursive | ForEach-Object {
+            $SFCount++
+            Get-PnPFolderPermission -Folder $_
+            
+            # Compute progress
+            $percent = [int][math]::Round(($SFCount / $SFTotal) * 100, 0)
+            
+            # Simple ETA (avoid divide-by-zero)
+            $elapsed = (Get-Date) - $start
+            $etaSec  = if ($SFCount -gt 0) 
+            {
+                [int]([double]$elapsed.TotalSeconds * ($SFTotal - $SFCount) / $SFCount)
+            } 
+            else {0}
+
+            # Format ETA as HH:MM:SS (supports >24 hours)
+            $ts      = [TimeSpan]::FromSeconds($etaSec)
+            $etaHMS  = ('{0:00}:{1:00}:{2:00}' -f [int]$ts.TotalHours, $ts.Minutes, $ts.Seconds)
+
+            Write-Progress -Activity "Processing Subfolders" `
+            -Status "Processing subfolder $SFCount of $SFTotal ($percent`%) ETA: $etaHMS"`
+            -PercentComplete $percent `
+        }
+        Write-Progress -Completed
     }
     elseif ($Folder.Name -eq "Forms" -or $subfolder.Name -eq "Forms") 
     {
@@ -165,6 +197,8 @@ foreach ($SubFolder in $SubFolders) {
         write-host -f Red "`nNo remaining folders found at '$($FolderSiteRelativeURL)'"
     }
 }
+
+
 
 #Merge all CSV files into one
 # Define the path to the folder containing your CSV files
