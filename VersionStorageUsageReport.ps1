@@ -7,6 +7,10 @@ Connect-SPOService -Url https://enchantedrock-admin.sharepoint.com
 #Configure Target Site
 $siteUrl = "https://enchantedrock.sharepoint.com/sites/erintranet"
 
+#Configure Library Name and ReportURL
+$libName = "Accounting"
+$reportUrl = "https://enchantedrock.sharepoint.com/sites/erintranet/IT Corporate/Reports in progress - restricted/VersionStorageUsageReport_$libName.csv"
+
 <#
 #Generate a version storage usage report for a site or OneDrive account 	
 New-SPOSiteFileVersionExpirationReportJob -Identity $siteUrl -ReportUrl $reportUrl 
@@ -20,50 +24,24 @@ Get-SPOSiteFileVersionExpirationReportJobProgress -Identity $siteUrl -ReportUrl 
 #>
 
 
-<#
-Generate a version storage usage report for a library 
-$libName = <libName>
-$reportUrl = "https://enchantedrock.sharepoint.com/sites/erintranet/IT Corporate/Reports in progress - restricted/VersionStorageUsageReport_<libName>.csv"
+
+#Generate a version storage usage report for a library 
 New-SPOListFileVersionExpirationReportJob -Site $siteUrl -List $libName -ReportUrl $reportUrl
-#>
 
-<#
 #Track progress of the job to generate report for a library 
-#Current Jobs
-$reportUrl = "https://enchantedrock.sharepoint.com/sites/erintranet/IT Corporate/Reports in progress - restricted/VersionStorageUsageReport_<libName>.csv"
-$libName = <libName>
-Get-SPOListFileVersionExpirationReportJobProgress -Site $siteUrl -List $libName -ReportUrl $reportUrl
-#>
-
-<#
-Completed Jobs
-#Libraries
-$libName = "O&M"	
-$reportUrl = "https://enchantedrock.sharepoint.com/sites/erintranet/IT Corporate/Reports in progress - restricted/VersionStorageUsageReport_OMLibrary.csv"
-$libName = "EPC"
-$reportUrl = "https://enchantedrock.sharepoint.com/sites/erintranet/IT Corporate/Reports in progress - restricted/VersionStorageUsageReport_EPCLibrary.csv"
-Get-SPOListFileVersionExpirationReportJobProgress -Site $siteUrl -List $libName -ReportUrl $reportUrl
-$libName = "Marketing"
-$reportUrl = "https://enchantedrock.sharepoint.com/sites/erintranet/IT Corporate/Reports in progress - restricted/VersionStorageUsageReport_Marketing.csv"
 Get-SPOListFileVersionExpirationReportJobProgress -Site $siteUrl -List $libName -ReportUrl $reportUrl
 
-#Sites
-$reportUrl = "https://enchantedrock.sharepoint.com/sites/erintranet/IT Corporate/Reports in progress - restricted/VersionStorageUsageReport_FullSite.csv"	
-Get-SPOSiteFileVersionExpirationReportJobProgress -Identity $siteUrl -ReportUrl $reportUrl
-#>
 
-<#
 #Trim Versions using Automatic Policy for a library 
-$libName = "EPC"
 New-SPOListFileVersionBatchDeleteJob -Site $siteUrl -List $libName -Automatic
-#>
 
 #Stop processing an in-progress library level trim job:
-#Remove-SPOListFileVersionBatchDeleteJob -Site $siteUrl -List $libName
+Remove-SPOListFileVersionBatchDeleteJob -Site $siteUrl -List $libName
 
 #Get status of a library level trimming job:
-$libName = "EPC"
-Get-SPOListFileVersionBatchDeleteJobProgress -Site $siteUrl -List $libName
+Get-SPOListFileVersionBatchDeleteJobProgress -Site $siteUrl -List $libName 
+
+
 
 <#
 #Set Automatic version history limits on a site

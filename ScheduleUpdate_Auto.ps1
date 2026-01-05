@@ -18,9 +18,13 @@ $Schedule |
   Export-Csv -Path $ExportPath -UseQuotes AsNeeded -NoTypeInformation
 
   <#
+  $libraryName = "SCM"
+  $importPath = "C:\Users\DakotaRuhl\Documents\Reports\VersionStorage\Usage Reports\VersionStorageUsageReport_$libraryName.csv"
+  $exportPath = "C:\Users\DakotaRuhl\Documents\Reports\VersionStorage\What if Reports\WhatIfAuto_$libraryName.csv"  
+
   To run this report, include mandatory parameters for ImportPath and ExportPath. Example:
     .\ScheduleUpdate_Auto.ps1 -ImportPath "C:\Path\To\VersionUsageReport.csv" -ExportPath "C:\Path\To\ScheduleUpdateReport.csv"
 
-    .\ScheduleUpdate_Auto.ps1 -ImportPath "C:\Users\DakotaRuhl\Documents\Reports\VersionStorage\VersionStorageUsageReport_Marketing.csv" -ExportPath "C:\Users\DakotaRuhl\Documents\Reports\VersionStorage\WhatIfAuto_Marketing.csv"
+    .\ScheduleUpdate_Auto.ps1 -ImportPath $importPath -ExportPath $exportPath
   #>
 
