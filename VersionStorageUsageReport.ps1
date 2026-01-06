@@ -7,9 +7,15 @@ Connect-SPOService -Url https://enchantedrock-admin.sharepoint.com
 #Configure Target Site
 $siteUrl = "https://enchantedrock.sharepoint.com/sites/erintranet"
 
-#Configure Library Name and ReportURL
-$libName = "Accounting"
-$reportUrl = "https://enchantedrock.sharepoint.com/sites/erintranet/IT Corporate/Reports in progress - restricted/VersionStorageUsageReport_$libName.csv"
+
+###REPORT JOBS###
+$reportLibName = "Sales"
+$reportUrl = "https://enchantedrock.sharepoint.com/sites/erintranet/IT Corporate/Reports in progress - restricted/VersionStorageUsageReport_$reportLibName.csv"
+
+#Generate a version storage usage report for a library 
+New-SPOListFileVersionExpirationReportJob -Site $siteUrl -List $reportLibName -ReportUrl $reportUrl
+#Track progress of the job to generate report for a library 
+Get-SPOListFileVersionExpirationReportJobProgress -Site $siteUrl -List $reportLibName -ReportUrl $reportUrl
 
 <#
 #Generate a version storage usage report for a site or OneDrive account 	
@@ -23,25 +29,17 @@ $reportUrl = "https://enchantedrock.sharepoint.com/sites/erintranet/IT Corporate
 Get-SPOSiteFileVersionExpirationReportJobProgress -Identity $siteUrl -ReportUrl $reportUrl
 #>
 
-
-
-#Generate a version storage usage report for a library 
-New-SPOListFileVersionExpirationReportJob -Site $siteUrl -List $libName -ReportUrl $reportUrl
-
-#Track progress of the job to generate report for a library 
-Get-SPOListFileVersionExpirationReportJobProgress -Site $siteUrl -List $libName -ReportUrl $reportUrl
-
+#####TRIM JOBS#####
+$trimLibName = "Safety"
 
 #Trim Versions using Automatic Policy for a library 
-New-SPOListFileVersionBatchDeleteJob -Site $siteUrl -List $libName -Automatic
+New-SPOListFileVersionBatchDeleteJob -Site $siteUrl -List $trimLibName -Automatic
 
 #Stop processing an in-progress library level trim job:
-Remove-SPOListFileVersionBatchDeleteJob -Site $siteUrl -List $libName
+Remove-SPOListFileVersionBatchDeleteJob -Site $siteUrl -List $trimLibName
 
 #Get status of a library level trimming job:
-Get-SPOListFileVersionBatchDeleteJobProgress -Site $siteUrl -List $libName 
-
-
+Get-SPOListFileVersionBatchDeleteJobProgress -Site $siteUrl -List $trimLibName 
 
 <#
 #Set Automatic version history limits on a site
