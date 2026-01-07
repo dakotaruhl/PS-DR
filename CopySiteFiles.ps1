@@ -7,20 +7,20 @@ It also generates reports on found and missing files for each site collection pr
 Start-Transcript -Path "C:\Users\DakotaRuhl\Documents\ProjectManagement\CopySiteFiles_Transcript_$(Get-Date -Format 'yyyyMMdd_HHmmss').txt" -Append 
 
 # Set up Excel module and read in file 
-# Import-Module ImportExcel
-# $filePath = "C:\Users\DakotaRuhl\Documents\Reports\GroupsCreatedByApp\Plans with TeamsURL.xlsx"
-# $Worksheet = "Sheet2"
-# $columnName = "UniqueGroupsWithExclusions"
-# $excelData = Import-Excel -Path $filePath -WorksheetName $Worksheet
-# $columnValues = $excelData | Select-Object -ExpandProperty $columnName
+ Import-Module ImportExcel
+ $filePath = "C:\Users\DakotaRuhl\Documents\SP Portfolio\Account Management\ComparePMtoAM.xlsx"
+ $Worksheet = "Revised AM List"
+ $columnName = "Link fixes"
+ $excelData = Import-Excel -Path $filePath -WorksheetName $Worksheet
+ $columnValues = $excelData | Select-Object -ExpandProperty $columnName
 
 # Connect to SharePoint Online
 $TenantAdminURL = "https://enchantedrock-admin.sharepoint.com/"
 Connect-PnPOnline -Url $TenantAdminURL -Interactive -ClientId 4ac6eede-e81e-4d22-abad-0d43c51486f2 
 
 #Get files from Target Site and Folder
-$targetSiteUrl = "https://enchantedrock.sharepoint.com/sites/erintranet"
-#$TargetFolder = "/EPC/ERE/00 ERE Projects"
+$targetSiteUrl = "https://enchantedrock.sharepoint.com/sites/accountmanagement"
+$TargetFolder = "/Archive"
 Connect-PnPOnline -Url $targetSiteUrl -Interactive -ClientId 4ac6eede-e81e-4d22-abad-0d43c51486f2
 #Write-Host -ForegroundColor Yellow "`nConnected to Target Site: $targetSiteUrl`nGetting all files from Target Folder: $TargetFolder"
 #$EREFilesList = Get-PnPFolderInFolder -FolderSiteRelativeUrl $TargetFolder | Get-PnPFileInFolder -Recurse -ExcludeSystemFolders | Where-Object {$_.Name -notlike "*.aspx" -and $_.Name -notlike "*.dotx" }
@@ -46,20 +46,20 @@ $reportPath = "C:\Users\DakotaRuhl\Documents\ProjectManagement"
 #     $j++
 # } 
  
-# $SitesCollections = @()
-# foreach ($item in $columnValues) 
-# {
-#     try 
-#     {
-#         $CurrentSite = Get-PnPTenantSite | Where-Object {$_.RelatedGroupID -eq $item} -ErrorAction Stop
-#         $SitesCollections += $CurrentSite
-#         Write-Host -ForegroundColor Green "Added Site Collection for GroupID: $item, and Site URL: $($CurrentSite.Url)"
-#     }
-#     catch 
-#     {
-#         Write-Host -ForegroundColor Red "Site for $item not found. Skipping."
-#     }
-# }
+$SitesCollections = @()
+foreach ($item in $columnValues) 
+{
+    try 
+    {
+        $CurrentSite = Get-PnPTenantSite $item -ErrorAction Stop
+        $SitesCollections += $CurrentSite
+        Write-Host -ForegroundColor Green "Added Site Collection: $($CurrentSite.Url)"
+    }
+    catch 
+    {
+        Write-Host -ForegroundColor Red "Site for $item not found. Skipping."
+    }
+}
 
 #Initialize collections to store found and missing files, and overall report
 $siteCollectionsResults = @()

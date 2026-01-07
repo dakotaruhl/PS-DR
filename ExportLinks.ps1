@@ -7,9 +7,8 @@ Connect-PnPOnline -Url $TenantAdminURL -Interactive -ClientId 4ac6eede-e81e-4d22
 
 #Get files from Target Site and Folder
 $targetSiteUrl = "https://enchantedrock.sharepoint.com/sites/erintranet"
-$TargetFolder = "/EPC/ERE/00 ERE Projects/HEB (EREJB161012)/01 Stores"
+$TargetFolder = "/EPC/ERE/01 ERE Engineering/HEB Engineering"
 Connect-PnPOnline -Url $targetSiteUrl -Interactive -ClientId 4ac6eede-e81e-4d22-abad-0d43c51486f2
-Write-Host -ForegroundColor Yellow "`nConnected to Target Site: $targetSiteUrl`nGetting all files from Target Folder: $TargetFolder"
 $storesFolderList = Get-PnPFolderInFolder -FolderSiteRelativeUrl $TargetFolder
 
 #Set base report path
