@@ -9,7 +9,16 @@ $siteUrl = "https://enchantedrock.sharepoint.com/sites/erintranet"
 
 
 ###REPORT JOBS###
-$reportLibName = "Titan"
+$reportLibName = "Culture Committee"
+$reportUrl = "https://enchantedrock.sharepoint.com/sites/erintranet/IT Corporate/Reports in progress - restricted/VersionStorageUsageReport_$reportLibName.csv"
+
+$reportLibName = "Asset Mgmt."
+$reportUrl = "https://enchantedrock.sharepoint.com/sites/erintranet/IT Corporate/Reports in progress - restricted/VersionStorageUsageReport_$reportLibName.csv"
+
+$reportLibName = "Employee Services"
+$reportUrl = "https://enchantedrock.sharepoint.com/sites/erintranet/IT Corporate/Reports in progress - restricted/VersionStorageUsageReport_$reportLibName.csv"
+
+$reportLibName = "Building Management"
 $reportUrl = "https://enchantedrock.sharepoint.com/sites/erintranet/IT Corporate/Reports in progress - restricted/VersionStorageUsageReport_$reportLibName.csv"
 
 #Generate a version storage usage report for a library 
@@ -30,9 +39,7 @@ Get-SPOSiteFileVersionExpirationReportJobProgress -Identity $siteUrl -ReportUrl 
 #>
 
 #####TRIM JOBS#####
-$trimLibName = "Finance"
-$trimLibName = "Structuring"
-$trimLibName = "Granite"
+$trimLibName = "Asset Mgmt."
 
 #Trim Versions using Automatic Policy for a library 
 New-SPOListFileVersionBatchDeleteJob -Site $siteUrl -List $trimLibName -Automatic
