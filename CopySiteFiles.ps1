@@ -322,12 +322,6 @@ Stop-Transcript
 #     set-pnptenantsite $sitescollections[20] -lockstate "unlock"
 # }
 
-#set-pnptenantsite "https://enchantedrock.sharepoint.com/sites/HEBFreshPlantPhaseI" -lockstate "readonly"
-
-set-pnptenantsite "https://enchantedrock.sharepoint.com/sites/CPS-SAWSMaintenanceAgreement" -lockstate "unlock"
-#get-pnptenantsite $sitescollections[113].Url | Select-Object lockstate
-
-
 
 #remove element at index 1 
 #$SitesCollections = $SitesCollections | Where-Object { $_ -ne $SitesCollections[1] }
