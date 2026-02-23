@@ -17,19 +17,120 @@ $recycleBinItemsSecondStage = Get-PnPRecycleBinItem -SecondStage
 
  
 # Sort by Name of person who deleted item
-$deletedBy = "Ariadna Labra"
+$deletedBy = "Paul Andrews"
 $recycleBinItemsFirstStage | Where-Object { $_.DeletedByName -eq $deletedBy} | Export-Excel -Path "$ReportFile-$($deletedBy -replace ' ','-').xlsx" -WorkSheetname 'FirstStage'
 $recycleBinItemsSecondStage | Where-Object { $_.DeletedByName -eq $deletedBy} | Export-Excel -Path "$ReportFile-$($deletedBy -replace ' ','-').xlsx" -WorkSheetname 'SecondStage'
 
+$PaulAndrewDeletesFS = $recycleBinItemsFirstStage | Where-Object { $_.DeletedByName -eq $deletedBy}
+$PaulAndrewDeletesSS = $recycleBinItemsSecondStage | Where-Object { $_.DeletedByName -eq $deletedBy}
+
+###BETA - No Profile temp load in session needed for -itemID
+pwsh -NoProfile
+Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass -Force
+Import-Module "C:\Temp\PnP-Nightly\PnP.PowerShell.psd1" -Force
+# Check it worked
+Get-Module PnP.PowerShell | Select Name, Version, Path
+Get-Command Restore-PnPRecycleBinItem -Syntax
+###
+
+$itemIds = $PaulAndrewDeletesFS | Select-Object -ExpandProperty Id
+$itemIds = $PaulAndrewDeletesSS | Select-Object -ExpandProperty Id
+
+#Break into batches of 1000 to avoid throttling and restore items deleted by Paul Andrews, and track progress in console
+$batchSize     = 1000
+$itemIds       = @($itemIds)  # ensure it's an array
+$totalItems    = $itemIds.Count
+$totalBatches  = [math]::Ceiling($totalItems / $batchSize)
+
+$processedBatches    = 0
+$processedItems      = 0
+$totalBatchSeconds   = 0.0
+$overallStart        = Get-Date
+
+for ($offset = 0; $offset -lt $totalItems; $offset += $batchSize) {
+
+    $endIndex = [math]::Min($offset + $batchSize - 1, $totalItems - 1)
+    $batch    = $itemIds[$offset..$endIndex]
+
+    # --- Restore this batch and time it ---
+    $batchStart = Get-Date
+    try {
+        Restore-PnPRecycleBinItem -IdList $batch
+    }
+    catch {
+        # Optional: log & continue. Change to "throw" if you want to stop on first failure.
+        Write-Warning "Batch $($processedBatches + 1) failed: $($_.Exception.Message)"
+        # continue
+    }
+    $batchElapsed = (Get-Date) - $batchStart
+
+    # --- Update counters ---
+    $processedBatches++
+    $processedItems += $batch.Count
+    $totalBatchSeconds += $batchElapsed.TotalSeconds
+
+    # --- Progress + ETA ---
+    $progress = [math]::Round(($processedBatches / [math]::Max($totalBatches,1)) * 100, 2)
+    $avgBatchSec = $totalBatchSeconds / [math]::Max($processedBatches,1)
+    $remainingBatches = $totalBatches - $processedBatches
+    $etaSec = [math]::Max(0, $avgBatchSec * $remainingBatches)
+
+    $ts     = [TimeSpan]::FromSeconds($etaSec)
+    $etaHMS = ('{0:00}:{1:00}:{2:00}' -f [int]$ts.TotalHours, $ts.Minutes, $ts.Seconds)
+
+    $elapsedTotal = (Get-Date) - $overallStart
+    $elapsedHMS   = ('{0:00}:{1:00}:{2:00}' -f [int]$elapsedTotal.TotalHours, $elapsedTotal.Minutes, $elapsedTotal.Seconds)
+
+    Write-Progress -Activity "Restoring Recycle Bin Items (IdList batches of $batchSize)" `
+        -Status "Batch $processedBatches/$totalBatches | Items $processedItems/$totalItems | Last batch: $([math]::Round($batchElapsed.TotalSeconds,1))s | Elapsed: $elapsedHMS | ETA: $etaHMS" `
+        -PercentComplete $progress `
+        -Id 1
+}
+
+Write-Progress -Completed -Id 1
+
+Write-Host "Done. Restored $processedItems items in $processedBatches batches. Total time: $((Get-Date) - $overallStart)"
+
+## Alternative: Restore items one by one with progress (slower but can show per-item progress and handle errors individually)
+$itemTotal = $PaulAndrewDeletesFS.Count
+$itemCount = 0
+$start = Get-Date
+#restore first stage items deleted by Paul Andrews and show progress in console
+Foreach ($item in $PaulAndrewDeletesFS) 
+{
+    
+    #compute progress
+    $progress = [math]::Round(($itemCount / $itemTotal * 100), 2)
+
+    # Simple ETA (avoid divide-by-zero)
+    $elapsed = (Get-Date) - $start
+    $etaSec  = if ($itemCount -gt 0) 
+    {
+        $avgSec = $elapsed.TotalSeconds / $itemCount
+        [int]($avgSec * ($itemTotal - $itemCount))
+    } 
+    else {0}
+
+    # Format ETA as HH:MM:SS (supports >24 hours)
+    $ts      = [TimeSpan]::FromSeconds($etaSec)
+    $etaHMS  = ('{0:00}:{1:00}:{2:00}' -f [int]$ts.TotalHours, $ts.Minutes, $ts.Seconds)
+
+    Write-Progress -Activity "Restoring Recycle Bin Items" `
+        -Status "Processing restores $itemCount of $itemTotal ($progress`%) ETA: $etaHMS"`
+        -PercentComplete $progress `
+        -Id 1
+
+    Restore-PnPRecycleBinItem -Identity $item.Id -Force
+    $itemCount++
+}
+Write-Progress -Completed -Id 1
 
 
 # Sort by directory path of deleted items
 $directory = "sites/erintranet/"
-$library = "OM"
+$library = "EPC"
 $recycleBinItemsFirstStage | Where-Object { $_.DirName -eq "$directory$library" } | Export-Excel -Path "$ReportFile-$($library -replace '/','-').xlsx" -WorkSheetname 'FirstStage'
 $recycleBinItemsSecondStage | Where-Object { $_.DirName -eq "$directory$library" } | Export-Excel -Path "$ReportFile-$($library -replace '/','-').xlsx" -WorkSheetname 'SecondStage'
-
-$recycleBinItemsFirstStage | Where-Object { $_.DirName -eq "$directory$library/Special Projects/2024 Employee Video Project" }
 
 # Restore all items from First Stage bin based on filters selected above in the export-csv commands
 Foreach ($item in $recycleBinItemsFirstStage) {
@@ -60,3 +161,6 @@ foreach ($item in $RestoreItems) {
         Restore-PnPRecycleBinItem -Identity $subitem.Id -Force
     }
 }
+
+
+Restore-PnPRecycleBinItem -Identity 6ebb0a00-c299-44b1-b086-2b3e2b5928e9 -force

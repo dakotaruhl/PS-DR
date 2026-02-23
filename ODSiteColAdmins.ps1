@@ -2,7 +2,7 @@ Import-Module Microsoft.Online.SharePoint.PowerShell -UseWindowsPowerShell
 Connect-SPOService -Url https://enchantedrock-admin.sharepoint.com
 
 $OneDriveSites = Get-SPOSite -IncludePersonalSite $true -Limit All -Template "SPSPERS"
-$UserToRemove = "admin-jo@enchantedrock.com"
+$UserToRemove = "admin-dr@enchantedrock.com"
 
 $results = @()
 foreach ($site in $OneDriveSites) 
