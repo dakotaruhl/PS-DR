@@ -12,14 +12,14 @@ Import-Module ImportExcel
 Connect-MgGraph -Scopes "User.Read.All", "Directory.Read.All"
 
 #Find all users for a specific license (e.g. Visio Plan 2)  
-$skuFriendlyName = "Visio Plan 2"
-$skuId = "c5928f49-12ba-48f7-ada3-0d743a3601d5" # Visio Plan 2
+$skuFriendlyName = "CoPilot"
+$skuId = "639dec6b-bb19-468b-871c-c5c441c4b0cb" 
 $licensedUsers = Get-MgUser -All -Property UserPrincipalName, DisplayName, AssignedLicenses 
     | Where-Object { $_.AssignedLicenses.skuId -contains $skuId } 
     | Select-Object UserPrincipalName, DisplayName
 $licensedUsers.Count
 #create report for licensed users
-$licensedUsers | Export-Excel -Path "$env:USERPROFILE\Documents\Reports\License Usage\$($skuFriendlyName)LicensedUsers.xlsx" -WorkSheetname 'LicensedUsers' -AutoSize
+$licensedUsers | Export-Excel -Path "$env:USERPROFILE\Documents\Reports\License Usage\$($skuFriendlyName) LicensedUsers.xlsx" -WorkSheetname 'LicensedUsers' -AutoSize
 
 # Consent once as an admin; Reports.Read.All is required
 Connect-MgGraph -Scopes "Reports.Read.All"
