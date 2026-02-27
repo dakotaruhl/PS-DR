@@ -14,3 +14,6 @@ $userIdentityRemove = "Nikole Elliott-Harvest"
 Add-MailboxFolderPermission -Identity $calendarIdentity -User $userIdentityAdd -AccessRights editor
 Get-MailboxFolderPermission -Identity $calendarIdentity | Format-Table User,AccessRights -AutoSize 
 Remove-MailboxFolderPermission -Identity $calendarIdentity -User $userIdentityRemove
+
+Get-FocusedInbox -Identity Jcarrington@enchantedrock.com
+Set-FocusedInbox -Identity Jcarrington@enchantedrock.com -FocusedInboxOn $false

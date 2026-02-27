@@ -11,15 +11,45 @@ Import-Module ImportExcel
 #Connect to graph with permission to read licenses 
 Connect-MgGraph -Scopes "User.Read.All", "Directory.Read.All"
 
+#Exchange for recipient details
+Connect-ExchangeOnline
+
 #Find all users for a specific license (e.g. Visio Plan 2)  
-$skuFriendlyName = "CoPilot"
-$skuId = "639dec6b-bb19-468b-871c-c5c441c4b0cb" 
+$skuFriendlyName = "Microsoft 365 Business Basic "
+$skuId = "3b555118-da6a-4418-894f-7df1e2096870"
 $licensedUsers = Get-MgUser -All -Property UserPrincipalName, DisplayName, AssignedLicenses 
     | Where-Object { $_.AssignedLicenses.skuId -contains $skuId } 
     | Select-Object UserPrincipalName, DisplayName
 $licensedUsers.Count
 #create report for licensed users
 $licensedUsers | Export-Excel -Path "$env:USERPROFILE\Documents\Reports\License Usage\$($skuFriendlyName) LicensedUsers.xlsx" -WorkSheetname 'LicensedUsers' -AutoSize
+
+#get recipient type details for $licensedusers
+$licensedUserDetails = foreach ($user in $licensedUsers) {
+    $recipient = Get-MgUser -UserId $user.UserPrincipalName -Property UserPrincipalName, DisplayName, AssignedLicenses
+    $recipientdetails = Get-Recipient -Identity $user.UserPrincipalName | Select-Object RecipientType
+    [PSCustomObject]@{
+        UserPrincipalName = $recipient.UserPrincipalName
+        DisplayName = $recipient.DisplayName
+        RecipientType = $recipientdetails.RecipientType
+    }
+}
+
+$licensedUserDetails | Export-Excel -Path "$env:USERPROFILE\Documents\Reports\License Usage\$($skuFriendlyName) LicensedUsers_Details.xlsx" -WorkSheetname 'LicensedUsersDetails' -AutoSize
+
+
+#Check a user's license details
+$userPrincipalName = "ratkinson@enchantedrock.com"
+$user = Get-MgUser -UserId $userPrincipalName -Property AssignedLicenses
+$user.AssignedLicenses | ForEach-Object {
+    $skuId = $_.skuId
+    $licenseDetails = Get-MgSubscribedSku | Where-Object { $_.SkuId -eq $skuId }
+    [PSCustomObject]@{
+        SkuId = $skuId
+        SkuPartNumber = $licenseDetails.SkuPartNumber
+        AssignedDateTime = $_.assignedDateTime
+    }
+} | Format-Table -AutoSize
 
 # Consent once as an admin; Reports.Read.All is required
 Connect-MgGraph -Scopes "Reports.Read.All"
