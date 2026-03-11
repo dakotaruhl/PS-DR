@@ -17,7 +17,7 @@ $TenantAdminURL = "https://enchantedrock-admin.sharepoint.com/"
 Connect-PnPOnline -Url $TenantAdminURL -Interactive -ClientId 4ac6eede-e81e-4d22-abad-0d43c51486f2 
 
 # Set Destination for Copy
-$CopyToSiteUrl = "https://enchantedrock.sharepoint.com/sites/accountmanagement"
+$CopyToSiteUrl = "https://enchantedrock.sharepoint.com/sites/communicationsexternal"
 $CopyToTargetFolder = "Shared Documents/Archive"
 Connect-PnPOnline -Url $CopyToSiteUrl -Interactive -ClientId 4ac6eede-e81e-4d22-abad-0d43c51486f2
 

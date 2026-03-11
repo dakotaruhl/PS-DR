@@ -120,7 +120,7 @@ function Merge-CsvFiles
 ##  install-module sharepointpnpPowerShellOnline -scope currentuser -allowclobber (maybe required old version?)
 #Site URL and document library (Change the value for relativeURL to the targeted Doc Library)
 $SiteURL="https://enchantedrock.sharepoint.com/sites/erintranet"
-$FolderSiteRelativeURL = "/Legal" 
+$FolderSiteRelativeURL = "/Accounting and Finance" 
 
 #Connect to the Site collection
 Connect-PnPOnline -URL $SiteURL -Interactive -ClientId 4ac6eede-e81e-4d22-abad-0d43c51486f2
