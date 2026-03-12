@@ -250,10 +250,11 @@ $stopWatch = [System.Diagnostics.Stopwatch]::StartNew()
 #Main loop to process each user and their devices
 foreach ($user in $Workbook) 
 {
+
     $count++
     $device = $devices | Where-Object {$_.UserDisplayName -eq $user.UniqueDisplayName}
     Write-Host "Processing $($device.Count) devices for user $($user.UniqueDisplayName) ($count of $totalUsers)" -ForegroundColor Blue
-
+    
     $userDeviceCount = 0
     foreach ($d in $device) 
     {
@@ -351,3 +352,5 @@ Export-ReportWorkbookWithTimestamp -Path $reportPath -Sheets @{
 
 Write-Host "Comprehensive report with summary exported to: $reportPath" -ForegroundColor Magenta
 Stop-Transcript
+
+$Devices | Export-Excel -Path "$basePath\AllDevices.xlsx" -WorksheetName "All Devices" -AutoSize -Append
