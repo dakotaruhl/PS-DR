@@ -1,3 +1,11 @@
+<# 
+This script retrieves all devices from Intune, compares them to a list of users from Excel, 
+and renames the devices in Intune to match the expected format. 
+
+It also generates a comprehensive report of the results.
+
+Currently the option to actually rename the device is commented out on line 206 to allow for testing and validation of the script without making changes to Intune.
+ #>
 Start-Transcript -Path "C:\Users\DakotaRuhl\Documents\Reports\Devices\Transcripts\SetDeviceName_$(Get-Date -Format 'yyyyMMdd-HHmmss').txt" -NoClobber
 Import-Module -Name ImportExcel
 Connect-MgGraph -Scopes "DeviceManagementManagedDevices.PrivilegedOperations.All" -NoWelcome
