@@ -1,5 +1,4 @@
 Start-Transcript -Path "C:\Users\DakotaRuhl\Documents\Reports\Devices\Transcripts\SetDeviceName_$(Get-Date -Format 'yyyyMMdd-HHmmss').txt" -NoClobber
-
 Import-Module -Name ImportExcel
 Connect-MgGraph -Scopes "DeviceManagementManagedDevices.PrivilegedOperations.All" -NoWelcome
 $ErrorActionPreference = 'Stop'
@@ -7,8 +6,6 @@ $ErrorActionPreference = 'Stop'
 #Get all devices
 Write-Host "Retrieving devices from Intune..." -ForegroundColor Blue
 $devices = Get-MgDeviceManagementManagedDevice -All
-#$device = $devices | Where-Object {$_.Serialnumber -eq "5CD116H4Z6"}
-#$device | FL
 
 #Import device user names and ID's from Excel report. Remove empty rows, only select specific column in specific sheet
 $Workbook = Import-Excel -Path "C:\Users\DakotaRuhl\Documents\Reports\Devices\ManufDeviceReport.xlsx"  -WorksheetName "User Display Names with ID" | 
@@ -24,49 +21,18 @@ $summary = @{
     SignedInUserMismatch = 0
     UnsupportedOS = 0
 }
-
 $unsupportedOSList = @()
 $SuccessfullyRenamedList = @()
 $ErrorsList = @()
 
 #Function to export results to Excel with timestamp in filename and run details in header
-function Export-ReportWithTimestamp {
-    param(
-        [Parameter(Mandatory)] $Data,
-        [Parameter(Mandatory)] [string] $Path,
-        [Parameter(Mandatory)] [string] $WorksheetName
-    )
-
-    $runDT = Get-Date
-
-    $pkg = $Data | Export-Excel -Path $Path `
-        -WorksheetName $WorksheetName `
-        -AutoSize `
-        -StartRow 3 `
-        -PassThru
-
-    $ws = $pkg.Workbook.Worksheets[$WorksheetName]
-
-    $ws.Cells["A1"].Value = "Run Timestamp (Local):"
-    $ws.Cells["B1"].Value = $runDT
-    $ws.Cells["B1"].Style.Numberformat.Format = "m/d/yyyy h:mm:ss AM/PM"
-    $ws.Cells["A1:B1"].Style.Font.Bold = $true
-
-    Close-ExcelPackage $pkg
-}
-
-Import-Module ImportExcel
-
 function Export-ReportWorkbookWithTimestamp {
     param(
         [Parameter(Mandatory)][string]$Path,
         [Parameter(Mandatory)][hashtable]$Sheets,   # SheetName -> Data
-        [int]$StartRow = 3
+        [int]$StartRow = 3,
+        [hashtable]$SummaryHash = $null             # optional: your $summary hashtable
     )
-
-    if (-not $Sheets -or $Sheets.Count -eq 0) {
-        throw "Sheets hashtable is empty. Provide at least one sheet name and dataset."
-    }
 
     # Ensure folder exists
     $dir = Split-Path $Path -Parent
@@ -74,80 +40,127 @@ function Export-ReportWorkbookWithTimestamp {
 
     $runDT = Get-Date
 
-    function Has-Records {
-        param($Data)
+    function Has-Records($Data) {
         if ($null -eq $Data) { return $false }
         if ($Data -is [System.Collections.ICollection]) { return ($Data.Count -gt 0) }
-        return $true  # single object
+        return $true
     }
 
-    function Ensure-Worksheet {
-        param(
-            [Parameter(Mandatory)]$ExcelPackage,
-            [Parameter(Mandatory)][string]$WorksheetName
-        )
-        $ws = $ExcelPackage.Workbook.Worksheets[$WorksheetName]
-        if (-not $ws) {
-            $ws = Add-Worksheet -ExcelPackage $ExcelPackage -WorksheetName $WorksheetName
-        }
-        return $ws
+    function Stamp-Timestamp([OfficeOpenXml.ExcelWorksheet]$ws, [datetime]$dt) {
+        $ws.Cells["A1"].Value = "Run Timestamp (Local):"
+        $ws.Cells["B1"].Value = $dt
+        $ws.Cells["B1"].Style.Numberformat.Format = "m/d/yyyy h:mm:ss AM/PM"
+        $ws.Cells["A1:B1"].Style.Font.Bold = $true
     }
 
-    function Set-TimestampHeader {
-        param(
-            [Parameter(Mandatory)][OfficeOpenXml.ExcelWorksheet]$Worksheet,
-            [Parameter(Mandatory)][datetime]$DateTime
-        )
-        $Worksheet.Cells["A1"].Value = "Run Timestamp (Local):"
-        $Worksheet.Cells["B1"].Value = $DateTime
-        $Worksheet.Cells["B1"].Style.Numberformat.Format = "m/d/yyyy h:mm:ss AM/PM"
-        $Worksheet.Cells["A1:B1"].Style.Font.Bold = $true
-    }
-
-    function Write-NoRecords {
-        param(
-            [Parameter(Mandatory)][OfficeOpenXml.ExcelWorksheet]$Worksheet,
-            [Parameter(Mandatory)][int]$Row
-        )
-        $cell = $Worksheet.Cells["A$Row"]
+    function Write-NoRecords([OfficeOpenXml.ExcelWorksheet]$ws, [int]$row) {
+        $cell = $ws.Cells["A$row"]
         $cell.Value = "No records"
         $cell.Style.Font.Italic = $true
         $cell.Style.Font.Color.SetColor([System.Drawing.Color]::Gray)
     }
 
-    # Create / open workbook package (works even with no data)
-    $pkg = Open-ExcelPackage -Path $Path -Create
+    function Add-SummarySheet {
+        param(
+            [Parameter(Mandatory)][OfficeOpenXml.ExcelPackage]$Pkg,
+            [Parameter(Mandatory)][hashtable]$Sheets,
+            [datetime]$RunDT,
+            [hashtable]$SummaryHash
+        )
 
+        # Create/clear summary sheet
+        $sumWs = Add-Worksheet -ExcelPackage $Pkg -WorksheetName "Summary" -ClearSheet
+        Stamp-Timestamp -ws $sumWs -dt $RunDT
+
+        # Title
+        $sumWs.Cells["A2"].Value = "Device Rename Report Summary"
+        $sumWs.Cells["A2"].Style.Font.Bold = $true
+        $sumWs.Cells["A2"].Style.Font.Size = 14
+
+        # Headers
+        $sumWs.Cells["A4"].Value = "Report"
+        $sumWs.Cells["B4"].Value = "Count"
+        $sumWs.Cells["C4"].Value = "Link"
+        $sumWs.Cells["A4:C4"].Style.Font.Bold = $true
+
+        $row = 5
+
+        foreach ($name in $Sheets.Keys) {
+            $data = $Sheets[$name]
+            $count = if ($data -is [System.Collections.ICollection]) { $data.Count } elseif ($null -ne $data) { 1 } else { 0 }
+
+            $sumWs.Cells["A$row"].Value = $name
+            $sumWs.Cells["B$row"].Value = $count
+
+            # Hyperlink to the sheet (internal Excel link)
+            # Format: '#''Sheet Name''!A1'
+            $safeSheet = $name.Replace("'", "''")
+            $linkTarget = "#'$safeSheet'!A1"
+
+            $sumWs.Cells["C$row"].Value = "Go to sheet"
+            $sumWs.Cells["C$row"].Hyperlink = $linkTarget
+            $sumWs.Cells["C$row"].Style.Font.Color.SetColor([System.Drawing.Color]::Blue)
+            $sumWs.Cells["C$row"].Style.Font.UnderLine = $true
+
+            $row++
+        }
+
+        # Optional: dump your $summary hashtable as a small table
+        if ($SummaryHash) {
+            $row += 2
+            $sumWs.Cells["A$row"].Value = "Script Summary Counters"
+            $sumWs.Cells["A$row"].Style.Font.Bold = $true
+            $row++
+
+            $sumWs.Cells["A$row"].Value = "Metric"
+            $sumWs.Cells["B$row"].Value = "Value"
+            $sumWs.Cells["A$row:B$row"].Style.Font.Bold = $true
+            $row++
+
+            foreach ($k in $SummaryHash.Keys) {
+                $sumWs.Cells["A$row"].Value = $k
+                $sumWs.Cells["B$row"].Value = $SummaryHash[$k]
+                $row++
+            }
+        }
+
+        # Auto size columns
+        $sumWs.Cells[$sumWs.Dimension.Address].AutoFitColumns()
+    }
+
+    # Create/open workbook once
+    $pkg = Open-ExcelPackage -Path $Path -Create
+    if (-not $pkg) { throw "Open-ExcelPackage returned null. Is the file locked/open? Path: $Path" }
+
+    # 1) Create Summary first (so it’s always present even if some sheets are empty)
+    Add-SummarySheet -Pkg $pkg -Sheets $Sheets -RunDT $runDT -SummaryHash $SummaryHash
+
+    # 2) Create each data sheet
     foreach ($sheetName in $Sheets.Keys) {
         $data = $Sheets[$sheetName]
 
-        # Ensure sheet exists and clear it
-        $ws = Ensure-Worksheet -ExcelPackage $pkg -WorksheetName $sheetName
-        $ws.Cells.Clear()
-
-        # Always stamp timestamp
-        Set-TimestampHeader -Worksheet $ws -DateTime $runDT
+        $ws = Add-Worksheet -ExcelPackage $pkg -WorksheetName $sheetName -ClearSheet
+        Stamp-Timestamp -ws $ws -dt $runDT
 
         if (Has-Records $data) {
-            # Write dataset starting at StartRow (keeps our header row 1)
-            $null = $data | Export-Excel -ExcelPackage $pkg `
+            # Use -PassThru to keep working with the package after export [1](https://www.tbone.se/2023/02/16/update-intune-primary-user-with-powershell-or-azure-automation/)[2](https://mikemdm.de/2023/02/19/automatically-set-intune-primary-user-based-on-the-logged-on-user/)[3](https://learn.microsoft.com/en-us/intune/intune-service/fundamentals/find-primary-user)
+            $pkg = $data | Export-Excel -ExcelPackage $pkg `
                 -WorksheetName $sheetName `
                 -StartRow $StartRow `
                 -AutoSize `
-                -ClearSheet
-            # Re-stamp timestamp because -ClearSheet recreates/overwrites worksheet content
+                -PassThru
+
+            # Stamp again for safety
             $ws = $pkg.Workbook.Worksheets[$sheetName]
-            Set-TimestampHeader -Worksheet $ws -DateTime $runDT
+            Stamp-Timestamp -ws $ws -dt $runDT
         }
         else {
-            # No data: write “No records”
-            Write-NoRecords -Worksheet $ws -Row $StartRow
+            Write-NoRecords -ws $ws -row $StartRow
         }
     }
 
     Close-ExcelPackage $pkg
 }
-
 
 ##Invoke API to rename devices - Format: SerialNumber-FirstInitialLastName (up to 6 characters of last name)
 Function Rename-DeviceForUser ([Microsoft.Graph.PowerShell.Models.IMicrosoftGraphManagedDevice]$device, [string]$newDeviceName)
@@ -313,34 +326,20 @@ foreach ($user in $Workbook)
         -Status "User $count of $totalUsers ($percent`%) ETA: $etaHMS" `
         -PercentComplete $percent
 }
-Write-Progress -Completed
 
+Write-Progress -Completed
 Write-Host "Device renaming process completed. Total time: $($stopWatch.Elapsed.ToString("hh\:mm\:ss"))" -ForegroundColor Green
 Write-Host "Summary: $($summary | ConvertTo-Json -Depth 5)" -ForegroundColor Magenta
 
 $runStampFile = Get-Date -Format "yyyyMMdd-HHmmss"
 $basePath = "C:\Users\DakotaRuhl\Documents\Reports\Devices"
-
-Export-ReportWithTimestamp -Data $unsupportedOSList `
-  -Path "$basePath\UnsupportedOS\UnsupportedOSDevices_$runStampFile.xlsx" `
-  -WorksheetName "Unsupported OS Devices"
-
-Export-ReportWithTimestamp -Data $ErrorsList `
-  -Path "$basePath\Errors\ErrorDevices_$runStampFile.xlsx" `
-  -WorksheetName "Errors Renaming Devices"
-
-Export-ReportWithTimestamp -Data $SuccessfullyRenamedList `
-  -Path "$basePath\Success\SuccessfulDevices_$runStampFile.xlsx" `
-  -WorksheetName "Renamed Devices"
-
-Write-Host "Detailed results exported to Excel files in C:\Users\DakotaRuhl\Documents\Reports\Devices\" -ForegroundColor Magenta
-
-
 $reportPath = "$basePath\DeviceRenameReport_$runStampFile.xlsx"
+
 Export-ReportWorkbookWithTimestamp -Path $reportPath -Sheets @{
     "Unsupported OS Devices"  = $unsupportedOSList
     "Errors Renaming Devices" = $ErrorsList
     "Renamed Devices"         = $SuccessfullyRenamedList
-}
+} -SummaryHash $summary
 
+Write-Host "Comprehensive report with summary exported to: $reportPath" -ForegroundColor Magenta
 Stop-Transcript
