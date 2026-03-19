@@ -58,3 +58,8 @@ Export-Excel -Path "C:\Users\DakotaRuhl\Documents\Reports\Calendar Permissions\A
 #Get-MailboxFolderPermission -Identity $calendarIdentity -User "ER Calender Owners"
 
 #$allRooms = $teamsRooms | ForEach-Object { $_.DisplayName }
+
+<# Get-MailboxFolderPermission -Identity "Aimee Middleton:\Calendar" | Format-Table User,AccessRights -AutoSize 
+Add-MailboxFolderPermission -Identity "Aimee Middleton:\Calendar" -User "Jessica Rohrbaugh" -AccessRights Editor
+Remove-MailboxFolderPermission -Identity "Aimee Middleton:\Calendar" -User "Jessica Rohrbaugh" -Confirm:$false
+ #>
