@@ -63,3 +63,7 @@ Export-Excel -Path "C:\Users\DakotaRuhl\Documents\Reports\Calendar Permissions\A
 Add-MailboxFolderPermission -Identity "Aimee Middleton:\Calendar" -User "Jessica Rohrbaugh" -AccessRights Editor
 Remove-MailboxFolderPermission -Identity "Aimee Middleton:\Calendar" -User "Jessica Rohrbaugh" -Confirm:$false
  #>
+
+Add-MailboxFolderPermission -Identity "Allen Schurr:\Calendar" -User "Jessica Rohrbaugh" -AccessRights Editor
+
+Get-MailboxFolderPermission -Identity $calendarIdentity | Format-Table User,AccessRights -AutoSize

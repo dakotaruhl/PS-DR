@@ -1,7 +1,7 @@
 #Set Parameters
 $AdminCenterURL="https://enchantedrock-admin.sharepoint.com/"
 #user with the ID mismatch
-$UserLoginID = "i:0#.f|membership|manguiano@enchantedrock.com"
+#$UserLoginID = "i:0#.f|membership|manguiano@enchantedrock.com"
 #enter user, that is sharepoint admin
 $SiteCollectionAdmin = "admin-dr@enchantedrock.com"
 
@@ -12,24 +12,63 @@ Import-Module Microsoft.Online.SharePoint.PowerShell -UseWindowsPowerShell
 Connect-SPOService -Url $AdminCenterURL
 
 #Get all Personal Site collections
-$PSitesUrl = Get-SPOSite -Template "SPSPERS" -limit ALL -includepersonalsite $True | Select URL
+$PSitesUrl = Get-SPOSite -Template "SPSPERS" -limit ALL -includepersonalsite $True | Select URL, LockState
 
+$count = 0
+$disabledUsersFound = @()
+Foreach ($PSite in $PSitesUrl)
+{	
+	$count++
+	Write-Host "Processing $count of $($PSitesUrl.Count): $($PSite.URL)" -ForegroundColor Cyan
 
-Foreach ($PSiteUrl in $PSitesUrl.url)
-{
-	#Add Site collection Admin
-	Set-SPOUser -site $PSiteUrl -LoginName $SiteCollectionAdmin -IsSiteCollectionAdmin $True
-    
-	#remove the user from "All people" personal site
-	$PSiteUrl = "https://enchantedrock-my.sharepoint.com/personal/ealzner_enchantedrock_com"
-	Remove-SPOUser -Site $PSiteUrl -LoginName $UserLoginID
+	If($PSite.LockState -ne "Unlock") 
+	{
+		Write-Host "Site $($PSite.URL) is locked. Skipping..." -ForegroundColor Yellow
+		continue
+	}	
 
-	#Remove Site collection Admin
-	Set-SPOUser -site $PSiteUrl -LoginName $SiteCollectionAdmin -IsSiteCollectionAdmin $False
+	try 
+	{
+        # Add Site Collection Admin
+        Set-SPOUser -Site $PSite.Url -LoginName $SiteCollectionAdmin -IsSiteCollectionAdmin $true -ErrorAction Stop | Out-Null
+
+        # Collect disabled users
+		$disabledUsers = Get-SPOUser -Limit All -Site $PSite.Url | Where-Object { $_.DisplayName -like '*DIS*' }
+        $disabledUsersFound += $disabledUsers | ForEach-Object {
+                [PSCustomObject]@{
+                    Name      = $_.DisplayName
+                    LoginName = $_.LoginName
+                    Site      = $PSite.Url
+                }
+            }
+
+		#remove the user from "All people" personal site
+		Foreach ($user in $disabledUsersFound) 
+		{
+			Write-Host "Removing $($user.LoginName) from $($user.Site)" -ForegroundColor Red
+			#Remove-SPOUser -Site $PSite.URL -LoginName $user.LoginName
+    	}
+    }
+    catch 
+	{
+        Write-Warning "Error processing $($PSite.Url): $($_.Exception.Message)"
+    }
+    finally 
+	{
+        # Always remove admin if it was added
+        try 
+		{
+            Set-SPOUser -Site $PSite.Url -LoginName $SiteCollectionAdmin -IsSiteCollectionAdmin $false -ErrorAction SilentlyContinue | Out-Null
+        }
+        catch {}
+    }
 }
 
+
+Export-Excel -InputObject ($disabledUsersFound | Sort-Object LoginName, Site -Unique) -Path "C:\Users\DakotaRuhl\Documents\Reports\OneDrive DisabledUsers\DisabledUsersFound.xlsx" -AutoSize
+
 #Remove admin from single site collection
-$PSiteUrl = "https://enchantedrock-my.sharepoint.com/personal/ggiles_enchantedrock_com"
+<# $PSiteUrl = "https://enchantedrock-my.sharepoint.com/personal/bsatterfield_enchantedrock_com"
 $SiteCollectionAdmin = "admin-dr@enchantedrock.com"
 
 Get-SPOUser -Site $PSiteUrl -LoginName $SiteCollectionAdmin | FL
@@ -38,10 +77,11 @@ Set-SPOUser -site $PSiteUrl -LoginName $SiteCollectionAdmin -IsSiteCollectionAdm
 ### Single Site Removal ###
 
 ##Check UPN on site access list
-Get-SPOUser https://enchantedrock-my.sharepoint.com/personal/ealzner_enchantedrock_com | Where-Object -Property LoginName -eq 'manguiano@enchantedrock.com'
+Get-SPOUser https://enchantedrock-my.sharepoint.com/personal/bsatterfield_enchantedrock_com | Where-Object -Property LoginName -eq 'manguiano@enchantedrock.com'
+Get-SPOUser https://enchantedrock-my.sharepoint.com/personal/bsatterfield_enchantedrock_com | Where-Object -Property LoginName -like 'DIS'
 
 ##Set OneDrive site, admin, and User to remove
-$PSiteUrl = "https://enchantedrock-my.sharepoint.com/personal/ealzner_enchantedrock_com"
+$PSiteUrl = "https://enchantedrock-my.sharepoint.com/personal/bsatterfield_enchantedrock_com"
 $SiteCollectionAdmin = "admin-dr@enchantedrock.com"
 $UserLoginID = "i:0#.f|membership|manguiano@enchantedrock.com"
 
@@ -50,4 +90,4 @@ Remove-SPOUser -Site $PSiteUrl -LoginName $UserLoginID
 
 #Remove yourself from SiteCollectionAdmins
 Set-SPOUser -site $PSiteUrl -LoginName $SiteCollectionAdmin -IsSiteCollectionAdmin $False
-Get-SPOUser -Site $PSiteUrl -LoginName $SiteCollectionAdmin | FL
+Get-SPOUser -Site $PSiteUrl -LoginName $SiteCollectionAdmin | FL #>
