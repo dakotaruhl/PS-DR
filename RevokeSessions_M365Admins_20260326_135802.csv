@@ -1,0 +1,12 @@
+"Timestamp","Group","DisplayName","UserPrincipalName","AccountEnabled","Result","Error"
+"2026-03-26T14:03:02","M365Admins","*DIS on 10/02/2025 - *DEL on 10/02/2026 - Greg Campbell - Admin Account","admin-gc@enchantedrock.com","False","Revoked",
+"2026-03-26T14:03:02","M365Admins","Joseph Obebeduo - Admin Account","admin-jo@enchantedrock.com","True","Revoked",
+"2026-03-26T14:03:03","M365Admins","Sathya Long - Admin Account","admin-sl@enchantedrock.com","True","Revoked",
+"2026-03-26T14:03:03","M365Admins","Quiana Gibson - Admin Account","admin-qg@enchantedrock.com","True","Revoked",
+"2026-03-26T14:03:03","M365Admins","Huytan Nguyen - Admin Account","admin-hn@enchantedrock.com","True","Revoked",
+"2026-03-26T14:03:04","M365Admins","Randy Atkinson - Admin Account","admin-ra@enchantedrock.com","True","Revoked",
+"2026-03-26T14:03:04","M365Admins","Petrick McCarver - Admin Account","admin-pm@enchantedrock.com","True","Revoked",
+"2026-03-26T14:03:04","M365Admins","Ketul Parekh - Admin Account","admin-kp@enchantedrock.com","True","Revoked",
+"2026-03-26T14:03:05","M365Admins","Admin Test - Sathya Long","admin-test@enchantedrock.com","True","Revoked",
+"2026-03-26T14:03:05","M365Admins","Dakota Ruhl - Admin Account","admin-dr@enchantedrock.com","True","Revoked",
+"2026-03-26T14:03:05","M365Admins","Mohammad Ishaque - Admin Account","admin-mi@enchantedrock.com","True","Revoked",

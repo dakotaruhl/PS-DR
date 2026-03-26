@@ -64,6 +64,18 @@ Add-MailboxFolderPermission -Identity "Aimee Middleton:\Calendar" -User "Jessica
 Remove-MailboxFolderPermission -Identity "Aimee Middleton:\Calendar" -User "Jessica Rohrbaugh" -Confirm:$false
  #>
 
-Add-MailboxFolderPermission -Identity "Allen Schurr:\Calendar" -User "Jessica Rohrbaugh" -AccessRights Editor
 
-Get-MailboxFolderPermission -Identity $calendarIdentity | Format-Table User,AccessRights -AutoSize
+
+$UPN = "Aschurr@enchantedrock.com"
+$calendarIdentity = "$($UPN):\Calendar"
+$userIdentityAdd = "JRohrbaugh@enchantedrock.com"
+Get-MailboxFolderPermission -Identity $calendarIdentity | Format-Table User,AccessRights -AutoSize 
+Get-MailboxPermission -Identity $UPN
+Get-Mailbox $UPN | FL
+
+Remove-MailboxFolderPermission -Identity $calendarIdentity -User $userIdentityAdd -Confirm:$false
+
+Set-MailboxFolderPermission -Identity "IBlakely@enchantedrock.com:\Calendar" -User "Default" -AccessRights AvailabilityOnly
+Set-MailboxFolderPermission -Identity $calendarIdentity -User $userIdentityAdd -AccessRights Editor
+
+Add-MailboxFolderPermission -Identity $calendarIdentity -User $userIdentityAdd -AccessRights Owner
