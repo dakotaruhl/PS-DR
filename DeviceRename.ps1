@@ -101,13 +101,13 @@ function Export-ReportWorkbookWithTimestamp {
 
     $runDT = Get-Date
 
-    function Has-Records($Data) {
+    function Records($Data) {
         if ($null -eq $Data) { return $false }
         if ($Data -is [System.Collections.ICollection]) { return ($Data.Count -gt 0) }
         return $true
     }
 
-    function Stamp-Timestamp([OfficeOpenXml.ExcelWorksheet]$ws, [datetime]$dt) {
+    function Timestamp([OfficeOpenXml.ExcelWorksheet]$ws, [datetime]$dt) {
         $ws.Cells["A1"].Value = "Run Timestamp (Local):"
         $ws.Cells["B1"].Value = $dt
         $ws.Cells["B1"].Style.Numberformat.Format = "m/d/yyyy h:mm:ss AM/PM"
@@ -131,7 +131,7 @@ function Export-ReportWorkbookWithTimestamp {
 
         # Create/clear summary sheet
         $sumWs = Add-Worksheet -ExcelPackage $Pkg -WorksheetName "Summary" -ClearSheet
-        Stamp-Timestamp -ws $sumWs -dt $RunDT
+        Timestamp -ws $sumWs -dt $RunDT
 
         # Title
         $sumWs.Cells["A2"].Value = "Device Rename Report Summary"
@@ -201,9 +201,9 @@ function Export-ReportWorkbookWithTimestamp {
         $data = $Sheets[$sheetName]
 
         $ws = Add-Worksheet -ExcelPackage $pkg -WorksheetName $sheetName -ClearSheet
-        Stamp-Timestamp -ws $ws -dt $runDT
+        Timestamp -ws $ws -dt $runDT
 
-        if (Has-Records $data) {
+        if (Records $data) {
             # Use -PassThru to keep working with the package after export [1](https://www.tbone.se/2023/02/16/update-intune-primary-user-with-powershell-or-azure-automation/)[2](https://mikemdm.de/2023/02/19/automatically-set-intune-primary-user-based-on-the-logged-on-user/)[3](https://learn.microsoft.com/en-us/intune/intune-service/fundamentals/find-primary-user)
             $pkg = $data | Export-Excel -ExcelPackage $pkg `
                 -WorksheetName $sheetName `
@@ -213,7 +213,7 @@ function Export-ReportWorkbookWithTimestamp {
 
             # Stamp again for safety
             $ws = $pkg.Workbook.Worksheets[$sheetName]
-            Stamp-Timestamp -ws $ws -dt $runDT
+            Timestamp -ws $ws -dt $runDT
         }
         else {
             Write-NoRecords -ws $ws -row $StartRow
