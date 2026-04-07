@@ -9,7 +9,11 @@ Currently the option to actually rename the device is commented out on line 206 
 
 Start-Transcript -Path "C:\Users\DakotaRuhl\Documents\Reports\Devices\Transcripts\SetDeviceName_$(Get-Date -Format 'yyyyMMdd-HHmmss').txt" -NoClobber
 Import-Module -Name ImportExcel
-Connect-MgGraph -Scopes "DeviceManagementManagedDevices.PrivilegedOperations.All" -NoWelcome
+
+$Thumbprint = "C47B91EB62634CA61FA8146DDA83B8BF605C0962"
+$ClientID = "ea2ca49b-d0df-4774-b611-86cf9dc9629f"
+$TenantID = "0bdf0e1f-a359-4b5c-9b79-9357e35ff8c6"
+Connect-MgGraph -ClientId $ClientID -TenantId $TenantID -CertificateThumbprint $Thumbprint 
 $ErrorActionPreference = 'Stop'
 
 #Get all devices
@@ -256,7 +260,7 @@ Function Rename-DeviceForUser ([Microsoft.Graph.PowerShell.Models.IMicrosoftGrap
             $body = @{ deviceName = $newDeviceName } | ConvertTo-Json
             $updateUrl = "https://graph.microsoft.com/beta/deviceManagement/managedDevices/$intuneDeviceId/setDeviceName"
 
-            #Invoke-MgGraphRequest -Method POST -Uri $updateUrl -Body $body -ErrorAction Stop
+            Invoke-MgGraphRequest -Method POST -Uri $updateUrl -Body $body -ErrorAction Stop
             Write-Host "Successfully renamed device with serial $serialNumber from $currentDeviceName to $newDeviceName" -ForegroundColor Green
 
             $script:summary.SuccessfullyRenamed++

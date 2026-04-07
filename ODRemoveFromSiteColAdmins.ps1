@@ -40,3 +40,19 @@ foreach ($site in $OneDriveSites)
 $results | Export-Csv -Path "C:\Users\DakotaRuhl\Documents\Reports\OneDrive Admins\AdminJOAllOneDriveSiteAdmins.csv" -NoTypeInformation
 
 #Get-SPOUser -Site https://enchantedrock-my.sharepoint.com/personal/slong_enchantedrock_com -Limit All | Where-Object {$_.IsSiteAdmin -eq $True} | Select-Object -ExpandProperty DisplayName
+
+
+[Environment]::SetEnvironmentVariable(
+    "PSModulePath",
+    ([Environment]::GetEnvironmentVariable("PSModulePath", "User") -split ';' |
+        Where-Object { $_ -ne "C:\Users\DakotaRuhl\OneDrive - Enchanted Rock\Documents\PowerShell\Modules" }) -join ';',
+    "User"
+)
+
+
+[Environment]::SetEnvironmentVariable(
+    "PSModulePath",
+    ([Environment]::GetEnvironmentVariable("PSModulePath", "Machine") -split ';' |
+        Where-Object { $_ -ne "C:\Users\DakotaRuhl\OneDrive - Enchanted Rock\Documents\PowerShell\Modules" }) -join ';',
+    "Machine"
+)

@@ -1,15 +1,19 @@
 #Set Parameters
 $AdminCenterURL="https://enchantedrock-admin.sharepoint.com/"
 #user with the ID mismatch
-#$UserLoginID = "i:0#.f|membership|manguiano@enchantedrock.com"
+$UserLoginID = "i:0#.f|membership|Btassin@enchantedrock.com"
 #enter user, that is sharepoint admin
 $SiteCollectionAdmin = "admin-dr@enchantedrock.com"
 
 #import PowerShell 7 SPO
 Import-Module Microsoft.Online.SharePoint.PowerShell -UseWindowsPowerShell
 
+$Thumbprint = "C47B91EB62634CA61FA8146DDA83B8BF605C0962"
+$ClientID = "ea2ca49b-d0df-4774-b611-86cf9dc9629f"
+$TenantID = "0bdf0e1f-a359-4b5c-9b79-9357e35ff8c6"
+Get-ChildItem -Path Cert:\CurrentUser\My | Where-Object {$_.Thumbprint -eq $Thumbprint}
 #Connect to SharePoint Online
-Connect-SPOService -Url $AdminCenterURL
+Connect-SPOService -Url $AdminCenterURL -ClientId $ClientID -TenantId $TenantID -CertificateThumbprint $Thumbprint 
 
 #Get all Personal Site collections
 $PSitesUrl = Get-SPOSite -Template "SPSPERS" -limit ALL -includepersonalsite $True | Select URL, LockState
@@ -46,7 +50,7 @@ Foreach ($PSite in $PSitesUrl)
 		Foreach ($user in $disabledUsersFound) 
 		{
 			Write-Host "Removing $($user.LoginName) from $($user.Site)" -ForegroundColor Red
-			#Remove-SPOUser -Site $PSite.URL -LoginName $user.LoginName
+			Remove-SPOUser -Site $PSite.URL -LoginName $user.LoginName
     	}
     }
     catch 
