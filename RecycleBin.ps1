@@ -17,7 +17,7 @@ $recycleBinItemsSecondStage = Get-PnPRecycleBinItem -SecondStage
 
  
 # Sort by Name of person who deleted item
-$deletedBy = "Paul Andrews"
+$deletedBy = "Holly Ross"
 $recycleBinItemsFirstStage | Where-Object { $_.DeletedByName -eq $deletedBy} | Export-Excel -Path "$ReportFile-$($deletedBy -replace ' ','-').xlsx" -WorkSheetname 'FirstStage'
 $recycleBinItemsSecondStage | Where-Object { $_.DeletedByName -eq $deletedBy} | Export-Excel -Path "$ReportFile-$($deletedBy -replace ' ','-').xlsx" -WorkSheetname 'SecondStage'
 
@@ -128,7 +128,7 @@ Write-Progress -Completed -Id 1
 
 # Sort by directory path of deleted items
 $directory = "sites/erintranet/"
-$library = "EPC"
+$library = "Accounting and Finance/1. Accounting - General/Sales Tax/Sales Tax Filings/ER LLC"
 $recycleBinItemsFirstStage | Where-Object { $_.DirName -eq "$directory$library" } | Export-Excel -Path "$ReportFile-$($library -replace '/','-').xlsx" -WorkSheetname 'FirstStage'
 $recycleBinItemsSecondStage | Where-Object { $_.DirName -eq "$directory$library" } | Export-Excel -Path "$ReportFile-$($library -replace '/','-').xlsx" -WorkSheetname 'SecondStage'
 
@@ -162,5 +162,5 @@ foreach ($item in $RestoreItems) {
     }
 }
 
-
-Restore-PnPRecycleBinItem -Identity 6ebb0a00-c299-44b1-b086-2b3e2b5928e9 -force
+#passwords.xlsx
+Restore-PnPRecycleBinItem -Identity a3da4aeb-f738-487f-8db8-4db049e43db6 -force
