@@ -1,4 +1,4 @@
-#Connect-ExchangeOnline
+Connect-ExchangeOnline
 
 Get-EXOMailbox -ResultSize Unlimited -RecipientTypeDetails UserMailbox |
 ForEach-Object {
@@ -14,3 +14,15 @@ ForEach-Object {
         }
     }
 } | Where-Object { $_.TotalSizeGB -gt 90 } | Sort-Object TotalSizeGB -Descending | Export-Excel -Path "C:\Users\DakotaRuhl\Documents\Reports\Full Mailboxes\MailboxSizes.xlsx" -AutoSize -WorksheetName "NearFullMailboxes"
+
+$user = "Emontoya@enchantedrock.com"
+Enable-Mailbox $user -Archive
+Enable-Mailbox $user -AutoExpandingArchive
+Set-Mailbox $user -RetentionPolicy "Archive after 24 months"
+
+Get-Mailbox $user | Select-Object ArchiveStatus,AutoExpandingArchiveEnabled
+Get-Mailbox $user | Select-Object RetentionPolicy
+
+Start-ManagedFolderAssistant -Identity $user
+
+

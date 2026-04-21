@@ -15,5 +15,5 @@ foreach ($url in $columnValues) {
 }
 
 #lockstates "unlock", "readonly", "noaccess"
-#set-pnptenantsite "https://enchantedrock.sharepoint.com/sites/MicrosoftSJC02-AllColos" -lockstate "unlock"
+#set-pnptenantsite "https://enchantedrock.sharepoint.com/sites/HuntsvilleHospital" -lockstate "noaccess"
 #get-pnptenantsite "https://enchantedrock.sharepoint.com/sites/ManagementTeam-OKRsandKPIs" | Select-Object lockstate
