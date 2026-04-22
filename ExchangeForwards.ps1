@@ -1,4 +1,4 @@
-#connect-exchangeonline 
+connect-exchangeonline 
 $Mailboxes = Get-Mailbox -ResultSize Unlimited
 
 
@@ -7,7 +7,7 @@ function Expand-Recipients {
 
     if (-not $Recipients) { return $null }
 
-    $Recipients |
+    ($Recipients |
         ForEach-Object {
             $_.PrimarySmtpAddress ??
             $_.ExternalEmailAddress ??
@@ -15,8 +15,10 @@ function Expand-Recipients {
             $_.ToString()
         } |
         Where-Object { $_ } |
-        Sort-Object -Unique | ForEach-Object { $_ } -join '; '
+        Sort-Object -Unique
+    ) -join '; '
 }
+
 
 
 
@@ -80,14 +82,14 @@ foreach ($Mailbox in $Mailboxes) {
             }
         }
         catch {
-            # This is where your screenshot warnings come from
             $RuleResults += [PSCustomObject]@{
                 Mailbox        = $Mailbox.UserPrincipalName
                 RuleName       = $Rule.Name
-                ForwardTo      = "<Error reading rule>"
-                RedirectTo     = "<Error reading rule>"
+                ForwardTo      = "Recipient expansion failure"
+                RedirectTo     = "Recipient expansion failure"
+                ForwardAsAttachmentTo = "Recipient expansion failure"
                 Enabled        = $Rule.Enabled
-                ErrorType      = "Corrupt inbox rule"
+                ErrorType      = "Recipient expansion failure"
                 ErrorMessage   = $_.Exception.Message
             }
         }
