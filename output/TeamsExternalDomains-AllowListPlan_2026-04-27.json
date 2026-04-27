@@ -1,0 +1,681 @@
+{
+  "GeneratedAt": "2026-04-27T09:27:16.6935226-05:00",
+  "ReportPath": "C:\\Users\\DakotaRuhl\\Documents\\PS-DR\\ExternalDomains.csv",
+  "MinUserCount": 2,
+  "ExcludePatterns": [
+    "*.onmicrosoft.com",
+    "gmail.com",
+    "yahoo.com",
+    "outlook.com",
+    "hotmail.com",
+    "live.com",
+    "aol.com"
+  ],
+  "IncludeDomains": [],
+  "ExcludeDomains": [],
+  "CurrentFederationMode": "AllowList",
+  "CurrentAllowedDomains": [],
+  "CurrentBlockedDomains": [
+    "yacnepal.org.np",
+    "secure-panel.top",
+    "kotaruh.onmicrosoft.com"
+  ],
+  "CandidateDomains": [
+    {
+      "Domain": "gtconsultingservices.com",
+      "Users": 29.0
+    },
+    {
+      "Domain": "prismelectric.com",
+      "Users": 19.0
+    },
+    {
+      "Domain": "epelectric.com",
+      "Users": 12.0
+    },
+    {
+      "Domain": "vistracorp.com",
+      "Users": 10.0
+    },
+    {
+      "Domain": "nortonrosefulbright.com",
+      "Users": 9.0
+    },
+    {
+      "Domain": "heb.com",
+      "Users": 9.0
+    },
+    {
+      "Domain": "luminant.com",
+      "Users": 9.0
+    },
+    {
+      "Domain": "kratosind.com",
+      "Users": 9.0
+    },
+    {
+      "Domain": "protiviti.com",
+      "Users": 8.0
+    },
+    {
+      "Domain": "vistraenergy.com",
+      "Users": 8.0
+    },
+    {
+      "Domain": "microsoft.com",
+      "Users": 8.0
+    },
+    {
+      "Domain": "lonestarelectricsupply.com",
+      "Users": 7.0
+    },
+    {
+      "Domain": "walmart.com",
+      "Users": 6.0
+    },
+    {
+      "Domain": "generac.com",
+      "Users": 6.0
+    },
+    {
+      "Domain": "mcxpsolutions.com",
+      "Users": 6.0
+    },
+    {
+      "Domain": "txu.com",
+      "Users": 6.0
+    },
+    {
+      "Domain": "cougarnet.uh.edu",
+      "Users": 5.0
+    },
+    {
+      "Domain": "trinityconsultants.com",
+      "Users": 5.0
+    },
+    {
+      "Domain": "amazon.com",
+      "Users": 5.0
+    },
+    {
+      "Domain": "enfrasolutions.com",
+      "Users": 5.0
+    },
+    {
+      "Domain": "generatecapital.com",
+      "Users": 5.0
+    },
+    {
+      "Domain": "energyimpactpartners.com",
+      "Users": 4.0
+    },
+    {
+      "Domain": "us.forvismazars.com",
+      "Users": 4.0
+    },
+    {
+      "Domain": "fieldpoint.net",
+      "Users": 4.0
+    },
+    {
+      "Domain": "manganinc.com",
+      "Users": 4.0
+    },
+    {
+      "Domain": "hdrinc.com",
+      "Users": 4.0
+    },
+    {
+      "Domain": "tamu.edu",
+      "Users": 4.0
+    },
+    {
+      "Domain": "diamondbackenergy.com",
+      "Users": 4.0
+    },
+    {
+      "Domain": "eid.utexas.edu",
+      "Users": 4.0
+    },
+    {
+      "Domain": "wsgr.com",
+      "Users": 3.0
+    },
+    {
+      "Domain": "gridaxon.io",
+      "Users": 3.0
+    },
+    {
+      "Domain": "millerbros.us",
+      "Users": 3.0
+    },
+    {
+      "Domain": "lselectricamerica.com",
+      "Users": 3.0
+    },
+    {
+      "Domain": "maverickpwr.com",
+      "Users": 3.0
+    },
+    {
+      "Domain": "mcadamsenergygroup.com",
+      "Users": 3.0
+    },
+    {
+      "Domain": "gftinc.com",
+      "Users": 3.0
+    },
+    {
+      "Domain": "flatrockcompanies.com",
+      "Users": 3.0
+    },
+    {
+      "Domain": "fastenal.com",
+      "Users": 3.0
+    },
+    {
+      "Domain": "meridiancp.com",
+      "Users": 3.0
+    },
+    {
+      "Domain": "anthropic.com",
+      "Users": 3.0
+    },
+    {
+      "Domain": "bastiontechnologies.com",
+      "Users": 3.0
+    },
+    {
+      "Domain": "txlobby.com",
+      "Users": 3.0
+    },
+    {
+      "Domain": "crichielaw.com",
+      "Users": 3.0
+    },
+    {
+      "Domain": "cyberreefsolutions.com",
+      "Users": 3.0
+    },
+    {
+      "Domain": "cushwake.com",
+      "Users": 3.0
+    },
+    {
+      "Domain": "meritadvisor.com",
+      "Users": 3.0
+    },
+    {
+      "Domain": "skens.com",
+      "Users": 3.0
+    },
+    {
+      "Domain": "wabtec.com",
+      "Users": 2.0
+    },
+    {
+      "Domain": "smartwattinc.com",
+      "Users": 2.0
+    },
+    {
+      "Domain": "vanjen.net",
+      "Users": 2.0
+    },
+    {
+      "Domain": "vanderbilt.edu",
+      "Users": 2.0
+    },
+    {
+      "Domain": "southernco.com",
+      "Users": 2.0
+    },
+    {
+      "Domain": "twimail.com",
+      "Users": 2.0
+    },
+    {
+      "Domain": "tva.gov",
+      "Users": 2.0
+    },
+    {
+      "Domain": "tunneltex.com",
+      "Users": 2.0
+    },
+    {
+      "Domain": "mpmaterials.com",
+      "Users": 2.0
+    },
+    {
+      "Domain": "poweredbysenergy.com",
+      "Users": 2.0
+    },
+    {
+      "Domain": "nadel.com",
+      "Users": 2.0
+    },
+    {
+      "Domain": "naes.com",
+      "Users": 2.0
+    },
+    {
+      "Domain": "toradex.com",
+      "Users": 2.0
+    },
+    {
+      "Domain": "seeberger.com",
+      "Users": 2.0
+    },
+    {
+      "Domain": "nw-groupe.com",
+      "Users": 2.0
+    },
+    {
+      "Domain": "oneplan.ai",
+      "Users": 2.0
+    },
+    {
+      "Domain": "phoenixcontact.com",
+      "Users": 2.0
+    },
+    {
+      "Domain": "prioritypower.com",
+      "Users": 2.0
+    },
+    {
+      "Domain": "tntcrane.com",
+      "Users": 2.0
+    },
+    {
+      "Domain": "swatconstruction.com",
+      "Users": 2.0
+    },
+    {
+      "Domain": "polytechinc.com",
+      "Users": 2.0
+    },
+    {
+      "Domain": "southlandind.com",
+      "Users": 2.0
+    },
+    {
+      "Domain": "summitmep.com",
+      "Users": 2.0
+    },
+    {
+      "Domain": "joeris.com",
+      "Users": 2.0
+    },
+    {
+      "Domain": "lonestar.edu",
+      "Users": 2.0
+    },
+    {
+      "Domain": "dchenning.com",
+      "Users": 2.0
+    },
+    {
+      "Domain": "dayzenllc.com",
+      "Users": 2.0
+    },
+    {
+      "Domain": "crmsuperhero.com",
+      "Users": 2.0
+    },
+    {
+      "Domain": "cpsenergy.com",
+      "Users": 2.0
+    },
+    {
+      "Domain": "coserv.com",
+      "Users": 2.0
+    },
+    {
+      "Domain": "comap-control.com",
+      "Users": 2.0
+    },
+    {
+      "Domain": "childrens.com",
+      "Users": 2.0
+    },
+    {
+      "Domain": "cgkholdings.com",
+      "Users": 2.0
+    },
+    {
+      "Domain": "centerpointenergy.com",
+      "Users": 2.0
+    },
+    {
+      "Domain": "ceis.com",
+      "Users": 2.0
+    },
+    {
+      "Domain": "caplawtx.com",
+      "Users": 2.0
+    },
+    {
+      "Domain": "bv.com",
+      "Users": 2.0
+    },
+    {
+      "Domain": "bakerbotts.com",
+      "Users": 2.0
+    },
+    {
+      "Domain": "atronsolutions.com",
+      "Users": 2.0
+    },
+    {
+      "Domain": "alum.iisc.ac.in",
+      "Users": 2.0
+    },
+    {
+      "Domain": "dieselradiator.com",
+      "Users": 2.0
+    },
+    {
+      "Domain": "ls-electric.com",
+      "Users": 2.0
+    },
+    {
+      "Domain": "dorsey.com",
+      "Users": 2.0
+    },
+    {
+      "Domain": "emjcorp.com",
+      "Users": 2.0
+    },
+    {
+      "Domain": "lockton.com",
+      "Users": 2.0
+    },
+    {
+      "Domain": "lcra.org",
+      "Users": 2.0
+    },
+    {
+      "Domain": "kirkland.com",
+      "Users": 2.0
+    },
+    {
+      "Domain": "kinleyconstruction.com",
+      "Users": 2.0
+    },
+    {
+      "Domain": "illinois.edu",
+      "Users": 2.0
+    },
+    {
+      "Domain": "icrinc.com",
+      "Users": 2.0
+    },
+    {
+      "Domain": "icrcapital.com",
+      "Users": 2.0
+    },
+    {
+      "Domain": "gridbeyond.com",
+      "Users": 2.0
+    },
+    {
+      "Domain": "gray.com",
+      "Users": 2.0
+    },
+    {
+      "Domain": "globalpwr.com",
+      "Users": 2.0
+    },
+    {
+      "Domain": "fpl.com",
+      "Users": 2.0
+    },
+    {
+      "Domain": "fortinet-us.com",
+      "Users": 2.0
+    },
+    {
+      "Domain": "fii-na.com",
+      "Users": 2.0
+    },
+    {
+      "Domain": "everlineus.com",
+      "Users": 2.0
+    },
+    {
+      "Domain": "entergy.com",
+      "Users": 2.0
+    },
+    {
+      "Domain": "eiwilliams.com",
+      "Users": 2.0
+    },
+    {
+      "Domain": "alphastruxure.com",
+      "Users": 2.0
+    }
+  ],
+  "ProposedAdds": [
+    "gtconsultingservices.com",
+    "prismelectric.com",
+    "epelectric.com",
+    "vistracorp.com",
+    "nortonrosefulbright.com",
+    "heb.com",
+    "luminant.com",
+    "kratosind.com",
+    "protiviti.com",
+    "vistraenergy.com",
+    "microsoft.com",
+    "lonestarelectricsupply.com",
+    "walmart.com",
+    "generac.com",
+    "mcxpsolutions.com",
+    "txu.com",
+    "cougarnet.uh.edu",
+    "trinityconsultants.com",
+    "amazon.com",
+    "enfrasolutions.com",
+    "generatecapital.com",
+    "energyimpactpartners.com",
+    "us.forvismazars.com",
+    "fieldpoint.net",
+    "manganinc.com",
+    "hdrinc.com",
+    "tamu.edu",
+    "diamondbackenergy.com",
+    "eid.utexas.edu",
+    "wsgr.com",
+    "gridaxon.io",
+    "millerbros.us",
+    "lselectricamerica.com",
+    "maverickpwr.com",
+    "mcadamsenergygroup.com",
+    "gftinc.com",
+    "flatrockcompanies.com",
+    "fastenal.com",
+    "meridiancp.com",
+    "anthropic.com",
+    "bastiontechnologies.com",
+    "txlobby.com",
+    "crichielaw.com",
+    "cyberreefsolutions.com",
+    "cushwake.com",
+    "meritadvisor.com",
+    "skens.com",
+    "wabtec.com",
+    "smartwattinc.com",
+    "vanjen.net",
+    "vanderbilt.edu",
+    "southernco.com",
+    "twimail.com",
+    "tva.gov",
+    "tunneltex.com",
+    "mpmaterials.com",
+    "poweredbysenergy.com",
+    "nadel.com",
+    "naes.com",
+    "toradex.com",
+    "seeberger.com",
+    "nw-groupe.com",
+    "oneplan.ai",
+    "phoenixcontact.com",
+    "prioritypower.com",
+    "tntcrane.com",
+    "swatconstruction.com",
+    "polytechinc.com",
+    "southlandind.com",
+    "summitmep.com",
+    "joeris.com",
+    "lonestar.edu",
+    "dchenning.com",
+    "dayzenllc.com",
+    "crmsuperhero.com",
+    "cpsenergy.com",
+    "coserv.com",
+    "comap-control.com",
+    "childrens.com",
+    "cgkholdings.com",
+    "centerpointenergy.com",
+    "ceis.com",
+    "caplawtx.com",
+    "bv.com",
+    "bakerbotts.com",
+    "atronsolutions.com",
+    "alum.iisc.ac.in",
+    "dieselradiator.com",
+    "ls-electric.com",
+    "dorsey.com",
+    "emjcorp.com",
+    "lockton.com",
+    "lcra.org",
+    "kirkland.com",
+    "kinleyconstruction.com",
+    "illinois.edu",
+    "icrinc.com",
+    "icrcapital.com",
+    "gridbeyond.com",
+    "gray.com",
+    "globalpwr.com",
+    "fpl.com",
+    "fortinet-us.com",
+    "fii-na.com",
+    "everlineus.com",
+    "entergy.com",
+    "eiwilliams.com",
+    "alphastruxure.com"
+  ],
+  "ProposedRemovals": [],
+  "FinalAllowedDomains": [
+    "gtconsultingservices.com",
+    "prismelectric.com",
+    "epelectric.com",
+    "vistracorp.com",
+    "nortonrosefulbright.com",
+    "heb.com",
+    "luminant.com",
+    "kratosind.com",
+    "protiviti.com",
+    "vistraenergy.com",
+    "lonestarelectricsupply.com",
+    "walmart.com",
+    "generac.com",
+    "mcxpsolutions.com",
+    "txu.com",
+    "cougarnet.uh.edu",
+    "trinityconsultants.com",
+    "amazon.com",
+    "enfrasolutions.com",
+    "generatecapital.com",
+    "energyimpactpartners.com",
+    "us.forvismazars.com",
+    "fieldpoint.net",
+    "manganinc.com",
+    "hdrinc.com",
+    "tamu.edu",
+    "diamondbackenergy.com",
+    "eid.utexas.edu",
+    "wsgr.com",
+    "gridaxon.io",
+    "millerbros.us",
+    "lselectricamerica.com",
+    "maverickpwr.com",
+    "mcadamsenergygroup.com",
+    "gftinc.com",
+    "flatrockcompanies.com",
+    "fastenal.com",
+    "meridiancp.com",
+    "anthropic.com",
+    "bastiontechnologies.com",
+    "txlobby.com",
+    "crichielaw.com",
+    "cyberreefsolutions.com",
+    "cushwake.com",
+    "meritadvisor.com",
+    "skens.com",
+    "wabtec.com",
+    "smartwattinc.com",
+    "vanjen.net",
+    "vanderbilt.edu",
+    "southernco.com",
+    "twimail.com",
+    "tva.gov",
+    "tunneltex.com",
+    "mpmaterials.com",
+    "poweredbysenergy.com",
+    "nadel.com",
+    "naes.com",
+    "toradex.com",
+    "seeberger.com",
+    "nw-groupe.com",
+    "oneplan.ai",
+    "phoenixcontact.com",
+    "prioritypower.com",
+    "tntcrane.com",
+    "swatconstruction.com",
+    "polytechinc.com",
+    "southlandind.com",
+    "summitmep.com",
+    "joeris.com",
+    "lonestar.edu",
+    "dchenning.com",
+    "dayzenllc.com",
+    "crmsuperhero.com",
+    "cpsenergy.com",
+    "coserv.com",
+    "comap-control.com",
+    "childrens.com",
+    "cgkholdings.com",
+    "centerpointenergy.com",
+    "ceis.com",
+    "caplawtx.com",
+    "bv.com",
+    "bakerbotts.com",
+    "atronsolutions.com",
+    "alum.iisc.ac.in",
+    "dieselradiator.com",
+    "ls-electric.com",
+    "dorsey.com",
+    "emjcorp.com",
+    "lockton.com",
+    "lcra.org",
+    "kirkland.com",
+    "kinleyconstruction.com",
+    "illinois.edu",
+    "icrinc.com",
+    "icrcapital.com",
+    "gridbeyond.com",
+    "gray.com",
+    "globalpwr.com",
+    "fpl.com",
+    "fortinet-us.com",
+    "fii-na.com",
+    "everlineus.com",
+    "entergy.com",
+    "eiwilliams.com",
+    "alphastruxure.com"
+  ],
+  "Approved": true,
+  "ApprovedBy": "Dakota Ruhl",
+  "ApprovedAt": "2026-04-27",
+  "Notes": "Set Approved=true after review, then run Apply with -PlanPath."
+}

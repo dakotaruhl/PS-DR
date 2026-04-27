@@ -1,0 +1,8 @@
+[2026-04-27 09:24:02][INFO] Starting Mode=Propose
+[2026-04-27 09:24:02][INFO] OutputFolder=.\output
+[2026-04-27 09:24:02][INFO] Loading MicrosoftTeams module
+[2026-04-27 09:24:02][INFO] Connecting to Microsoft Teams
+[2026-04-27 09:24:22][INFO] Connected using interactive auth.
+[2026-04-27 09:24:22][INFO] Loading report: .\ExternalDomains.csv
+[2026-04-27 09:24:22][INFO] Loaded 803 rows from report
+[2026-04-27 09:24:22][INFO] Candidate domains after filters: 108

@@ -1,0 +1,7 @@
+[2026-04-27 09:19:39][INFO] Starting Mode=Propose
+[2026-04-27 09:19:39][INFO] OutputFolder=.\output
+[2026-04-27 09:19:39][INFO] Loading MicrosoftTeams module
+[2026-04-27 09:19:46][INFO] Connecting to Microsoft Teams
+[2026-04-27 09:20:08][INFO] Connected using interactive auth.
+[2026-04-27 09:20:08][INFO] Loading report: .\ExternalDomains.csv
+[2026-04-27 09:20:08][INFO] Loaded 803 rows from report

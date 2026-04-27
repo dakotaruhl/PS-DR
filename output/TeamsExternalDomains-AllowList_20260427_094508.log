@@ -1,0 +1,11 @@
+[2026-04-27 09:45:08][INFO] Starting Mode=Apply
+[2026-04-27 09:45:08][INFO] OutputFolder=.\output
+[2026-04-27 09:45:08][INFO] Loading MicrosoftTeams module
+[2026-04-27 09:45:08][INFO] Connecting to Microsoft Teams
+[2026-04-27 09:45:13][INFO] Connected using interactive auth.
+[2026-04-27 09:45:13][INFO] Loading plan: .\output\TeamsExternalDomains-AllowListPlan_2026-04-27.json
+[2026-04-27 09:45:13][INFO] Final allow list domains in plan: 108
+[2026-04-27 09:45:14][INFO] Backed up current federation config: .\output\TeamsFederationConfigBackup_20260427_094514.json
+[2026-04-27 09:45:14][WARN] Applying allow list. Reminder: allow list blocks all other external domains.
+[2026-04-27 09:45:14][INFO] Applied allow list with 108 domains.
+[2026-04-27 09:45:14][INFO] Post-change federation mode: AllowList

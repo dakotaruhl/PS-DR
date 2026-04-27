@@ -1,0 +1,73 @@
+{
+  "CapturedAt": "2026-04-27T09:45:14.0209711-05:00",
+  "Mode": "AllowList",
+  "AllowedDomains": null,
+  "BlockedDomains": [],
+  "Raw": {
+    "AllowedDomains": {
+      "AllowedDomain": [
+        {
+          "Domain": "microsoft.com"
+        }
+      ]
+    },
+    "BlockedDomains": [],
+    "AllowedTrialTenantDomains": [],
+    "AllowFederatedUsers": true,
+    "AllowTeamsSms": true,
+    "AllowTeamsConsumer": false,
+    "AllowTeamsConsumerInbound": false,
+    "TreatDiscoveredPartnersAsUnverified": false,
+    "SharedSipAddressSpace": false,
+    "RestrictTeamsConsumerToExternalUserProfiles": false,
+    "BlockAllSubdomains": true,
+    "ExternalAccessWithTrialTenants": "Blocked",
+    "DomainBlockingForMDOAdminsInTeams": "Disabled",
+    "SecurityTeamAllowBlockListDelegation": "Disabled",
+    "EnableExternalAccessRestrictionsForChatPartipants": false,
+    "EnableMutualFederationForChatPartipants": false,
+    "Key": {
+      "ScopeClass": "Global",
+      "SchemaId": {
+        "XName": {
+          "name": "{urn:schema:Microsoft.Rtc.Management.Settings.Edge.2008}TenantFederationSettings"
+        }
+      },
+      "AuthorityId": {
+        "Class": "Tenant",
+        "InstanceId": "0bdf0e1f-a359-4b5c-9b79-9357e35ff8c6",
+        "XmlRoot": {
+          "name": "{urn:schema:Microsoft.Rtc.Management.ScopeFramework.2008}AuthorityId"
+        }
+      },
+      "DefaultXml": {
+        "SchemaId": {
+          "XName": {
+            "name": "{urn:schema:Microsoft.Rtc.Management.Settings.Edge.2008}TenantFederationSettings"
+          }
+        },
+        "Data": {
+          "TenantFederationSettings": {
+            "@xmlns": "urn:schema:Microsoft.Rtc.Management.Settings.Edge.2008",
+            "AllowedDomains": {
+              "AllowAllKnownDomains": null
+            },
+            "BlockedDomains": null,
+            "AllowedTrialTenantDomains": null
+          }
+        },
+        "ConfigObject": null,
+        "Signature": "00000000-0000-0000-0000-000000000000",
+        "IsModified": true
+      },
+      "XmlRoot": {
+        "name": "{urn:schema:Microsoft.Rtc.Management.ScopeFramework.2008}AnchoredXmlKey"
+      }
+    },
+    "Identity": "Global",
+    "ConfigMetadata": {
+      "Authority": "Tenant"
+    },
+    "ConfigId": "Global"
+  }
+}
