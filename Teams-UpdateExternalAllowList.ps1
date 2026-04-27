@@ -494,3 +494,5 @@ if ($Mode -eq "Apply") {
 # .\Teams-UpdateExternalAllowList.ps1 -Mode Propose -ReportPath .\ExternalDomains.csv
 # apply
 # .\Teams-UpdateExternalAllowList.ps1 -Mode Apply -PlanPath .\output\TeamsExternalDomains-AllowListPlan_2026-04-27.json
+
+#(Get-CsTenantFederationConfiguration).AllowedDomains.AllowedDomain | Export-Excel -Path "C:\Users\DakotaRuhl\Documents\Reports\CurrentAllowedDomains.xlsx" -AutoSize -WorksheetName "AllowedDomains"

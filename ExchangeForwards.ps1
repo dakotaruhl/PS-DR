@@ -122,3 +122,9 @@ Get-DistributionGroup | ForEach-Object {
 $ForwardResults | Export-Excel -Path "C:\Users\DakotaRuhl\Documents\Reports\MailboxForwardsAny.xlsx" -AutoSize -WorksheetName "Forwards"
 $RuleResults | Export-Excel -Path "C:\Users\DakotaRuhl\Documents\Reports\MailboxForwardsAny.xlsx" -AutoSize -WorksheetName "Inbox Rules"
 $DLExternalMemberResults | Export-Excel -Path "C:\Users\DakotaRuhl\Documents\Reports\MailboxForwardsAny.xlsx" -AutoSize -WorksheetName "DG External Members"
+
+# Testing or single deletes
+Get-InboxRule -Mailbox jobebeduo@enchantedrock.com
+Remove-InboxRule -Mailbox jobebeduo@enchantedrock.com -Identity "1200474222900543489" -Confirm:$false
+Remove-InboxRule -Mailbox jobebeduo@enchantedrock.com -Identity "1272531816938471425" -Confirm:$false
+

@@ -235,6 +235,7 @@ Function Rename-DeviceForUser ([Microsoft.Graph.PowerShell.Models.IMicrosoftGrap
         $serialNumber = $device.Serialnumber
         try 
         {   
+            $serialNumber ="F9FFP20DQ1KV"
             $apiUrl = "https://graph.microsoft.com/beta/deviceManagement/managedDevices?`$filter=serialNumber eq '$serialNumber'"
             $deviceResult = Invoke-MgGraphRequest -Method GET -Uri $apiUrl -ErrorAction Stop
     

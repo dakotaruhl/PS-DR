@@ -66,16 +66,17 @@ Remove-MailboxFolderPermission -Identity "Aimee Middleton:\Calendar" -User "Jess
 
 
 
-$UPN = "acampbell@enchantedrock.com"
+$UPN = "druhl@enchantedrock.com"
 $calendarIdentity = "$($UPN):\Calendar"
-$userIdentityAdd = "druhl@enchantedrock.com"
+$userIdentityAdd = "test.user@enchantedrock.com"
 Get-MailboxFolderPermission -Identity $calendarIdentity | Format-Table User,AccessRights -AutoSize 
 Get-MailboxPermission -Identity $UPN
 Get-Mailbox $UPN | FL
 
 Remove-MailboxFolderPermission -Identity $calendarIdentity -User $userIdentityAdd -Confirm:$false
 Remove-MailboxFolderPermission -Identity $calendarIdentity -User "Joseph Obebeduo" -Confirm:$false
-Set-MailboxFolderPermission -Identity "IBlakely@enchantedrock.com:\Calendar" -User "Default" -AccessRights AvailabilityOnly
+Set-MailboxFolderPermission -Identity "IBlakely@enchantedrock.com:\Calendar" -User "Default" -AccessRights AvailabilityOnly 
 Set-MailboxFolderPermission -Identity $calendarIdentity -User $userIdentityAdd -AccessRights Editor
+Add-MailboxFolderPermission -Identity $calendarIdentity -User $userIdentityAdd -AccessRights Editor -SharingPermissionFlags Delegate, CanViewPrivateItems
 
 Add-MailboxFolderPermission -Identity $calendarIdentity -User $userIdentityAdd -AccessRights Owner
