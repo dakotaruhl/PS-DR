@@ -1,4 +1,4 @@
-#Connect-Graph -scopes "UserAuthenticationMethod.ReadWrite.All"
+Connect-Graph -scopes "UserAuthenticationMethod.ReadWrite.All"
 
 $androidAAGuid = "de1e552d-db1d-4423-a619-566b625cdc84"
 $iosAAGuid = "90a3ccdf-635c-4729-a248-9b709135078f"
@@ -9,7 +9,7 @@ $passKeysMissingCount = 0
 $authAppFoundCount = 0
 $authAppMissingCount = 0
 
-$path = "C:\Users\DakotaRuhl\Downloads\exportGroupMembers.xlsx"
+$path = "C:\Users\DakotaRuhl\Downloads\exportERockTeamGroupMembers.xlsx"
 $users = Import-Excel -Path $path
 $results = @()
 foreach ($user in $users) 
@@ -63,6 +63,21 @@ foreach ($user in $users)
                     $authApp = $true 
                     break
                 }
+                elseif($authMethod.AdditionalProperties['@odata.type'] -eq '#microsoft.graph.softwareOathAuthenticationMethod')
+                {
+                    $results += [PSCustomObject]@{
+                        UserPrincipalName = $user.userPrincipalName
+                        MethodType        = "Authenticator App (Software OATH)"
+                        DisplayName       = $authMethod.AdditionalProperties['displayName']
+                        CreatedDateTime   = $authMethod.CreatedDateTime
+                        AdditionalProperties = ($authMethod.AdditionalProperties.GetEnumerator() |
+                                                Where-Object { $_.Key -notin '@odata.type', 'displayName' } | 
+                                                ForEach-Object { "$($_.Key)=$($_.Value)" }) -join "; "
+                    }
+                    $authAppFoundCount++
+                    $authApp = $true 
+                    break
+                }
             }
             if (-not $authApp) {
                 $authAppMissingCount++
@@ -90,10 +105,13 @@ foreach ($user in $users)
     }
 }
 
+$resultsPath = "C:\Users\DakotaRuhl\Documents\Reports\FIDO2Results.xlsx"
+
 if(Test-Path -Path $resultsPath) 
 {
     Remove-Item -Path $resultsPath -Force
 }
+
 
 $excel = $results | Export-Excel -Path $resultsPath -AutoSize -WorksheetName "FIDO2Results" -PassThru
 $sheet = $excel.Workbook.Worksheets["FIDO2Results"]
@@ -125,6 +143,14 @@ Add-ConditionalFormatting -WorkSheet $sheet -Range $fullRange -RuleType Expressi
 $sheet.Cells[$sheet.Dimension.Address].Style.HorizontalAlignment = [OfficeOpenXml.Style.ExcelHorizontalAlignment]::Left
 $sheet.Cells[$sheet.Dimension.Address].Style.VerticalAlignment   = [OfficeOpenXml.Style.ExcelVerticalAlignment]::Top
 Close-ExcelPackage $excel 
+
+
+$summary = @(
+    [PSCustomObject]@{ Metric = "Passkeys Found";   Count = $passKeysFoundCount }
+    [PSCustomObject]@{ Metric = "Passkeys Missing"; Count = $passKeysMissingCount }
+    [PSCustomObject]@{ Metric = "Auth App Found";   Count = $authAppFoundCount }
+    [PSCustomObject]@{ Metric = "Auth App Missing"; Count = $authAppMissingCount }
+)
 
 # Summary written after, appends a new sheet to the already-saved file
 $summary | Export-Excel -Path $resultsPath -AutoSize -WorksheetName "Summary"

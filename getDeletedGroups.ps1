@@ -57,3 +57,19 @@ foreach ($item in $columnValues)
     }
 }
 
+Restore-MgDirectoryDeletedItem -DirectoryObjectId b6026dce-d04e-4e04-bbc4-e3f015420c42
+
+$deletedMailboxes = Get-Mailbox -SoftDeletedMailbox
+$deletedMailboxes | Select-Object DisplayName, UserPrincipalName, WhenSoftDeleted | Export-Excel -Path "C:\Users\DakotaRuhl\Documents\Reports\Deleted Groups\DeletedMailboxes1125.xlsx" -AutoSize
+$deletedMailboxes | Select-Object DisplayName, UserPrincipalName, WhenSoftDeleted | Export-Excel -Path "C:\Users\DakotaRuhl\Documents\Reports\Deleted Groups\DeletedMailboxes1125_Payable.xlsx" -AutoSize
+
+
+Get-MgDirectoryDeletedItem -DirectoryObjectId b6026dce-d04e-4e04-bbc4-e3f015420c42 | FL | Select-Object -ExpandProperty AdditionalProperties | Select-Object proxyAddresses
+
+
+Get-Mailbox -ResultSize Unlimited |
+  Where-Object {
+    $_.EmailAddresses -match "EROAccountsPayable@enchantedrock.com"
+  } |
+  Select Name,RecipientType,PrimarySmtpAddress,EmailAddresses
+
