@@ -58,6 +58,7 @@ foreach ($user in $users)
                 $passKeysFoundCount++
                 continue
             }
+
         }
 
         # Pull specific methods (first match is fine for classification)
@@ -213,6 +214,7 @@ $summary = @(
     [PSCustomObject]@{ Metric = "Phone Auth Only"; Count = $phoneAuthOnlyCount }
     [PSCustomObject]@{ Metric = "No Authenticator App or Phone!"; Count = $noAuthAppOrPhoneCount }
     [PSCustomObject]@{ Metric = "No Auth Methods!"; Count = $noAuthMethodsCount }
+
 )
 
 # Summary written after, appends a new sheet to the already-saved file
