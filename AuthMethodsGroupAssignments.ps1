@@ -290,7 +290,7 @@ function Sync-TargetGroup {
     Write-Host "$GroupName  |  Desired: $($DesiredIds.Count)  Added: $addOk  Removed: $removeOk" -ForegroundColor Cyan
 }
 
-# Updated calls (no more -ManagedIds parameter)
+# calls 
 Sync-TargetGroup -GroupId $fido2Group.Id   -GroupName $fido2GroupName   -DesiredIds $fido2UserIds
 Sync-TargetGroup -GroupId $authAppGroup.Id -GroupName $authAppGroupName -DesiredIds $authAppUserIds
 Sync-TargetGroup -GroupId $regReqGroup.Id  -GroupName $regReqGroupName  -DesiredIds $regReqUserIds
