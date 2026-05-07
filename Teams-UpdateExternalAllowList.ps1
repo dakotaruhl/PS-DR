@@ -371,7 +371,8 @@ function Backup-CurrentConfig {
     Write-Log "Backed up current federation config: $file"
 }
 
-function Apply-AllowList {
+function Set-AllowList {
+    [CmdletBinding(SupportsShouldProcess)]
     param(
         [Parameter(Mandatory=$true)][string[]]$FinalAllowedDomains
     )
@@ -479,7 +480,7 @@ if ($Mode -eq "Apply") {
     # This is the key control behavior: allow list means everything else is blocked. [1](https://enchantedrock.sharepoint.com/sites/itdepartment/_layouts/15/Doc.aspx?action=edit&mobileredirect=true&wdorigin=Sharepoint&DefaultItemOpen=1&sourcedoc={d7d84aad-b9e9-48c0-bb88-74797c938961}&wd=target(/M365.one/)&wdpartid={01b5ff38-aa9d-4f91-8900-669d7f0ef919}{11}&wdsectionfileid={44f30d7c-29ea-4626-a04c-fa17ae750dc1})
     Write-Log "Applying allow list. Reminder: allow list blocks all other external domains." 'WARN'
 
-    Apply-AllowList -FinalAllowedDomains $final
+    Set-AllowList -FinalAllowedDomains $final
 
     $stateAfter = Get-CurrentFederationState
     Write-Log ("Post-change federation mode: {0}" -f $stateAfter.Mode)
