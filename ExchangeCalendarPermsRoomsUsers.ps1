@@ -66,9 +66,9 @@ Remove-MailboxFolderPermission -Identity "Aimee Middleton:\Calendar" -User "Jess
 
 
 
-$UPN = "druhl@enchantedrock.com"
+$UPN = "pfroutan@enchantedrock.com"
 $calendarIdentity = "$($UPN):\Calendar"
-$userIdentityAdd = "test.user@enchantedrock.com"
+$userIdentityAdd = "JRohrbaugh@enchantedrock.com"
 Get-MailboxFolderPermission -Identity $calendarIdentity | Format-Table User,AccessRights -AutoSize 
 Get-MailboxPermission -Identity $UPN
 Get-Mailbox $UPN | FL
@@ -76,7 +76,16 @@ Get-Mailbox $UPN | FL
 Remove-MailboxFolderPermission -Identity $calendarIdentity -User $userIdentityAdd -Confirm:$false
 Remove-MailboxFolderPermission -Identity $calendarIdentity -User "Joseph Obebeduo" -Confirm:$false
 Set-MailboxFolderPermission -Identity "IBlakely@enchantedrock.com:\Calendar" -User "Default" -AccessRights AvailabilityOnly 
-Set-MailboxFolderPermission -Identity $calendarIdentity -User $userIdentityAdd -AccessRights Editor
-Add-MailboxFolderPermission -Identity $calendarIdentity -User $userIdentityAdd -AccessRights Editor -SharingPermissionFlags Delegate, CanViewPrivateItems
+Set-MailboxFolderPermission -Identity $calendarIdentity -User $userIdentityAdd -AccessRights Owner
+Add-MailboxFolderPermission -Identity $calendarIdentity -User $userIdentityAdd -AccessRights Owner -SharingPermissionFlags Delegate, CanViewPrivateItems
 
 Add-MailboxFolderPermission -Identity $calendarIdentity -User $userIdentityAdd -AccessRights Owner
+
+Sales solution meeting prep
+Sales solution meeting
+
+$title = "Sales solution meeting prep"
+$adminEmail = "admin-dr@enchantedrock.com"
+$meetings = Get-Mailbox -ResultSize Unlimited | Get-CalendarDiagnosticObjects -ResultSize Unlimited | Where-Object { $_.Subject -eq $title }
+$meetings | Select-Object OrganizerName, OrganizerSmtpAddress, StartTime, EndTime 
+

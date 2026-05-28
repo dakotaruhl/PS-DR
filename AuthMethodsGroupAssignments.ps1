@@ -29,6 +29,8 @@ $TenantID = "0bdf0e1f-a359-4b5c-9b79-9357e35ff8c6"
 # --- Connect ---
 Connect-MgGraph  -ClientId $ClientID -TenantId $TenantID -CertificateThumbprint $Thumbprint
 
+Get-MgGroup -GroupId "5352e984-2660-4339-9267-89c277ad5a2a" | Select-Object DisplayName, GroupTypes, SecurityEnabled
+Update-MgGroup -GroupId "5352e984-2660-4339-9267-89c277ad5a2a" -SecurityEnabled 
 # ================================================================
 #  CONFIGURATION
 # ================================================================
