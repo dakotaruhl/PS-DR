@@ -1,7 +1,7 @@
 #Set Parameters
 $AdminCenterURL="https://enchantedrock-admin.sharepoint.com/"
 #user with the ID mismatch
-$UserLoginID = "i:0#.f|membership|Btassin@enchantedrock.com"
+$UserLoginID = "i:0#.f|membership|test.user@enchantedrock.com"
 #enter user, that is sharepoint admin
 $SiteCollectionAdmin = "admin-dr@enchantedrock.com"
 
@@ -12,10 +12,11 @@ $Thumbprint = "C47B91EB62634CA61FA8146DDA83B8BF605C0962"
 $ClientID = "ea2ca49b-d0df-4774-b611-86cf9dc9629f"
 $TenantID = "0bdf0e1f-a359-4b5c-9b79-9357e35ff8c6"
 
+$credential = Get-Credential -Credential "admin-dr@enchantedrock.com"
 #Connect to SharePoint Online
 Connect-SPOService -Url $AdminCenterURL -ClientId $ClientID -TenantId $TenantID -CertificateThumbprint $Thumbprint 
-
-#Get all Personal Site collections
+Connect-SPOService -Url $AdminCenterURL -Credential $credential -ModernAuth $true -AuthenticationUrl "https://login.microsoftonline.com/"
+#Get all Personal Site collections`
 $PSitesUrl = Get-SPOSite -Template "SPSPERS" -limit ALL -includepersonalsite $True | Select URL, LockState
 
 $count = 0
@@ -81,7 +82,7 @@ Set-SPOUser -site $PSiteUrl -LoginName $SiteCollectionAdmin -IsSiteCollectionAdm
 ### Single Site Removal ###
 
 ##Check UPN on site access list
-Get-SPOUser https://enchantedrock-my.sharepoint.com/personal/bsatterfield_enchantedrock_com | Where-Object -Property LoginName -eq 'manguiano@enchantedrock.com'
+Get-SPOUser https://enchantedrock-my.sharepoint.com/personal/druhl_enchantedrock_com | Where-Object -Property LoginName -eq 'test.user@enchantedrock.com'
 Get-SPOUser https://enchantedrock-my.sharepoint.com/personal/bsatterfield_enchantedrock_com | Where-Object -Property LoginName -like 'DIS'
 
 ##Set OneDrive site, admin, and User to remove
@@ -95,3 +96,14 @@ Remove-SPOUser -Site $PSiteUrl -LoginName $UserLoginID
 #Remove yourself from SiteCollectionAdmins
 Set-SPOUser -site $PSiteUrl -LoginName $SiteCollectionAdmin -IsSiteCollectionAdmin $False
 Get-SPOUser -Site $PSiteUrl -LoginName $SiteCollectionAdmin | FL #>
+
+
+Get-ChildItem Cert:\CurrentUser\My | Where-Object {$_.Thumbprint -eq "C47B91EB62634CA61FA8146DDA83B8BF605C0962"}
+
+Get-ChildItem Cert:\LocalMachine\My | Where-Object {$_.Thumbprint -eq "C47B91EB62634CA61FA8146DDA83B8BF605C0962"}
+
+$cert = Get-ChildItem Cert:\CurrentUser\My\C47B91EB62634CA61FA8146DDA83B8BF605C0962
+$cert.HasPrivateKey
+
+$cert = Get-ChildItem Cert:\CurrentUser\My\C47B91EB62634CA61FA8146DDA83B8BF605C0962
+$cert | Format-List *
