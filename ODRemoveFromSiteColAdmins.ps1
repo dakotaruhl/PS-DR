@@ -50,46 +50,43 @@ $results | Export-Csv -Path "C:\Users\DakotaRuhl\Documents\Reports\OneDrive Admi
 
 ##Remove from a single site
 $userToRemove = "admin-dr@enchantedrock.com"
-$singleSite = "https://enchantedrock-my.sharepoint.com/personal/lzvonek_enchantedrock_com"
+$singleSite = "https://enchantedrock-my.sharepoint.com/personal/arendon_enchantedrock_com"
 
 $site = Get-PnPTenantSite -Identity $singleSite 
 Connect-PnPOnline -Url $site.Url -ClientId $ClientID -Tenant $TenantID -Thumbprint $Thumbprint
 
 
 try 
+{
+    $siteAdmins = Get-PnPUser | Where-Object { $_.IsSiteAdmin -eq $True }
+    foreach ($admin in $siteAdmins) 
     {
-        $siteAdmins = Get-PnPUser | Where-Object { $_.IsSiteAdmin -eq $True }
-        foreach ($admin in $siteAdmins) 
+        $userToRemoveFormatted = "i:0#.f|membership|" +  $userToRemove
+        Write-Host "Current site admin: $($admin.DisplayName) ($($admin.LoginName))"
+        if ($admin.LoginName -eq $userToRemoveFormatted) 
         {
-            $userToRemove = "i:0#.f|membership|" +  $userToRemove
-            Write-Host "Current site admin: $($admin.DisplayName) ($($admin.LoginName))"
-            if ($admin.LoginName -eq $userToRemove) 
-            {
-                Write-Host "User $userToRemove is a site admin for $($site.Url). Removing admin rights..."
-                Get-PnPUser | ? Title -Like "*admin account" | Remove-PnPSiteCollectionAdmin -ErrorAction Stop
-                Write-Host "Removed $userToRemove as site admin for $($site.Url)."
-            }
-        }
-        
-        #Recalculate site admins after potential removal
-        $siteAdmins = Get-PnPUser | Where-Object { $_.IsSiteAdmin -eq $True }
-        $results += [PSCustomObject]@{
-            SiteUrl      = $site.Url
-            SiteAdminNames  = ($siteAdmins | Select-Object -ExpandProperty Title) -join "; " 
-            SiteAdminLogins = ($siteAdmins | Select-Object -ExpandProperty LoginName) -join "; "
-        }
-        Write-Host "Processed site: $($site.Url)"  
-    }
-    catch 
-    {
-        If ($_.Exception.Message -like "*Access is denied*")
-        {
-            Write-Error "$($site.Url): $($_.Exception.Message)"
-        }
-        else {
-            Write-Error "An unexpected error occurred while processing site $($site.Url): $($_.Exception.Message)"
+            Write-Host "User $userToRemove is a site admin for $($site.Url). Removing admin rights..."
+            Get-PnPUser | ? LoginName -Like $userToRemoveFormatted | Remove-PnPSiteCollectionAdmin -ErrorAction Stop
+            Write-Host "Removed $userToRemove as site admin for $($site.Url)."
         }
     }
-
-#
-$users = Get-PnPUser
+    
+    #Recalculate site admins after potential removal
+    $siteAdmins = Get-PnPUser | Where-Object { $_.IsSiteAdmin -eq $True }
+    $results += [PSCustomObject]@{
+        SiteUrl      = $site.Url
+        SiteAdminNames  = ($siteAdmins | Select-Object -ExpandProperty Title) -join "; " 
+        SiteAdminLogins = ($siteAdmins | Select-Object -ExpandProperty LoginName) -join "; "
+    }
+    Write-Host "Processed site: $($site.Url)"  
+}
+catch 
+{
+    If ($_.Exception.Message -like "*Access is denied*")
+    {
+        Write-Error "$($site.Url): $($_.Exception.Message)"
+    }
+    else {
+        Write-Error "An unexpected error occurred while processing site $($site.Url): $($_.Exception.Message)"
+    }
+}

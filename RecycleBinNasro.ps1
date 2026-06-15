@@ -17,9 +17,11 @@ $recycleBinItemsSecondStage = Get-PnPRecycleBinItem -SecondStage
 
  
 # Sort by Name of person who deleted item
-$deletedBy = "Holly Ross"
+$deletedBy = "Emmanuel Aguas-Alzner"
 $recycleBinItemsFirstStage | Where-Object { $_.DeletedByName -eq $deletedBy} | Export-Excel -Path "$ReportFile-$($deletedBy -replace ' ','-').xlsx" -WorkSheetname 'FirstStage'
 $recycleBinItemsSecondStage | Where-Object { $_.DeletedByName -eq $deletedBy} | Export-Excel -Path "$ReportFile-$($deletedBy -replace ' ','-').xlsx" -WorkSheetname 'SecondStage'
+
+
 
 $PaulAndrewDeletesFS = $recycleBinItemsFirstStage | Where-Object { $_.DeletedByName -eq $deletedBy}
 $PaulAndrewDeletesSS = $recycleBinItemsSecondStage | Where-Object { $_.DeletedByName -eq $deletedBy}
@@ -164,3 +166,6 @@ foreach ($item in $RestoreItems) {
 
 #passwords.xlsx
 Restore-PnPRecycleBinItem -Identity a3da4aeb-f738-487f-8db8-4db049e43db6 -force
+
+export-excel -path "$ReportFile\$($deletedBy)" -WorksheetName "FirstStage" -AutoSize -TableName "FirstStageItems" -InputObject $recycleBinItemsFirstStage
+export-excel -path "$ReportFile\$($deletedBy)" -WorksheetName "SecondStage" -AutoSize -TableName "SecondStageItems" -InputObject $recycleBinItemsSecondStage
