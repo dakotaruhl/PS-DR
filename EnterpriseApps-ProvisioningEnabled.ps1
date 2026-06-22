@@ -12,8 +12,26 @@ $ClientID = "ea2ca49b-d0df-4774-b611-86cf9dc9629f"
 $TenantID = "0bdf0e1f-a359-4b5c-9b79-9357e35ff8c6"
 Connect-MgGraph -ClientId $ClientID -TenantId $TenantID -CertificateThumbprint $Thumbprint
 
+# Get all enterprise apps, excluding MSFT native
+$microsoftOwnerTenantIds = @(
+    'f8cdef31-a31e-4b4a-93e4-5f571e91255a', # Microsoft Services
+    '72f988bf-86f1-41af-91ab-2d7cd011db47'  # Microsoft
+)
+
+$filter = @(
+    "servicePrincipalType eq 'Application'"
+    "appOwnerOrganizationId ne $($microsoftOwnerTenantIds[0])"
+    "appOwnerOrganizationId ne $($microsoftOwnerTenantIds[1])"
+) -join ' and '
+
+$servicePrincipals = Get-MgServicePrincipal -All `
+    -ConsistencyLevel eventual `
+    -CountVariable spCount `
+    -Filter $filter `
+    -Property 'id,displayName,appId,appOwnerOrganizationId,verifiedPublisher,tags'
+
 # Get all enterprise apps / service principals
-$servicePrincipals = Get-MgServicePrincipal -All
+#$servicePrincipals = Get-MgServicePrincipal -All -Filter 
 
 $results = foreach ($sp in $servicePrincipals) {
     $jobs = $null
@@ -52,38 +70,3 @@ $csvPath = "C:\Users\DakotaRuhl\Documents\Reports\DomainMigration\EnterpriseApps
 $results | Export-Excel -Path $csvPath 
 
 Write-Host "Exported to: $csvPath"
-
-
-
-
-$params = @{
-    passwordPolicies = "DisablePasswordExpiration"
-}
-
-Update-MgUser -UserId svc_fat_ipads@enchantedrock.com -BodyParameter $params
-
-
-Update-MgUser -UserId svc_fat_ipads@enchantedrock.com -BodyParameter @{
-    passwordPolicies = "None"
-}
-
-
-Update-MgUser -UserId svc_fat_ipads@enchantedrock.com -BodyParameter @{
-    passwordPolicies = "DisablePasswordExpiration"
-}
-
-
-Get-MgUser -UserId svc_fat_ipads@enchantedrock.com | Select PasswordPolicies
-
-
-
-$user = "svc_fat_ipads@enchantedrock.com"
-
-# Step 1: explicitly set None
-Update-MgUser -UserId $user -PasswordPolicies "None"
-
-# Step 2: set DisablePasswordExpiration
-Update-MgUser -UserId $user -PasswordPolicies "DisablePasswordExpiration"
-
-# Step 3: verify FULL object (not Select)
-Get-MgUser -UserId $user | fl PasswordPolicies

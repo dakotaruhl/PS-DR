@@ -7,7 +7,7 @@
 $AdminCenterURL = "https://enchantedrock-admin.sharepoint.com"
 
 # User with the ID mismatch
-$UserLoginID = "i:0#.f|membership|test.user@enchantedrock.com"
+$UserLoginID = "i:0#.f|membership|manguiano@enchantedrock.com"
 
 # SharePoint admin account to temporarily add as site collection admin
 $SiteCollectionAdmin = "admin-dr@enchantedrock.com"
@@ -95,11 +95,11 @@ foreach ($Site in $OneDriveSites) {
 
         # Check if target user exists in the site's user list
         $MatchedUser = Get-PnPUser -ErrorAction Stop |
-            Where-Object { $_.LoginName -eq $UserLoginID }
+            Where-Object { $_.LoginName -eq $UserLoginID -and $_.Title -like "*DIS -*" }
 
         if ($MatchedUser) {
 
-            Write-Host "Found user in site: $($Site.Url)" -ForegroundColor Green
+            Write-Host "Found user in site: $($Site.Url) with display name $($MatchedUser.Title)" -ForegroundColor Green
 
             $removed = $false
 
@@ -183,7 +183,7 @@ if (!(Test-Path $ReportFolder)) {
 
 if (Get-Module -ListAvailable -Name ImportExcel) {
     $Results |
-        Sort-Object UserFound -Descending, SiteUrl |
+        Sort-Object @{Expression='UserFound';Descending=$true}, SiteUrl |
         Export-Excel `
             -Path $ReportPath `
             -AutoSize `
@@ -194,7 +194,7 @@ else {
     $CsvPath = $ReportPath -replace '\.xlsx$', '.csv'
 
     $Results |
-        Sort-Object UserFound -Descending, SiteUrl |
+        Sort-Object @{Expression='UserFound';Descending=$true}, SiteUrl |
         Export-Csv `
             -Path $CsvPath `
             -NoTypeInformation
@@ -207,7 +207,58 @@ Write-Host "Matches found: $(($Results | Where-Object UserFound).Count)" -Foregr
 
 
 <# Single Site Check 
+$UserLoginID = "i:0#.f|membership|test.user@enchantedrock.com"
 
+# SharePoint admin account to temporarily add as site collection admin
+$SiteCollectionAdmin = "admin-dr@enchantedrock.com"
 
+# App-only auth
+$Thumbprint = "C47B91EB62634CA61FA8146DDA83B8BF605C0962"
+$ClientID   = "ea2ca49b-d0df-4774-b611-86cf9dc9629f"
+$TenantID   = "0bdf0e1f-a359-4b5c-9b79-9357e35ff8c6"
+
+$Site = Connect-PnPOnline -Url "https://enchantedrock-my.sharepoint.com/personal/druhl_enchantedrock_com" `
+    -ClientId $ClientID `
+    -Tenant $TenantID `
+    -Thumbprint $Thumbprint
+
+ Add-PnPSiteCollectionAdmin `
+            -Owners $SiteCollectionAdmin `
+            -Connection (Get-PnPConnection) `
+            -ErrorAction Stop
+
+$adminAdded = $true
+
+# Check if target user exists in the site's user list
+$MatchedUser = Get-PnPUser -ErrorAction Stop |
+    Where-Object { $_.LoginName -eq $UserLoginID }
+
+$MatchedUser = Get-PnPUser -ErrorAction Stop |
+    Where-Object { $_.LoginName -like "*test.user*" }
+
+if ($MatchedUser) {
+
+    Write-Host "Found user in site: $($Site.Url)" -ForegroundColor Green
+
+    $removed = $false
+
+    if ($RemoveUser) {
+        Write-Host "Removing $UserLoginID from $($Site.Url)" -ForegroundColor Red
+
+        Remove-PnPUser `
+            -Identity $UserLoginID `
+            -Force `
+            -ErrorAction Stop
+
+        $removed = $true
+    }
+Connect-PnPOnline `
+            -Url "https://enchantedrock-my.sharepoint.com/personal/asenko_enchantedrock_com" `
+            -ClientId $ClientID `
+            -Tenant $TenantID `
+            -Thumbprint $Thumbprint
+
+$MatchedUser = Get-PnPUser -ErrorAction Stop |
+            Where-Object { $_.LoginName -eq $UserLoginID -and $_.Title -like "*DIS -*" }
 
 #>
