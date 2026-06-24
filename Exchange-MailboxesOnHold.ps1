@@ -97,3 +97,8 @@ Get-Mailbox -InactiveMailboxOnly -ResultSize Unlimited | Where-Object {
     DelayHoldApplied,
     DelayReleaseHoldApplied |
 Export-Excel -path "C:\Users\DakotaRuhl\Documents\Reports\MailboxHolds\MailboxHolds.xlsx" -WorksheetName "Inactive"
+
+## Applying and removing holds
+
+## Apply holds
+
