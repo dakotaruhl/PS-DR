@@ -1,7 +1,19 @@
-$Thumbprint = "C47B91EB62634CA61FA8146DDA83B8BF605C0962"
-$ClientID = "ea2ca49b-d0df-4774-b611-86cf9dc9629f"
-$TenantID = "0bdf0e1f-a359-4b5c-9b79-9357e35ff8c6"
-Connect-MgGraph -ClientId $ClientID -TenantId $TenantID -CertificateThumbprint $Thumbprint
+try {
+    $existing = Get-MgContext -ErrorAction SilentlyContinue
+
+    if ($existing) {
+        Write-Host "Graph already connected" -ForegroundColor Green
+    } else {
+        Write-Host "Connecting to Graph" -ForegroundColor DarkYellow
+        $Thumbprint = "C47B91EB62634CA61FA8146DDA83B8BF605C0962"
+        $ClientID = "ea2ca49b-d0df-4774-b611-86cf9dc9629f"
+        $TenantID = "0bdf0e1f-a359-4b5c-9b79-9357e35ff8c6"
+        Connect-MgGraph -ClientId $ClientID -TenantId $TenantID -CertificateThumbprint $Thumbprint
+    }
+}
+catch {
+    throw "Failed to connect to Graph: $($_.Exception.Message)"
+}
 
 # Get all enterprise apps, excluding MSFT native
 $microsoftOwnerTenantIds = @(
@@ -15,7 +27,7 @@ $filter = @(
     "appOwnerOrganizationId ne $($microsoftOwnerTenantIds[1])"
 ) -join ' and '
 
-$servicePrincipals = Get-MgServicePrincipal -All `
+$spns = Get-MgServicePrincipal -All `
     -ConsistencyLevel eventual `
     -CountVariable spCount `
     -Filter $filter `
@@ -66,4 +78,8 @@ $result = foreach ($sp in $spns) {
 }
 
 
-$result | export-excel -path "C:\Users\DakotaRuhl\Documents\Reports\DomainMigration\SSOandOIDC.xlsx"
+$result | export-excel -path "C:\Users\DakotaRuhl\Documents\Reports\DomainMigration\SSOandOIDC2.xlsx" -WorksheetName "SSOandOIDC"
+
+
+
+

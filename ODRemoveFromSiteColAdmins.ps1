@@ -50,7 +50,7 @@ $results | Export-Csv -Path "C:\Users\DakotaRuhl\Documents\Reports\OneDrive Admi
 
 ##Remove from a single site
 $userToRemove = "admin-dr@enchantedrock.com"
-$singleSite = "https://enchantedrock-my.sharepoint.com/personal/arendon_enchantedrock_com"
+$singleSite = "https://enchantedrock-my.sharepoint.com/personal/mstiles_enchantedrock_com"
 
 $site = Get-PnPTenantSite -Identity $singleSite 
 Connect-PnPOnline -Url $site.Url -ClientId $ClientID -Tenant $TenantID -Thumbprint $Thumbprint

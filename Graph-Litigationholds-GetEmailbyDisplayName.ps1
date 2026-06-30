@@ -7,9 +7,9 @@
 # -----------------------------
 # Config
 # -----------------------------
-$ExcelPath = "C:\Users\DakotaRuhl\OneDrive - Enchanted Rock\Projects\Mailboxes On Hold\MailboxHoldsUpdate.xlsx"
-$InputSheet = "Action List"
-$OutputSheet = "Resolved UPNs"
+$ExcelPath = "C:\Users\DakotaRuhl\Downloads\Salesforce Profiles.xlsx"
+$InputSheet = "Power Users"
+$OutputSheet = "Power Users UPNs"
 
 # -----------------------------
 # Modules
