@@ -66,7 +66,7 @@ Remove-MailboxFolderPermission -Identity "Aimee Middleton:\Calendar" -User "Jess
 
 
 
-$UPN = "arohan@enchantedrock.com"
+$UPN = "camthor@enchantedrock.com"
 $calendarIdentity = "$($UPN):\Calendar"
 $userIdentityAdd = "JRohrbaugh@enchantedrock.com"
 Get-MailboxFolderPermission -Identity $calendarIdentity | Format-Table User,AccessRights -AutoSize 
@@ -88,5 +88,4 @@ $title = "Sales solution meeting prep"
 $adminEmail = "admin-dr@enchantedrock.com"
 $meetings = Get-Mailbox -ResultSize Unlimited | Get-CalendarDiagnosticObjects -ResultSize Unlimited | Where-Object { $_.Subject -eq $title }
 $meetings | Select-Object OrganizerName, OrganizerSmtpAddress, StartTime, EndTime 
-
 
