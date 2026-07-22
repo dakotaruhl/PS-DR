@@ -7,7 +7,7 @@
 $AdminCenterURL = "https://enchantedrock-admin.sharepoint.com"
 
 # User with the ID mismatch
-$UserLoginID = "i:0#.f|membership|manguiano@enchantedrock.com"
+$UserLoginID = "i:0#.f|membership|kparekh@enchantedrock.com"
 
 # SharePoint admin account to temporarily add as site collection admin
 $SiteCollectionAdmin = "admin-dr@enchantedrock.com"
@@ -38,6 +38,13 @@ Connect-PnPOnline `
 # =========================
 # Get OneDrive personal sites
 # =========================
+## test
+# $OneDriveSites = Get-PnPTenantSite `
+# -IncludeOneDriveSites `
+# -Filter "Url -like '-my.sharepoint.com/personal/kparekh'" |
+# Select-Object Url, LockState
+# $Site = $OneDriveSites | Where-Object { $_.Url -like '-my.sharepoint.com/personal/kparekh' }
+##
 
 $OneDriveSites = Get-PnPTenantSite `
     -IncludeOneDriveSites `

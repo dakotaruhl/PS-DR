@@ -72,3 +72,62 @@ else {
     Write-Host "Invalid selection - exiting"
     Break
 }
+
+Install-AllUsersModule microsoft.online.sharepoint.powershell
+import-module microsoft.online.sharepoint.powershell 
+update-module microsoft.online.sharepoint.powershell 
+Get-SPOTenant | Select RestrictedAccessControl
+
+
+$TenantId   = "0bdf0e1f-a359-4b5c-9b79-9357e35ff8c6"
+$ClientId   = "97d01716-c2a3-4311-9b73-09ac8579cbf1"
+$Thumbprint = "94EF4B57723E2E90CD56F2F407EF6AFBEF275392"
+$AdminUrl   = "https://enchantedrock-admin.sharepoint.com"
+
+$cert = Get-Item "Cert:\LocalMachine\My\$Thumbprint"
+
+try {
+    Connect-SPOService `
+        -Url $AdminUrl `
+        -ClientId $ClientId `
+        -TenantId $TenantId `
+        -Certificate $cert `
+        -Verbose `
+        -ErrorAction Stop
+}
+catch {
+    Write-Host "TOP LEVEL ERROR:" -ForegroundColor Red
+    $_ | Format-List * -Force
+
+    Write-Host "EXCEPTION:" -ForegroundColor Red
+    $_.Exception | Format-List * -Force
+
+    Write-Host "INNER EXCEPTION:" -ForegroundColor Red
+    $_.Exception.InnerException | Format-List * -Force
+
+    Write-Host "INNER INNER EXCEPTION:" -ForegroundColor Red
+    $_.Exception.InnerException.InnerException | Format-List * -Force
+}
+
+[Environment]::GetFolderPath("MyDocuments")
+
+
+$User = Get-MgUser -UserId "svc_itnotifications@enchantedrock.com"
+$ExpirationDate = $User.LastPasswordChangeDateTime.AddDays($ValidityPeriod)
+$ExpirationDate
+
+$User | Select-Object -ExpandProperty PasswordPolicies DisablePasswordExpiration
+
+[PSCustomObject]@{
+    DisplayName          = $User.DisplayName
+    LastPasswordChanged  = $User.LastPasswordChangeDateTime
+    MustChangeNextLogon  = $User.PasswordProfile.ForceChangePasswordNextSignIn
+    Expiration          = $User.PasswordPolicies
+}
+
+Update-MgUser -UserId "svc_itnotifications@enchantedrock.com" -PasswordPolicies DisablePasswordExpiration
+$User | FL *Password*
+
+$user = Get-MgUser -UserId "svc_itnotifications@enchantedrock.com" -Property UserPrincipalName, PasswordPolicies
+$user.PasswordPolicies
+$user.PasswordPolicies

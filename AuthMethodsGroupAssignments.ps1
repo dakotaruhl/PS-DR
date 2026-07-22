@@ -1,4 +1,9 @@
-#Requires -Modules Microsoft.Graph.Authentication, Microsoft.Graph.Groups, Microsoft.Graph.Identity.SignIns
+#Requires -Modules Microsoft.Graph.Authentication, Microsoft.Graph.Groups, Microsoft.Graph.Identity.SignIns, ImportExcel
+
+[CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = 'Medium')]
+param(
+    [switch]$SkipReport
+)
 
 <#
 .SYNOPSIS
@@ -29,8 +34,7 @@ $TenantID = "0bdf0e1f-a359-4b5c-9b79-9357e35ff8c6"
 # --- Connect ---
 Connect-MgGraph  -ClientId $ClientID -TenantId $TenantID -CertificateThumbprint $Thumbprint
 
-Get-MgGroup -GroupId "5352e984-2660-4339-9267-89c277ad5a2a" | Select-Object DisplayName, GroupTypes, SecurityEnabled
-Update-MgGroup -GroupId "5352e984-2660-4339-9267-89c277ad5a2a" -SecurityEnabled 
+
 # ================================================================
 #  CONFIGURATION
 # ================================================================
@@ -38,10 +42,10 @@ Update-MgGroup -GroupId "5352e984-2660-4339-9267-89c277ad5a2a" -SecurityEnabled
 $androidAAGuid = "de1e552d-db1d-4423-a619-566b625cdc84"
 $iosAAGuid     = "90a3ccdf-635c-4729-a248-9b709135078f"
 
-$sourceGroupMail  = "erockteam@enchantedrock.com"
-$fido2GroupName   = "MFA-FIDO2-Complete"
-$authAppGroupName = "MFA-AuthApp-Complete"
-$regReqGroupName  = "MFA-Registration-Required"
+$sourceGroupObjId  = "b01d12ba-43c2-4914-8c2e-0a0cdafa0c1a"  # erockteam@enchantedrock.com
+$fido2GroupObjId  = "e7ce5efc-4eea-4226-aff4-550d5fa4bcab"  # MFA-FIDO2-Complete
+$authAppGroupObjId = "dbff1eb1-63d7-4670-9049-47e4d3891dba" # MFA-AuthApp-Complete
+$regReqGroupObjId  = "ac323ba8-2ed5-4f7f-91c2-ba8896e91a43"             # MFA-Registration-Required
 $resultsPath      = "C:\Users\DakotaRuhl\Documents\Reports\FIDO2Results.xlsx"
 
 # ================================================================
@@ -50,16 +54,20 @@ $resultsPath      = "C:\Users\DakotaRuhl\Documents\Reports\FIDO2Results.xlsx"
 
 Write-Host "Resolving groups..." -ForegroundColor Cyan
 
-$sourceGroup  = Get-MgGroup -Filter "mail eq '$sourceGroupMail'" -ErrorAction Stop
-if (-not $sourceGroup) { throw "Source group '$sourceGroupMail' not found." }
+$sourceGroup  = Get-MgGroup -GroupId $sourceGroupObjId -ErrorAction Stop
+if (-not $sourceGroup) { throw "Source group with ID '$sourceGroupObjId' not found." }
 
-$fido2Group   = Get-MgGroup -Filter "displayName eq '$fido2GroupName'"  -ErrorAction Stop
-$authAppGroup = Get-MgGroup -Filter "displayName eq '$authAppGroupName'" -ErrorAction Stop
-$regReqGroup  = Get-MgGroup -Filter "displayName eq '$regReqGroupName'"  -ErrorAction Stop
+$fido2Group   = Get-MgGroup -GroupId $fido2GroupObjId -ErrorAction Stop
+$authAppGroup = Get-MgGroup -GroupId $authAppGroupObjId -ErrorAction Stop
+$regReqGroup  = Get-MgGroup -GroupId $regReqGroupObjId  -ErrorAction Stop
 
-if (-not $fido2Group)   { throw "Group '$fido2GroupName' not found. Create it first." }
-if (-not $authAppGroup) { throw "Group '$authAppGroupName' not found. Create it first." }
-if (-not $regReqGroup)  { throw "Group '$regReqGroupName' not found. Create it first." }
+$fido2GroupName   = $fido2Group.DisplayName
+$authAppGroupName = $authAppGroup.DisplayName
+$regReqGroupName  = $regReqGroup.DisplayName
+
+if (-not $fido2Group)   { throw "Group with ID '$fido2GroupObjId' not found. Create it first." }
+if (-not $authAppGroup) { throw "Group with ID '$authAppGroupObjId' not found. Create it first." }
+if (-not $regReqGroup)  { throw "Group with ID '$regReqGroupObjId' not found. Create it first." }
 
 Write-Host "  Source:  $($sourceGroup.DisplayName)  ($($sourceGroup.Id))"  -ForegroundColor Gray
 Write-Host "  FIDO2:   $($fido2Group.DisplayName)   ($($fido2Group.Id))"   -ForegroundColor Gray
@@ -70,7 +78,7 @@ Write-Host "  RegReq:  $($regReqGroup.DisplayName)   ($($regReqGroup.Id))"  -For
 #  PULL SOURCE GROUP MEMBERS (users only)
 # ================================================================
 
-Write-Host "`nFetching members from $sourceGroupMail ..." -ForegroundColor Cyan
+Write-Host "`nFetching members from $($sourceGroup.DisplayName) ($($sourceGroup.Id)) ..." -ForegroundColor Cyan
 $sourceMembers = Get-MgGroupMember -GroupId $sourceGroup.Id -All
 
 $users = foreach ($m in $sourceMembers) {
@@ -252,27 +260,60 @@ foreach ($user in $users) {
 
 # Simplified function signature
 function Sync-TargetGroup {
+    [CmdletBinding(SupportsShouldProcess = $true)]
     param(
+        [Parameter(Mandatory)]
         [string]$GroupId,
+
+        [Parameter(Mandatory)]
         [string]$GroupName,
-        [System.Collections.Generic.HashSet[string]]$DesiredIds
+
+        [Parameter(Mandatory)]
+        [System.Collections.Generic.HashSet[string]]$DesiredIds,
+
+        [Parameter(Mandatory)]
+        [System.Collections.Generic.HashSet[string]]$ManagedIds
     )
 
-    $currentMembers = Get-MgGroupMember -GroupId $GroupId -All
+    Write-Host "`nSyncing target group: $GroupName" -ForegroundColor Cyan
+
+    $currentMembers = Get-MgGroupMember -GroupId $GroupId -All -ErrorAction Stop
+
     $currentIds = [System.Collections.Generic.HashSet[string]]::new(
         [string[]]@($currentMembers | ForEach-Object { $_.Id })
     )
 
+    $toAdd = @(
+        $DesiredIds | Where-Object {
+            -not $currentIds.Contains($_)
+        }
+    )
 
-    $toAdd    = @($DesiredIds | Where-Object { -not $currentIds.Contains($_) })
-    $toRemove = @($currentIds | Where-Object { -not $DesiredIds.Contains($_) })
+    # Only remove members that are in the source group.
+    # This prevents the script from removing manually added exceptions.
+    $toRemove = @(
+        $currentIds | Where-Object {
+            $ManagedIds.Contains($_) -and -not $DesiredIds.Contains($_)
+        }
+    )
 
-    $addOk = 0; $removeOk = 0
+    $addOk = 0
+    $removeOk = 0
+    $addSkipped = 0
+    $removeSkipped = 0
 
     foreach ($id in $toAdd) {
         try {
-            New-MgGroupMember -GroupId $GroupId -DirectoryObjectId $id -ErrorAction Stop
-            $addOk++
+            if ($PSCmdlet.ShouldProcess($GroupName, "Add member $id")) {
+                New-MgGroupMemberByRef -GroupId $GroupId -BodyParameter @{
+                    '@odata.id' = "https://graph.microsoft.com/v1.0/directoryObjects/$id"
+                } -ErrorAction Stop
+
+                $addOk++
+            }
+            else {
+                $addSkipped++
+            }
         }
         catch {
             Write-Warning "  ADD FAILED [$GroupName] $id : $_"
@@ -281,21 +322,37 @@ function Sync-TargetGroup {
 
     foreach ($id in $toRemove) {
         try {
-            Remove-MgGroupMemberByRef -GroupId $GroupId -DirectoryObjectId $id -ErrorAction Stop
-            $removeOk++
+            if ($PSCmdlet.ShouldProcess($GroupName, "Remove member $id")) {
+                Remove-MgGroupMemberByRef -GroupId $GroupId -DirectoryObjectId $id -ErrorAction Stop
+                $removeOk++
+            }
+            else {
+                $removeSkipped++
+            }
         }
         catch {
             Write-Warning "  REMOVE FAILED [$GroupName] $id : $_"
         }
     }
 
-    Write-Host "$GroupName  |  Desired: $($DesiredIds.Count)  Added: $addOk  Removed: $removeOk" -ForegroundColor Cyan
+    Write-Host "$GroupName | Desired: $($DesiredIds.Count) AddNeeded: $($toAdd.Count) RemoveNeeded: $($toRemove.Count) Added: $addOk Removed: $removeOk WhatIfSkippedAdds: $addSkipped WhatIfSkippedRemoves: $removeSkipped" -ForegroundColor Cyan
 }
 
 # calls 
-Sync-TargetGroup -GroupId $fido2Group.Id   -GroupName $fido2GroupName   -DesiredIds $fido2UserIds
-Sync-TargetGroup -GroupId $authAppGroup.Id -GroupName $authAppGroupName -DesiredIds $authAppUserIds
-Sync-TargetGroup -GroupId $regReqGroup.Id  -GroupName $regReqGroupName  -DesiredIds $regReqUserIds
+Sync-TargetGroup -GroupId $fido2Group.Id `
+    -GroupName $fido2GroupName `
+    -DesiredIds $fido2UserIds `
+    -ManagedIds $allSourceUserIds
+
+Sync-TargetGroup -GroupId $authAppGroup.Id `
+    -GroupName $authAppGroupName `
+    -DesiredIds $authAppUserIds `
+    -ManagedIds $allSourceUserIds
+
+Sync-TargetGroup -GroupId $regReqGroup.Id `
+    -GroupName $regReqGroupName `
+    -DesiredIds $regReqUserIds `
+    -ManagedIds $allSourceUserIds
 
 # ================================================================
 #  EXCEL AUDIT REPORT

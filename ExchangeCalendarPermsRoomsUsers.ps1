@@ -60,16 +60,16 @@ Export-Excel -Path "C:\Users\DakotaRuhl\Documents\Reports\Calendar Permissions\A
 #$allRooms = $teamsRooms | ForEach-Object { $_.DisplayName }
 
 <# Get-MailboxFolderPermission -Identity "Aimee Middleton:\Calendar" | Format-Table User,AccessRights -AutoSize 
-Add-MailboxFolderPermission -Identity "Aimee Middleton:\Calendar" -User "Jessica Rohrbaugh" -AccessRights Editor
+Add-MailboxFolderPermission -Identity "Octavio :\Calendar" -User "Dakota Ruhl" -AccessRights Owner
 Remove-MailboxFolderPermission -Identity "Aimee Middleton:\Calendar" -User "Jessica Rohrbaugh" -Confirm:$false
  #>
 
 
 
-$UPN = "camthor@enchantedrock.com"
+$UPN = "nherr@erock.com"
 $calendarIdentity = "$($UPN):\Calendar"
-$userIdentityAdd = "JRohrbaugh@enchantedrock.com"
-Get-MailboxFolderPermission -Identity $calendarIdentity | Format-Table User,AccessRights -AutoSize 
+$userIdentityAdd = "tamaya@erock.com"
+Get-MailboxFolderPermission -Identity $calendarIdentity | Format-Table -AutoSize 
 Get-MailboxPermission -Identity $UPN
 Get-Mailbox $UPN | FL
 
@@ -89,3 +89,11 @@ $adminEmail = "admin-dr@enchantedrock.com"
 $meetings = Get-Mailbox -ResultSize Unlimited | Get-CalendarDiagnosticObjects -ResultSize Unlimited | Where-Object { $_.Subject -eq $title }
 $meetings | Select-Object OrganizerName, OrganizerSmtpAddress, StartTime, EndTime 
 
+Get-MailboxAutoReplyConfiguration -Identity $UPN
+
+$guid = (get-mailbox -Identity "nherr@erock.com" | select-object -ExpandProperty exchangeguid)
+Get-InboxRule -Mailbox $guid.Guid -includehidden
+
+Get-InboxRule -Mailbox nherr@erock.com -IncludeHidden |
+    Where-Object {$_.Name -like "Delegate Rule*"} |
+    Format-List *

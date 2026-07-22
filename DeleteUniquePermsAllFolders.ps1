@@ -1,9 +1,13 @@
 #Set Variables
-$SiteURL = "https://enchantedrock.sharepoint.com/sites/erintranet"
-$FolderURL = "/Events Library" 
+$SiteURL = "https://enchantedrock.sharepoint.com/sites/Granite"
+$FolderURL = "/Shared Documents" 
  
+$TenantId   = "0bdf0e1f-a359-4b5c-9b79-9357e35ff8c6"
+$ClientId   = "97d01716-c2a3-4311-9b73-09ac8579cbf1"
+$Thumbprint = "94EF4B57723E2E90CD56F2F407EF6AFBEF275392"
+
 #Connect to PnP Online
-Connect-PnPOnline -URL $SiteURL -Interactive -ClientId 4ac6eede-e81e-4d22-abad-0d43c51486f2
+Connect-PnPOnline -URL $SiteURL -ClientId $ClientId -Tenant $TenantId -Thumbprint $Thumbprint
  
 #Function to reset permissions of all Sub-Folders
 Function Reset-SubFolderPermissions($FolderURL)

@@ -1,9 +1,41 @@
-"Email","DisplayName","Status","Reason","GuestId","GuestUPN","Sponsor"
-"scott.owens@centerpointenergy.com","Owens, Scott B","Skipped","Guest already exists","070afcb2-91a9-4e70-94b3-bf040d3ffe0d","scott.owens_centerpointenergy.com#EXT#@EnchantedRock.onmicrosoft.com","jstivers@enchantedrock.com"
-"stephen.ballard@centerpointenergy.com","Ballard, Stephen","Skipped","Guest already exists","da84ea1a-f2ff-447e-8b7b-5b81acaa5e67","stephen.ballard_centerpointenergy.com#EXT#@EnchantedRock.onmicrosoft.com","jstivers@enchantedrock.com"
-"warren.wehr@centerpointenergy.com","Wehr, Warren C","Skipped","Guest already exists","5e565eb5-0c27-4eaa-a23e-879c8a291010","warren.wehr_centerpointenergy.com#EXT#@EnchantedRock.onmicrosoft.com","jstivers@enchantedrock.com"
-"michael.bish@centerpointenergy.com","Bish, Michael C","Skipped","Guest already exists","5467d9a3-8c88-4784-bb04-39b7894bfefe","michael.bish_centerpointenergy.com#EXT#@EnchantedRock.onmicrosoft.com","jstivers@enchantedrock.com"
-"michael.gooden@centerpointenergy.com","Gooden Sr, Michael T","Skipped","Guest already exists","028b787a-893c-4689-a22a-8be3787e8af1","michael.gooden_centerpointenergy.com#EXT#@EnchantedRock.onmicrosoft.com","jstivers@enchantedrock.com"
-"tara.vincent@centerpointenergy.com","Vincent, Tara R","Skipped","Guest already exists","fe4720bb-b842-4d53-bc4a-04961869206d","tara.vincent_centerpointenergy.com#EXT#@EnchantedRock.onmicrosoft.com","jstivers@enchantedrock.com"
-"heather.kisla@centerpointenergy.com","Kisla, Heather N","Skipped","Guest already exists","41d1c0d4-75dc-4ac3-ab2c-bab0fff75c24","heather.kisla_centerpointenergy.com#EXT#@EnchantedRock.onmicrosoft.com","jstivers@enchantedrock.com"
-"polo.solis@centerpointenergy.com","Solis, Polo J","Skipped","Guest already exists","e1d5b605-abc6-41e2-a82f-eb8359877022","polo.solis_centerpointenergy.com#EXT#@EnchantedRock.onmicrosoft.com","jstivers@enchantedrock.com"
+"ClassId2e4f51ef21dd47e99d3c952918aff9cd","pageHeaderEntry","pageFooterEntry","autosizeInfo","shapeInfo","groupingEntry"
+"033ecb2bc07a4d43b5ef94ed5a35d280",,,"Microsoft.PowerShell.Commands.Internal.Format.AutosizeInfo","Microsoft.PowerShell.Commands.Internal.Format.TableHeaderInfo",
+"9e210fe47d09416682b841769c78b8a3",,,,,
+"27c87ef9bbda4f709f6b4002fa4af63c",,,,,
+"4ec4f0187cb04f4cb6973460dfe252df",,,,,
+"cf522b78d86c486691226b40aa69e95c",,,,,
+,,,,,
+,,,,,
+"033ecb2bc07a4d43b5ef94ed5a35d280",,,"Microsoft.PowerShell.Commands.Internal.Format.AutosizeInfo","Microsoft.PowerShell.Commands.Internal.Format.TableHeaderInfo",
+"9e210fe47d09416682b841769c78b8a3",,,,,
+"27c87ef9bbda4f709f6b4002fa4af63c",,,,,
+"4ec4f0187cb04f4cb6973460dfe252df",,,,,
+"cf522b78d86c486691226b40aa69e95c",,,,,
+,,,,,
+,,,,,
+,,,,,
+,,,,,
+,,,,,
+,,,,,
+"033ecb2bc07a4d43b5ef94ed5a35d280",,,"Microsoft.PowerShell.Commands.Internal.Format.AutosizeInfo","Microsoft.PowerShell.Commands.Internal.Format.TableHeaderInfo",
+"9e210fe47d09416682b841769c78b8a3",,,,,
+"27c87ef9bbda4f709f6b4002fa4af63c",,,,,
+"4ec4f0187cb04f4cb6973460dfe252df",,,,,
+"cf522b78d86c486691226b40aa69e95c",,,,,
+,,,,,
+"033ecb2bc07a4d43b5ef94ed5a35d280",,,"Microsoft.PowerShell.Commands.Internal.Format.AutosizeInfo","Microsoft.PowerShell.Commands.Internal.Format.TableHeaderInfo",
+"9e210fe47d09416682b841769c78b8a3",,,,,
+"27c87ef9bbda4f709f6b4002fa4af63c",,,,,
+"4ec4f0187cb04f4cb6973460dfe252df",,,,,
+"cf522b78d86c486691226b40aa69e95c",,,,,
+,,,,,
+,,,,,
+"033ecb2bc07a4d43b5ef94ed5a35d280",,,"Microsoft.PowerShell.Commands.Internal.Format.AutosizeInfo","Microsoft.PowerShell.Commands.Internal.Format.TableHeaderInfo",
+"9e210fe47d09416682b841769c78b8a3",,,,,
+"27c87ef9bbda4f709f6b4002fa4af63c",,,,,
+"4ec4f0187cb04f4cb6973460dfe252df",,,,,
+"cf522b78d86c486691226b40aa69e95c",,,,,
+,,,,,
+,,,,,
+,,,,,
+,,,,,

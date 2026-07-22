@@ -1,13 +1,17 @@
+## Configuration ##
+$invitations = Import-Excel '.\Input Data\invitations.xlsx' -WorksheetName "invitations" 
+$sponsorEmail = $invitations.Sponsor[0]
+
+## Azure AD App Registration Details ##
 $Thumbprint = "C47B91EB62634CA61FA8146DDA83B8BF605C0962"
 $ClientID   = "ea2ca49b-d0df-4774-b611-86cf9dc9629f"
 $TenantID   = "0bdf0e1f-a359-4b5c-9b79-9357e35ff8c6"
 
+# Connect to Microsoft Graph using the app registration credentials
 Connect-MgGraph `
     -ClientId $ClientID `
     -TenantId $TenantID `
     -CertificateThumbprint $Thumbprint
-
-$invitations = Import-Csv '.\Input Data\invitations.csv'
 
 $messageInfo = New-Object Microsoft.Graph.PowerShell.Models.MicrosoftGraphInvitedUserMessageInfo
 
@@ -21,20 +25,21 @@ Please click the "Accept Invitation" link below and follow the prompts to activa
 If you have any questions, please feel free to send me an email at druhl@enchantedrock.com.
 "@
 
-$sponsor = Get-MgUser -UserId "jstivers@enchantedrock.com" -ErrorAction Stop
+$sponsor = Get-MgUser -UserId $sponsorEmail -ErrorAction Stop
 
-$results = foreach ($email in $invitations) {
+$results = @()
+$results = foreach ($row in $invitations) {
     try {
-        if ([string]::IsNullOrWhiteSpace($email.InvitedUserEmailAddress)) {
-            throw "Missing InvitedUserEmailAddress in CSV row."
+        if ([string]::IsNullOrWhiteSpace($row.Email)) {
+            throw "Missing Email in CSV row."
         }
 
-        if ([string]::IsNullOrWhiteSpace($email.Name)) {
-            throw "Missing Name in CSV row for $($email.InvitedUserEmailAddress)."
+        if ([string]::IsNullOrWhiteSpace($row.Name)) {
+            throw "Missing Name in CSV row for $($row.Email)."
         }
 
-        $inviteEmail = $email.InvitedUserEmailAddress.Trim()
-        $displayName = $email.Name.Trim()
+        $inviteEmail = $row.Email.Trim()
+        $displayName = $row.Name.Trim()
 
         # Escape single quotes for OData filter safety
         $escapedInviteEmail = $inviteEmail.Replace("'", "''")
@@ -97,9 +102,6 @@ $results = foreach ($email in $invitations) {
 
         $assignedSponsors = Get-MgUserSponsor -UserId $invite.InvitedUser.Id -ErrorAction Stop
 
-        $assignedSponsors |
-            Select-Object Id, DisplayName, UserPrincipalName |
-            Format-Table -AutoSize
 
         [PSCustomObject]@{
             Email             = $inviteEmail
@@ -112,11 +114,11 @@ $results = foreach ($email in $invitations) {
         }
     }
     catch {
-        Write-Warning "FAILED: $($email.InvitedUserEmailAddress) - $($_.Exception.Message)"
+        Write-Warning "FAILED: $($row.Email) - $($_.Exception.Message)"
 
         [PSCustomObject]@{
-            Email             = $email.InvitedUserEmailAddress
-            DisplayName       = $email.Name
+            Email             = $row.Email
+            DisplayName       = $row.Name
             Status            = "Failed"
             Reason            = $_.Exception.Message
             GuestId           = $null
@@ -126,5 +128,5 @@ $results = foreach ($email in $invitations) {
     }
 }
 
-$results | Export-Csv ".\Input Data\GuestInviteResults.csv" -NoTypeInformation 
-$results | Format-Table -AutoSize
+$results | Export-csv ".\Input Data\GuestInviteResults.csv" -NoTypeInformation 
+$results | Format-Table -AutoSize  
