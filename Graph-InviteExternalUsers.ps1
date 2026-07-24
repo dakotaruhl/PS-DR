@@ -1,5 +1,9 @@
 ## Configuration ##
-$invitations = Import-Excel '.\Input Data\invitations.xlsx' -WorksheetName "invitations" 
+$invitations = Import-Excel '.\Input Data\invitations.xlsx' -WorksheetName "invitations" |
+    Where-Object {
+        -not [string]::IsNullOrWhiteSpace($_.Email) -and
+        -not [string]::IsNullOrWhiteSpace($_.Name)
+    }
 $sponsorEmail = $invitations.Sponsor[0]
 
 ## Azure AD App Registration Details ##

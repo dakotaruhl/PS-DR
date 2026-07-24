@@ -7,10 +7,10 @@
 $AdminCenterURL = "https://enchantedrock-admin.sharepoint.com"
 
 # User with the ID mismatch
-$UserLoginID = "i:0#.f|membership|kparekh@enchantedrock.com"
+$UserLoginID = "i:0#.f|membership|bnguyen@erock.com"
 
 # SharePoint admin account to temporarily add as site collection admin
-$SiteCollectionAdmin = "admin-dr@enchantedrock.com"
+$SiteCollectionAdmin = "admin-dr@erock.com"
 
 # App-only auth
 $Thumbprint = "C47B91EB62634CA61FA8146DDA83B8BF605C0962"
