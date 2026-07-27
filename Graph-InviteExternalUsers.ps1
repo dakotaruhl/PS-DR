@@ -4,7 +4,7 @@ $invitations = Import-Excel '.\Input Data\invitations.xlsx' -WorksheetName "invi
         -not [string]::IsNullOrWhiteSpace($_.Email) -and
         -not [string]::IsNullOrWhiteSpace($_.Name)
     }
-$sponsorEmail = $invitations.Sponsor[0]
+$sponsorEmail = $invitations.Sponsor | Select-Object -First 1 
 
 ## Azure AD App Registration Details ##
 $Thumbprint = "C47B91EB62634CA61FA8146DDA83B8BF605C0962"
