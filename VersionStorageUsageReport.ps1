@@ -1,12 +1,25 @@
-#import PS7 version
-Import-Module Microsoft.Online.SharePoint.PowerShell -UseWindowsPowerShell
+Import-Module Microsoft.Online.SharePoint.PowerShell -ErrorAction Stop
 
-#Connect SPO Site
-Connect-SPOService -Url https://enchantedrock-admin.sharepoint.com
+$TenantId   = "0bdf0e1f-a359-4b5c-9b79-9357e35ff8c6"
+$ClientId   = "97d01716-c2a3-4311-9b73-09ac8579cbf1"
+$Thumbprint = "94EF4B57723E2E90CD56F2F407EF6AFBEF275392"
+$AdminUrl   = "https://enchantedrock-admin.sharepoint.com"
 
-#Configure Target Site
+# Certificate object method
+$cert = Get-Item "Cert:\LocalMachine\My\$Thumbprint" -ErrorAction Stop
+
+Connect-SPOService `
+    -Url $AdminUrl `
+    -ClientId $ClientId `
+    -TenantId $TenantId `
+    -Certificate $cert `
+    -ErrorAction Stop
+
+#Confgure Target Sites, all sites except /erintranet 
+$AllSites = Get-SPOSite -Limit All
+$TargetSites = $AllSites | Where-Object { $_.Url -notlike "https://enchantedrock.sharepoint.com/sites/erintranet" }
+
 $siteUrl = "https://enchantedrock.sharepoint.com/sites/erintranet"
-
 
 ###REPORT JOBS###
 $reportLibName = "Culture Committee"

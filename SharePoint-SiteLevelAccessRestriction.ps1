@@ -11,11 +11,12 @@ $ClientId   = "97d01716-c2a3-4311-9b73-09ac8579cbf1"
 $Thumbprint = "94EF4B57723E2E90CD56F2F407EF6AFBEF275392"
 $AdminUrl   = "https://enchantedrock-admin.sharepoint.com"
 
-# RAC group object IDs
-$AllUsersRestrictedGroupID = "31f49681-76cf-41e2-81cb-b306a2c38ce1"
-
 $RestrictedAccessGroupIds = @(
-    [guid]$AllUsersRestrictedGroupID
+    [guid]"31f49681-76cf-41e2-81cb-b306a2c38ce1", # All Users Restricted
+    [guid]"b01d12ba-43c2-4914-8c2e-0a0cdafa0c1a", # ERock Team
+    [guid]"5352e984-2660-4339-9267-89c277ad5a2a", # Employee's Only
+    [guid]"543e0e54-2643-424d-bf06-37e9b0d5a651", # Contractors 
+    [guid]"a5f41c3e-3f89-4719-bc69-c6ae949f23b2"  # Interns 
 )
 
 # Sites to exclude
