@@ -1,0 +1,510 @@
+{
+  "CapturedAt": "2026-07-31T16:39:30.0841952-05:00",
+  "Mode": "AllowList",
+  "AllowedDomains": [
+    "alphastruxure.com",
+    "alum.iisc.ac.in",
+    "amazon.com",
+    "anthropic.com",
+    "atronsolutions.com",
+    "bakerbotts.com",
+    "bastiontechnologies.com",
+    "bv.com",
+    "caplawtx.com",
+    "ceis.com",
+    "centerpointenergy.com",
+    "cgkholdings.com",
+    "childrens.com",
+    "comap-control.com",
+    "coserv.com",
+    "cougarnet.uh.edu",
+    "cpsenergy.com",
+    "crichielaw.com",
+    "crmsuperhero.com",
+    "cushwake.com",
+    "cyberreefsolutions.com",
+    "dayzenllc.com",
+    "dchenning.com",
+    "diamondbackenergy.com",
+    "dieselradiator.com",
+    "dorsey.com",
+    "eid.utexas.edu",
+    "eiwilliams.com",
+    "emjcorp.com",
+    "energyimpactpartners.com",
+    "enfrasolutions.com",
+    "entergy.com",
+    "epelectric.com",
+    "everlineus.com",
+    "fastenal.com",
+    "fieldpoint.net",
+    "fii-na.com",
+    "flatrockcompanies.com",
+    "fortinet-us.com",
+    "fpl.com",
+    "generac.com",
+    "generatecapital.com",
+    "gftinc.com",
+    "gibsondunn.com",
+    "globalpwr.com",
+    "gray.com",
+    "gridaxon.io",
+    "gridbeyond.com",
+    "gtconsultingservices.com",
+    "hdrinc.com",
+    "heb.com",
+    "icrcapital.com",
+    "icrinc.com",
+    "illinois.edu",
+    "joeris.com",
+    "kinleyconstruction.com",
+    "kirkland.com",
+    "kratosind.com",
+    "lcra.org",
+    "lockton.com",
+    "lonestar.edu",
+    "lonestarelectricsupply.com",
+    "ls-electric.com",
+    "lselectricamerica.com",
+    "luminant.com",
+    "manganinc.com",
+    "maverickpwr.com",
+    "mcadamsenergygroup.com",
+    "mcxpsolutions.com",
+    "meridiancp.com",
+    "meritadvisor.com",
+    "millerbros.us",
+    "mpmaterials.com",
+    "nadel.com",
+    "naes.com",
+    "nortonrosefulbright.com",
+    "nw-groupe.com",
+    "oneplan.ai",
+    "phoenixcontact.com",
+    "polytechinc.com",
+    "poweredbysenergy.com",
+    "prioritypower.com",
+    "prismelectric.com",
+    "protiviti.com",
+    "rwr.com",
+    "seeberger.com",
+    "shi.com",
+    "skens.com",
+    "smartwattinc.com",
+    "southernco.com",
+    "southlandind.com",
+    "summitmep.com",
+    "swatconstruction.com",
+    "tamu.edu",
+    "tntcrane.com",
+    "toradex.com",
+    "trinityconsultants.com",
+    "tunneltex.com",
+    "tva.gov",
+    "twimail.com",
+    "txlobby.com",
+    "txu.com",
+    "us.forvismazars.com",
+    "vanderbilt.edu",
+    "vanjen.net",
+    "vistracorp.com",
+    "vistraenergy.com",
+    "wabtec.com",
+    "walmart.com",
+    "wsgr.com"
+  ],
+  "BlockedDomains": [],
+  "Raw": {
+    "AllowedDomains": {
+      "AllowedDomain": [
+        {
+          "Domain": "alphastruxure.com"
+        },
+        {
+          "Domain": "alum.iisc.ac.in"
+        },
+        {
+          "Domain": "amazon.com"
+        },
+        {
+          "Domain": "anthropic.com"
+        },
+        {
+          "Domain": "atronsolutions.com"
+        },
+        {
+          "Domain": "bakerbotts.com"
+        },
+        {
+          "Domain": "bastiontechnologies.com"
+        },
+        {
+          "Domain": "bv.com"
+        },
+        {
+          "Domain": "caplawtx.com"
+        },
+        {
+          "Domain": "ceis.com"
+        },
+        {
+          "Domain": "centerpointenergy.com"
+        },
+        {
+          "Domain": "cgkholdings.com"
+        },
+        {
+          "Domain": "childrens.com"
+        },
+        {
+          "Domain": "comap-control.com"
+        },
+        {
+          "Domain": "coserv.com"
+        },
+        {
+          "Domain": "cougarnet.uh.edu"
+        },
+        {
+          "Domain": "cpsenergy.com"
+        },
+        {
+          "Domain": "crichielaw.com"
+        },
+        {
+          "Domain": "crmsuperhero.com"
+        },
+        {
+          "Domain": "cushwake.com"
+        },
+        {
+          "Domain": "cyberreefsolutions.com"
+        },
+        {
+          "Domain": "dayzenllc.com"
+        },
+        {
+          "Domain": "dchenning.com"
+        },
+        {
+          "Domain": "diamondbackenergy.com"
+        },
+        {
+          "Domain": "dieselradiator.com"
+        },
+        {
+          "Domain": "dorsey.com"
+        },
+        {
+          "Domain": "eid.utexas.edu"
+        },
+        {
+          "Domain": "eiwilliams.com"
+        },
+        {
+          "Domain": "emjcorp.com"
+        },
+        {
+          "Domain": "energyimpactpartners.com"
+        },
+        {
+          "Domain": "enfrasolutions.com"
+        },
+        {
+          "Domain": "entergy.com"
+        },
+        {
+          "Domain": "epelectric.com"
+        },
+        {
+          "Domain": "everlineus.com"
+        },
+        {
+          "Domain": "fastenal.com"
+        },
+        {
+          "Domain": "fieldpoint.net"
+        },
+        {
+          "Domain": "fii-na.com"
+        },
+        {
+          "Domain": "flatrockcompanies.com"
+        },
+        {
+          "Domain": "fortinet-us.com"
+        },
+        {
+          "Domain": "fpl.com"
+        },
+        {
+          "Domain": "generac.com"
+        },
+        {
+          "Domain": "generatecapital.com"
+        },
+        {
+          "Domain": "gftinc.com"
+        },
+        {
+          "Domain": "globalpwr.com"
+        },
+        {
+          "Domain": "gray.com"
+        },
+        {
+          "Domain": "gridaxon.io"
+        },
+        {
+          "Domain": "gridbeyond.com"
+        },
+        {
+          "Domain": "gtconsultingservices.com"
+        },
+        {
+          "Domain": "hdrinc.com"
+        },
+        {
+          "Domain": "heb.com"
+        },
+        {
+          "Domain": "icrcapital.com"
+        },
+        {
+          "Domain": "icrinc.com"
+        },
+        {
+          "Domain": "illinois.edu"
+        },
+        {
+          "Domain": "joeris.com"
+        },
+        {
+          "Domain": "kinleyconstruction.com"
+        },
+        {
+          "Domain": "kirkland.com"
+        },
+        {
+          "Domain": "kratosind.com"
+        },
+        {
+          "Domain": "lcra.org"
+        },
+        {
+          "Domain": "lockton.com"
+        },
+        {
+          "Domain": "lonestar.edu"
+        },
+        {
+          "Domain": "lonestarelectricsupply.com"
+        },
+        {
+          "Domain": "ls-electric.com"
+        },
+        {
+          "Domain": "lselectricamerica.com"
+        },
+        {
+          "Domain": "luminant.com"
+        },
+        {
+          "Domain": "manganinc.com"
+        },
+        {
+          "Domain": "maverickpwr.com"
+        },
+        {
+          "Domain": "mcadamsenergygroup.com"
+        },
+        {
+          "Domain": "mcxpsolutions.com"
+        },
+        {
+          "Domain": "meridiancp.com"
+        },
+        {
+          "Domain": "meritadvisor.com"
+        },
+        {
+          "Domain": "millerbros.us"
+        },
+        {
+          "Domain": "mpmaterials.com"
+        },
+        {
+          "Domain": "nadel.com"
+        },
+        {
+          "Domain": "naes.com"
+        },
+        {
+          "Domain": "nortonrosefulbright.com"
+        },
+        {
+          "Domain": "nw-groupe.com"
+        },
+        {
+          "Domain": "oneplan.ai"
+        },
+        {
+          "Domain": "phoenixcontact.com"
+        },
+        {
+          "Domain": "polytechinc.com"
+        },
+        {
+          "Domain": "poweredbysenergy.com"
+        },
+        {
+          "Domain": "prioritypower.com"
+        },
+        {
+          "Domain": "prismelectric.com"
+        },
+        {
+          "Domain": "protiviti.com"
+        },
+        {
+          "Domain": "seeberger.com"
+        },
+        {
+          "Domain": "skens.com"
+        },
+        {
+          "Domain": "smartwattinc.com"
+        },
+        {
+          "Domain": "southernco.com"
+        },
+        {
+          "Domain": "southlandind.com"
+        },
+        {
+          "Domain": "summitmep.com"
+        },
+        {
+          "Domain": "swatconstruction.com"
+        },
+        {
+          "Domain": "tamu.edu"
+        },
+        {
+          "Domain": "tntcrane.com"
+        },
+        {
+          "Domain": "toradex.com"
+        },
+        {
+          "Domain": "trinityconsultants.com"
+        },
+        {
+          "Domain": "tunneltex.com"
+        },
+        {
+          "Domain": "tva.gov"
+        },
+        {
+          "Domain": "twimail.com"
+        },
+        {
+          "Domain": "txlobby.com"
+        },
+        {
+          "Domain": "txu.com"
+        },
+        {
+          "Domain": "us.forvismazars.com"
+        },
+        {
+          "Domain": "vanderbilt.edu"
+        },
+        {
+          "Domain": "vanjen.net"
+        },
+        {
+          "Domain": "vistracorp.com"
+        },
+        {
+          "Domain": "vistraenergy.com"
+        },
+        {
+          "Domain": "wabtec.com"
+        },
+        {
+          "Domain": "walmart.com"
+        },
+        {
+          "Domain": "wsgr.com"
+        },
+        {
+          "Domain": "shi.com"
+        },
+        {
+          "Domain": "rwr.com"
+        },
+        {
+          "Domain": "gibsondunn.com"
+        }
+      ]
+    },
+    "BlockedDomains": [],
+    "AllowedTrialTenantDomains": [],
+    "AllowFederatedUsers": true,
+    "AllowTeamsSms": true,
+    "AllowTeamsConsumer": false,
+    "AllowTeamsConsumerInbound": false,
+    "TreatDiscoveredPartnersAsUnverified": false,
+    "SharedSipAddressSpace": false,
+    "RestrictTeamsConsumerToExternalUserProfiles": false,
+    "BlockAllSubdomains": true,
+    "ExternalAccessWithTrialTenants": "Blocked",
+    "SecurityTeamAllowBlockListDelegation": "Disabled",
+    "EnableExternalAccessRestrictionsForChatParticipants": false,
+    "EnableMutualFederationForChatParticipants": false,
+    "Key": {
+      "ScopeClass": "Global",
+      "SchemaId": {
+        "XName": {
+          "name": "{urn:schema:Microsoft.Rtc.Management.Settings.Edge.2008}TenantFederationSettings"
+        }
+      },
+      "AuthorityId": {
+        "Class": "Tenant",
+        "InstanceId": "0bdf0e1f-a359-4b5c-9b79-9357e35ff8c6",
+        "XmlRoot": {
+          "name": "{urn:schema:Microsoft.Rtc.Management.ScopeFramework.2008}AuthorityId"
+        }
+      },
+      "DefaultXml": {
+        "SchemaId": {
+          "XName": {
+            "name": "{urn:schema:Microsoft.Rtc.Management.Settings.Edge.2008}TenantFederationSettings"
+          }
+        },
+        "Data": {
+          "TenantFederationSettings": {
+            "@xmlns": "urn:schema:Microsoft.Rtc.Management.Settings.Edge.2008",
+            "AllowedDomains": {
+              "AllowAllKnownDomains": null
+            },
+            "BlockedDomains": null,
+            "AllowedTrialTenantDomains": null
+          }
+        },
+        "ConfigObject": null,
+        "Signature": "00000000-0000-0000-0000-000000000000",
+        "IsModified": true
+      },
+      "XmlRoot": {
+        "name": "{urn:schema:Microsoft.Rtc.Management.ScopeFramework.2008}AnchoredXmlKey"
+      }
+    },
+    "Identity": "Global",
+    "ConfigMetadata": {
+      "Authority": "Tenant"
+    },
+    "ConfigId": "Global"
+  }
+}

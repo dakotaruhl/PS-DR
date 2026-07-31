@@ -17,19 +17,6 @@ Connect-MgGraph `
     -TenantId $TenantID `
     -CertificateThumbprint $Thumbprint
 
-    $RestrictedAccessGroupIds | ForEach-Object {
-    $g = Get-MgGroup -GroupId $_
-
-    [PSCustomObject]@{
-        DisplayName     = $g.DisplayName
-        Id              = $g.Id
-        SecurityEnabled = $g.SecurityEnabled
-        MailEnabled     = $g.MailEnabled
-        GroupTypes      = ($g.GroupTypes -join ',')
-    }
-} | Format-Table -AutoSize
-
-
 Import-Module Microsoft.Graph.Identity.SignIns    
 $messageInfo = New-Object Microsoft.Graph.PowerShell.Models.MicrosoftGraphInvitedUserMessageInfo
 $messageInfo.CustomizedMessageBody = @"

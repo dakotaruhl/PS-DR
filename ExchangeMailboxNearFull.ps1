@@ -39,7 +39,7 @@ Write-Host "Last MFA Processed Time: $LastProcessed"
 
 
 Get-mdmMailboxFolderStatistics -Identity $user -FolderScope All | Select-Object Name,ItemsInFolder,FolderSize
-#>
+
 
 $stats = Get-EXOMailboxStatistics -Identity "Emontoya@enchantedrock.com"
     [PSCustomObject]@{
@@ -52,3 +52,5 @@ $stats = Get-EXOMailboxStatistics -Identity "Emontoya@enchantedrock.com"
             0
         }
     }
+
+#>

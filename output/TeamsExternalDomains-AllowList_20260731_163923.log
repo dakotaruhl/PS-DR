@@ -1,0 +1,19 @@
+[2026-07-31 16:39:23][INFO] Starting Mode=Propose
+[2026-07-31 16:39:23][INFO] OutputFolder=.\Output
+[2026-07-31 16:39:23][INFO] Loading MicrosoftTeams module
+[2026-07-31 16:39:23][INFO] Connecting to Microsoft Teams
+[2026-07-31 16:39:28][INFO] Connected using interactive auth.
+[2026-07-31 16:39:28][INFO] Loading report: .\Input Data\ActiveDomains_2026-07-31.csv
+[2026-07-31 16:39:28][INFO] Loaded 648 rows from report
+[2026-07-31 16:39:29][INFO] Candidate domains after filters: 143
+[2026-07-31 16:39:30][INFO] Exported current allowed domains CSV: .\Output\CurrentTeamsAllowedDomains_20260731_163929.csv
+[2026-07-31 16:39:30][INFO] Exported current allowed domains TXT: .\Output\CurrentTeamsAllowedDomains_20260731_163929.txt
+[2026-07-31 16:39:30][INFO] Exported current allowed domains JSON: .\Output\CurrentTeamsAllowedDomains_20260731_163929.json
+[2026-07-31 16:39:30][INFO] Current allowed domains detected: 110
+[2026-07-31 16:39:30][INFO] Current federation mode: AllowList
+[2026-07-31 16:39:30][INFO] Backed up current federation config: .\Output\TeamsFederationConfigBackup_20260731_163930.json
+[2026-07-31 16:39:30][INFO] Wrote plan: .\Output\TeamsExternalDomains-AllowListPlan_20260731_163930.json
+[2026-07-31 16:39:30][INFO] Summary:
+[2026-07-31 16:39:30][INFO] Adds: 78
+[2026-07-31 16:39:30][INFO] Removals: 45
+[2026-07-31 16:39:30][INFO] Plan file: .\Output\TeamsExternalDomains-AllowListPlan_20260731_163930.json

@@ -3,9 +3,6 @@ Connect-ExchangeOnline
 $user = "alabra@enchantedrock.com"
 $mailbox = Get-Mailbox -Identity $user
 $mailboxStatistics = Get-MailboxFolderStatistics -Identity $user
-
-
-
 $mailbox | Select-Object RetentionPolicy
 
 #View all mailboxes with holds enabled

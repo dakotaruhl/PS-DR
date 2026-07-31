@@ -40,7 +40,7 @@ Wildcard patterns to exclude (default blocks *.onmicrosoft.com and common consum
 Optional app-based auth for unattended runs. If omitted, the script uses interactive auth.
 
 .EXAMPLE
-.\Teams-UpdateExternalAllowList.ps1 -Mode Propose -ReportPath .\ExternalDomains.csv
+.\Teams-UpdateExternalAllowList.ps1 -Mode Propose -ReportPath ".\Input Data\ActiveDomains_2026-07-31.csv" -OutputFolder ".\Output"
 
 .EXAMPLE
 # After reviewing the plan JSON and setting Approved=true
@@ -92,7 +92,13 @@ param(
     [switch]$UseDeviceAuthentication,
 
     [Parameter(Mandatory = $false)]
-    [string]$AccountId
+    [string]$AccountId,
+
+    [Parameter(Mandatory = $false)]
+    [int]$MinimumFinalDomainCount = 10,
+
+    [Parameter(Mandatory = $false)]
+    [switch]$ApplyRemovals
 )
 
 Set-StrictMode -Version Latest
@@ -116,7 +122,7 @@ function Write-Log {
     if ($script:LogFile) { Add-Content -LiteralPath $script:LogFile -Value $line }
 }
 
-function Normalize-Domain {
+function Format-Domain {
     param([Parameter(Mandatory=$true)][string]$Domain)
 
     $d = $Domain.Trim().ToLowerInvariant()
@@ -144,7 +150,11 @@ function Test-Excluded {
         if ($Domain -eq $p)  { return $true }
     }
 
-    if ($ExplicitExclude -and $ExplicitExclude -contains $Domain) {
+    $normalizedExplicitExclude = @(
+    $ExplicitExclude | ForEach-Object { Format-Domain $_ } | Where-Object { $_ }
+    )
+
+    if ($normalizedExplicitExclude -contains $Domain) {
         return $true
     }
 
@@ -207,75 +217,127 @@ function Connect-Teams {
     Write-Log "Connected using interactive auth."
 }
 
+function Get-FederationDomainValue {
+    param(
+        [Parameter(Mandatory = $false)]
+        [object]$InputObject
+    )
+
+    if ($null -eq $InputObject) {
+        return $null
+    }
+
+    $raw = $null
+
+    if ($InputObject -is [string]) {
+        $raw = $InputObject
+    }
+    else {
+        # Teams federation objects commonly expose AllowedDomain.
+        # Other object shapes may expose Domain, Name, or Value.
+        foreach ($propertyName in @("AllowedDomain", "Domain", "Name", "Value")) {
+            if ($InputObject.PSObject.Properties.Name -contains $propertyName) {
+                $raw = [string]$InputObject.$propertyName
+                break
+            }
+        }
+
+        if (-not $raw) {
+            $raw = [string]$InputObject
+        }
+    }
+
+    if (-not $raw) {
+        return $null
+    }
+
+    $raw = $raw.Trim()
+
+    # Handles display strings like:
+    # Domain=contoso.com
+    # domain=contoso.com
+    $raw = $raw -replace '(?i)^\s*domain\s*=\s*', ''
+
+    return Format-Domain $raw
+}
+
 function Get-CurrentFederationState {
     $cfg = Get-CsTenantFederationConfiguration
-    $allowedRaw = $cfg.AllowedDomains
 
     $mode = "AllowList"
-    $current = @()
+    $current = New-Object System.Collections.Generic.List[string]
+    $blocked = New-Object System.Collections.Generic.List[string]
 
-    if ($null -eq $allowedRaw) {
-        # Explicit allow list, currently empty
-        $mode = "AllowList"
-        $current = @()
-    }
-    elseif ($allowedRaw -is [string]) {
-        if ($allowedRaw -eq "AllowAllKnownDomains") {
-            $mode = "AllowAllKnownDomains"
-            $current = @()
-        } else {
-            $current = @(
-                $allowedRaw -split "," |
-                ForEach-Object {
-                    Normalize-Domain ($_ -replace "^domain=", "")
-                } |
-                Where-Object { $_ }
-            )
+    function Add-ParsedFederationDomain {
+        param(
+            [Parameter(Mandatory = $true)]
+            [object]$Item,
+
+            [AllowEmptyCollection()]
+            [System.Collections.Generic.List[string]]$TargetList
+        )
+
+        if ($null -eq $Item) {
+            return
         }
-    }
-    elseif ($allowedRaw -is [System.Collections.IEnumerable]) {
-        foreach ($item in $allowedRaw) {
-            if ($item -is [string]) {
-                if ($item -eq "AllowAllKnownDomains") {
-                    $mode = "AllowAllKnownDomains"
-                    $current = @()
-                    break
+
+        $text = [string]$Item
+
+        if ($text.Trim() -eq "AllowAllKnownDomains") {
+            $script:DetectedAllowAllKnownDomains = $true
+            return
+        }
+
+        # Sometimes Teams renders a collection as:
+        # Domain=contoso.com, Domain=fabrikam.com
+        if ($text -match "(?i)\bdomain\s*=" -and $text -match ",") {
+            $parts = $text -split ","
+            foreach ($part in $parts) {
+                $d = Get-FederationDomainValue -InputObject $part
+                if ($d) {
+                    [void]$TargetList.Add($d)
                 }
-                $d = Normalize-Domain ($item -replace "^domain=", "")
-                if ($d) { $current += $d }
             }
-            elseif ($item.PSObject.Properties.Match("Domain").Count -gt 0) {
-                $d = Normalize-Domain $item.Domain
-                if ($d) { $current += $d }
-            }
-            else {
-                $d = Normalize-Domain ($item.ToString())
-                if ($d) { $current += $d }
-            }
+            return
+        }
+
+        $d = Get-FederationDomainValue -InputObject $Item
+        if ($d) {
+            [void]$TargetList.Add($d)
         }
     }
 
-    $current = $current | Sort-Object -Unique
+    $script:DetectedAllowAllKnownDomains = $false
+
+    if ($null -ne $cfg.AllowedDomains) {
+        foreach ($item in @($cfg.AllowedDomains)) {
+            Add-ParsedFederationDomain -Item $item -TargetList $current
+        }
+    }
+
+    if ($script:DetectedAllowAllKnownDomains) {
+        $mode = "AllowAllKnownDomains"
+        $current.Clear()
+    }
+
+    if ($null -ne $cfg.BlockedDomains) {
+        foreach ($item in @($cfg.BlockedDomains)) {
+            Add-ParsedFederationDomain -Item $item -TargetList $blocked
+        }
+    }
+
+    $currentFinal = @($current | Sort-Object -Unique)
+    $blockedFinal = @($blocked | Sort-Object -Unique)
 
     [pscustomobject]@{
         Config         = $cfg
         Mode           = $mode
-        AllowedDomains = $current
-        BlockedDomains = @(
-            $cfg.BlockedDomains |
-            ForEach-Object {
-                if ($_.PSObject.Properties.Match("Domain").Count -gt 0) {
-                    $_.Domain
-                } else {
-                    $_.ToString()
-                }
-            }
-        )
+        AllowedDomains = $currentFinal
+        BlockedDomains = $blockedFinal
     }
 }
 
-
-function Ensure-AllowDomainsAsAListSupported {
+function Get-AllowDomainsAsAListSupported {
     $cmd = Get-Command Set-CsTenantFederationConfiguration -ErrorAction Stop
     if (-not $cmd.Parameters.ContainsKey("AllowedDomainsAsAList")) {
         throw "Your Set-CsTenantFederationConfiguration does not expose -AllowedDomainsAsAList. Update the MicrosoftTeams module to a newer version."
@@ -302,11 +364,11 @@ function Build-CandidateDomains {
 
         if (-not $domainVal) { continue }
 
-        $d = Normalize-Domain $domainVal
+        $d = Format-Domain $domainVal
         if (-not $d) { continue }
 
         $n = 0
-        if ($userCountVal -ne $null -and $userCountVal -ne "") {
+        if ($null -ne $userCountVal -and $userCountVal -ne "") {
             [void][int]::TryParse($userCountVal.ToString(), [ref]$n)
         }
 
@@ -332,7 +394,7 @@ function Build-CandidateDomains {
     }
 
     if ($IncludeDomains.Count -gt 0) {
-        $includeNormalized = $IncludeDomains | ForEach-Object { Normalize-Domain $_ } | Where-Object { $_ }
+        $includeNormalized = $IncludeDomains | ForEach-Object { Format-Domain $_ } | Where-Object { $_ }
         $filtered = $filtered | Where-Object { $includeNormalized -contains $_.Domain }
     }
 
@@ -345,8 +407,9 @@ function Write-PlanFile {
         [Parameter(Mandatory=$true)][string]$Folder
     )
 
-    $ts = Get-Date -Format "yyyy-MM-dd"
+    $ts = Get-Date -Format "yyyyMMdd_HHmmss"
     $file = Join-Path $Folder ("TeamsExternalDomains-AllowListPlan_{0}.json" -f $ts)
+
 
     $Plan | ConvertTo-Json -Depth 10 | Set-Content -LiteralPath $file -Encoding UTF8
     Write-Log "Wrote plan: $file"
@@ -371,13 +434,60 @@ function Backup-CurrentConfig {
     Write-Log "Backed up current federation config: $file"
 }
 
+function Export-CurrentAllowedDomains {
+    param(
+        [Parameter(Mandatory = $true)]
+        [pscustomobject]$State,
+
+        [Parameter(Mandatory = $true)]
+        [string]$Folder,
+
+        [Parameter(Mandatory = $false)]
+        [string]$Prefix = "CurrentTeamsAllowedDomains"
+    )
+
+    $ts = Get-Date -Format "yyyyMMdd_HHmmss"
+
+    $csvPath  = Join-Path $Folder ("{0}_{1}.csv" -f $Prefix, $ts)
+    $txtPath  = Join-Path $Folder ("{0}_{1}.txt" -f $Prefix, $ts)
+    $jsonPath = Join-Path $Folder ("{0}_{1}.json" -f $Prefix, $ts)
+
+    $domainObjects = @($State.AllowedDomains | ForEach-Object {
+        [pscustomobject]@{
+            Domain = $_
+        }
+    })
+
+    $domainObjects | Export-Csv -LiteralPath $csvPath -NoTypeInformation -Encoding UTF8
+    $State.AllowedDomains | Set-Content -LiteralPath $txtPath -Encoding UTF8
+
+    [pscustomobject]@{
+        CapturedAt = (Get-Date).ToString("o")
+        Mode = $State.Mode
+        AllowedDomainCount = @($State.AllowedDomains).Count
+        AllowedDomains = $State.AllowedDomains
+        BlockedDomainCount = @($State.BlockedDomains).Count
+        BlockedDomains = $State.BlockedDomains
+    } | ConvertTo-Json -Depth 10 | Set-Content -LiteralPath $jsonPath -Encoding UTF8
+
+    Write-Log ("Exported current allowed domains CSV: {0}" -f $csvPath)
+    Write-Log ("Exported current allowed domains TXT: {0}" -f $txtPath)
+    Write-Log ("Exported current allowed domains JSON: {0}" -f $jsonPath)
+
+    [pscustomobject]@{
+        CsvPath = $csvPath
+        TxtPath = $txtPath
+        JsonPath = $jsonPath
+    }
+}
+
 function Set-AllowList {
     [CmdletBinding(SupportsShouldProcess)]
     param(
         [Parameter(Mandatory=$true)][string[]]$FinalAllowedDomains
     )
 
-    Ensure-AllowDomainsAsAListSupported
+    Get-AllowDomainsAsAListSupported
 
     $list = New-Object 'System.Collections.Generic.List[string]'
     foreach ($d in ($FinalAllowedDomains | Sort-Object -Unique)) {
@@ -411,13 +521,59 @@ if ($Mode -eq "Propose") {
     Write-Log ("Candidate domains after filters: {0}" -f $candidateDomains.Count)
 
     $state = Get-CurrentFederationState
+    $currentAllowedExports = Export-CurrentAllowedDomains -State $state -Folder $OutputFolder
+
+    Write-Log ("Current allowed domains detected: {0}" -f @($state.AllowedDomains).Count)
+
+    if ($state.Mode -eq "AllowList" -and @($state.AllowedDomains).Count -eq 0) {
+        Write-Log "AllowList mode detected, but zero current allowed domains were parsed. This may indicate an object parsing issue." "WARN"
+
+        $rawCfg = Get-CsTenantFederationConfiguration
+        $sampleAllowed = @($rawCfg.AllowedDomains) | Select-Object -First 10
+
+        foreach ($sample in $sampleAllowed) {
+            if ($null -eq $sample) {
+                Write-Log "AllowedDomains sample was null." "WARN"
+                continue
+            }
+
+            Write-Log ("AllowedDomains sample type: {0}" -f $sample.GetType().FullName) "WARN"
+            Write-Log ("AllowedDomains sample ToString: {0}" -f $sample.ToString()) "WARN"
+
+            $propertyNames = ($sample.PSObject.Properties.Name -join ", ")
+            Write-Log ("AllowedDomains sample properties: {0}" -f $propertyNames) "WARN"
+
+            foreach ($prop in $sample.PSObject.Properties) {
+                Write-Log ("AllowedDomains property {0}: {1}" -f $prop.Name, $prop.Value) "WARN"
+            }
+        }
+    }
+
     Write-Log ("Current federation mode: {0}" -f $state.Mode)
 
     # If mode is AllowAllKnownDomains, current allow list is empty by definition for diff purposes
     $currentAllow = @($state.AllowedDomains)
 
-    $adds = @($candidateDomains | Where-Object { $currentAllow -notcontains $_ })
-    $removes = @($currentAllow | Where-Object { $candidateDomains -notcontains $_ })
+    $adds = @(
+        $candidateDomains |
+        Where-Object { $currentAllow -notcontains $_ }
+    )
+
+    $removes = @(
+        $currentAllow |
+        Where-Object { $candidateDomains -notcontains $_ }
+    )
+
+    # Default Apply behavior: add new domains and preserve existing domains.
+    $finalAllowedDomainsWithoutRemovals = @(
+        $currentAllow
+        $candidateDomains
+    ) | Sort-Object -Unique
+
+    # Destructive Apply behavior when -ApplyRemovals is used.
+    $finalAllowedDomainsWithRemovals = @(
+        $candidateDomains
+    ) | Sort-Object -Unique
 
     $plan = [pscustomobject]@{
         GeneratedAt = (Get-Date).ToString("o")
@@ -427,15 +583,27 @@ if ($Mode -eq "Propose") {
         IncludeDomains = $IncludeDomains
         ExcludeDomains = $ExcludeDomains
 
+        CurrentAllowedDomainCount = @($currentAllow).Count
+        CandidateDomainCount = @($candidateDomains).Count
+        ProposedAddCount = @($adds).Count
+        ProposedRemovalCount = @($removes).Count
+        FinalAllowedDomainCountWithoutRemovals = @($finalAllowedDomainsWithoutRemovals).Count
+        FinalAllowedDomainCountWithRemovals = @($finalAllowedDomainsWithRemovals).Count
+
         CurrentFederationMode = $state.Mode
         CurrentAllowedDomains = $currentAllow
         CurrentBlockedDomains = $state.BlockedDomains
+        CurrentAllowedDomainsCsv = $currentAllowedExports.CsvPath
+        CurrentAllowedDomainsTxt = $currentAllowedExports.TxtPath
+        CurrentAllowedDomainsJson = $currentAllowedExports.JsonPath
 
-        CandidateDomains = $candidate
+        CandidateDomainDetails = $candidate
+
         ProposedAdds = $adds
         ProposedRemovals = $removes
-
-        FinalAllowedDomains = $candidateDomains
+        FinalAllowedDomainsWithoutRemovals = $finalAllowedDomainsWithoutRemovals
+        FinalAllowedDomainsWithRemovals = $finalAllowedDomainsWithRemovals
+        DefaultApplyBehavior = "Preserve existing domains. Use -ApplyRemovals to apply ProposedRemovals."
 
         Approved = $false
         ApprovedBy = ""
@@ -455,7 +623,10 @@ if ($Mode -eq "Propose") {
     Write-Host "Next steps:"
     Write-Host "1) Open the plan JSON and review ProposedAdds and ProposedRemovals."
     Write-Host "2) Set Approved=true, populate ApprovedBy and ApprovedAt."
-    Write-Host "3) Run Apply: .\Teams-UpdateExternalAllowList.ps1 -Mode Apply -PlanPath `"$writtenPlan`""
+    Write-Host "3) To add only and retain existing domains:"
+    Write-Host "   .\Teams-UpdateExternalAllowList.ps1 -Mode Apply -PlanPath `"$writtenPlan`""
+    Write-Host "4) To add and remove proposed removals:"
+    Write-Host "   .\Teams-UpdateExternalAllowList.ps1 -Mode Apply -PlanPath `"$writtenPlan`" -ApplyRemovals"
     exit 0
 }
 
@@ -469,31 +640,108 @@ if ($Mode -eq "Apply") {
     if (-not $plan.Approved) {
         throw "Plan is not approved. Set Approved=true in the plan JSON before applying."
     }
+    if ([string]::IsNullOrWhiteSpace($plan.ApprovedBy)) {
+        throw "Plan is approved but ApprovedBy is empty."
+    }
 
-    $final = @($plan.FinalAllowedDomains | ForEach-Object { Normalize-Domain $_ } | Where-Object { $_ } | Sort-Object -Unique)
+    if ([string]::IsNullOrWhiteSpace($plan.ApprovedAt)) {
+        throw "Plan is approved but ApprovedAt is empty."
+    }
 
-    Write-Log ("Final allow list domains in plan: {0}" -f $final.Count)
+    try {
+        [datetime]::Parse($plan.ApprovedAt) | Out-Null
+    }
+    catch {
+        throw "ApprovedAt must be a valid datetime value."
+    }
 
     $state = Get-CurrentFederationState
+    $currentAllow = @($state.AllowedDomains)
+
+    if (-not $ApplyRemovals) {
+        $final = @(
+            $currentAllow
+            $plan.ProposedAdds
+        ) |
+        ForEach-Object { Format-Domain $_ } |
+        Where-Object { $_ } |
+        Sort-Object -Unique
+
+        $selectedApplyMode = "AddOnlyPreserveExisting"
+        Write-Log "ApplyRemovals not specified. Existing domains will be retained."
+    }
+    else {
+        $final = @(
+            $plan.FinalAllowedDomainsWithRemovals
+        ) |
+        ForEach-Object { Format-Domain $_ } |
+        Where-Object { $_ } |
+        Sort-Object -Unique
+
+        $selectedApplyMode = "AddAndRemove"
+        Write-Log ("ApplyRemovals specified. This run will remove {0} domain(s) from the allow list." -f @($plan.ProposedRemovals).Count) "WARN"
+    }
+
+    $minimumPercentage = 0.5
+    if ($currentAllow.Count -gt 0 -and $final.Count -lt ($currentAllow.Count * $minimumPercentage)) {
+        throw "Final allow list is unexpectedly small compared to current state."
+    }
+    if ($final.Count -lt $MinimumFinalDomainCount) {
+        throw "Refusing to apply. Final allow list contains only $($final.Count) domains, below safety floor of $MinimumFinalDomainCount."
+    }
+
+    Write-Log ("Selected apply mode: {0}" -f $selectedApplyMode)
+    Write-Log ("Current domains: {0}" -f $currentAllow.Count)
+    Write-Log ("Proposed adds: {0}" -f $plan.ProposedAdds.Count)
+    Write-Log ("Proposed removals: {0}" -f $plan.ProposedRemovals.Count)
+    Write-Log ("Final domains after processing: {0}" -f $final.Count)
+
     Backup-CurrentConfig -State $state -Folder $OutputFolder
 
     # This is the key control behavior: allow list means everything else is blocked. [1](https://enchantedrock.sharepoint.com/sites/itdepartment/_layouts/15/Doc.aspx?action=edit&mobileredirect=true&wdorigin=Sharepoint&DefaultItemOpen=1&sourcedoc={d7d84aad-b9e9-48c0-bb88-74797c938961}&wd=target(/M365.one/)&wdpartid={01b5ff38-aa9d-4f91-8900-669d7f0ef919}{11}&wdsectionfileid={44f30d7c-29ea-4626-a04c-fa17ae750dc1})
     Write-Log "Applying allow list. Reminder: allow list blocks all other external domains." 'WARN'
 
     Set-AllowList -FinalAllowedDomains $final
-
+    if ($WhatIfPreference) {
+    Write-Log "WhatIf mode detected. Skipping post-change validation because no change was applied." "WARN"
+    Write-Log "Completed Apply in WhatIf mode."
+    exit 0
+}
     $stateAfter = Get-CurrentFederationState
+
+    $postAllowed = @($stateAfter.AllowedDomains | Sort-Object -Unique)
+    $expectedAllowed = @($final | Sort-Object -Unique)
+
+    $missingAfterApply = @($expectedAllowed | Where-Object { $postAllowed -notcontains $_ })
+    $unexpectedAfterApply = @($postAllowed | Where-Object { $expectedAllowed -notcontains $_ })
+
+    if ($missingAfterApply.Count -gt 0 -or $unexpectedAfterApply.Count -gt 0) {
+        Write-Log ("Post-change validation failed. Missing={0}; Unexpected={1}" -f $missingAfterApply.Count, $unexpectedAfterApply.Count) "ERROR"
+
+        if ($missingAfterApply.Count -gt 0) {
+            Write-Log ("Missing after apply: {0}" -f ($missingAfterApply -join ", ")) "ERROR"
+        }
+
+        if ($unexpectedAfterApply.Count -gt 0) {
+            Write-Log ("Unexpected after apply: {0}" -f ($unexpectedAfterApply -join ", ")) "ERROR"
+        }
+
+        throw "Post-change validation failed. Review the backup, log, and post-change export."
+    }
+
+    Write-Log ("Post-change validation passed. Actual allowed domains match selected apply mode: {0}" -f $selectedApplyMode)
+
+
+    $postAllowedExports = Export-CurrentAllowedDomains -State $stateAfter -Folder $OutputFolder -Prefix "PostChangeTeamsAllowedDomains"
+
     Write-Log ("Post-change federation mode: {0}" -f $stateAfter.Mode)
     $allowedCount = @($stateAfter.AllowedDomains).Count
     Write-Log ("Post-change allowed domains count: {0}" -f $allowedCount)
+    Write-Log ("Post-change allowed domains CSV: {0}" -f $postAllowedExports.CsvPath)
+    Write-Log ("Post-change allowed domains TXT: {0}" -f $postAllowedExports.TxtPath)
+    Write-Log ("Post-change allowed domains JSON: {0}" -f $postAllowedExports.JsonPath)
 
 
     Write-Log "Completed Apply."
     exit 0
 }
-
-# .\Teams-UpdateExternalAllowList.ps1 -Mode Propose -ReportPath .\ExternalDomains.csv
-# apply
-# .\Teams-UpdateExternalAllowList.ps1 -Mode Apply -PlanPath .\output\TeamsExternalDomains-AllowListPlan_2026-04-27.json
-
-#(Get-CsTenantFederationConfiguration).AllowedDomains.AllowedDomain | Export-Excel -Path "C:\Users\DakotaRuhl\Documents\Reports\CurrentAllowedDomains.xlsx" -AutoSize -WorksheetName "AllowedDomains"
