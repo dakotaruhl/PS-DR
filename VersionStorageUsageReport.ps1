@@ -15,47 +15,36 @@ Connect-SPOService `
     -Certificate $cert `
     -ErrorAction Stop
 
-#Confgure Target Sites, all sites except /erintranet 
+
+<#
+# Confgure Target Sites, all sites except /erintranet 
 $AllSites = Get-SPOSite -Limit All
 $TargetSites = $AllSites | Where-Object { $_.Url -notlike "https://enchantedrock.sharepoint.com/sites/erintranet" }
+#>
 
+###REPORT JOBS - IN PROGRESS###
 $siteUrl = "https://enchantedrock.sharepoint.com/sites/erintranet"
-
-###REPORT JOBS###
-$reportLibName = "Culture Committee"
-$reportUrl = "https://enchantedrock.sharepoint.com/sites/erintranet/IT Corporate/Reports in progress - restricted/VersionStorageUsageReport_$reportLibName.csv"
-
-$reportLibName = "Asset Mgmt."
-$reportUrl = "https://enchantedrock.sharepoint.com/sites/erintranet/IT Corporate/Reports in progress - restricted/VersionStorageUsageReport_$reportLibName.csv"
-
-$reportLibName = "Employee Services"
-$reportUrl = "https://enchantedrock.sharepoint.com/sites/erintranet/IT Corporate/Reports in progress - restricted/VersionStorageUsageReport_$reportLibName.csv"
-
-$reportLibName = "Building Management"
-$reportUrl = "https://enchantedrock.sharepoint.com/sites/erintranet/IT Corporate/Reports in progress - restricted/VersionStorageUsageReport_$reportLibName.csv"
+$reportLibName = "Titan"
+$reportUrl = "https://enchantedrock.sharepoint.com/sites/erintranet/Titan/VersionStorageReport/TitanReport.csv"
 
 #Generate a version storage usage report for a library 
 New-SPOListFileVersionExpirationReportJob -Site $siteUrl -List $reportLibName -ReportUrl $reportUrl
 #Track progress of the job to generate report for a library 
-Get-SPOListFileVersionExpirationReportJobProgress -Site $siteUrl -List $reportLibName -ReportUrl $reportUrl
+Get-SPOListFileVersionExpirationReportJobProgress -Site $siteUrl -List $reportLibName -ReportUrl $reportUrl | Format-List 
 
 <#
 #Generate a version storage usage report for a site or OneDrive account 	
 New-SPOSiteFileVersionExpirationReportJob -Identity $siteUrl -ReportUrl $reportUrl 
 #>
 
-<#
-#Track progress of the job to generate report for a site or OneDrive account 
-#Current Jobs
-$reportUrl = "https://enchantedrock.sharepoint.com/sites/erintranet/IT Corporate/Reports in progress - restricted/VersionStorageUsageReport_FullSite.csv"	
-Get-SPOSiteFileVersionExpirationReportJobProgress -Identity $siteUrl -ReportUrl $reportUrl
-#>
-
 #####TRIM JOBS#####
-$trimLibName = "Asset Mgmt."
+$trimLibName = "Titan"
 
 #Trim Versions using Automatic Policy for a library 
 New-SPOListFileVersionBatchDeleteJob -Site $siteUrl -List $trimLibName -Automatic
+
+#Trim Versions using version limits for a library
+New-SPOListFileVersionBatchDeleteJob -Site $siteUrl -List $trimLibName -MajorVersionLimit 30 -MajorWithMinorVersionsLimit 10
 
 #Stop processing an in-progress library level trim job:
 Remove-SPOListFileVersionBatchDeleteJob -Site $siteUrl -List $trimLibName
@@ -72,10 +61,24 @@ The setting for new document libraries takes effect immediately. Please run Get-
 MajorVersionLimit. The setting for existing document libraries may take 24 hours to take effect. Please run Get-SPOSiteVersionPolicyJobProgress to check the progress. The setting for existing libraries 
 does not trim existing versions to meet the newly set limits.
 #>
-
 <#
 #Get status of site level version policy job:
 $siteUrl = "https://enchantedrock.sharepoint.com/sites/MarketingTeam"
 Get-SPOSiteVersionPolicyJobProgress -Identity $siteUrl
 Get-SPOSite -Identity $siteUrl | Select-Object EnableAutoExpirationVersionTrim, ExpireVersionsAfterDays, MajorVersionLimit
 #>
+
+Connect-PnPOnline -Url $siteUrl -ClientId $ClientId -Tenant $TenantId -Thumbprint $Thumbprint
+Get-PnPFolder -Url "Titan/VersionStorageReport"
+
+Add-PnPFile `
+    -Path "C:\Temp\Test.txt" `
+    -Folder "Titan/VersionStorageReport"
+
+    Get-PnPList -Identity "Titan" |
+    Select Title, BaseType, Hidden, ItemCount
+
+    $list = Get-PnPList -Identity "Titan"
+
+$list.EnableVersioning
+$list.MajorVersionLimit
