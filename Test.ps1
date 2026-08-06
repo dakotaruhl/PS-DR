@@ -131,3 +131,13 @@ $User | FL *Password*
 $user = Get-MgUser -UserId "svc_itnotifications@enchantedrock.com" -Property UserPrincipalName, PasswordPolicies
 $user.PasswordPolicies
 $user.PasswordPolicies
+
+
+
+Connect-MgGraph -Scopes "User.ReadWrite.All" 
+
+Update-MgUser -UserId "7af10937-97d8-41ec-8de8-bd7af754d85e" -PasswordPolicies DisablePasswordExpiration  
+Get-mguser -UserId "7af10937-97d8-41ec-8de8-bd7af754d85e" | Select-Object -ExpandProperty PasswordPolicies
+
+Update-MgUser -UserId "7af10937-97d8-41ec-8de8-bd7af754d85e" -PasswordProfile @{ForceChangePasswordNextSignIn = $false}
+get-mguser -UserId "7af10937-97d8-41ec-8de8-bd7af754d85e" | Select-Object -ExpandProperty PasswordProfile

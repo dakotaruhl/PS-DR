@@ -15,7 +15,8 @@ $TenantID   = "0bdf0e1f-a359-4b5c-9b79-9357e35ff8c6"
 Connect-MgGraph `
     -ClientId $ClientID `
     -TenantId $TenantID `
-    -CertificateThumbprint $Thumbprint
+    -CertificateThumbprint $Thumbprint `
+    -NoWelcome
 
 Import-Module Microsoft.Graph.Identity.SignIns    
 $messageInfo = New-Object Microsoft.Graph.PowerShell.Models.MicrosoftGraphInvitedUserMessageInfo

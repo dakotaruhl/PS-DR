@@ -49,8 +49,8 @@ $results | Export-Csv -Path "C:\Users\DakotaRuhl\Documents\Reports\OneDrive Admi
 #Get-SPOUser -Site https://enchantedrock-my.sharepoint.com/personal/slong_enchantedrock_com -Limit All | Where-Object {$_.IsSiteAdmin -eq $True} | Select-Object -ExpandProperty DisplayName
 
 ##Remove from a single site
-$userToRemove = "admin-dr@enchantedrock.com"
-$singleSite = "https://enchantedrock-my.sharepoint.com/personal/mstiles_enchantedrock_com"
+$userToRemove = "admin-dr@erock.com"
+$singleSite = "https://enchantedrock-my.sharepoint.com/personal/kparekh_erock_com"
 
 $site = Get-PnPTenantSite -Identity $singleSite 
 Connect-PnPOnline -Url $site.Url -ClientId $ClientID -Tenant $TenantID -Thumbprint $Thumbprint
