@@ -1,0 +1,68 @@
+﻿MOC Module Maintenance started: 2026-08-14 16:30:55
+Installer: C:\Users\DakotaRuhl\Documents\PS-DR\Helpdesk-MOC\Install-MOCPowerShellModules.ps1
+PowerShell: C:\Program Files\WindowsApps\Microsoft.PowerShell_7.6.4.0_x64__8wekyb3d8bbwe\pwsh.exe
+Mode: UpgradeAll
+Scope: CurrentUser
+MOC transcript: C:\Users\DakotaRuhl\Documents\PS-DR\Helpdesk-MOC\Transcript Logs\MOC-ModuleMaintenance-2026-08-14_16-30-55.txt
+
+Module installer started. Output is being captured inside the MOC progress pane.
+
+
+========================================================================
+MOC PowerShell module maintenance
+========================================================================
+[INFO] Platform: Windows
+[INFO] PowerShell: Core 7.6.4
+[INFO] Scope: CurrentUser
+[INFO] Mode: UpgradeAll
+[INFO] Script build: Install-MOCPowerShellModules-1.3.1-CROSS-PLATFORM
+[INFO] Transcript: C:\Users\DakotaRuhl\Documents\PS-DR\Helpdesk-MOC\Transcript Logs\MOC-ModuleMaintenance-2026-08-14_16-30-58.txt
+[INFO] Normal MOC child scripts validate modules only. This maintenance script installs approved modules.
+[INFO] CurrentUser scope is recommended for Linux/macOS and works without sudo/admin rights.
+
+========================================================================
+PowerShellGet and PackageManagement setup
+========================================================================
+[OK] PowerShellGet 2.2.5 is available.
+[OK] PackageManagement 1.4.8.1 is available.
+
+========================================================================
+PowerShell Gallery setup
+========================================================================
+[OK] NuGet package provider is available.
+[OK] PSGallery is available.
+
+========================================================================
+Approved MOC module baseline
+========================================================================
+[WARN] UpgradeAll installs the latest approved module versions available from PSGallery. Fully restart PowerShell after completion.
+[OK] Az 16.2.0 installed. Latest PSGallery version: 16.2.0.
+[INFO] Upgrading ExchangeOnlineManagement. Installed: 3.9.2. Latest PSGallery version: 3.10.1.
+[33;1mWARNING: The version '1.4.8.1' of module 'PackageManagement' is currently in use. Retry the operation after closing the applications.[0m
+[33;1mWARNING: The version '2.2.5' of module 'PowerShellGet' is currently in use. Retry the operation after closing the applications.[0m
+[OK] ExchangeOnlineManagement 3.10.1 installed.
+[INFO] Upgrading Microsoft.Online.SharePoint.PowerShell. Installed: 16.0.27424.12000. Latest PSGallery version: 16.0.27515.12000.
+[OK] Microsoft.Online.SharePoint.PowerShell 16.0.27515.12000 installed.
+[OK] ImportExcel 7.8.10 installed. Latest PSGallery version: 7.8.10.
+[INFO] Upgrading Microsoft.Graph. Installed: 2.37.0. Latest PSGallery version: 2.39.0.
+[OK] Microsoft.Graph 2.39.0 installed.
+[OK] Microsoft.Graph.Authentication 2.39.0 installed. Latest PSGallery version: 2.39.0.
+[INFO] Upgrading Microsoft.Graph.Beta.Reports. Installed: 2.36.1. Latest PSGallery version: 2.39.0.
+[OK] Microsoft.Graph.Beta.Reports 2.39.0 installed.
+
+========================================================================
+Final verification
+========================================================================
+[OK] Az 16.2.0
+[OK] ExchangeOnlineManagement 3.10.1
+[OK] Microsoft.Online.SharePoint.PowerShell 16.0.27515.12000
+[OK] ImportExcel 7.8.10
+[OK] Microsoft.Graph 2.39.0
+[OK] Microsoft.Graph.Authentication 2.39.0
+[OK] Microsoft.Graph.Beta.Reports 2.39.0
+
+[OK] Module maintenance completed successfully.
+[INFO] Fully restart PowerShell/Windows Terminal/terminal shell before launching MOC and authenticating again.
+
+Module installer finished with exit code: 0
+Close and reopen PowerShell before authenticating in MOC again if modules were installed or upgraded.

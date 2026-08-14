@@ -1,0 +1,38 @@
+﻿MOC Module Maintenance started: 2026-08-14 16:15:56
+Installer: C:\Users\DakotaRuhl\Documents\PS-DR\helpdesk-moc\Install-MOCPowerShellModules.ps1
+PowerShell: C:\Program Files\WindowsApps\Microsoft.PowerShell_7.6.4.0_x64__8wekyb3d8bbwe\pwsh.exe
+Mode: InstallMissing
+Scope: CurrentUser
+MOC transcript: C:\Users\DakotaRuhl\Documents\PS-DR\helpdesk-moc\Transcript Logs\MOC-ModuleMaintenance-2026-08-14_16-15-56.txt
+
+Module installer started. Output is being captured inside the MOC progress pane.
+
+
+========================================================================
+MOC PowerShell module maintenance
+========================================================================
+[INFO] Platform: Windows
+[INFO] PowerShell: Core 7.6.4
+[INFO] Scope: CurrentUser
+[INFO] Mode: InstallMissing
+[INFO] Script build: Install-MOCPowerShellModules-1.3.1-CROSS-PLATFORM
+[INFO] Transcript: C:\Users\DakotaRuhl\Documents\PS-DR\helpdesk-moc\Transcript Logs\MOC-ModuleMaintenance-2026-08-14_16-15-57.txt
+[INFO] Normal MOC child scripts validate modules only. This maintenance script installs approved modules.
+[INFO] CurrentUser scope is recommended for Linux/macOS and works without sudo/admin rights.
+
+========================================================================
+PowerShellGet and PackageManagement setup
+========================================================================
+[OK] PowerShellGet 2.2.5 is available.
+[OK] PackageManagement 1.4.8.1 is available.
+
+========================================================================
+PowerShell Gallery setup
+========================================================================
+[OK] NuGet package provider is available.
+[OK] PSGallery is available.
+
+========================================================================
+Approved MOC module baseline
+========================================================================
+[INFO] Installing Az. Minimum required: 15.4.0.

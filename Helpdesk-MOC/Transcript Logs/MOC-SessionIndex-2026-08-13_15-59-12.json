@@ -1,0 +1,14 @@
+{
+  "sessionId": "2026-08-13_15-59-12",
+  "sessionStarted": "2026-08-13T15:59:12.2675172-05:00",
+  "sessionIndexPath": "C:\\Users\\DakotaRuhl\\Documents\\PS-DR\\helpdesk-moc\\Transcript Logs\\MOC-SessionIndex-2026-08-13_15-59-12.json",
+  "machine": "22397HM-DRUHL",
+  "user": "AzureAD\\DakotaRuhl",
+  "host": "ConsoleHost",
+  "powerShell": "7.6.4",
+  "MOCVersion": "1.13.83",
+  "rootPath": "C:\\Users\\DakotaRuhl\\Documents\\PS-DR\\helpdesk-moc",
+  "transcriptLogRoot": "C:\\Users\\DakotaRuhl\\Documents\\PS-DR\\helpdesk-moc\\Transcript Logs",
+  "reportsRoot": "C:\\Users\\DakotaRuhl\\Documents\\PS-DR\\helpdesk-moc\\Reports",
+  "runs": []
+}

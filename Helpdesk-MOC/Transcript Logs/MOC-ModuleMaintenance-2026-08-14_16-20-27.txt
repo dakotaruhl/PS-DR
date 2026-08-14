@@ -1,0 +1,79 @@
+**********************
+PowerShell transcript start
+Start time: 20260814162027
+Username: AzureAD\DakotaRuhl
+RunAs User: AzureAD\DakotaRuhl
+Configuration Name: 
+Machine: 22397HM-DRUHL (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Program Files\WindowsApps\Microsoft.PowerShell_7.6.4.0_x64__8wekyb3d8bbwe\pwsh.dll -NoProfile -ExecutionPolicy Bypass -File C:\Users\DakotaRuhl\Documents\PS-DR\Helpdesk-MOC\Install-MOCPowerShellModules.ps1 -Mode InstallMissing -Scope CurrentUser -NoPause
+Process ID: 20816
+PSVersion: 7.6.4
+PSEdition: Core
+GitCommitId: 7.6.4
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+
+========================================================================
+MOC PowerShell module maintenance
+========================================================================
+[INFO] Platform: Windows
+[INFO] PowerShell: Core 7.6.4
+[INFO] Scope: CurrentUser
+[INFO] Mode: InstallMissing
+[INFO] Script build: Install-MOCPowerShellModules-1.3.1-CROSS-PLATFORM
+[INFO] Transcript: C:\Users\DakotaRuhl\Documents\PS-DR\Helpdesk-MOC\Transcript Logs\MOC-ModuleMaintenance-2026-08-14_16-20-27.txt
+[INFO] Normal MOC child scripts validate modules only. This maintenance script installs approved modules.
+[INFO] CurrentUser scope is recommended for Linux/macOS and works without sudo/admin rights.
+
+========================================================================
+PowerShellGet and PackageManagement setup
+========================================================================
+[OK] PowerShellGet 2.2.5 is available.
+[OK] PackageManagement 1.4.8.1 is available.
+
+========================================================================
+PowerShell Gallery setup
+========================================================================
+[OK] NuGet package provider is available.
+[OK] PSGallery is available.
+
+========================================================================
+Approved MOC module baseline
+========================================================================
+[INFO] Installing Az. Minimum required: 15.4.0.
+[OK] Az 16.2.0 installed.
+[OK] ExchangeOnlineManagement 3.9.2 installed. Minimum required: 3.9.2.
+[OK] Microsoft.Online.SharePoint.PowerShell 16.0.27424.12000 installed. Minimum required: 16.0.27111.12000.
+[OK] ImportExcel 7.8.10 installed. Minimum required: 7.8.10.
+
+========================================================================
+Microsoft Graph module baseline
+========================================================================
+[OK] Microsoft.Graph 2.36.1 installed.
+[INFO] Installing Microsoft.Graph.Authentication 2.36.1.
+[OK] Microsoft.Graph.Authentication 2.36.1 installed.
+[INFO] Installing Microsoft.Graph.Beta.Reports 2.36.1.
+[OK] Microsoft.Graph.Beta.Reports 2.36.1 installed.
+
+========================================================================
+Final verification
+========================================================================
+[OK] Az 16.2.0
+[OK] ExchangeOnlineManagement 3.9.2
+[OK] Microsoft.Online.SharePoint.PowerShell 16.0.27424.12000
+[OK] ImportExcel 7.8.10
+[OK] Microsoft.Graph 2.37.0
+[OK] Microsoft.Graph.Authentication 2.37.0
+[OK] Microsoft.Graph.Beta.Reports 2.36.1
+
+[OK] Module maintenance completed successfully.
+[INFO] Fully restart PowerShell/Windows Terminal/terminal shell before launching MOC and authenticating again.
+**********************
+PowerShell transcript end
+End time: 20260814162928
+**********************

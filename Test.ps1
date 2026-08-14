@@ -141,3 +141,8 @@ Get-mguser -UserId "7af10937-97d8-41ec-8de8-bd7af754d85e" | Select-Object -Expan
 
 Update-MgUser -UserId "7af10937-97d8-41ec-8de8-bd7af754d85e" -PasswordProfile @{ForceChangePasswordNextSignIn = $false}
 get-mguser -UserId "7af10937-97d8-41ec-8de8-bd7af754d85e" | Select-Object -ExpandProperty PasswordProfile
+
+@(
+    Get-Content C:\Users\DakotaRuhl\Downloads\BLOBS\BLOBS\blob.crt -Raw
+    Get-Content C:\Users\DakotaRuhl\Downloads\BLOBS\BLOBS\blob.key -Raw
+) | Set-Content C:\Users\DakotaRuhl\Downloads\BLOBS\BLOBS\blob.pem -NoNewline

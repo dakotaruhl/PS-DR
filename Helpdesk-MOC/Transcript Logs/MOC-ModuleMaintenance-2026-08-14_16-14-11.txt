@@ -1,0 +1,68 @@
+﻿MOC Module Maintenance started: 2026-08-14 16:14:11
+Installer: C:\Users\DakotaRuhl\Documents\PS-DR\helpdesk-moc\Install-MOCPowerShellModules.ps1
+PowerShell: C:\Program Files\WindowsApps\Microsoft.PowerShell_7.6.4.0_x64__8wekyb3d8bbwe\pwsh.exe
+Mode: InstallMissing
+Scope: CurrentUser
+MOC transcript: C:\Users\DakotaRuhl\Documents\PS-DR\helpdesk-moc\Transcript Logs\MOC-ModuleMaintenance-2026-08-14_16-14-11.txt
+
+Module installer started. Output is being captured inside the MOC progress pane.
+
+
+========================================================================
+MOC PowerShell module maintenance
+========================================================================
+[INFO] Platform: Windows
+[INFO] PowerShell: Core 7.6.4
+[INFO] Scope: CurrentUser
+[INFO] Mode: InstallMissing
+[INFO] Script build: Install-MOCPowerShellModules-1.3.1-CROSS-PLATFORM
+[INFO] Transcript: C:\Users\DakotaRuhl\Documents\PS-DR\helpdesk-moc\Transcript Logs\MOC-ModuleMaintenance-2026-08-14_16-14-13.txt
+[INFO] Normal MOC child scripts validate modules only. This maintenance script installs approved modules.
+[INFO] CurrentUser scope is recommended for Linux/macOS and works without sudo/admin rights.
+
+========================================================================
+PowerShellGet and PackageManagement setup
+========================================================================
+[OK] PowerShellGet 2.2.5 is available.
+[OK] PackageManagement 1.4.8.1 is available.
+
+========================================================================
+PowerShell Gallery setup
+========================================================================
+[OK] NuGet package provider is available.
+[OK] PSGallery is available.
+
+========================================================================
+Approved MOC module baseline
+========================================================================
+[INFO] Installing Az. Minimum required: 15.4.0.
+[ERROR] Failed installing Az: Administrator rights are required to install or update. Log on to the computer with an account that has Administrator rights, and then try again, or install by adding "-Scope CurrentUser" to your command. You can also try running the Windows PowerShell session with elevated rights (Run as Administrator).
+[OK] ExchangeOnlineManagement 3.9.2 installed. Minimum required: 3.9.2.
+[OK] Microsoft.Online.SharePoint.PowerShell 16.0.27424.12000 installed. Minimum required: 16.0.27111.12000.
+[OK] ImportExcel 7.8.10 installed. Minimum required: 7.8.10.
+
+========================================================================
+Microsoft Graph module baseline
+========================================================================
+[OK] Microsoft.Graph 2.36.1 installed.
+[INFO] Installing Microsoft.Graph.Authentication 2.36.1.
+[ERROR] Failed installing Microsoft.Graph.Authentication 2.36.1: Administrator rights are required to install or update. Log on to the computer with an account that has Administrator rights, and then try again, or install by adding "-Scope CurrentUser" to your command. You can also try running the Windows PowerShell session with elevated rights (Run as Administrator).
+[INFO] Installing Microsoft.Graph.Beta.Reports 2.36.1.
+[ERROR] Failed installing Microsoft.Graph.Beta.Reports 2.36.1: Administrator rights are required to install or update. Log on to the computer with an account that has Administrator rights, and then try again, or install by adding "-Scope CurrentUser" to your command. You can also try running the Windows PowerShell session with elevated rights (Run as Administrator).
+
+========================================================================
+Final verification
+========================================================================
+[ERROR] Az is missing or below required version 15.4.0.
+[OK] ExchangeOnlineManagement 3.9.2
+[OK] Microsoft.Online.SharePoint.PowerShell 16.0.27424.12000
+[OK] ImportExcel 7.8.10
+[OK] Microsoft.Graph 2.37.0
+[OK] Microsoft.Graph.Authentication 2.37.0
+[ERROR] Microsoft.Graph.Beta.Reports is missing or below required version 2.36.1.
+
+[WARN] Module maintenance completed with one or more warnings/errors. Review the transcript.
+[INFO] Fully restart PowerShell/Windows Terminal/terminal shell before launching MOC and authenticating again.
+
+Module installer finished with exit code: 0
+Close and reopen PowerShell before authenticating in MOC again if modules were installed or upgraded.

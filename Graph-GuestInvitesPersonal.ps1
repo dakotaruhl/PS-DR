@@ -1,3 +1,11 @@
+#Requires -Version 7.0
+
+if ($PSVersionTable.PSVersion.Major -lt 7) {
+    Write-Host "PowerShell Edition : $($PSVersionTable.PSEdition)"
+    Write-Host "PowerShell Version : $($PSVersionTable.PSVersion)"
+    throw "PowerShell 7 or later is required."
+}
+
 ########################
 ## Check Dependencies ##
 ########################
@@ -307,7 +315,6 @@ function New-GuestInvitesFromListItem {
 
     return $results
 }
-
 
 ## Connection Check ##
 # Connect to Microsoft Graph using the personal credentials, if not already connected with these scopes.

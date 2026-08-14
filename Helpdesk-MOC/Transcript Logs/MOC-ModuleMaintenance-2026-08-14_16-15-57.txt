@@ -1,0 +1,48 @@
+**********************
+PowerShell transcript start
+Start time: 20260814161557
+Username: AzureAD\DakotaRuhl
+RunAs User: AzureAD\DakotaRuhl
+Configuration Name: 
+Machine: 22397HM-DRUHL (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Program Files\WindowsApps\Microsoft.PowerShell_7.6.4.0_x64__8wekyb3d8bbwe\pwsh.dll -NoProfile -ExecutionPolicy Bypass -File C:\Users\DakotaRuhl\Documents\PS-DR\helpdesk-moc\Install-MOCPowerShellModules.ps1 -Mode InstallMissing -Scope CurrentUser -NoPause
+Process ID: 24052
+PSVersion: 7.6.4
+PSEdition: Core
+GitCommitId: 7.6.4
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+
+========================================================================
+MOC PowerShell module maintenance
+========================================================================
+[INFO] Platform: Windows
+[INFO] PowerShell: Core 7.6.4
+[INFO] Scope: CurrentUser
+[INFO] Mode: InstallMissing
+[INFO] Script build: Install-MOCPowerShellModules-1.3.1-CROSS-PLATFORM
+[INFO] Transcript: C:\Users\DakotaRuhl\Documents\PS-DR\helpdesk-moc\Transcript Logs\MOC-ModuleMaintenance-2026-08-14_16-15-57.txt
+[INFO] Normal MOC child scripts validate modules only. This maintenance script installs approved modules.
+[INFO] CurrentUser scope is recommended for Linux/macOS and works without sudo/admin rights.
+
+========================================================================
+PowerShellGet and PackageManagement setup
+========================================================================
+[OK] PowerShellGet 2.2.5 is available.
+[OK] PackageManagement 1.4.8.1 is available.
+
+========================================================================
+PowerShell Gallery setup
+========================================================================
+[OK] NuGet package provider is available.
+[OK] PSGallery is available.
+
+========================================================================
+Approved MOC module baseline
+========================================================================
+[INFO] Installing Az. Minimum required: 15.4.0.
