@@ -467,16 +467,18 @@ try {
             }
         }
 
-        Write-ChildOutputLine -Level Header 'Pending Guest Invitations'
+        Write-ChildOutputLine `
+            -Message 'Pending Guest Invitations' `
+            -Level Header
+            
 
         foreach ($item in $script:MenuItems) {
 
-            Write-ChildOutputLine (
-                "{0}. {1} | {2}" -f
+            Write-ChildOutputLine `
+                -Message ("{0}. {1} | {2}" -f
                 $item.Number,
                 $item.GuestEmail,
-                $item.Sponsor
-            )
+                $item.Sponsor)
         }
 
         $script:Selection = Read-ChildText `
@@ -502,11 +504,9 @@ try {
 
             foreach ($guest in $parsedGuests) {
 
-                Write-ChildOutputLine (
-                    "{0} <{1}>" -f
-                    $guest.DisplayName,
-                    $guest.Email
-                )
+                Write-ChildOutputLine `
+                    -Message ("{0} <{1}>" -f $guest.DisplayName, $guest.Email)
+                
             }
         }
 
@@ -543,19 +543,14 @@ try {
     -Name 'Finalize Results' `
     -ScriptBlock {
 
-        Write-ChildOutputLine ''
         Write-ChildOutputLine `
             -Level Header `
             -Message 'Invitation Results'
 
         foreach ($result in @($script:Results)) {
 
-            Write-ChildOutputLine (
-                '{0} | {1} | {2}' -f
-                $result.Email,
-                $result.Status,
-                $result.Reason
-            )
+            Write-ChildOutputLine `
+                -Message ("{0} | {1} | {2}" -f $result.Email, $result.Status, $result.Reason)
         }
 
         $FailedResults = @(

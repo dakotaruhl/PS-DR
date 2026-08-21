@@ -13,7 +13,6 @@ if ($PSVersionTable.PSVersion.Major -lt 7) {
 $RequiredModules = @(
     "Microsoft.Graph.Authentication"
     "Microsoft.Graph.Users"
-    "Microsoft.Graph.Identity.SignIns"
     "Microsoft.Graph.Sites"
 )
 
@@ -21,8 +20,6 @@ foreach ($module in $RequiredModules) {
     if (-not (Get-Module -ListAvailable -Name $module)) {
         Install-Module $module -Scope CurrentUser -Force
     }
-
-    Import-Module $module -Force
 }
 
 ###################
@@ -36,6 +33,10 @@ $ListName = "External sharing request responses"
 $GuestFieldName    = "Enter external guest email(s)"
 $SponsorFieldName  = "Email"
 $CompleteFieldName = "Complete"
+
+#personal app registration for guest invites
+$Thumbprint = "C47B91EB62634CA61FA8146DDA83B8BF605C0962"
+$ClientID   = "ea2ca49b-d0df-4774-b611-86cf9dc9629f"
 
 function Get-GraphSiteListItems {
     param (
@@ -324,7 +325,7 @@ $RequiredScopes = @(
     "Sites.Read.All"
 )
 
-$ctx = Get-MgContext
+$ctx = Get-MgContext | out-Null -ErrorAction SilentlyContinue
 $NeedReconnect = $false
 
 if (-not $ctx) {
@@ -343,8 +344,14 @@ if ($NeedReconnect) {
 
     Connect-MgGraph `
         -TenantId $TenantId `
-        -Scopes $RequiredScopes `
+        -ClientId $ClientID `
+        -CertificateThumbprint $Thumbprint `
         -NoWelcome
+
+    <# Connect-MgGraph `
+        -TenantId $TenantId `
+        -Scopes $RequiredScopes `
+        -NoWelcome #>
 }
 
 ##########

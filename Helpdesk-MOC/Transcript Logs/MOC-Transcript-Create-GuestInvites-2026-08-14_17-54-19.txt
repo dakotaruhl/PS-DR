@@ -1,0 +1,73 @@
+﻿**********************
+MOC transcript start
+Start time: 20260814175419
+User: AzureAD\DakotaRuhl
+Machine: 22397HM-DRUHL
+Host: ConsoleHost
+PowerShell: 7.6.4
+Script: Create-GuestInvites.ps1
+**********************
+
+MOC terminal banner snapshot
+-----------------------------
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+                                       ██╗  ██╗███████╗██╗     ██████╗ ██████╗ ███████╗███████╗██╗  ██╗      ███╗   ███╗ ██████╗  ██████╗
+                                       ██║  ██║██╔════╝██║     ██╔══██╗██╔══██╗██╔════╝██╔════╝██║ ██╔╝      ████╗ ████║██╔═══██╗██╔════╝
+                                       ███████║█████╗  ██║     ██████╔╝██║  ██║█████╗  ███████╗█████╔╝       ██╔████╔██║██║   ██║██║     
+                                       ██╔══██║██╔══╝  ██║     ██╔═══╝ ██║  ██║██╔══╝  ╚════██║██╔═██╗       ██║╚██╔╝██║██║   ██║██║     
+                                       ██║  ██║███████╗███████╗██║     ██████╔╝███████╗███████║██║  ██╗      ██║ ╚═╝ ██║╚██████╔╝╚██████╗
+                                       ╚═╝  ╚═╝╚══════╝╚══════╝╚═╝     ╚═════╝ ╚══════╝╚══════╝╚═╝  ╚═╝      ╚═╝     ╚═╝ ╚═════╝  ╚═════╝
+                                                                       Helpdesk - M365 Operations Console
+
+                                                                Organization: Enchanted Rock     Menu: v1.13.83
+                                          Tenant: 0bdf0e1f**********************f8c6     Auth: Connected     User: admin-dr@erock.com
+                                                                        Script: Create-GuestInvites.ps1
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+Breadcrumb: Home > Helpdesk
+
+Transcript log: C:\Users\DakotaRuhl\Documents\PS-DR\Helpdesk-MOC\Transcript Logs\MOC-Transcript-Create-GuestInvites-2026-08-14_17-54-19.txt
+Session index: C:\Users\DakotaRuhl\Documents\PS-DR\Helpdesk-MOC\Transcript Logs\MOC-SessionIndex-2026-08-14_17-52-14.json
+Report root: Reports\Helpdesk\
+Shared MOC session ready.
+========================================================================
+[Step 1 of 6] Validate Graph Session
+========================================================================
+Graph app-only session detected. Required app permissions: User.Invite.All, User.Read.All, Sites.Read.All
+True
+Graph permissions validated.
+SUCCESS: Validate Graph Session completed in 0.0 seconds.
+========================================================================
+[Step 2 of 6] Load SharePoint Requests
+========================================================================
+1 pending request(s) found.
+SUCCESS: Load SharePoint Requests completed in 0.5 seconds.
+========================================================================
+[Step 3 of 6] Select Requests
+========================================================================
+Pending Guest Invitations
+1. dakota.ruhl@gmail.com | druhl@erock.com
+SUCCESS: Select Requests completed in 140.1 seconds.
+========================================================================
+[Step 4 of 6] Preview Guests
+========================================================================
+Request 1
+Dakota Ruhl <dakota.ruhl@gmail.com>
+SUCCESS: Preview Guests completed in 5.2 seconds.
+========================================================================
+[Step 5 of 6] Send Invitations
+========================================================================
+AUDIT NOTE [Error] Send Invitations - ERROR during step 'Send Invitations': Cannot find type [Microsoft.Graph.PowerShell.Models.MicrosoftGraphInvitedUserMessageInfo]: verify that the assembly containing this type is loaded.
+Cannot find type [Microsoft.Graph.PowerShell.Models.MicrosoftGraphInvitedUserMessageInfo]: verify that the assembly containing this type is loaded.
+
+ERROR: Cannot find type [Microsoft.Graph.PowerShell.Models.MicrosoftGraphInvitedUserMessageInfo]: verify that the assembly containing this type is loaded.
+at New-InviteMessageInfo, C:\Users\DakotaRuhl\Documents\PS-DR\Helpdesk-MOC\Helpdesk\Create-GuestInvites.ps1: line 174
+at <ScriptBlock>, C:\Users\DakotaRuhl\Documents\PS-DR\Helpdesk-MOC\Helpdesk\Create-GuestInvites.ps1: line 526
+at Invoke-ScriptStep, C:\Users\DakotaRuhl\Documents\PS-DR\Helpdesk-MOC\Modules\MOCChildTools\MOCChildTools.psm1: line 851
+at <ScriptBlock>, C:\Users\DakotaRuhl\Documents\PS-DR\Helpdesk-MOC\Helpdesk\Create-GuestInvites.ps1: line 521
+at <ScriptBlock>, C:\Users\DakotaRuhl\Documents\PS-DR\Helpdesk-MOC\Helpdesk-MOC.ps1: line 6337
+at Invoke-ScriptInRunConsole, C:\Users\DakotaRuhl\Documents\PS-DR\Helpdesk-MOC\Helpdesk-MOC.ps1: line 6334
+at Invoke-SelectedScript, C:\Users\DakotaRuhl\Documents\PS-DR\Helpdesk-MOC\Helpdesk-MOC.ps1: line 7368
+at <ScriptBlock>, C:\Users\DakotaRuhl\Documents\PS-DR\Helpdesk-MOC\Helpdesk-MOC.ps1: line 8274
+at <ScriptBlock>, <No file>: line 1
+
+Transcript log saved to: C:\Users\DakotaRuhl\Documents\PS-DR\Helpdesk-MOC\Transcript Logs\MOC-Transcript-Create-GuestInvites-2026-08-14_17-54-19.txt

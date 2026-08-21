@@ -1,0 +1,32 @@
+{
+  "sessionId": "2026-08-14_17-52-14",
+  "sessionStarted": "2026-08-14T17:52:14.2530412-05:00",
+  "sessionIndexPath": "C:\\Users\\DakotaRuhl\\Documents\\PS-DR\\Helpdesk-MOC\\Transcript Logs\\MOC-SessionIndex-2026-08-14_17-52-14.json",
+  "machine": "22397HM-DRUHL",
+  "user": "AzureAD\\DakotaRuhl",
+  "host": "ConsoleHost",
+  "powerShell": "7.6.4",
+  "MOCVersion": "1.13.83",
+  "rootPath": "C:\\Users\\DakotaRuhl\\Documents\\PS-DR\\Helpdesk-MOC",
+  "transcriptLogRoot": "C:\\Users\\DakotaRuhl\\Documents\\PS-DR\\Helpdesk-MOC\\Transcript Logs",
+  "reportsRoot": "C:\\Users\\DakotaRuhl\\Documents\\PS-DR\\Helpdesk-MOC\\Reports",
+  "runs": [
+    {
+      "runNumber": 1,
+      "scriptName": "Create-GuestInvites.ps1",
+      "scriptPath": "C:\\Users\\DakotaRuhl\\Documents\\PS-DR\\Helpdesk-MOC\\Helpdesk\\Create-GuestInvites.ps1",
+      "category": "Helpdesk",
+      "status": "Failed",
+      "exitCode": 1,
+      "started": "2026-08-14T17:53:19.3847246-05:00",
+      "ended": "2026-08-14T17:54:16.0734808-05:00",
+      "durationSeconds": 56.689,
+      "transcriptPath": "C:\\Users\\DakotaRuhl\\Documents\\PS-DR\\Helpdesk-MOC\\Transcript Logs\\MOC-Transcript-Create-GuestInvites-2026-08-14_17-53-19.txt",
+      "reportRoot": "Reports\\Helpdesk\\",
+      "outputFolder": "",
+      "fullOutputFolder": "",
+      "workbookPath": "",
+      "summaryPath": ""
+    }
+  ]
+}

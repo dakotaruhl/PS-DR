@@ -19,6 +19,31 @@ $script:MOCChildState = [ordered]@{
     ScriptMetadata = $null
 }
 
+$script:MOCChildOutputRenderer = $null
+$script:MOCChildStatusRenderer = $null
+
+function Set-MOCChildOutputRenderer {
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory)]
+        [scriptblock]$OutputRenderer,
+
+        [Parameter(Mandatory = $false)]
+        [scriptblock]$StatusRenderer
+    )
+
+    $script:MOCChildOutputRenderer = $OutputRenderer
+    $script:MOCChildStatusRenderer = $StatusRenderer
+}
+
+function Clear-MOCChildOutputRenderer {
+    [CmdletBinding()]
+    param()
+
+    $script:MOCChildOutputRenderer = $null
+    $script:MOCChildStatusRenderer = $null
+}
+
 function Get-MOCChildState {
     [CmdletBinding()]
     param()
@@ -182,30 +207,52 @@ function Write-ChildOutputLine {
         [Parameter(Mandatory = $false, ValueFromPipeline = $true, ValueFromRemainingArguments = $true)]
         [AllowNull()]
         [object[]]$Message,
+
         [ValidateSet('Info','Success','Warning','Error','Critical','Action','Prompt','Header','Muted')]
         [string]$Level = 'Info'
     )
 
     process {
-        $Text = (@($Message) | ForEach-Object { if ($null -eq $_) { '' } else { [string]$_ } }) -join ' '
-        if ([string]::IsNullOrWhiteSpace($Text)) { return }
+        $Text = (@($Message) | ForEach-Object {
+            if ($null -eq $_) { '' } else { [string]$_ }
+        }) -join ' '
 
-        if (Get-Command -Name Write-MOCOutputLine -ErrorAction SilentlyContinue) {
-            try { $null = Write-MOCOutputLine -Message $Text -Level $Level; return } catch { }
-            try { $null = Write-MOCOutputLine $Text -Level $Level; return } catch { }
-            try { $null = Write-MOCOutputLine -Message $Text; return } catch { }
-            try { $null = Write-MOCOutputLine $Text; return } catch { }
+        if ([string]::IsNullOrWhiteSpace($Text)) {
+            return
         }
 
-        if (Get-Command -Name Write-MOCStatusLine -ErrorAction SilentlyContinue) {
-            try { $null = Write-MOCStatusLine -Message $Text -Level $Level; return } catch { }
-            try { $null = Write-MOCStatusLine $Text -Level $Level; return } catch { }
-            try { $null = Write-MOCStatusLine -Message $Text; return } catch { }
-            try { $null = Write-MOCStatusLine $Text; return } catch { }
+        if ($script:MOCChildOutputRenderer) {
+            try {
+                & $script:MOCChildOutputRenderer -Message $Text -Level $Level
+                return
+            }
+            catch {
+                throw "MOC child output renderer failed. $($_.Exception.Message)"
+            }
         }
 
-        throw 'No MOC-safe output renderer is available. Refusing to write outside the MOC Run Output Pane.'
-    }
+        if ($script:MOCChildStatusRenderer) {
+            try {
+                & $script:MOCChildStatusRenderer -Message $Text -Level $Level
+                return
+            }
+            catch {
+                throw "MOC child status renderer failed. $($_.Exception.Message)"
+            }
+        }
+
+        if (Get-Command Write-MOCOutputLine -ErrorAction SilentlyContinue) {
+            Write-MOCOutputLine -Message $Text -Level $Level
+            return
+        }
+
+        if (Get-Command Write-MOCStatusLine -ErrorAction SilentlyContinue) {
+            Write-MOCStatusLine -Message $Text -Level $Level
+            return
+        }
+
+        throw 'No MOC-safe output renderer is available.'
+}
 }
 
 function Write-ChildStatusLine {
@@ -217,11 +264,24 @@ function Write-ChildStatusLine {
         if ([string]::IsNullOrWhiteSpace($Text)) { return }
 
         if (Get-Command -Name Write-MOCStatusLine -ErrorAction SilentlyContinue) {
-            try { $null = Write-MOCStatusLine $Text; return } catch { }
-            try { $null = Write-MOCStatusLine -Message $Text; return } catch { }
+            try {
+                $null = Write-MOCStatusLine `
+                    -Message $Text `
+                    -Level Info
+                return
+            }
+            catch { }
+            try {
+                $null = Write-MOCStatusLine `
+                    -Message $Text `
+                    -Level Info
+                return
+            }
+            catch { }
         }
 
-        Write-ChildOutputLine $Text
+        Write-ChildOutputLine `
+            -Message $Text
     }
 }
 
@@ -297,17 +357,17 @@ function Read-ChildMenuChoice {
         [Parameter(Mandatory = $false)][string]$DefaultChoice
     )
 
-    Write-ChildOutputLine $Title -Level Header
-    Write-ChildOutputLine ('-' * $Title.Length) -Level Muted
-    foreach ($Option in $Options) { Write-ChildOutputLine $Option }
-    if ($AllowExit) { Write-ChildOutputLine '4. Exit and return to MOC menu' }
+    Write-ChildOutputLine -Level Header -Message $Title
+    Write-ChildOutputLine -Level Muted -Message ('-' * $Title.Length)
+    foreach ($Option in $Options) { Write-ChildOutputLine -Message $Option }
+    if ($AllowExit) { Write-ChildOutputLine -Level Muted -Message '4. Exit and return to MOC menu' }
 
     $ChoiceHelp = if ($AllowExit) { (($ValidChoices + @('4','q','Esc')) -join '/') } else { ($ValidChoices -join '/') }
     if (-not [string]::IsNullOrWhiteSpace($DefaultChoice)) {
-        Write-ChildOutputLine ("{0} ({1}; default {2})" -f $Prompt, $ChoiceHelp, $DefaultChoice) -Level Prompt
+        Write-ChildOutputLine -Level Prompt -Message ("{0} ({1}; default {2})" -f $Prompt, $ChoiceHelp, $DefaultChoice)
     }
     else {
-        Write-ChildOutputLine ("{0} ({1})" -f $Prompt, $ChoiceHelp) -Level Prompt
+        Write-ChildOutputLine -Level Prompt -Message ("{0} ({1})" -f $Prompt, $ChoiceHelp) 
     }
 
     while ($true) {
@@ -320,21 +380,21 @@ function Read-ChildMenuChoice {
 
         $ChoiceLower = $Choice.ToLowerInvariant()
         if ($AllowExit -and ($ChoiceLower -in @('4','q','esc'))) {
-            Write-ChildOutputLine 'Selected option: Exit and return to MOC menu'
+            Write-ChildOutputLine -Message 'Selected option: Exit and return to MOC menu'
             return 'ExitToMenu'
         }
 
         if ($Choice -in $ValidChoices) {
-            Write-ChildOutputLine ("Selected option: {0}" -f $Choice)
+            Write-ChildOutputLine -Message ("Selected option: {0}" -f $Choice)
             return $Choice
         }
 
         $Help = if ($AllowExit) { (($ValidChoices + @('4','q','Esc')) -join ', ') } else { ($ValidChoices -join ', ') }
         if (-not [string]::IsNullOrWhiteSpace($DefaultChoice)) {
-            Write-ChildOutputLine ("Invalid selection. Please enter {0}, or press Enter for {1}." -f $Help, $DefaultChoice) -Level Warning
+            Write-ChildOutputLine -Level Warning -Message ("Invalid selection. Please enter {0}, or press Enter for {1}." -f $Help, $DefaultChoice) 
         }
         else {
-            Write-ChildOutputLine ("Invalid selection. Please enter {0}." -f $Help) -Level Warning
+            Write-ChildOutputLine -Level Warning -Message ("Invalid selection. Please enter {0}." -f $Help) 
         }
     }
 }
@@ -443,7 +503,7 @@ function Export-AuditCsv {
     $ArrayRows | Export-Csv -Path $CsvPath -NoTypeInformation -Encoding UTF8
 
     $RowCount = @($ArrayRows).Count
-    Write-ChildStatusLine ("Exported {0} row(s) -> {1}" -f $RowCount, (Get-ReportDisplayPath -Path $CsvPath))
+    Write-ChildOutputLine -Level Success -Message ("Exported {0} row(s) -> {1}" -f $RowCount, (Get-ReportDisplayPath -Path $CsvPath))
     Write-ChildTranscriptLine ("Exported {0} row(s) to {1}" -f $RowCount, $CsvPath)
 
     if (-not [string]::IsNullOrWhiteSpace($SummaryKey)) {
@@ -768,10 +828,23 @@ function Invoke-ScriptStep {
     $Percent = (($StepNumber - 1) / [Math]::Max($TotalSteps, 1)) * 100
     Update-ChildProgress -Activity $script:MOCChildState.ScriptName -Percent $Percent -Status ("Step {0} of {1} - {2}" -f $StepNumber, $TotalSteps, $Name) -CurrentOperation ''
 
-    Write-ChildOutputLine ''
-    Write-ChildOutputLine '========================================================================' -Level Header
-    Write-ChildOutputLine ("[Step {0} of {1}] {2}" -f $StepNumber, $TotalSteps, $Name) -Level Header
-    Write-ChildOutputLine '========================================================================' -Level Header
+    Write-ChildOutputLine -Message ''
+
+    Write-ChildOutputLine `
+        -Level Header `
+        -Message '========================================================================'
+        
+
+    Write-ChildOutputLine `
+        -Level Header `
+        -Message ("[Step {0} of {1}] {2}" -f $StepNumber, $TotalSteps, $Name) 
+        
+
+    Write-ChildOutputLine `
+        -Level Header `
+        -Message '========================================================================' `
+        
+
 
     $Stopwatch = [System.Diagnostics.Stopwatch]::StartNew()
     try {
@@ -833,5 +906,7 @@ Export-ModuleMember -Function @(
     'Export-MOCWorkbook',
     'Open-MOCOutputFile',
     'Invoke-ScriptStep',
-    'Complete-MOCChildRun'
+    'Complete-MOCChildRun',
+    'Set-MOCChildOutputRenderer',
+    'Clear-MOCChildOutputRenderer'
 )

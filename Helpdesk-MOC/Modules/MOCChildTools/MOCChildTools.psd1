@@ -36,7 +36,10 @@
         'Export-MOCWorkbook',
         'Open-MOCOutputFile',
         'Invoke-ScriptStep',
-        'Complete-MOCChildRun'
+        'Complete-MOCChildRun',
+        'Set-MOCChildOutputRenderer',
+        'Clear-MOCChildOutputRenderer',
+        'Write-ChildOutputLine'
     )
     CmdletsToExport = @()
     VariablesToExport = @()

@@ -146,3 +146,27 @@ get-mguser -UserId "7af10937-97d8-41ec-8de8-bd7af754d85e" | Select-Object -Expan
     Get-Content C:\Users\DakotaRuhl\Downloads\BLOBS\BLOBS\blob.crt -Raw
     Get-Content C:\Users\DakotaRuhl\Downloads\BLOBS\BLOBS\blob.key -Raw
 ) | Set-Content C:\Users\DakotaRuhl\Downloads\BLOBS\BLOBS\blob.pem -NoNewline
+
+(RecipientTypeDetails -eq 'UserMailbox') -and
+(AccountDisabled -eq $false) -and
+(Title -like '*Contractor*') -and
+(WindowsLiveID -like '*-sc*')
+
+Get-Recipient -RecipientPreviewFilter "
+(RecipientTypeDetails -eq 'UserMailbox') -and
+(AccountDisabled -eq `$false) -and
+(Title -like '*Contractor') -and
+(WindowsLiveID -like '*-sc*')
+" | FL *displayname*
+
+New-DynamicDistributionGroup `
+    -Name "Contractors-DL" `
+    -Alias "Contractors-DL" `
+    -PrimarySmtpAddress "Contractors-DL@erock.com" `
+    -RecipientFilter "
+        (RecipientTypeDetails -eq 'UserMailbox') -and
+        (AccountDisabled -eq `$false) -and
+        (Title -like '*Contractor') -and
+        (WindowsLiveID -like '*-sc@erock.com')
+    "
+get-inboxrule -mailbox 46d4f931-4b88-4716-aa9b-ce4307ed3cde -IncludeHidden | select name, identity, description, enabled, priority, ruleidentity, ruleid, ruleversion, ruleversionid, ruleversionnumber

@@ -33,6 +33,34 @@ Current: v1.13.82 - U: Update now reports one combined menu/CHANGELOG/child-scri
 
 #Requires -Version 7.2
 
+############################################################################
+# Load MOCChildTools
+############################################################################
+
+$CandidateModulePaths = @()
+
+if (-not [string]::IsNullOrWhiteSpace([string]$script:MOC_RootPath)) {
+    $CandidateModulePaths += Join-Path $script:MOC_RootPath 'Modules\MOCChildTools\MOCChildTools.psd1'
+}
+
+if (-not [string]::IsNullOrWhiteSpace($PSScriptRoot)) {
+    $CandidateModulePaths += Join-Path $PSScriptRoot '..\Modules\MOCChildTools\MOCChildTools.psd1'
+    $CandidateModulePaths += Join-Path $PSScriptRoot 'Modules\MOCChildTools\MOCChildTools.psd1'
+}
+
+$CandidateModulePaths += Join-Path (Get-Location).Path 'Helpdesk-MOC\Modules\MOCChildTools\MOCChildTools.psd1'
+$CandidateModulePaths += Join-Path (Get-Location).Path 'Modules\MOCChildTools\MOCChildTools.psd1'
+
+$ModulePath = $CandidateModulePaths |
+    Where-Object { Test-Path -LiteralPath $_ } |
+    Select-Object -First 1
+
+if (-not $ModulePath) {
+    throw "MOCChildTools module not found. Checked paths: $($CandidateModulePaths -join '; ')"
+}
+
+Import-Module $ModulePath -Force -DisableNameChecking
+
 function Get-MOCScriptMetadata {
     [CmdletBinding()]
     param(
@@ -5619,6 +5647,32 @@ function Invoke-ScriptInRunConsole {
         [pscustomobject]$Script
     )
 
+    Set-MOCChildOutputRenderer `
+    -OutputRenderer {
+        param(
+            [string]$Message,
+            [string]$Level
+        )
+
+        Add-RunConsoleLine `
+            -OutputBuffer $script:MOC_RunConsole_Buffer `
+            -Line $Message
+
+        Render-MOCRunConsoleIfDue
+    } `
+    -StatusRenderer {
+        param(
+            [string]$Message,
+            [string]$Level
+        )
+
+        Add-RunConsoleLine `
+            -OutputBuffer $script:MOC_RunConsole_Buffer `
+            -Line $Message
+
+        Render-MOCRunConsoleIfDue
+    }
+
     $OutputBuffer = [System.Collections.Generic.List[string]]::new()
     $script:MOC_RunConsole_Buffer = $OutputBuffer
     $script:MOC_RunConsole_ScriptName = $Script.Name
@@ -5693,7 +5747,7 @@ function Invoke-ScriptInRunConsole {
             }
         }
 
-        function Write-MOCStatusLine {
+        function global:Write-MOCStatusLine {
             param(
                 [Parameter(Mandatory = $false, ValueFromPipeline = $true, ValueFromRemainingArguments = $true)]
                 [AllowNull()]
@@ -5757,7 +5811,7 @@ function Invoke-ScriptInRunConsole {
         }
 
 
-        function Write-MOCOutputLine {
+        function global:Write-MOCOutputLine {
             [CmdletBinding()]
             param(
                 [Parameter(Mandatory = $false, ValueFromPipeline = $true, ValueFromRemainingArguments = $true)]
@@ -5952,6 +6006,8 @@ function Invoke-ScriptInRunConsole {
                 }
             }
             finally {
+                $script:MOC_FrameTranscriptMirrorEnabled = $false
+                $script:MOC_RunConsole_IsActive = $false
                 $script:MOC_RunConsole_ProgressActivity = $priorActivity
                 $script:MOC_RunConsole_ProgressStatus = $priorStatus
                 $script:MOC_RunConsole_ProgressOperation = $priorOperation
@@ -6404,6 +6460,7 @@ function Invoke-ScriptInRunConsole {
     Add-MOCSessionIndexEntry -Script $Script -Status $FinalStatus -StartTime $ChildRunStartTime -EndTime $ChildRunEndTime -ExitCode $ExitCode -TranscriptPath $MenuTranscriptPath -OutputBuffer $OutputBuffer
 
     $script:MOC_CurrentScriptReportsRoot = $null
+    Clear-MOCChildOutputRenderer
 
     return $ExitCode
 }

@@ -1,0 +1,42 @@
+﻿**********************
+MOC transcript start
+Start time: 20260814172148
+User: AzureAD\DakotaRuhl
+Machine: 22397HM-DRUHL
+Host: ConsoleHost
+PowerShell: 7.6.4
+Script: Create-GuestInvites.ps1
+**********************
+
+MOC terminal banner snapshot
+-----------------------------
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+                             ██╗  ██╗███████╗██╗     ██████╗ ██████╗ ███████╗███████╗██╗  ██╗      ███╗   ███╗ ██████╗  ██████╗
+                             ██║  ██║██╔════╝██║     ██╔══██╗██╔══██╗██╔════╝██╔════╝██║ ██╔╝      ████╗ ████║██╔═══██╗██╔════╝
+                             ███████║█████╗  ██║     ██████╔╝██║  ██║█████╗  ███████╗█████╔╝       ██╔████╔██║██║   ██║██║     
+                             ██╔══██║██╔══╝  ██║     ██╔═══╝ ██║  ██║██╔══╝  ╚════██║██╔═██╗       ██║╚██╔╝██║██║   ██║██║     
+                             ██║  ██║███████╗███████╗██║     ██████╔╝███████╗███████║██║  ██╗      ██║ ╚═╝ ██║╚██████╔╝╚██████╗
+                             ╚═╝  ╚═╝╚══════╝╚══════╝╚═╝     ╚═════╝ ╚══════╝╚══════╝╚═╝  ╚═╝      ╚═╝     ╚═╝ ╚═════╝  ╚═════╝
+                                                             Helpdesk - M365 Operations Console
+
+                                                       Organization: Enchanted Rock     Menu: v1.13.83
+                                 Tenant: 0bdf0e1f**********************f8c6     Auth: Connected     User: admin-dr@erock.com
+                                                               Script: Create-GuestInvites.ps1
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+Breadcrumb: Home > Helpdesk
+
+Transcript log: C:\Users\DakotaRuhl\Documents\PS-DR\Helpdesk-MOC\Transcript Logs\MOC-Transcript-Create-GuestInvites-2026-08-14_17-21-48.txt
+Session index: C:\Users\DakotaRuhl\Documents\PS-DR\Helpdesk-MOC\Transcript Logs\MOC-SessionIndex-2026-08-14_17-20-50.json
+Report root: Reports\Helpdesk\
+Shared MOC session ready.
+
+ERROR: No MOC-safe output renderer is available. Refusing to write outside the MOC Run Output Pane.
+at Write-ChildOutputLine<Process>, C:\Users\DakotaRuhl\Documents\PS-DR\Helpdesk-MOC\Modules\MOCChildTools\MOCChildTools.psm1: line 244
+at <ScriptBlock>, C:\Users\DakotaRuhl\Documents\PS-DR\Helpdesk-MOC\Helpdesk\Create-GuestInvites.ps1: line 631
+at <ScriptBlock>, C:\Users\DakotaRuhl\Documents\PS-DR\Helpdesk-MOC\Helpdesk-MOC.ps1: line 6337
+at Invoke-ScriptInRunConsole, C:\Users\DakotaRuhl\Documents\PS-DR\Helpdesk-MOC\Helpdesk-MOC.ps1: line 6334
+at Invoke-SelectedScript, C:\Users\DakotaRuhl\Documents\PS-DR\Helpdesk-MOC\Helpdesk-MOC.ps1: line 7368
+at <ScriptBlock>, C:\Users\DakotaRuhl\Documents\PS-DR\Helpdesk-MOC\Helpdesk-MOC.ps1: line 8274
+at <ScriptBlock>, <No file>: line 1
+
+Transcript log saved to: C:\Users\DakotaRuhl\Documents\PS-DR\Helpdesk-MOC\Transcript Logs\MOC-Transcript-Create-GuestInvites-2026-08-14_17-21-48.txt

@@ -1,2 +1,17 @@
 2026-08-14 16:36:10 | User=DakotaRuhl | Action=EXIT | Script=Launcher
 2026-08-14 16:36:10 | User=DakotaRuhl | DAILY_TOTAL | Runtime=00:00:00
+2026-08-14 16:48:06 | User=admin-dr@erock.com | Action=START | Script=Create-GuestInvites.ps1
+2026-08-14 16:51:46 | User=admin-dr@erock.com | Action=START | Script=Create-GuestInvites.ps1
+2026-08-14 16:59:39 | User=DakotaRuhl | Action=EXIT | Script=Launcher
+2026-08-14 16:59:39 | User=DakotaRuhl | DAILY_TOTAL | Runtime=00:00:00
+2026-08-14 17:01:41 | User=admin-dr@erock.com | Action=START | Script=Create-GuestInvites.ps1
+2026-08-14 17:04:37 | User=admin-dr@erock.com | Action=START | Script=Create-GuestInvites.ps1
+2026-08-14 17:09:47 | User=admin-dr@erock.com | Action=START | Script=Create-GuestInvites.ps1
+2026-08-14 17:17:37 | User=admin-dr@erock.com | Action=START | Script=Create-GuestInvites.ps1
+2026-08-14 17:18:58 | User=admin-dr@erock.com | Action=FAIL | Script=Create-GuestInvites.ps1 | ExitCode=1 | Duration=00:01:21
+2026-08-14 17:21:48 | User=admin-dr@erock.com | Action=START | Script=Create-GuestInvites.ps1
+2026-08-14 17:29:37 | User=admin-dr@erock.com | Action=START | Script=Create-GuestInvites.ps1
+2026-08-14 17:43:43 | User=admin-dr@erock.com | Action=START | Script=Create-GuestInvites.ps1
+2026-08-14 17:53:19 | User=admin-dr@erock.com | Action=START | Script=Create-GuestInvites.ps1
+2026-08-14 17:54:16 | User=admin-dr@erock.com | Action=FAIL | Script=Create-GuestInvites.ps1 | ExitCode=1 | Duration=00:00:57
+2026-08-14 17:54:19 | User=admin-dr@erock.com | Action=START | Script=Create-GuestInvites.ps1
