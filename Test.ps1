@@ -159,7 +159,248 @@ Get-Recipient -RecipientPreviewFilter "
 (WindowsLiveID -like '*-sc*')
 " | FL *displayname*
 
-New-DynamicDistributionGroup `
+$Thumbprint = "C47B91EB62634CA61FA8146DDA83B8BF605C0962"
+$ClientID   = "ea2ca49b-d0df-4774-b611-86cf9dc9629f"
+$Tenant = "enchantedrock.onmicrosoft.com"
+$user = "tmcandrew@erock.com"
+    
+Connect-ExchangeOnline -CertificateThumbprint $Thumbprint -AppId $ClientID -Organization $Tenant
+Get-Mailbox tmcandrew@erock.com | fl RetentionPolicy
+Get-Mailbox $user | fl RetentionHoldEnabled
+Get-RetentionPolicy "Move to Archive after 1 year" | fl RetentionPolicyTagLinks
+
+Get-MailboxFolderStatistics $user `
+    -FolderScope RecoverableItems |
+    ft Name,FolderAndSubfolderSize
+
+Get-EXOMailboxStatistics $user |
+    fl TotalItemSize,TotalDeletedItemSize
+
+
+Get-Mailbox $user | fl `
+ArchiveStatus,
+RetentionPolicy,
+RetentionHoldEnabled,
+LitigationHoldEnabled
+
+Get-Mailbox $user |
+    fl RetentionHoldEnabled,StartDateForRetentionHold,EndDateForRetentionHold
+
+    Get-EXOMailboxStatistics $user -Archive |
+    fl TotalItemSize,ItemCount
+
+    Get-RetentionPolicy "Move to Archive after 1 year" |
+    fl RetentionPolicyTagLinks
+
+
+
+Get-RetentionPolicyTag "Move to Archive after 1 year" |
+fl Name,Type,RetentionAction,AgeLimitForRetention
+
+Get-Mailbox $user |
+fl RetentionHoldEnabled,
+   StartDateForRetentionHold,
+   EndDateForRetentionHold
+Get-Mailbox $user |
+fl RetentionComment,
+   RetentionUrl,
+   RetentionHoldEnabled,
+   LitigationHoldEnabled
+
+   Get-Mailbox $user |
+fl WhenChanged
+
+Get-Mailbox $user |
+fl ElcProcessingDisabled
+
+$logs = Search-UnifiedAuditLog `
+    -StartDate "8/11/2026" `
+    -EndDate "8/13/2026" `
+    -Operations Set-Mailbox `
+    -ResultSize 5000 | Where-Object {$_.ObjectId -eq $user}
+
+$logs | Where-Object {$_.Identity -match "018e1284-163e-45f9-9d8b-aa7de18e83fb"}
+
+($logs | Where-Object {$_.ObjectId -match "018e1284-163e-45f9-9d8b-aa7de18e83fb"})[0].AuditData | ConvertFrom-Json
+
+Set-Mailbox $user -RetentionHoldEnabled $false
+
+Get-Mailbox $user | fl RetentionHoldEnabled
+
+start-managedfolderassistant -identity $user
+
+Get-Mailbox $user |
+fl LitigationHoldEnabled,
+   ComplianceTagHoldApplied,
+   DelayHoldApplied,
+   DelayReleaseHoldApplied,
+   RetentionHoldEnabled
+
+Get-MailboxStatistics $user |
+fl *Time*
+
+Get-MailboxStatistics $user |
+fl LastProcessedTime
+Get-EXOMailboxStatistics $user -Archive |
+fl TotalItemSize,ItemCount
+
+Get-MailboxFolderStatistics $user |
+Sort FolderAndSubfolderSize -Descending |
+Select -First 20 Name,FolderAndSubfolderSize
+
+Export-MailboxDiagnosticLogs `
+    -Identity $user `
+    -ExtendedProperties |
+    Select-String "ELC"
+
+
+Get-Mailbox $user |
+    Format-List RetentionHoldEnabled,ElcProcessingDisabled
+
+
+Start-ManagedFolderAssistant -Identity $user -FullCrawl
+
+
+$Log = Export-MailboxDiagnosticLogs `
+    -Identity $user `
+    -ExtendedProperties
+
+$Xml = [xml]$Log.MailboxLog
+
+$Xml.Properties.MailboxTable.Property |
+    Where-Object {
+        $_.Name -like "Elc*" -or
+        $_.Name -eq "IsELCFullCrawlNeeded"
+    } |
+    Select-Object Name,Value |
+    Format-Table -AutoSize
+
+    Get-Mailbox $user |
+    Format-List RetentionPolicy,RetentionHoldEnabled,
+        ElcProcessingDisabled,ArchiveStatus
+
+$Log = Export-MailboxDiagnosticLogs `
+    -Identity $user `
+    -ExtendedProperties
+
+$Xml = [xml]$Log.MailboxLog
+
+$FullCrawl = $Xml.Properties.MailboxTable.Property |
+    Where-Object Name -eq "ELCJobAssistantFullCrawlExecutionDetails" |
+    Select-Object -ExpandProperty Value |
+    ConvertFrom-Json
+
+$FullCrawl | Format-List *
+
+$Names = @(
+    "ElcAssistantLock"
+    "ELCLastSuccessTimestamp"
+    "IsELCFullCrawlNeeded"
+    "ElcLastRunTaggedWithArchiveItemCount"
+    "ElcLastRunArchivedFromRootItemCount"
+    "ElcLastRunArchivedFromDumpsterItemCount"
+    "ElcLastRunUpdatedItemCount"
+    "ElcLastRunSkippedNoTagItemCount"
+    "ElcLastRunSkippedWithTagItemCount"
+    "ElcLastRunSkippedNotExcludedItemCount"
+)
+
+$Xml.Properties.MailboxTable.Property |
+    Where-Object Name -in $Names |
+    Select-Object Name,Value |
+    Format-Table -AutoSize
+
+
+Get-EXOMailboxStatistics $user -Archive |
+    Format-List TotalItemSize,ItemCount
+
+    Get-RetentionPolicyTag "Move to Archive after 1 year" |
+    Format-List Name,
+        Type,
+        RetentionEnabled,
+        RetentionAction,
+        AgeLimitForRetention,
+        MessageClass
+
+Get-Mailbox $user |
+    Format-List DisplayName,
+        RecipientTypeDetails,
+        AccountDisabled,
+        LitigationHoldEnabled,
+        RetentionHoldEnabled,
+        ElcProcessingDisabled,
+        RetentionPolicy,
+        ArchiveStatus        
+
+Get-MailboxFolderStatistics $user |
+    Where-Object {
+        $_.Name -in @("Inbox","Sent Items","Deleted Items")
+    } |
+    Format-List Name,
+        FolderPath,
+        ItemsInFolder,
+        FolderAndSubfolderSize,
+        OldestItemReceivedDate,
+        NewestItemReceivedDate
+
+Get-MailboxFolderStatistics $user |
+    Where-Object {
+        $_.Name -in @("Inbox","Sent Items","Deleted Items")
+    } |
+    Format-List Name,
+        FolderPath,
+        ArchivePolicy,
+        DeletePolicy,
+        CompliancePolicy,
+        RetentionFlags
+
+$Policy = Get-RetentionPolicy $user.RetentionPolicy
+
+$Mailbox = Get-Mailbox $user
+$Policy  = Get-RetentionPolicy $Mailbox.RetentionPolicy
+
+$Policy.RetentionPolicyTagLinks |
+    ForEach-Object {
+        Get-RetentionPolicyTag $_
+    } |
+    Format-Table Name,
+        Type,
+        RetentionEnabled,
+        RetentionAction,
+        AgeLimitForRetention,
+        MessageClass -AutoSize
+
+$Mailbox = Get-Mailbox $user
+$Tag = Get-RetentionPolicyTag "Move to Archive after 1 year"
+
+[pscustomobject]@{
+    RecipientTypeDetails  = $Mailbox.RecipientTypeDetails
+    AccountDisabled       = $Mailbox.AccountDisabled
+    ArchiveStatus         = $Mailbox.ArchiveStatus
+    RetentionPolicy       = $Mailbox.RetentionPolicy
+    RetentionHoldEnabled  = $Mailbox.RetentionHoldEnabled
+    ElcProcessingDisabled = $Mailbox.ElcProcessingDisabled
+    TagEnabled            = $Tag.RetentionEnabled
+    TagType               = $Tag.Type
+    TagAction             = $Tag.RetentionAction
+    TagAge                 = $Tag.AgeLimitForRetention
+    TagMessageClass        = $Tag.MessageClass
+} | Format-List
+
+Get-MailboxFolderStatistics $user -IncludeAnalysis |
+    Where-Object {$_.Name -eq "Inbox"} |
+    fl *
+
+Get-MailboxFolderStatistics $user |
+Where-Object {$_.ItemsInFolder -gt 1000} |
+Select Name,
+       ItemsInFolder,
+       FolderAndSubfolderSize,
+       NewestItemLastModifiedDate,
+       OldestItemLastModifiedDate |
+ft -Auto
+
+    New-DynamicDistributionGroup `
     -Name "Contractors-DL" `
     -Alias "Contractors-DL" `
     -PrimarySmtpAddress "Contractors-DL@erock.com" `
