@@ -410,4 +410,13 @@ ft -Auto
         (Title -like '*Contractor') -and
         (WindowsLiveID -like '*-sc@erock.com')
     "
-get-inboxrule -mailbox 46d4f931-4b88-4716-aa9b-ce4307ed3cde -IncludeHidden | select name, identity, description, enabled, priority, ruleidentity, ruleid, ruleversion, ruleversionid, ruleversionnumber
+
+    
+Get-TransportConfig | Format-List SmtpClientAuthenticationDisabled
+
+
+
+
+
+
+    get-inboxrule -mailbox 46d4f931-4b88-4716-aa9b-ce4307ed3cde -IncludeHidden | select name, identity, description, enabled, priority, ruleidentity, ruleid, ruleversion, ruleversionid, ruleversionnumber

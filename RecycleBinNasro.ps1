@@ -17,14 +17,14 @@ $recycleBinItemsSecondStage = Get-PnPRecycleBinItem -SecondStage
 
  
 # Sort by Name of person who deleted item
-$deletedBy = "Emmanuel Aguas-Alzner"
+$deletedBy = "Shreeram Kalyanakrishnan"
 $recycleBinItemsFirstStage | Where-Object { $_.DeletedByName -eq $deletedBy} | Export-Excel -Path "$ReportFile-$($deletedBy -replace ' ','-').xlsx" -WorkSheetname 'FirstStage'
 $recycleBinItemsSecondStage | Where-Object { $_.DeletedByName -eq $deletedBy} | Export-Excel -Path "$ReportFile-$($deletedBy -replace ' ','-').xlsx" -WorkSheetname 'SecondStage'
 
 
 
-$PaulAndrewDeletesFS = $recycleBinItemsFirstStage | Where-Object { $_.DeletedByName -eq $deletedBy}
-$PaulAndrewDeletesSS = $recycleBinItemsSecondStage | Where-Object { $_.DeletedByName -eq $deletedBy}
+$ShreeramKalyanakrishnanDeletesFS = $recycleBinItemsFirstStage | Where-Object { $_.DeletedByName -eq $deletedBy}
+$ShreeramKalyanakrishnanDeletesSS = $recycleBinItemsSecondStage | Where-Object { $_.DeletedByName -eq $deletedBy}
 
 ###BETA - No Profile temp load in session needed for -itemID
 pwsh -NoProfile
