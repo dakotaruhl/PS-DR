@@ -17,8 +17,18 @@ Connect-ExchangeOnline -CertificateThumbprint $Thumbprint -AppId $ClientID -Orga
 # Graph API
 # =====================================================
 
- Connect-MgGraph `
+Connect-MgGraph `
         -TenantId $TenantId `
         -ClientId $ClientID `
         -CertificateThumbprint $Thumbprint `
         -NoWelcome
+
+
+# =====================================================
+# Azure 
+# =====================================================       
+
+Connect-AzAccount `
+    -ServicePrincipal `
+    -Tenant $TenantId `
+    -Credential $Credential | Out-Null

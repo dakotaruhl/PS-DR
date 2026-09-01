@@ -1,4 +1,4 @@
-$Subject = "CN=KeyVaultAutomation" 
+$Subject = "CN=DakotaPersonalCert" 
 
 $Cert = New-SelfSignedCertificate `
     -Subject $Subject `
