@@ -420,3 +420,18 @@ Get-TransportConfig | Format-List SmtpClientAuthenticationDisabled
 
 
     get-inboxrule -mailbox 46d4f931-4b88-4716-aa9b-ce4307ed3cde -IncludeHidden | select name, identity, description, enabled, priority, ruleidentity, ruleid, ruleversion, ruleversionid, ruleversionnumber
+
+
+New-ApplicationAccessPolicy -AccessRight RestrictAccess -AppId 4a1b9aed-6040-4f15-88ba-2c34d2635957 -PolicyScopeGroupId it_mail_app_access@erock.com -Description "Restrict app to specific mailboxes used in IT environment"
+Test-ApplicationAccessPolicy -Identity svc_ITNotifications@enchantedrock.com -AppId 4a1b9aed-6040-4f15-88ba-2c34d2635957
+Add-DistributionGroupMember -Identity "offboarding@erock.com" -Member "soc@erock.com"
+
+Get-AzRoleDefinition | Where-Object {
+    $_.Name -like "*Communication*"
+} | Select-Object Name
+
+Get-AzRoleDefinition "Communication and Email Service Owner" |
+Select-Object -ExpandProperty Permissions |
+Format-List
+
+az role assignment list --assignee 38d1b123-3eaf-47ae-a416-796297c2742d --scope "/subscriptions/03866bcc-752b-4fd1-b5bb-cdd66aed21fb/resourceGroups/fieldpoint-communications-prod/providers/Microsoft.Communication/communicationServices/fieldpoint-communications-sms-prod"

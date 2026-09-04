@@ -837,3 +837,67 @@ $role | Select-Object Id, Value, DisplayName
 Get-MgServicePrincipalAppRoleAssignment `
     -ServicePrincipalId $mi.Id |
     Select-Object PrincipalDisplayName, ResourceDisplayName, AppRoleId | FL
+
+
+public async Task SendEmail(string subject, string body, string recipient, bool isPriority)
+{
+     try
+     {
+         //Sending email via app registration and Microsoft Graph API
+         var keyVaultUrl = $"https://{_config.GetValue<string>("Mail:KeyVaultName")}.vault.azure.net/"; 
+         var tenantId = RetrieveKeyVaultSecret(keyVaultUrl, _config.GetValue<string>("Mail:TenantSecretName"));
+         var clientId = RetrieveKeyVaultSecret(keyVaultUrl, _config.GetValue<string>("Mail:OauthSmtpClientIdSecretName"));
+         var clientSecret = RetrieveKeyVaultSecret(keyVaultUrl, _config.GetValue<string>("Mail:OauthSmtpClientSecretSecretName"));
+         var fromUser = _config.GetValue<string>("Mail:FromAddress");
+         var scopes = new[] { "https://graph.microsoft.com/.default" };
+ 
+         // using Azure.Identity;
+         var options = new ClientSecretCredentialOptions
+         {
+             AuthorityHost = AzureAuthorityHosts.AzurePublicCloud,
+         };
+ 
+         // https://learn.microsoft.com/dotnet/api/azure.identity.clientsecretcredential
+         var clientSecretCredential = new ClientSecretCredential(
+             tenantId, clientId, clientSecret, options);
+ 
+         var graphClient = new GraphServiceClient(clientSecretCredential, scopes);
+ 
+         var token = await clientSecretCredential.GetTokenAsync(new Azure.Core.TokenRequestContext(scopes));
+ 
+ 
+         var message = new Message
+         {
+             Subject = subject,
+             Body = new ItemBody
+             {
+                 ContentType = BodyType.Html,
+                 Content = body
+             },
+             Importance = isPriority ? Importance.High : Importance.Normal,
+             ToRecipients =
+             [
+                 new Recipient
+           {
+               EmailAddress = new EmailAddress
+               {
+                   Address = recipient
+               }
+           }
+             ]
+         };
+ 
+         await graphClient.Users[fromUser]
+             .SendMail
+             .PostAsync(new Microsoft.Graph.Users.Item.SendMail.SendMailPostRequestBody
+             {
+                 Message = message,
+                 SaveToSentItems = true
+             });
+     }
+     catch (Exception ex)
+     {
+         _logger.LogError(ex, "Error sending email via Microsoft Graph API.");
+         throw;
+     }
+}

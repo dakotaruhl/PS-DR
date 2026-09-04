@@ -11,7 +11,7 @@ $TenantId = "0bdf0e1f-a359-4b5c-9b79-9357e35ff8c6"
 # Exchange
 # =====================================================   
 
-Connect-ExchangeOnline -CertificateThumbprint $Thumbprint -AppId $ClientID -Organization $Tenant -NoWelcome
+Connect-ExchangeOnline -CertificateThumbprint $Thumbprint -AppId $ClientID -Organization $Tenant
 
 # =====================================================
 # Graph API

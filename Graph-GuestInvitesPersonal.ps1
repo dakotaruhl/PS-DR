@@ -89,17 +89,17 @@ function Get-GraphSiteListItems {
 }
 
 function New-InviteMessageInfo {
-    $messageInfo = New-Object Microsoft.Graph.PowerShell.Models.MicrosoftGraphInvitedUserMessageInfo
-
-    $messageInfo.CustomizedMessageBody = @"
+   $messageInfo = @{
+    customizedMessageBody = @"
 Hello,
 
-This is the IT dept at ERock. Your guest account has been created for access to content in our organization, pending your activation.
+This is the IT department at ERock. Your guest account has been created for access to content in our organization, pending your activation.
 
 Please click the `"Accept Invitation`" link below and follow the prompts to activate the guest account and set up multi-factor authentication. A corresponding file share link will be sent to you following this email.
 
-If you have any questions, please feel free to send us an email at itdepartment@erock.com.
+If you have any questions, please contact us at itdepartment@erock.com.
 "@
+}
 
     return $messageInfo
 }

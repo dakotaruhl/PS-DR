@@ -8,14 +8,29 @@ Uses certificate-based application authentication. Produces Findings.csv,
 Evidence.json, OffboardingReport.html, and ExecutionTranscript.txt.
 No access is changed.
 
+# Granite
+$UserPrincipalName     = 'jhull@graniteproject.dev'
+$UserPrincipalName     = 'admin-jh@graniteproject.dev'
+$TenantId              = 'a76bf141-b9f9-4f32-ad2a-060b5991730f'
+$ClientId              = 'ddbd94ea-ad86-46f0-84af-24998ed86d2d'
+$CertificateThumbprint = 'A1D8B302230D51274ED54FB6E1C182B890D560BC'
+$ExchangeOrganization  = $null
+
+# Erock
+$UserPrincipalName     = 'JHull@erock.com'
+$TenantId              = '0bdf0e1f-a359-4b5c-9b79-9357e35ff8c6'
+$ClientId              = 'ea2ca49b-d0df-4774-b611-86cf9dc9629f'
+$CertificateThumbprint = 'C47B91EB62634CA61FA8146DDA83B8BF605C0962'
+$ExchangeOrganization  = 'enchantedrock.onmicrosoft.com'
+
 $params = @{
-    UserPrincipalName     = 'JHull@erock.com'
-    TenantId              = '0bdf0e1f-a359-4b5c-9b79-9357e35ff8c6'
-    ClientId              = 'ea2ca49b-d0df-4774-b611-86cf9dc9629f'
-    CertificateThumbprint = 'C47B91EB62634CA61FA8146DDA83B8BF605C0962'
-    ExchangeOrganization  = 'enchantedrock.onmicrosoft.com'
+    UserPrincipalName     = $UserPrincipalName
+    TenantId              = $TenantId
+    ClientId              = $ClientId
+    CertificateThumbprint = $CertificateThumbprint
+    ExchangeOrganization  = $ExchangeOrganization
     OutputPath            = 'C:\Users\DakotaRuhl\Documents\Reports\Elevated User Offboarding'
-    SkipExchange          = $false
+    SkipExchange          = $true
 }
 
 .\Get-AzureEntraOffboardingReport-v2.ps1 @params
