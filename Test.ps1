@@ -435,3 +435,25 @@ Select-Object -ExpandProperty Permissions |
 Format-List
 
 az role assignment list --assignee 38d1b123-3eaf-47ae-a416-796297c2742d --scope "/subscriptions/03866bcc-752b-4fd1-b5bb-cdd66aed21fb/resourceGroups/fieldpoint-communications-prod/providers/Microsoft.Communication/communicationServices/fieldpoint-communications-sms-prod"
+
+func azure functionapp publish graph-mail-sendAs
+az functionapp function keys list -g M365-Infrastructure -n graph-mail-sendAs --function-name SendMail
+
+$code = "<paste-the-default-key>"
+Invoke-RestMethod -Method Post -Uri "https://graph-mail-sendAs.azurewebsites.net/api/SendMail?code=$code" `
+    -ContentType 'application/json' -Body (@{
+        To      = "druhl@erock.com"
+        Subject = "Prod test"
+        Body    = "<p>Sent from the deployed Function App.</p>"
+    } | ConvertTo-Json)
+
+cd C:\Users\DakotaRuhl\Documents\PS-DR\GraphMailFunction
+
+$rg      = "M365-Infrastructure"
+$appName = "graph-mail-sendAs"
+$zipPath = "C:\Users\DakotaRuhl\Documents\PS-DR\GraphMailFunction.zip"
+
+# Zip the CONTENTS of the folder, not the folder itself
+Compress-Archive -Path ".\*" -DestinationPath $zipPath -Force
+
+Publish-AzWebApp -ResourceGroupName $rg -Name $appName -ArchivePath $zipPath -Force

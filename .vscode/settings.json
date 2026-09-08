@@ -1,3 +1,7 @@
 {
-    "azureAutomation.directory.basePath": "C:\\Users\\DakotaRuhl\\Documents\\PS-DR"
+    "azureAutomation.directory.basePath": "C:\\Users\\DakotaRuhl\\Documents\\PS-DR",
+    "azureFunctions.deploySubpath": "GraphMailFunction",
+    "azureFunctions.projectLanguage": "PowerShell",
+    "azureFunctions.projectRuntime": "~4",
+    "debug.internalConsoleOptions": "neverOpen"
 }
