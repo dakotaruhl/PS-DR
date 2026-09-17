@@ -11,6 +11,19 @@ $To      = $Request.Body.To
 $Subject = $Request.Body.Subject
 $Body    = $Request.Body.Body
 $Cc      = $Request.Body.Cc
+$Importance = if ($Request.Body.Importance) {$Request.Body.Importance.ToLower().Trim()} else {'normal'}
+    $ValidImportance = @('low', 'normal', 'high')
+    if ($Importance -notin $ValidImportance) {
+        Push-OutputBinding -Name Response -Value ([HttpResponseContext]@{
+            StatusCode = [HttpStatusCode]::BadRequest
+            Body       = @{
+                error = "Importance must be one of: low, normal, high."
+                providedValue = $Importance
+                validValues = @('low','normal','high')
+            } | ConvertTo-Json
+        })
+        return
+    }
 $From    = if ($Request.Body.From) { $Request.Body.From } else { $env:MailFromAddress }
 
 if (-not $To -or -not $Subject -or -not $Body) {
@@ -108,6 +121,7 @@ try {
     # -----------------------------------------------------------------------
     $Message = @{
         subject      = $Subject
+        importance   = $Importance
         body         = @{ contentType = 'HTML'; content = $Body }
         toRecipients = ConvertTo-RecipientArray -Addresses $To
     }

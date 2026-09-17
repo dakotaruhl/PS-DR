@@ -457,3 +457,327 @@ $zipPath = "C:\Users\DakotaRuhl\Documents\PS-DR\GraphMailFunction.zip"
 Compress-Archive -Path ".\*" -DestinationPath $zipPath -Force
 
 Publish-AzWebApp -ResourceGroupName $rg -Name $appName -ArchivePath $zipPath -Force
+
+
+
+Invoke-RestMethod -Method Post -Uri "https://graph-mail-sendas-guh9b5c3h8e5azas.centralus-01.azurewebsites.net/api/sendmail?code=$code" -ContentType 'application/json' -Body (@{
+    To      = "druhl@erock.com"
+    Subject = "Prod test"
+    Body    = "<p>Sent from the Function App.</p>"
+} | ConvertTo-Json)
+
+$secureKey = ConvertTo-SecureString -String $code -AsPlainText -Force
+Set-AzKeyVaultSecret -VaultName "kv-summittrail" -Name "GraphMailSendAs-FunctionKey" -SecretValue $secureKey
+
+
+$Thumbprint = "C47B91EB62634CA61FA8146DDA83B8BF605C0962"
+$ClientId   = "ea2ca49b-d0df-4774-b611-86cf9dc9629f"
+$TenantId   = "0bdf0e1f-a359-4b5c-9b79-9357e35ff8c6"
+
+
+function Get-TrimmedValue {
+    [CmdletBinding()]
+    param(
+        [AllowNull()]
+        [object]$Value
+    )
+
+    if ($null -eq $Value) {
+        return ""
+    }
+
+    return $Value.ToString().Trim()
+}
+
+function ConvertTo-EmployeeHireDate {
+    [CmdletBinding()]
+    param(
+        [AllowNull()]
+        [object]$Value
+    )
+
+    if ($null -eq $Value -or [string]::IsNullOrWhiteSpace($Value.ToString())) {
+        return [datetime]::MinValue
+    }
+
+    if ($Value -is [datetime]) {
+        return [datetime]$Value
+    }
+
+    # Handle an Excel serial date if ImportExcel returns a numeric value.
+    $excelSerial = 0.0
+    if ([double]::
+            $Value.ToString(),
+            [System.Globalization.NumberStyles]::Any,
+            [System.Globalization.CultureInfo]::InvariantCulture,
+            [ref]$excelSerial
+        )) {
+        return [datetime]::FromOADate($excelSerial)
+    }
+
+    $parsedDate = [datetime]::MinValue
+
+    if ([datetime]::TryParselue.ToString(),
+            [System.Globalization.CultureInfo]::GetCultureInfo("en-US"),
+            [System.Globalization.DateTimeStyles]::AssumeLocal,
+            [ref]$parsedDate
+        )) {
+        return $parsedDate
+    }
+
+    throw "Hire date '$Value' is not a recognized date."
+}
+
+# Validate the input file.
+if (-not (Test-Path -LiteralPath $InputPath)) {
+    throw "Input file was not found: $InputPath"
+}
+
+# Validate and establish the intended Graph connection.
+$graphContext = Get-MgContext -ErrorAction SilentlyContinue
+
+$connectionMatches = (
+    $null -ne $graphContext -and
+    $graphContext.TenantId -eq $TenantId -and
+    $graphContext.ClientId -eq $ClientId -and
+    $graphContext.AuthType -eq "AppOnly"
+)
+
+if (-not $connectionMatches) {
+    if ($graphContext) {
+        Disconnect-MgGraph -ErrorAction SilentlyContinue | Out-Null
+    }
+
+    Connect-MgGraph `
+        -ClientId $ClientId `
+        -TenantId $TenantId `
+        -CertificateThumbprint $Thumbprint `
+        -NoWelcome
+}
+
+$graphContext = Get-MgContext
+
+if (
+    $graphContext.TenantId -ne $TenantId -or
+    $graphContext.ClientId -ne $ClientId -or
+    $graphContext.AuthType -ne "AppOnly"
+) {
+    throw "Microsoft Graph connected with an unexpected tenant, client, or authentication type."
+}
+
+Write-Host "Connected to Microsoft Graph using application authentication." `
+    -ForegroundColor Green
+
+$userList = @(Import-Excel -Path $InputPath)
+
+if ($userList.Count -eq 0) {
+    throw "The input workbook contains no user rows."
+}
+
+$results = [System.Collections.Generic.List[object]]::new()
+
+$rowNumber = 1
+
+foreach ($user in $userList) {
+    $rowNumber++
+
+    $displayName   = Get-TrimmedValue $user.displayName
+    $upn           = Get-TrimmedValue $user.UPN
+    $mailNickname  = Get-TrimmedValue $user.mailnickname
+    $givenName     = Get-TrimmedValue $user.givenName
+    $surname       = Get-TrimmedValue $user.surname
+    $department    = Get-TrimmedValue $user.department
+    $employeeType  = Get-TrimmedValue $user.employeeType
+    $companyName   = Get-TrimmedValue $user.companyName
+    $usageLocation = (Get-TrimmedValue $user.usageLocation).ToUpperInvariant()
+    $jobTitle      = Get-TrimmedValue $user.jobTitle
+    $employeeId    = Get-TrimmedValue $user.employeeId
+    $userPassword  = Get-TrimmedValue $user.Password
+
+    $result = [ordered]@{
+        RowNumber      = $rowNumber
+        DisplayName    = $displayName
+        UPN            = $upn
+        EmployeeId     = $employeeId
+        Action         = ""
+        Status         = ""
+        UserId         = ""
+        EmployeeHireDate = ""
+        Error          = ""
+        ProcessedAt    = Get-Date
+    }
+
+    try {
+        # Validate required spreadsheet values.
+        $missingFields = [System.Collections.Generic.List[string]]::new()
+
+        if ([string]:: {
+            $missingFields.Add("displayName")
+        }
+
+        if ([string]:: {
+            $missingFields.Add("UPN")
+        }
+
+        if ([string]:: {
+            $missingFields.Add("mailnickname")
+        }
+
+        if ([string]:: {
+            $missingFields.Add("givenName")
+        }
+
+        if ([string]:: {
+            $missingFields.Add("surname")
+        }
+
+        if ([string]:: {
+            $missingFields.Add("usageLocation")
+        }
+
+        if ([string]::IsNullOrWhiteSpace($userPasswordd("Password")
+        }
+
+        if ($missingFields.Count -gt 0) {
+            throw "Missing required field(s): $($missingFields -join ', ')."
+        }
+
+        if ($upn -notmatch '^[^@\s]+@[^@\s]+\.[^@\s]+$') {
+            throw "UPN is not in a valid email-style format: $upn"
+        }
+
+        if ($usageLocation -notmatch '^[A-Z]{2}$') {
+            throw "UsageLocation must be a two-letter country code, such as US."
+        }
+
+        $employeeHireDate = ConvertTo-EmployeeHireDate $user.hireDate
+
+        if ($employeeHireDate) {
+            $result.EmployeeHireDate = $employeeHireDate.ToString("yyyy-MM-dd")
+        }
+
+        # Query the user while distinguishing a real 404 from other Graph errors.
+        $existingUser = $null
+
+        try {
+            $existingUser = Get-MgUser `
+                -UserId $upn `
+                -Property Id,DisplayName,UserPrincipalName,EmployeeHireDate `
+                -ErrorAction Stop
+        }
+        catch {
+            $statusCode = $null
+
+            if ($_.Exception.ResponseStatusCode) {
+                $statusCode = [int]$_.Exception.ResponseStatusCode
+            }
+            elseif ($_.Exception.Response.StatusCode) {
+                $statusCode = [int]$_.Exception.Response.StatusCode
+            }
+
+            if ($statusCode -ne 404) {
+                throw
+            }
+        }
+
+        if ($existingUser) {
+            $result.Action = "Skipped"
+            $result.Status = "Already exists"
+            $result.UserId = $existingUser.Id
+
+            Write-Host "User already exists: $displayName ($upn). Skipping creation." `
+                -ForegroundColor Yellow
+
+            # Intentionally do not update existing users from this creation script.
+            $results.Add([pscustomobject]$result)
+            continue
+        }
+
+        $passwordProfile = @{
+            Password                      = $userPassword
+            ForceChangePasswordNextSignIn = $true
+        }
+
+        $newUserParameters = @{
+            DisplayName       = $displayName
+            MailNickname      = $mailNickname
+            UserPrincipalName = $upn
+            AccountEnabled    = $true
+            GivenName         = $givenName
+            Surname           = $surname
+            UsageLocation     = $usageLocation
+            PasswordProfile   = $passwordProfile
+        }
+
+        # Only send optional properties when values are present.
+        if ($department) {
+            $newUserParameters.Department = $department
+        }
+
+        if ($employeeType) {
+            $newUserParameters.EmployeeType = $employeeType
+        }
+
+        if ($companyName) {
+            $newUserParameters.CompanyName = $companyName
+        }
+
+        if ($jobTitle) {
+            $newUserParameters.JobTitle = $jobTitle
+        }
+
+        if ($employeeId) {
+            $newUserParameters.EmployeeId = $employeeId
+        }
+
+        if ($employeeHireDate) {
+            $newUserParameters.EmployeeHireDate = $employeeHireDate
+        }
+
+        Write-Host "Creating user: $displayName ($upn)" -ForegroundColor Cyan
+
+        $createdUser = New-MgUser @newUserParameters -ErrorAction Stop
+
+        $result.Action = "Created"
+        $result.Status = "Success"
+        $result.UserId = $createdUser.Id
+
+        Write-Host "Created user: $displayName ($upn)" -ForegroundColor Green
+    }
+    catch {
+        $result.Action = if ($result.Action) {
+            $result.Action
+        }
+        else {
+            "Create"
+        }
+
+        $result.Status = "Failed"
+        $result.Error  = $_.Exception.Message
+
+        Write-Host "Failed to process $displayName ($upn): $($_.Exception.Message)" `
+            -ForegroundColor Red
+    }
+
+    $results.Add([pscustomobject]$result)
+}
+
+$results |
+    Export-Excel `
+        -Path $ReportPath `
+        -WorksheetName "Results" `
+        -AutoSize `
+        -AutoFilter `
+        -FreezeTopRow `
+        -BoldTopRow
+
+$createdCount = @($results | Where-Object Status -eq "Success").Count
+$skippedCount = @($results | Where-Object Status -eq "Already exists").Count
+$failedCount  = @($results | Where-Object Status -eq "Failed").Count
+
+Write-Host ""
+Write-Host "Processing complete." -ForegroundColor Green
+Write-Host "Created: $createdCount"
+Write-Host "Skipped: $skippedCount"
+Write-Host "Failed: $failedCount"
+Write-Host "Report: $ReportPath"

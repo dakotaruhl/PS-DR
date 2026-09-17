@@ -22,6 +22,8 @@ Get-Mailbox -ResultSize Unlimited | Where-Object {
     DelayHoldApplied,
     DelayReleaseHoldApplied
 
+
+
 Get-Mailbox -ResultSize Unlimited |
 Where-Object {$_.InPlaceHolds -ne $null} |
 Select DisplayName,InPlaceHolds
@@ -100,5 +102,19 @@ Export-Excel -path "C:\Users\DakotaRuhl\Documents\Reports\MailboxHolds\MailboxHo
 
 ## Applying and removing holds
 
-## Apply holds
+## Review retention applied to the user
+$user = "ratkinson@erock.com"
+Get-Mailbox $user | fl LitigationHoldEnabled,
+   RetentionHoldEnabled,
+   DelayHoldApplied,
+   DelayReleaseHoldApplied,
+   ComplianceTagHoldApplied,
+   InPlaceHolds
 
+get-mailboxstatistics -identity $user | FL
+
+start-managedfolderassistant -identity $user
+
+Get-MailboxStatistics $user | fl TotalDeletedItemSize,ItemCount
+
+Get-Mailbox $user | Select-Object RetentionPolicy

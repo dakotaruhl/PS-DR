@@ -10,7 +10,7 @@ Connect-MgGraph `
     -CertificateThumbprint $Thumbprint `
     -NoWelcome
 
-$user = "aschurr@erock.com"
+$user = "svc_FAT_SPSync5@erock.com"
 
 Update-MgUser -UserId $user -passwordProfile @{forceChangePasswordNextSignIn = $false}
 Update-MgUser -UserId $user -PasswordPolicies "DisablePasswordExpiration"

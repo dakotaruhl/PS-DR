@@ -467,4 +467,3 @@ Write-Host "Invitation Results" -ForegroundColor Cyan
 Write-Host ""
 
 $results | Format-Table -AutoSize
-
