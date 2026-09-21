@@ -15,7 +15,6 @@ $user = "svc_FAT_SPSync5@erock.com"
 Update-MgUser -UserId $user -passwordProfile @{forceChangePasswordNextSignIn = $false}
 Update-MgUser -UserId $user -PasswordPolicies "DisablePasswordExpiration"
 
-
 Get-MgUser -UserId $user | select-object DisplayName, UserPrincipalName
 Get-MgUser -UserId $user -Property PasswordPolicies | Select-Object PasswordPolicies
 Get-MgUser -UserId $user -Property PasswordProfile | Select-Object -ExpandProperty PasswordProfile

@@ -100,7 +100,7 @@ ForEach ($room in $roomList) {
         -UsageLocation "US"
 }
 
-<# 
+
 ## Hyp updates
 $FormatEnumerationLimit=-1
 
@@ -151,30 +151,3 @@ $firstfloor = @("Big Bend", "Castle Rock", "Death Valley", "Rocky Mountain",
 $secondfloor = @("Grand Canyon", "Yellowstone", "Beacon Rock", "Granite2")
 $firstfloorrooms = Get-DistributionGroupMember -Identity "Vine Rooms" | Where-Object { $firstfloor -contains $_.Name }
 $secondfloorrooms = Get-DistributionGroupMember -Identity "Vine Rooms" | Where-Object { $secondfloor -contains $_.Name }
-
-$Quiet = Get-CalendarProcessing quietspace@erock.com
-$Aspen = Get-CalendarProcessing aspen@erock.com
-
-$Quiet.PSObject.Properties.Name |
-    ForEach-Object {
-        $Property = $_
-
-        [PSCustomObject]@{
-            Property   = $Property
-            QuietSpace = $Quiet.$Property
-            Aspen      = $Aspen.$Property
-        }
-    } |
-    Where-Object { $_.QuietSpace -ne $_.Aspen } |
-    Format-Table -AutoSize
-
-Connect-ExchangeOnline
-Set-CalendarProcessing -Identity "quietspace@erock.com" `
-        -AutomateProcessing AutoAccept `
-        -AddOrganizerToSubject $false `
-        -AllowRecurringMeetings $true `
-        -DeleteAttachments $true `
-        -DeleteComments $false `
-        -DeleteSubject $false `
-        -RemovePrivateProperty $false
- #>

@@ -1,50 +1,3 @@
-Connect-ExchangeOnline
-
-Get-Mailbox -ResultSize Unlimited |
-Select-Object DisplayName,UserPrincipalName,
-    LitigationHoldEnabled,
-    InPlaceHolds,
-    RetentionHoldEnabled,
-    DelayHoldApplied,
-    DelayReleaseHoldApplied
-
-
-Get-Mailbox -ResultSize Unlimited | Where-Object {
-    $_.LitigationHoldEnabled -eq $true -or
-    $_.InPlaceHolds.Count -gt 0 -or
-    $_.RetentionHoldEnabled -eq $true -or
-    $_.DelayHoldApplied -eq $true -or
-    $_.DelayReleaseHoldApplied -eq $true
-} | Select-Object DisplayName,UserPrincipalName,
-    LitigationHoldEnabled,
-    InPlaceHolds,
-    RetentionHoldEnabled,
-    DelayHoldApplied,
-    DelayReleaseHoldApplied
-
-
-
-Get-Mailbox -ResultSize Unlimited |
-Where-Object {$_.InPlaceHolds -ne $null} |
-Select DisplayName,InPlaceHolds
-
-Get-RetentionCompliancePolicy | Select Name,Guid
-
-Get-Mailbox -ResultSize Unlimited | Where-Object {
-    $_.LitigationHoldEnabled -or
-    $_.InPlaceHolds.Count -gt 0 -or
-    $_.RetentionHoldEnabled -or
-    $_.DelayHoldApplied -or
-    $_.DelayReleaseHoldApplied
-} | Select DisplayName,UserPrincipalName,
-    LitigationHoldEnabled,
-    InPlaceHolds,
-    RetentionHoldEnabled,
-    DelayHoldApplied,
-    DelayReleaseHoldApplied |
-Export-Excel -path "C:\Users\DakotaRuhl\Documents\Reports\MailboxHolds.xlsx" 
-
-
 # Connect to Exchange Online
 Connect-ExchangeOnline
 
@@ -86,6 +39,7 @@ Get-Mailbox -SoftDeletedMailbox -ResultSize Unlimited | Where-Object {
     DelayReleaseHoldApplied |
 Export-Excel -path "C:\Users\DakotaRuhl\Documents\Reports\MailboxHolds\MailboxHolds.xlsx" -WorksheetName "Soft Deleted"
 
+# Export inactive mailbox holds with readable InPlaceHolds
 Get-Mailbox -InactiveMailboxOnly -ResultSize Unlimited | Where-Object {
     $_.LitigationHoldEnabled -or
     $_.InPlaceHolds.Count -gt 0 -or
@@ -99,22 +53,3 @@ Get-Mailbox -InactiveMailboxOnly -ResultSize Unlimited | Where-Object {
     DelayHoldApplied,
     DelayReleaseHoldApplied |
 Export-Excel -path "C:\Users\DakotaRuhl\Documents\Reports\MailboxHolds\MailboxHolds.xlsx" -WorksheetName "Inactive"
-
-## Applying and removing holds
-
-## Review retention applied to the user
-$user = "ratkinson@erock.com"
-Get-Mailbox $user | fl LitigationHoldEnabled,
-   RetentionHoldEnabled,
-   DelayHoldApplied,
-   DelayReleaseHoldApplied,
-   ComplianceTagHoldApplied,
-   InPlaceHolds
-
-get-mailboxstatistics -identity $user | FL
-
-start-managedfolderassistant -identity $user
-
-Get-MailboxStatistics $user | fl TotalDeletedItemSize,ItemCount
-
-Get-Mailbox $user | Select-Object RetentionPolicy
