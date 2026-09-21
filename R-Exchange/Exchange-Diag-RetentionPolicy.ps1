@@ -50,10 +50,10 @@ Get-RetentionPolicyTag |
 Set-RetentionPolicy "Default MRM Policy" -RetentionPolicyTagLinks "Deleted Items"
 
 ## Verify it worked
-Get-RetentionPolicy "ErockCompliance" |
+Get-RetentionPolicy "Erock Compliance" |
     Format-List Name, RetentionPolicyTagLinks
 
-$PolicyName = "ErockCompliance"
+$PolicyName = "Erock Compliance"
 
 Get-Mailbox -ResultSize Unlimited -RecipientTypeDetails UserMailbox |
     Set-Mailbox -RetentionPolicy $PolicyName
