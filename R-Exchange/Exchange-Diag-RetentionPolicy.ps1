@@ -102,3 +102,4 @@ Get-Mailbox -ResultSize Unlimited -RecipientTypeDetails UserMailbox |
         $_.RetainDeletedItemsFor -eq (New-TimeSpan -Days 14)
     }).Count
 
+# check randy mailbox deleted item count

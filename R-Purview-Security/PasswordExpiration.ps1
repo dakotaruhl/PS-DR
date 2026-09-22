@@ -19,7 +19,7 @@ Get-MgUser -UserId svc_fat_ipads@enchantedrock.com | Select PasswordPolicies
 
 
 
-$user = "svc_fat_ipads@enchantedrock.com"
+$user = "planfulintegration@erock.com"
 
 # Step 1: explicitly set None
 Update-MgUser -UserId $user -PasswordPolicies "None"

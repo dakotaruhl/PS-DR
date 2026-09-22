@@ -244,7 +244,7 @@ Enable-Users `
 # Example live run:
 <#
 Enable-Users `
-    -ExcelPath '.\Input Data\Converted Aerotek FTE (Start 9_22).xlsx' `
+    -ExcelPath '.\Input Data\Aerotek FTE.xlsx' `
     -WorksheetName 'Results' `
     -TenantId "0bdf0e1f-a359-4b5c-9b79-9357e35ff8c6" `
     -ClientId "ea2ca49b-d0df-4774-b611-86cf9dc9629f" `
