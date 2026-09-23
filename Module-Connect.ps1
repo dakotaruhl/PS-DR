@@ -38,3 +38,41 @@ Connect-AzAccount -ServicePrincipal `
 
 #CLI 
 az login --service-principal -u $ClientID -p <path-to-cert.pem> --tenant $Tenant
+
+# =====================================================
+# Get Certificate 
+# =====================================================  
+
+$Cert = Get-ChildItem Cert:\CurrentUser\My, Cert:\LocalMachine\My |
+    Where-Object Thumbprint -eq $Thumbprint
+
+$Cert | Select-Object Subject, Thumbprint, HasPrivateKey, PSPath
+
+:SetEnvironmentVariable(
+    "AZURE_CLIENT_ID",
+    $ClientID,
+    "User"
+)
+
+:SetEnvironmentVariable(
+    "AZURE_TENANT_DOMAIN",
+    $Tenant,
+    "User"
+)
+
+:SetEnvironmentVariable(
+    "AZURE_CLIENT_CERTIFICATE_THUMBPRINT",
+    $Thumbprint,
+    "User"
+)
+
+:SetEnvironmentVariable(
+    "AZURE_TENANT_ID",
+    $TenantId,
+    "User"
+)
+
+$env:AZURE_CLIENT_ID
+$env:AZURE_TENANT_DOMAIN
+$env:AZURE_CLIENT_CERTIFICATE_THUMBPRINT
+$env:AZURE_TENANT_ID
