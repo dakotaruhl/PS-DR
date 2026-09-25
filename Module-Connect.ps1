@@ -20,11 +20,10 @@ Connect-ExchangeOnline -CertificateThumbprint $Thumbprint -AppId $ClientID -Orga
 # =====================================================
 
 Connect-MgGraph `
-        -TenantId $TenantId `
-        -ClientId $ClientID `
-        -CertificateThumbprint $Thumbprint `
+        -TenantId $env:AZURE_TENANT_ID `
+        -ClientId $env:AZURE_CLIENT_ID `
+        -CertificateThumbprint $env:AZURE_CLIENT_CERTIFICATE_THUMBPRINT `
         -NoWelcome
-
 
 # =====================================================
 # Azure 
@@ -48,31 +47,12 @@ $Cert = Get-ChildItem Cert:\CurrentUser\My, Cert:\LocalMachine\My |
 
 $Cert | Select-Object Subject, Thumbprint, HasPrivateKey, PSPath
 
-:SetEnvironmentVariable(
-    "AZURE_CLIENT_ID",
-    $ClientID,
-    "User"
-)
 
-:SetEnvironmentVariable(
-    "AZURE_TENANT_DOMAIN",
-    $Tenant,
-    "User"
-)
-
-:SetEnvironmentVariable(
-    "AZURE_CLIENT_CERTIFICATE_THUMBPRINT",
-    $Thumbprint,
-    "User"
-)
-
-:SetEnvironmentVariable(
-    "AZURE_TENANT_ID",
-    $TenantId,
-    "User"
-)
-
+#these credentials can be used by other scripts or modules to authenticate with Azure services
 $env:AZURE_CLIENT_ID
 $env:AZURE_TENANT_DOMAIN
-$env:AZURE_CLIENT_CERTIFICATE_THUMBPRINT
+$env:AZURE_CLIENT_CERTIFICATE_THUMBPRINT 
+$env:AZURE_CLIENT_CERTIFICATE_PATH
 $env:AZURE_TENANT_ID
+
+Update-MgGroup -GroupId "00a68b7a-3e61-4b6d-93e8-d8229bb21a18" -SecurityEnabled:$true

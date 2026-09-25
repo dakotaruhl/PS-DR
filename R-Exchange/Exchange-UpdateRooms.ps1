@@ -29,15 +29,19 @@ $AddLicenses = @(
     }
 )
 $RemoveLicenses = @()
-    
-ForEach ($room in $roomList) {
-    $RoomName = $room.RoomName.Trim()
-    $RoomEmail = $room.RoomEmail.Trim()
 
-    if($room.update -eq "no") {
+
+
+ForEach ($room in $roomList) {
+    
+    
+    #$RoomName = $room.RoomName.Trim()
+    #$RoomEmail = $room.RoomEmail.Trim()
+
+    <# if($room.update -eq "no") {
         Write-Host "Skipping room mailbox: $RoomName ($RoomEmail) as per the update flag." -ForegroundColor Yellow
         continue
-    }
+    } #>
 
     # Set password to never expire for the room mailbox, remove change password flag
     <# Update-MgUser -UserId $RoomEmail `
@@ -50,5 +54,5 @@ ForEach ($room in $roomList) {
 
 
     # Assign the license to the resource account
-    Set-MgUserLicense -UserId $RoomEmail -AddLicenses $AddLicenses -RemoveLicenses $RemoveLicenses
+    #Set-MgUserLicense -UserId $RoomEmail -AddLicenses $AddLicenses -RemoveLicenses $RemoveLicenses
 }
