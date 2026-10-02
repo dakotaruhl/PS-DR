@@ -56,3 +56,23 @@ ForEach ($room in $roomList) {
     # Assign the license to the resource account
     #Set-MgUserLicense -UserId $RoomEmail -AddLicenses $AddLicenses -RemoveLicenses $RemoveLicenses
 }
+
+$Rooms = @(
+    "Glacier"
+    "McKinley"
+    "Quiet Space"
+    "Redwood"
+    "Ridge"
+)
+
+foreach ($Room in $Rooms) {
+    Write-Host "Processing: $Room" -ForegroundColor Cyan
+
+    Set-Place -Identity $Room -AudioDeviceName "Logitech Rally Bar + Rally Mic Pod" `
+        -VideoDeviceName "Logitech Rally Bar" `
+        -DisplayDeviceName "Samsung 75 M70H"
+}
+
+foreach ($Room in $Rooms) {
+    Get-Place -Identity $Room | Select-Object DisplayName, AudioDeviceName, VideoDeviceName, DisplayDeviceName
+}

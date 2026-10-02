@@ -781,3 +781,23 @@ Write-Host "Created: $createdCount"
 Write-Host "Skipped: $skippedCount"
 Write-Host "Failed: $failedCount"
 Write-Host "Report: $ReportPath"
+##############################################
+$VineFilter = "(ExtensionCustomAttribute1 -eq 'Vine') -and (RecipientTypeDetails -eq 'UserMailbox') -and (HiddenFromAddressListsEnabled -eq `$false)"
+
+Set-DynamicDistributionGroup `
+    -Identity "vine@erock.com" `
+    -RecipientFilter $VineFilter
+
+Get-DynamicDistributionGroup -Identity "vine@erock.com" |
+    Format-List Name, PrimarySmtpAddress, RecipientFilter
+
+$Group = Get-DynamicDistributionGroup -Identity "vine@erock.com"
+
+Get-Recipient -RecipientPreviewFilter $Group.RecipientFilter |
+    Select-Object DisplayName,
+                  PrimarySmtpAddress,
+                  Office,
+                  ExtensionCustomAttribute1 |
+    Sort-Object DisplayName
+
+###############################################

@@ -1,11 +1,11 @@
-#Connect-ExchangeOnline -DisableWam
+
 
 #Get-DistributionGroup -RecipientTypeDetails RoomList | Format-Table DisplayName, Identity, PrimarySmtpAddress –AutoSize
 
 
 # Get all room lists
 $roomLists = Get-DistributionGroup -ResultSize Unlimited -RecipientTypeDetails RoomList
-
+$roomList = $roomLists[0]
 # Iterate through each room list, then each room in the list, and assign rooms to 24/7 availability. 
 foreach ($roomList in $roomLists) 
 {
@@ -27,36 +27,31 @@ foreach ($roomList in $roomLists)
 #Remove-DistributionGroupMember -Identity "Vine Rooms" -Member ""
 #Set-MailboxCalendarConfiguration -Identity  -WorkingHoursStartTime 09:00:00 -WorkingHoursEndTime 18:00:00
 
+$room = "Beacon Rock"
+Get-place -Identity $room | Format-Table Identity, DisplayName, Floor, Building, Type, IsManaged, BookingType, MTREnabled, Capacity
+Set-place -Identity $room -Floor 2 
 
-# Exact path to remove (your OneDrive modules path)
-#$oneDriveModules = 'C:\Users\DakotaRuhl\OneDrive - Enchanted Rock\Documents\PowerShell\Modules'
+$rooms | Format-Table DisplayName, PrimarySmtpAddress, WorkingHoursStartTime, WorkingHoursEndTime, building, floor, MTREnabled
 
-# Split, filter out the exact OneDrive path (handles duplicates), and rejoin
-#$env:PSModulePath = ($env:PSModulePath -split ';' | Where-Object { $_ -and ($_ -ne $oneDriveModules) } ) -join ';'
+foreach ($room in $rooms)
+{
+    #Set the missing floor and MTREnabled properties for each room. All missing floors are floor 1 (Ground)
+    Write-Host "Processing Room: $($room.DisplayName)" -ForegroundColor Cyan
+    $place = Get-place -Identity $room.DisplayName
+    if (-not $place.Floor) {
+        Write-Host "Setting default floor for $($room.DisplayName) to Ground (1)." -ForegroundColor Green
+        Set-place -Identity $room.DisplayName -Floor 1 -FloorLabel "Ground"
+    }
+    if (-not $place.MTREnabled) {
+        Write-Host "Enabling MTR for $($room.DisplayName)." -ForegroundColor Green
+        Set-place -Identity $room.DisplayName -MTREnabled $true
+    }
+}
 
-# Verify
-#$env:PSModulePath -split ';'
+foreach ($room in $rooms)
+{
+    Write-Host "Retrieving place information for $($room.DisplayName)." -ForegroundColor Cyan
+    $place = Get-place -Identity $room.DisplayName
+    $place | Format-Table Identity, DisplayName, Floor, Building, Type, IsManaged, BookingType, MTREnabled, Capacity
+}
 
-# for machine level 
-# Build the exact set you want to keep (no OneDrive path)
-#$desired = @(
-  #'C:\Program Files\PowerShell\7\Modules',
-  #'C:\Program Files\PowerShell\Modules',
-  #'C:\Program Files\WindowsPowerShell\Modules',
-  #'C:\WINDOWS\system32\WindowsPowerShell\v1.0\Modules',
-  #'C:\Program Files\SharePoint Online Management Shell\',
-  #'c:\Users\DakotaRuhl\.vscode\extensions\ms-vscode.powershell-2025.4.0\modules'
-#) | Select-Object -Unique
-
-#[Environment]::SetEnvironmentVariable('PSModulePath', ($desired -join ';'), 'Machine')
-
-#"Updated Machine PSModulePath. Restart PowerShell (or sign out/in) for it to apply."
-
-#[Environment]::SetEnvironmentVariable('PSModulePath', $null, 'User')
-
-
-#Remove-Item "C:\Program Files\PowerShell\7\Modules\ExchangeOnlineManagement" -Recurse -Force -ErrorAction SilentlyContinue
-#Remove-Item "C:\Program Files\WindowsPowerShell\Modules\ExchangeOnlineManagement" -Recurse -Force -ErrorAction SilentlyContinue
-#Remove-Item "$env:USERPROFILE\Documents\PowerShell\Modules\ExchangeOnlineManagement" -Recurse -Force -ErrorAction SilentlyContinue
-#Remove-Item "C:\Users\DakotaRuhl\OneDrive - Enchanted Rock\Documents\PowerShell\Modules\ExchangeOnlineManagement" -Recurse -Force -ErrorAction SilentlyContinue
-#Get-Module ExchangeOnlineManagement -ListAvailable

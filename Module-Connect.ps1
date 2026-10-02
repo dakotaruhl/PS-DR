@@ -13,7 +13,7 @@ $Tenant = "enchantedrock.onmicrosoft.com"
 # Exchange
 # =====================================================   
 
-Connect-ExchangeOnline -CertificateThumbprint $Thumbprint -AppId $ClientID -Organization $Tenant
+Connect-ExchangeOnline -CertificateThumbprint $env:AZURE_CLIENT_CERTIFICATE_THUMBPRINT  -AppId $env:AZURE_CLIENT_ID -Organization $env:AZURE_TENANT_DOMAIN
 
 # =====================================================
 # Graph API

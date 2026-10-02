@@ -1,99 +1,123 @@
-#Connect-ExchangeOnline
-
-#User to add/Remove
+# Users or groups to add/remove
 $userIdentityAdd = "Room Calendar Editors"
-$userIdentityRemove = "Tiffany Amaya"
+$userIdentitiesRemove = @(
+    "Alexis Campbell"
+    "Charity Cortez"
+    "Randy Atkinson"
+)
+
+#Room list to process
+# Vine Rooms 
+# Titan Rooms
+# Hyperion Rooms
+$roomListName = "Titan Rooms"
 
 # Get all rooms
-$teamsRooms = Get-Mailbox -RecipientTypeDetails RoomMailbox
-#$room = $teamsRooms[0]
+$roomList = Get-DistributionGroup `
+    -RecipientTypeDetails RoomList `
+    -Identity $roomListName 
+
+$teamsRooms = Get-DistributionGroupMember -Identity $roomList.Identity |
+    Where-Object { $_.RecipientTypeDetails -eq "RoomMailbox" }
+
 $calendarPermissions = @()
-# Iterate through each room and update permissions 
-foreach ($room in $teamsRooms) 
-{
-    $calendarIdentity = "$($room.primarySmtpAddress):\Calendar"
-    $newPermissions = Get-MailboxFolderPermission -Identity $calendarIdentity
 
-    if( ($newPermissions.user | ForEach-Object { $_.ToString() }) -notcontains $userIdentityAdd) 
-    {
-        # Add the user with Editor permissions if they don't already have permissions
-        Add-MailboxFolderPermission -Identity $calendarIdentity -User $userIdentityAdd -AccessRights Editor
-        $newPermissions = Get-MailboxFolderPermission -Identity $calendarIdentity
-        Write-Host "Added $userIdentityAdd to $($room.DisplayName) permissions." -ForegroundColor Green
+# Iterate through each room and update permissions
+foreach ($room in $teamsRooms) {
+    $calendarIdentity = "$($room.PrimarySmtpAddress):\Calendar"
+
+    Write-Host "`nProcessing $($room.DisplayName)..." -ForegroundColor Cyan
+
+    try {
+        $newPermissions = Get-MailboxFolderPermission `
+            -Identity $calendarIdentity `
+            -ErrorAction Stop
+    }
+    catch {
+        Write-Warning "Could not retrieve permissions for $($room.DisplayName): $($_.Exception.Message)"
+        continue
+    }
+
+    $currentPermissionUsers = @(
+        $newPermissions.User |
+            ForEach-Object { $_.ToString() }
+    )
+
+    # Add the requested identity when it does not already have permissions
+    if ($currentPermissionUsers -notcontains $userIdentityAdd) {
+        try {
+            Add-MailboxFolderPermission `
+                -Identity $calendarIdentity `
+                -User $userIdentityAdd `
+                -AccessRights Editor `
+                -ErrorAction Stop
+
+            Write-Host "Added $userIdentityAdd to $($room.DisplayName)." -ForegroundColor Green
+        }
+        catch {
+            Write-Warning "Could not add $userIdentityAdd to $($room.DisplayName): $($_.Exception.Message)"
+        }
     }
     else {
-         Write-Host "$userIdentityAdd already has permissions for $($room.DisplayName). Skipping..." -ForegroundColor Yellow
+        Write-Host "$userIdentityAdd already has permissions for $($room.DisplayName). Skipping..." -ForegroundColor Yellow
     }
 
-    if( ($newPermissions.user | ForEach-Object { $_.ToString() }) -contains $userIdentityRemove) 
-    {
-        # Remove the user if they have permissions
-        Remove-MailboxFolderPermission -Identity $calendarIdentity -User $userIdentityRemove -Confirm:$false
-        $newPermissions = Get-MailboxFolderPermission -Identity $calendarIdentity
-        Write-Host "Removed $userIdentityRemove from $($room.DisplayName) permissions." -ForegroundColor Red
+    # Remove each requested identity when it has permissions
+    foreach ($userIdentityRemove in $userIdentitiesRemove) {
+        if ($currentPermissionUsers -contains $userIdentityRemove) {
+            try {
+                Remove-MailboxFolderPermission `
+                    -Identity $calendarIdentity `
+                    -User $userIdentityRemove `
+                    -Confirm:$false `
+                    -ErrorAction Stop
+
+                Write-Host "Removed $userIdentityRemove from $($room.DisplayName)." -ForegroundColor Red
+            }
+            catch {
+                Write-Warning "Could not remove $userIdentityRemove from $($room.DisplayName): $($_.Exception.Message)"
+            }
+        }
+        else {
+            Write-Host "$userIdentityRemove does not have permissions for $($room.DisplayName). Skipping..." -ForegroundColor Yellow
+        }
     }
-    else {
-         Write-Host "$userIdentityRemove does not have permissions for $($room.DisplayName). Skipping..." -ForegroundColor Yellow
+
+    # Retrieve the final permission state once after all changes
+    try {
+        $newPermissions = Get-MailboxFolderPermission `
+            -Identity $calendarIdentity `
+            -ErrorAction Stop
     }
-    
-    Write-Host "Updated permissions for $($room.DisplayName):" -ForegroundColor Green
-    $newPermissions | Format-Table User,AccessRights -AutoSize 
+    catch {
+        Write-Warning "Could not retrieve final permissions for $($room.DisplayName): $($_.Exception.Message)"
+        continue
+    }
+
+    Write-Host "Final permissions for $($room.DisplayName):" -ForegroundColor Green
+    $newPermissions | Format-Table User, AccessRights -AutoSize
+
     $calendarPermissions += $newPermissions |
-        Where-Object { $_.AccessRights -and ($_.AccessRights -notcontains 'None') } |
+        Where-Object {
+            $_.AccessRights -and
+            $_.AccessRights -notcontains "None"
+        } |
         ForEach-Object {
             [PSCustomObject]@{
                 Room         = $room.DisplayName
                 User         = $_.User.ToString()
-                AccessRights = ($_.AccessRights -join ', ')
+                AccessRights = $_.AccessRights -join ", "
             }
         }
 }
 
-Export-Excel -Path "C:\Users\DakotaRuhl\Documents\Reports\Calendar Permissions\AllRooms3.xlsx" -WorksheetName "Permissions" -AutoSize -TableName "CalendarPermissions" -InputObject $calendarPermissions
+$exportPath = "C:\Users\DakotaRuhl\Documents\Reports\Calendar Permissions\$($roomListName).xlsx"
 
-#Remove-MailboxFolderPermission -Identity $calendarIdentity -User $userIdentityRemove
-#Get-MailboxFolderPermission -Identity $calendarIdentity | Format-Table User,AccessRights -AutoSize 
+$calendarPermissions |
+    Export-Excel `
+        -Path $exportPath `
+        -WorksheetName "Permissions" `
+        -AutoSize `
+        -TableName "CalendarPermissions"
 
-#expand the "Er Calendar Owners" user
-#Get-MailboxFolderPermission -Identity $calendarIdentity -User "ER Calender Owners"
-
-#$allRooms = $teamsRooms | ForEach-Object { $_.DisplayName }
-
-<# Get-MailboxFolderPermission -Identity "Olympus:\Calendar" | Format-Table User,AccessRights -AutoSize 
-Add-MailboxFolderPermission -Identity "Octavio :\Calendar" -User "Dakota Ruhl" -AccessRights Owner
-Remove-MailboxFolderPermission -Identity "Aimee Middleton:\Calendar" -User "Jessica Rohrbaugh" -Confirm:$false
- #>
-
-
-
-$UPN = "nherr@erock.com"
-$calendarIdentity = "$($UPN):\Calendar"
-$userIdentityAdd = "tamaya@erock.com"
-Get-MailboxFolderPermission -Identity $calendarIdentity | Format-Table -AutoSize 
-Get-MailboxPermission -Identity $UPN
-Get-Mailbox $UPN | FL
-
-Remove-MailboxFolderPermission -Identity $calendarIdentity -User $userIdentityAdd -Confirm:$false
-Remove-MailboxFolderPermission -Identity $calendarIdentity -User "Joseph Obebeduo" -Confirm:$false
-Set-MailboxFolderPermission -Identity "IBlakely@enchantedrock.com:\Calendar" -User "Default" -AccessRights AvailabilityOnly 
-Set-MailboxFolderPermission -Identity $calendarIdentity -User $userIdentityAdd -AccessRights Owner
-Add-MailboxFolderPermission -Identity $calendarIdentity -User $userIdentityAdd -AccessRights Owner -SharingPermissionFlags Delegate, CanViewPrivateItems
-
-Add-MailboxFolderPermission -Identity $calendarIdentity -User $userIdentityAdd -AccessRights Owner
-
-Sales solution meeting prep
-Sales solution meeting
-
-$title = "Sales solution meeting prep"
-$adminEmail = "admin-dr@enchantedrock.com"
-$meetings = Get-Mailbox -ResultSize Unlimited | Get-CalendarDiagnosticObjects -ResultSize Unlimited | Where-Object { $_.Subject -eq $title }
-$meetings | Select-Object OrganizerName, OrganizerSmtpAddress, StartTime, EndTime 
-
-Get-MailboxAutoReplyConfiguration -Identity $UPN
-
-$guid = (get-mailbox -Identity "nherr@erock.com" | select-object -ExpandProperty exchangeguid)
-Get-InboxRule -Mailbox $guid.Guid -includehidden
-
-Get-InboxRule -Mailbox nherr@erock.com -IncludeHidden |
-    Where-Object {$_.Name -like "Delegate Rule*"} |
-    Format-List *
+Write-Host "`nPermission report exported to: $exportPath" -ForegroundColor Cyan

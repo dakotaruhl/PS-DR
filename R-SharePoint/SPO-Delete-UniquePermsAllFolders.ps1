@@ -1,10 +1,9 @@
 #Set Variables
-$SiteURL = "https://enchantedrock.sharepoint.com/sites/Granite"
-$FolderURL = "/Shared Documents" 
- 
-$TenantId   = "0bdf0e1f-a359-4b5c-9b79-9357e35ff8c6"
+$SiteURL = "https://enchantedrock.sharepoint.com/sites/erintranet"
+$FolderURL = "/Human Resources/1. Admin HR - Confidential to HR department Only/Employee Files & Data"
 $ClientId   = "97d01716-c2a3-4311-9b73-09ac8579cbf1"
 $Thumbprint = "94EF4B57723E2E90CD56F2F407EF6AFBEF275392"
+$TenantId = "0bdf0e1f-a359-4b5c-9b79-9357e35ff8c6"
 
 #Connect to PnP Online
 Connect-PnPOnline -URL $SiteURL -ClientId $ClientId -Tenant $TenantId -Thumbprint $Thumbprint
