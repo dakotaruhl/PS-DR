@@ -1,4 +1,5 @@
 # Connect to Microsoft Graph using certificate-based authentication
+Start-transcript -Path ".\output\SecGroup-Get-Owners.log"
 
 Connect-MgGraph `
         -TenantId $env:AZURE_TENANT_ID `
@@ -50,3 +51,4 @@ $Results |
 
 
 Export-Excel -InputObject $Results -Path ".\output\BCRoleGroups.xlsx" -AutoSize
+Stop-Transcript

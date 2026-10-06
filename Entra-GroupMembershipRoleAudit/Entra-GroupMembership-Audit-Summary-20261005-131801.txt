@@ -1,0 +1,23 @@
+Microsoft Entra Security-Group Membership Privilege Audit
+Generated UTC: 2026-10-05 18:18:07Z
+Tenant domain: enchantedrock.onmicrosoft.com
+Tenant ID: 0bdf0e1f-a359-4b5c-9b79-9357e35ff8c6
+
+Role definitions reviewed: 148
+In-scope roles: 18
+In-scope active assignments: 19
+In-scope eligible assignments: 6
+Unique active users: 11
+Unique eligible users: 11
+Disabled users included: False
+
+Detection combines known broad built-in role template IDs with explicit role permissions.
+Privileged Role Administrator is included because of role-assignable group authority.
+Assignment scope must be considered when interpreting effective access.
+PIM-for-Groups eligible members are not included unless currently active group members.
+
+Reports:
+C:\Users\DakotaRuhl\Documents\PS-DR\Entra-GroupMembershipRoleAudit\Entra-InScope-Roles-20261005-131801.csv
+C:\Users\DakotaRuhl\Documents\PS-DR\Entra-GroupMembershipRoleAudit\Entra-InScope-Assignments-20261005-131801.csv
+C:\Users\DakotaRuhl\Documents\PS-DR\Entra-GroupMembershipRoleAudit\Entra-InScope-EffectiveUsers-20261005-131801.csv
+C:\Users\DakotaRuhl\Documents\PS-DR\Entra-GroupMembershipRoleAudit\Entra-GroupMembership-Audit-20261005-131801.xlsx

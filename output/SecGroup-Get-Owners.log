@@ -1,0 +1,73 @@
+**********************
+PowerShell transcript start
+Start time: 20261005122705
+Username: AzureAD\DakotaRuhl
+RunAs User: AzureAD\DakotaRuhl
+Configuration Name: 
+Machine: 22397HM-DRUHL (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Program Files\WindowsApps\Microsoft.PowerShell_7.6.6.0_x64__8wekyb3d8bbwe\pwsh.dll -NoProfile -ExecutionPolicy Bypass -Command Import-Module 'c:\Users\DakotaRuhl\.vscode\extensions\ms-vscode.powershell-2025.4.0\modules\PowerShellEditorServices\PowerShellEditorServices.psd1'; Start-EditorServices -HostName 'Visual Studio Code Host' -HostProfileId 'Microsoft.VSCode' -HostVersion '2025.4.0' -BundledModulesPath 'c:\Users\DakotaRuhl\.vscode\extensions\ms-vscode.powershell-2025.4.0\modules' -EnableConsoleRepl -StartupBanner "PowerShell Extension v2025.4.0
+Copyright (c) Microsoft Corporation.
+
+https://aka.ms/vscode-powershell
+Type 'help' to get help.
+" -LogLevel 'Warning' -LogPath 'c:\Users\DakotaRuhl\AppData\Roaming\Code\logs\20261005T121119\window1\exthost\ms-vscode.powershell' -SessionDetailsPath 'c:\Users\DakotaRuhl\AppData\Roaming\Code\User\globalStorage\ms-vscode.powershell\sessions\PSES-VSCode-19776-826547.json' -FeatureFlags @() 
+Process ID: 43824
+PSVersion: 7.6.6
+PSEdition: Core
+GitCommitId: 7.6.6
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is .\output\SecGroup-Get-Owners.log
+
+DisplayName                  OwnerCount OwnerStatus  Owners
+-----------                  ---------- -----------  ------
+BC-ROLE-Accounting Basic              1 SINGLE OWNER Barrett Allen
+BC-ROLE-Accounting External           1 SINGLE OWNER Barrett Allen
+BC-ROLE-Accounts Payable              1 SINGLE OWNER Barrett Allen
+BC-ROLE-Accounts Receivable           1 SINGLE OWNER Barrett Allen
+BC-ROLE-Administrator                 1 SINGLE OWNER Barrett Allen
+BC-ROLE-Banking                       1 SINGLE OWNER Barrett Allen
+BC-ROLE-BC Contractor                 1 SINGLE OWNER Barrett Allen
+BC-ROLE-BI Developer                  1 SINGLE OWNER Barrett Allen
+BC-ROLE-Contracts Manager             1 SINGLE OWNER Barrett Allen
+BC-ROLE-Controller                    1 SINGLE OWNER Barrett Allen
+BC-ROLE-Engineering                   1 SINGLE OWNER Barrett Allen
+BC-ROLE-Executive                     1 SINGLE OWNER Barrett Allen
+BC-ROLE-Finance                       1 SINGLE OWNER Barrett Allen
+BC-ROLE-Financial Reporting           1 SINGLE OWNER Barrett Allen
+BC-ROLE-Fixed Assets                  1 SINGLE OWNER Barrett Allen
+BC-ROLE-Gen Journal                   1 SINGLE OWNER Barrett Allen
+BC-ROLE-Inventory                     1 SINGLE OWNER Barrett Allen
+BC-ROLE-Inventory Mgr                 1 SINGLE OWNER Barrett Allen
+BC-ROLE-IT Support                    1 SINGLE OWNER Barrett Allen
+BC-ROLE-Item Master Maintain          1 SINGLE OWNER Barrett Allen
+BC-ROLE-Manufacturing                 1 SINGLE OWNER Barrett Allen
+BC-ROLE-Mfg Acct                      1 SINGLE OWNER Barrett Allen
+BC-ROLE-Planning                      1 SINGLE OWNER Barrett Allen
+BC-ROLE-PQUOTES                       1 SINGLE OWNER Barrett Allen
+BC-ROLE-Procurement                   1 SINGLE OWNER Barrett Allen
+BC-ROLE-Procurement Manager           1 SINGLE OWNER Barrett Allen
+BC-ROLE-Production                    1 SINGLE OWNER Barrett Allen
+BC-ROLE-Project Acct                  1 SINGLE OWNER Barrett Allen
+BC-ROLE-Project Mgmt                  1 SINGLE OWNER Barrett Allen
+BC-ROLE-Quality                       1 SINGLE OWNER Barrett Allen
+BC-ROLE-RCV Only                      1 SINGLE OWNER Barrett Allen
+BC-ROLE-Sales Invoicing               1 SINGLE OWNER Barrett Allen
+BC-ROLE-Sales Mgmt                    1 SINGLE OWNER Barrett Allen
+BC-ROLE-Service                       1 SINGLE OWNER Barrett Allen
+BC-ROLE-SPV Accountant                1 SINGLE OWNER Barrett Allen
+BC-ROLE-Team Member                   1 SINGLE OWNER Barrett Allen
+BC-ROLE-Treasury                      1 SINGLE OWNER Barrett Allen
+BC-ROLE-UOM Maintenance               1 SINGLE OWNER Barrett Allen
+BC-ROLE-Warehouse                     1 SINGLE OWNER Barrett Allen
+BC-ROLE-Warehouse-Temp                1 SINGLE OWNER Barrett Allen
+
+**********************
+PowerShell transcript end
+End time: 20261005122717
+**********************
