@@ -2,10 +2,10 @@
 # Credentials
 # =====================================================
 
-$Thumbprint = "C47B91EB62634CA61FA8146DDA83B8BF605C0962"
-$ClientID   = "ea2ca49b-d0df-4774-b611-86cf9dc9629f"
-$TenantId = "0bdf0e1f-a359-4b5c-9b79-9357e35ff8c6"
-$Tenant = "enchantedrock.onmicrosoft.com"
+$Thumbprint = $env:AZURE_CLIENT_CERTIFICATE_THUMBPRINT
+$ClientID   = $env:AZURE_CLIENT_ID
+$TenantId = $env:AZURE_TENANT_ID
+$Tenant = $env:AZURE_TENANT_DOMAIN
 
 
 
@@ -29,14 +29,15 @@ Connect-MgGraph `
 # Azure 
 # =====================================================       
 
-Connect-AzAccount -ServicePrincipal `
-        -Tenant $TenantId `
-        -ApplicationId $ClientID `
-        -CertificateThumbprint $Thumbprint | Out-Null
+Connect-AzAccount -Subscription "03866bcc-752b-4fd1-b5bb-cdd66aed21fb" `
+        -ServicePrincipal `
+        -Tenant $env:AZURE_TENANT_ID `
+        -ApplicationId $env:AZURE_CLIENT_ID `
+        -CertificateThumbprint $env:AZURE_CLIENT_CERTIFICATE_THUMBPRINT | Out-Null
 
 
 #CLI 
-az login --service-principal -u $ClientID -p <path-to-cert.pem> --tenant $Tenant
+az login --service-principal -u $env:AZURE_CLIENT_ID -p <path-to-cert.pem> --tenant $env:AZURE_TENANT_ID
 
 # =====================================================
 # Get Certificate 
