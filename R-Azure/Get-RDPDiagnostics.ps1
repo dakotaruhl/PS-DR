@@ -20,7 +20,7 @@ $Result.InstanceView.Output
 
 $SubscriptionId    = (Get-AzContext).Subscription.Id
 $ResourceGroupName = "VINE_RESOURCES"
-$VMName            = "azbusappsdb"
+$VMName            = "azappsdb"
 $Location          = "centralus"
 $RunCommandName    = "Get-RecentRDPFailure"
 

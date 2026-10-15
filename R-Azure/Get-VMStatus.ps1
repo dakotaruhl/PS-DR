@@ -101,3 +101,57 @@ foreach ($command in $commands) {
         --expand instanceView `
         -o json
 }
+
+(Get-CimInstance Win32_ComputerSystem).DNSHostName
+(Get-CimInstance Win32_ComputerSystem).Domain
+
+Resolve-DnsName 10.0.7.4 -Type PTR
+
+Resolve-DnsName enchantedrock.com -Type SOA -Server 10.0.5.4
+
+Resolve-DnsName enchantedrock.com -Type NS -Server 10.0.5.4
+
+Get-AzNetworkInterface |
+    ForEach-Object {
+        $Nic = $_
+
+        foreach ($IpConfig in $Nic.IpConfigurations) {
+            if ($IpConfig.PrivateIpAddress -eq '10.0.5.4') {
+                [PSCustomObject]@{
+                    NetworkInterface = $Nic.Name
+                    ResourceGroup    = $Nic.ResourceGroupName
+                    PrivateIP        = $IpConfig.PrivateIpAddress
+                    VM               = $Nic.VirtualMachine.Id
+                }
+            }
+        }
+    }
+
+Get-AzVM `
+    -ResourceGroupName "Vine_Resources" `
+    -Name "azfgt01" |
+    Select-Object Name,
+        Location,
+        @{N="Publisher";E={$_.StorageProfile.ImageReference.Publisher}},
+        @{N="Offer";E={$_.StorageProfile.ImageReference.Offer}},
+        @{N="SKU";E={$_.StorageProfile.ImageReference.Sku}}
+
+Get-AzNetworkInterface |
+    Where-Object {
+        $_.VirtualMachine.Id -like "*/virtualMachines/azfgt01"
+    } |
+    ForEach-Object {
+
+        $Nic = $_
+
+        foreach ($IP in $Nic.IpConfigurations) {
+
+            [PSCustomObject]@{
+                NIC       = $Nic.Name
+                PrivateIP = $IP.PrivateIpAddress
+                Primary   = $IP.Primary
+                Subnet    = ($IP.Subnet.Id -split "/")[-1]
+            }
+        }
+    } |
+    Format-Table -AutoSize

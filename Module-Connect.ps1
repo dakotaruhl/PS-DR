@@ -37,7 +37,7 @@ Connect-AzAccount -Subscription "03866bcc-752b-4fd1-b5bb-cdd66aed21fb" `
 
 
 #CLI 
-az login --service-principal -u $env:AZURE_CLIENT_ID -p <path-to-cert.pem> --tenant $env:AZURE_TENANT_ID
+az login --service-principal -u $env:AZURE_CLIENT_ID -c $env:AZURE_CLIENT_CERTIFICATE_PATH --tenant $env:AZURE_TENANT_ID
 
 # =====================================================
 # Get Certificate 

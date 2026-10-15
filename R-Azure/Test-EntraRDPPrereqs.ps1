@@ -19,7 +19,7 @@ $Result.InstanceView |
 
 $SubscriptionId    = (Get-AzContext).Subscription.Id
 $ResourceGroupName = "VINE_RESOURCES"
-$VMName            = "azbusappsdb"
+$VMName            = "azappsdb"
 $Location          = "centralus"
 $RunCommandName    = "Test-EntraRDPPrereqs"
 
