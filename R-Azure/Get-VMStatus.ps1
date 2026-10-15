@@ -155,3 +155,76 @@ Get-AzNetworkInterface |
         }
     } |
     Format-Table -AutoSize
+
+$ResourceGroupName = "VINE_RESOURCES"
+$VMName = "azappsdb"
+
+$vm = Get-AzVM `
+    -ResourceGroupName $ResourceGroupName `
+    -Name $VMName `
+    -Status
+
+$vm.Statuses |
+    Select-Object Code, DisplayStatus, Message |
+    Format-List
+
+Get-AzVMExtension `
+    -ResourceGroupName $ResourceGroupName `
+    -VMName $VMName |
+    Select-Object Name, Publisher, ExtensionType, ProvisioningState |
+    Format-Table -AutoSize
+
+Test-NetConnection 10.0.7.4 -Port 3389 -InformationLevel Detailed
+Test-NetConnection azappsdb.enchantedrock.com -Port 3389 -InformationLevel Detailed
+Resolve-DnsName azappsdb.enchantedrock.com
+
+$vm = Get-AzVM `
+    -ResourceGroupName "VINE_RESOURCES" `
+    -Name "azappsdb"
+
+[PSCustomObject]@{
+    VMName        = $vm.Name
+    ResourceId    = $vm.Id
+    IdentityType  = $vm.Identity.Type
+    PrincipalId   = $vm.Identity.PrincipalId
+    TenantId      = $vm.Identity.TenantId
+}
+
+Get-AzRoleAssignment `
+    -Scope $vm.Id |
+    Where-Object {
+        $_.RoleDefinitionName -in @(
+            "Virtual Machine Administrator Login",
+            "Virtual Machine User Login"
+        )
+    } |
+    Select-Object DisplayName,
+                  SignInName,
+                  ObjectType,
+                  RoleDefinitionName,
+                  Scope |
+    Format-Table -AutoSize
+
+$CompareVM = "azbusappsdb"
+$ResourceGroupName = "VINE_RESOURCES"
+
+Get-AzVMExtension `
+    -ResourceGroupName $ResourceGroupName `
+    -VMName $CompareVM |
+    Select-Object Name,
+                  Publisher,
+                  ExtensionType,
+                  TypeHandlerVersion,
+                  ProvisioningState |
+    Format-Table -AutoSize
+
+$compare = Get-AzVM `
+    -ResourceGroupName $ResourceGroupName `
+    -Name $CompareVM
+
+[PSCustomObject]@{
+    VMName       = $compare.Name
+    IdentityType = $compare.Identity.Type
+    PrincipalId  = $compare.Identity.PrincipalId
+    TenantId     = $compare.Identity.TenantId
+} | Format-List
