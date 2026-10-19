@@ -26,3 +26,4 @@ Get-ItemProperty 'HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\ProfileList
 $Result.Value |
     Select-Object Code, DisplayStatus, Message |
     Format-List
+

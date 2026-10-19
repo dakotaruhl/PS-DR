@@ -1,7 +1,10 @@
 param (
     [Parameter(Mandatory)]
     [ValidateScript({ Test-Path $_ -PathType Leaf })]
-    [string]$CsvPath
+    [string]$CsvPath,
+
+    [Parameter(Mandatory)]
+    [string]$GroupEmailAddress
 )
 
 # Requires ExchangeOnlineManagement
@@ -12,67 +15,84 @@ Connect-ExchangeOnline `
     -ShowBanner:$false
 
 $CsvPath = (Resolve-Path $CsvPath).Path
-
 $Users = @(Import-Csv -Path $CsvPath)
-
 $UnverifiedUsers = [System.Collections.Generic.List[object]]::new()
 
 foreach ($Row in $Users) {
 
-    $UPN       = $Row.UPN.Trim()
-    $GroupName = $Row.'Group Name'.Trim()
+    # Add the tracking column if the source CSV does not already contain it.
+    if (-not $Row.PSObject.Properties['Added']) {
+        $Row | Add-Member `
+            -MemberType NoteProperty `
+            -Name 'Added' `
+            -Value 'FALSE'
+    }
 
-    Write-Host "`nProcessing: $UPN" -ForegroundColor Cyan
-    Write-Host "Group:      $GroupName" -ForegroundColor DarkGray
-
-    # Skip rows already completed
+    # Skip rows already completed.
     if ($Row.Added -eq 'TRUE') {
-        Write-Host "Already marked as added. Skipping." -ForegroundColor DarkGray
+        Write-Host "`nAlready marked as added. Skipping: $($Row.userPrincipalName)" -ForegroundColor DarkGray
         continue
     }
 
-    # Default to FALSE
+    # Default the current row to FALSE until membership is confirmed.
     $Row.Added = 'FALSE'
 
-    # Verify the recipient exists in Exchange Online
+    $UPN = if ($null -ne $Row.userPrincipalName) {
+        $Row.userPrincipalName.Trim()
+    }
+    else {
+        ''
+    }
+
+    Write-Host "`nProcessing: $UPN" -ForegroundColor Cyan
+    Write-Host "Group:      $GroupEmailAddress" -ForegroundColor DarkGray
+
+    # Skip malformed rows that do not contain a userPrincipalName.
+    if ([string]::IsNullOrWhiteSpace($UPN)) {
+        Write-Warning "Row does not contain a userPrincipalName."
+        continue
+    }
+
+    # Verify the recipient exists in Exchange Online.
     try {
-        $Recipient = Get-Recipient -Identity $UPN -ErrorAction Stop
+        $Recipient = Get-Recipient `
+            -Identity $UPN `
+            -ErrorAction Stop
     }
     catch {
         Write-Warning "Unable to verify UPN: $UPN"
 
         $UnverifiedUsers.Add(
             [PSCustomObject]@{
-                UPN        = $UPN
-                GroupName  = $GroupName
+                UPN = $UPN
             }
         )
 
         continue
     }
 
-    # Add user to the mail-enabled security group
+    # Add the recipient to the mail-enabled security group.
     try {
         Add-DistributionGroupMember `
-            -Identity $GroupName `
+            -Identity $GroupEmailAddress `
             -Member $Recipient.PrimarySmtpAddress `
             -BypassSecurityGroupManagerCheck `
             -ErrorAction Stop
 
         $Row.Added = 'TRUE'
 
-        Write-Host "Successfully added $UPN to $GroupName" -ForegroundColor Green
+        Write-Host "Successfully added $UPN to $GroupEmailAddress" -ForegroundColor Green
 
-        # Save progress immediately
-        $Users | Export-Csv -Path $CsvPath -NoTypeInformation
+        # Save progress immediately so the script is safely rerunnable.
+        $Users | Export-Csv `
+            -Path $CsvPath `
+            -NoTypeInformation
     }
     catch {
-
-        # If they're already a member, determine whether we should
-        # consider this row successfully satisfied.
+        # If the recipient is already a member, consider the row complete.
         try {
             $ExistingMember = Get-DistributionGroupMember `
-                -Identity $GroupName `
+                -Identity $GroupEmailAddress `
                 -ResultSize Unlimited `
                 -ErrorAction Stop |
                 Where-Object {
@@ -82,38 +102,45 @@ foreach ($Row in $Users) {
             if ($ExistingMember) {
                 $Row.Added = 'TRUE'
 
-                Write-Host "$UPN is already a member of $GroupName" -ForegroundColor Yellow
+                Write-Host "$UPN is already a member of $GroupEmailAddress" -ForegroundColor Yellow
 
-                $Users | Export-Csv -Path $CsvPath -NoTypeInformation
+                $Users | Export-Csv `
+                    -Path $CsvPath `
+                    -NoTypeInformation
             }
             else {
-                Write-Warning "Failed to add $UPN to $GroupName"
+                Write-Warning "Failed to add $UPN to $GroupEmailAddress"
                 Write-Warning $_.Exception.Message
             }
         }
         catch {
-            Write-Warning "Failed to add or verify membership for $UPN in $GroupName"
+            Write-Warning "Failed to add or verify membership for $UPN in $GroupEmailAddress"
             Write-Warning $_.Exception.Message
         }
     }
 }
 
-# Final save
-$Users | Export-Csv -Path $CsvPath -NoTypeInformation
+# Final save.
+$Users | Export-Csv `
+    -Path $CsvPath `
+    -NoTypeInformation
 
 Write-Host "`n============================================" -ForegroundColor Cyan
 Write-Host "Processing complete" -ForegroundColor Cyan
 Write-Host "============================================" -ForegroundColor Cyan
 
 if ($UnverifiedUsers.Count -gt 0) {
-
     Write-Host "`nUPNs that could not be verified:" -ForegroundColor Yellow
 
     $UnverifiedUsers |
-        Format-Table UPN, GroupName -AutoSize
+        Format-Table UPN -AutoSize
 }
 else {
     Write-Host "`nAll UPNs were successfully verified." -ForegroundColor Green
 }
 
-## .\MESG-Set-AddMembers.ps1 -CsvPath "C:\Users\DakotaRuhl\Documents\PS-DR\Input Data\FortiClient VPN Users.csv"
+<# Example:
+ .\R-Exchange\MESG-Set-AddMembers.ps1 `
+     -CsvPath "C:\Users\DakotaRuhl\Downloads\OnePlanUsers (1).csv" `
+     -GroupEmailAddress "oneplanusers@erock.com"
+#>
