@@ -12,6 +12,7 @@
         Stockton
         Clifton
         Remote
+        Field
 
     Office values can contain multiple locations separated by "/".
     Example:
@@ -35,15 +36,18 @@ $ErrorActionPreference = "Stop"
 # Configuration
 # =========================
 
-$Organization = "erock.com"
+$Organization = "EnchantedRock.onmicrosoft.com"
 
 $ValidLocations = @(
     "Vine"
     "Titan"
     "Hyperion"
+    "Atlas"
     "Stockton"
     "Clifton"
+    "Clinton"
     "Remote"
+    "Field"
 )
 
 # =========================
@@ -166,7 +170,7 @@ $Results = foreach ($Mailbox in $Mailboxes) {
         $CurrentLocations = @(
             $Mailbox.ExtensionCustomAttribute1 |
                 Where-Object {
-                    -not :IsNullOrWhiteSpace($_)
+                    -not [string]::IsNullOrWhiteSpace($_)
                 }
         )
 
@@ -207,10 +211,45 @@ $Results = foreach ($Mailbox in $Mailboxes) {
             Write-Output "    Current: $($CurrentLocations -join ', ')"
             Write-Output "    New:     $($LocationsToSet -join ', ')"
 
-            Set-Mailbox `
-                -Identity $Mailbox.Identity `
-                -ExtensionCustomAttribute1 $LocationsToSet `
-                -ErrorAction Stop
+            $MaxAttempts = 3
+            $Attempt = 0
+            $UpdateSucceeded = $false
+
+            while (-not $UpdateSucceeded -and $Attempt -lt $MaxAttempts) {
+
+                $Attempt++
+
+                try {
+
+                    Set-Mailbox `
+                        -Identity $Mailbox.Identity `
+                        -ExtensionCustomAttribute1 $LocationsToSet `
+                        -ErrorAction Stop
+
+                    $UpdateSucceeded = $true
+                }
+                catch {
+
+                    $SetMailboxError = $_
+
+                    if ($Attempt -ge $MaxAttempts) {
+                        throw
+                    }
+
+                    $DelaySeconds = 5 * $Attempt
+
+                    Write-Warning (
+                        "Set-Mailbox attempt {0}/{1} failed for {2}: {3}. Retrying after {4} seconds." -f `
+                        $Attempt,
+                        $MaxAttempts,
+                        $Mailbox.PrimarySmtpAddress,
+                        $SetMailboxError.Exception.Message,
+                        $DelaySeconds
+                    )
+
+                    Start-Sleep -Seconds $DelaySeconds
+                }
+            }
 
             $UpdatedCount++
             $Status = "Updated"
@@ -229,7 +268,9 @@ $Results = foreach ($Mailbox in $Mailboxes) {
 
         $FailedCount++
 
-        Write-Error "FAILED: $($Mailbox.PrimarySmtpAddress) - $($_.Exception.Message)"
+        $ErrorMessage = $_.Exception.Message
+
+        Write-Warning "FAILED: $($Mailbox.PrimarySmtpAddress) - $ErrorMessage"
 
         [PSCustomObject]@{
             DisplayName      = $Mailbox.DisplayName
@@ -237,7 +278,7 @@ $Results = foreach ($Mailbox in $Mailboxes) {
             Office           = $Mailbox.Office
             Locations        = $null
             UnknownLocations = $null
-            Status           = "Failed: $($_.Exception.Message)"
+            Status           = "Failed: $ErrorMessage"
         }
     }
 }
@@ -263,16 +304,65 @@ if ($FailedCount -gt 0) {
 
 $Results |
     Sort-Object DisplayName |
-    Format-Table `
+    Select-Object `
         DisplayName,
+        PrimarySmtp,
         Office,
         Locations,
         UnknownLocations,
-        Status `
-        -AutoSize
+        Status
 
 # =========================
 # Disconnect
 # =========================
 
 Disconnect-ExchangeOnline -Confirm:$false
+
+
+
+$ManagedIdentityObjectId = "6e0f75bb-2aef-46ba-b80a-c9045d7ecd00"
+
+$RoleDefinition = Get-MgRoleManagementDirectoryRoleDefinition `
+    -Filter "displayName eq 'Exchange Recipient Administrator'"
+
+if ($null -eq $RoleDefinition) {
+    throw "Exchange Recipient Administrator role definition was not found."
+}
+
+$RoleDefinition |
+    Select-Object Id, DisplayName |
+    Format-List
+
+#Assign 
+$RoleAssignment = New-MgRoleManagementDirectoryRoleAssignment `
+    -PrincipalId $ManagedIdentityObjectId `
+    -RoleDefinitionId $RoleDefinition.Id `
+    -DirectoryScopeId "/"
+
+$RoleAssignment |
+    Select-Object `
+        Id,
+        PrincipalId,
+        RoleDefinitionId,
+        DirectoryScopeId |
+    Format-List
+
+$RoleAssignmentId = $RoleAssignment.Id
+
+
+
+$Assignments = Get-MgRoleManagementDirectoryRoleAssignment `
+    -Filter "principalId eq '$ManagedIdentityObjectId'" `
+    -All
+
+ $Assignments | ForEach-Object {
+    $Assignment = $_
+    $Definition = Get-MgRoleManagementDirectoryRoleDefinition `
+        -UnifiedRoleDefinitionId $Assignment.RoleDefinitionId
+
+    [PSCustomObject]@{
+        RoleName     = $Definition.DisplayName
+        AssignmentId = $Assignment.Id
+        Scope        = $Assignment.DirectoryScopeId
+    }
+} | Format-Table -AutoSize

@@ -3,9 +3,10 @@ $ManagedIdentityObjectId = "6e0f75bb-2aef-46ba-b80a-c9045d7ecd00"
 $ManagedIdentityClientId = "7f2929c1-44c0-4aaf-8f1a-a4eed05fa3e3"
 $ExchangeOnlineAppId = "00000002-0000-0ff1-ce00-000000000000"
 
-Connect-MgGraph -Scopes `
-    "Application.Read.All",
-    "AppRoleAssignment.ReadWrite.All"
+Connect-MgGraph -TenantId $env:AZURE_TENANT_ID `
+        -ClientId $env:AZURE_CLIENT_ID `
+        -CertificateThumbprint $env:AZURE_CLIENT_CERTIFICATE_THUMBPRINT `
+        -NoWelcome
 
 #### Grant Exchange.ManageAsApp
 $ExchangeServicePrincipal = Get-MgServicePrincipal `
@@ -49,7 +50,10 @@ else {
 Disconnect-MgGraph
 
 #### Create the Exchange service-principal reference
-Connect-ExchangeOnline
+Connect-ExchangeOnline `
+    -CertificateThumbprint $env:AZURE_CLIENT_CERTIFICATE_THUMBPRINT  `
+    -AppId $env:AZURE_CLIENT_ID `
+    -Organization $env:AZURE_TENANT_DOMAIN
 
 $ExchangeServicePrincipalName = "AA-CustomAttribute1-Set-OfficeLocation"
 
@@ -171,3 +175,82 @@ if (-not $ExistingMember) {
 else {
     Write-Host "Managed identity is already a member." -ForegroundColor DarkGray
 }
+
+
+## Clean up / remove 
+## Inventory / Verify existing setup
+
+$RoleGroupName       = "RG-AA-Set-OfficeLocationExtensionAttribute"
+$CustomRoleName      = "Set-OfficeLocationExtensionAttribute"
+$ServicePrincipalName = "AA-CustomAttribute1-Set-OfficeLocation"
+
+Write-Host "=== Role Group ==="
+Get-RoleGroup -Identity $RoleGroupName |
+    Format-List Name,Roles,Members
+
+Write-Host "`n=== Role Group Members ==="
+Get-RoleGroupMember -Identity $RoleGroupName |
+    Format-Table Name,RecipientType,PrimarySmtpAddress -AutoSize
+
+Write-Host "`n=== Custom Role Assignments ==="
+Get-ManagementRoleAssignment -Role $CustomRoleName |
+    Format-Table Name,Role,RoleAssigneeName,RoleAssigneeType -AutoSize
+
+Write-Host "`n=== Exchange Service Principal ==="
+Get-ServicePrincipal -Identity $ServicePrincipalName |
+    Format-List DisplayName,AppId,ObjectId,Identity
+
+##Remove role group and custom role assignment
+Write-Host "`n=== Removing Role Group ==="
+Remove-RoleGroup `
+    -Identity "RG-AA-Set-OfficeLocationExtensionAttribute" `
+    -Confirm:$false
+
+Get-RoleGroup `
+    -Identity "RG-AA-Set-OfficeLocationExtensionAttribute" `
+    -ErrorAction SilentlyContinue
+
+Write-Host "`n=== Removing Custom Role Assignment ==="  
+Remove-ManagementRoleAssignment `
+    $CustomRoleName `
+    -Confirm:$false
+
+Get-ManagementRoleAssignment `
+    -Role "Set-OfficeLocationExtensionAttribute" |
+    Format-Table `
+        Name,
+        Role,
+        RoleAssigneeName,
+        RoleAssigneeType `
+        -AutoSize
+
+Remove-ManagementRole `
+    -Identity "Set-OfficeLocationExtensionAttribute" `
+    -Confirm:$false
+
+Get-ManagementRole -Identity "Set-OfficeLocationExtensionAttribute" -ErrorAction SilentlyContinue
+
+##Remove service principal
+$ExchangeServicePrincipal = Get-ServicePrincipal `
+    -Identity "AA-CustomAttribute1-Set-OfficeLocation"
+
+$ExchangeServicePrincipal |
+    Format-List DisplayName,AppId,ObjectId,Identity
+
+Remove-ServicePrincipal `
+    -Identity $ExchangeServicePrincipal.Identity `
+    -Confirm:$false
+
+Get-ServicePrincipal -Identity "AA-CustomAttribute1-Set-OfficeLocation" -ErrorAction SilentlyContinue
+
+Write-Host "`n=== Finished Cleanup ==="
+
+Get-ManagementRoleAssignment `
+    -Role "Set-OfficeLocationExtensionAttribute" |
+    Format-Table `
+        Name,
+        Role,
+        RoleAssigneeName,
+        RoleAssigneeType `
+        -AutoSize
+
