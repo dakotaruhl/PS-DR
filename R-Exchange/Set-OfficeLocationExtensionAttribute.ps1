@@ -1,10 +1,8 @@
 <#
 .SYNOPSIS
     Synchronizes Exchange ExtensionCustomAttribute1 with Office locations.
-
 .DESCRIPTION
     Reads the Office attribute from Exchange Online user mailboxes.
-
     Supported Office locations:
         Vine
         Titan
@@ -15,21 +13,17 @@
         Clinton
         Remote
         Field
-
     Office values can contain multiple locations separated by "/".
     Example:
-
         Office = Titan/Hyperion/Vine
-
     Becomes:
-
         ExtensionCustomAttribute1 = Titan, Hyperion, Vine
-
     The runbook only updates mailboxes when the existing
     ExtensionCustomAttribute1 values differ from the desired values.
-
 .NOTES
     Designed for Azure Automation using a system-assigned managed identity.
+    Uses ExternalDirectoryObjectId for Set-Mailbox to avoid ambiguous
+    Identity/alias resolution when Exchange contains duplicate names or aliases.
 #>
 
 $ErrorActionPreference = "Stop"
@@ -37,7 +31,6 @@ $ErrorActionPreference = "Stop"
 # =========================
 # Configuration
 # =========================
-
 $Organization = "EnchantedRock.onmicrosoft.com"
 $MaxAttempts = 3
 
@@ -56,12 +49,10 @@ $ValidLocations = @(
 # =========================
 # Main
 # =========================
-
 try {
     # =========================
     # Connect to Exchange Online
     # =========================
-
     Write-Output "Connecting to Exchange Online using managed identity..."
 
     Connect-ExchangeOnline `
@@ -75,7 +66,6 @@ try {
     # =========================
     # Get mailboxes
     # =========================
-
     Write-Output "Retrieving user mailboxes..."
 
     $Mailboxes = @(
@@ -90,18 +80,21 @@ try {
     # =========================
     # Counters
     # =========================
-
     $UpdatedCount  = 0
     $NoChangeCount = 0
     $SkippedCount  = 0
     $FailedCount   = 0
 
     $Results = foreach ($Mailbox in $Mailboxes) {
+        # Initialize per-mailbox variables so a failure cannot reuse values
+        # left over from the previous mailbox iteration.
+        $LocationsToSet  = @()
+        $UnknownLocations = @()
+
         try {
             # Skip mailboxes without an Office value
             if ([string]::IsNullOrWhiteSpace($Mailbox.Office)) {
                 Write-Verbose "SKIPPED: $($Mailbox.PrimarySmtpAddress) - Office is empty."
-
                 $SkippedCount++
 
                 [PSCustomObject]@{
@@ -112,7 +105,6 @@ try {
                     UnknownLocations = $null
                     Status           = "Skipped - Empty Office"
                 }
-
                 continue
             }
 
@@ -145,7 +137,6 @@ try {
             # No approved locations found
             if ($LocationsToSet.Count -eq 0) {
                 Write-Warning "SKIPPED: $($Mailbox.PrimarySmtpAddress) - No recognized locations in '$($Mailbox.Office)'"
-
                 $SkippedCount++
 
                 [PSCustomObject]@{
@@ -156,7 +147,6 @@ try {
                     UnknownLocations = $UnknownLocations -join ", "
                     Status           = "Skipped - No Valid Locations"
                 }
-
                 continue
             }
 
@@ -193,7 +183,6 @@ try {
 
             if ($IsAlreadyCorrect) {
                 Write-Verbose "NO CHANGE: $($Mailbox.PrimarySmtpAddress) - $($LocationsToSet -join ', ')"
-
                 $NoChangeCount++
                 $Status = "No Change"
             }
@@ -203,6 +192,15 @@ try {
                 Write-Verbose "    Current: $($CurrentLocations -join ', ')"
                 Write-Verbose "    New:     $($LocationsToSet -join ', ')"
 
+                # ExternalDirectoryObjectId maps this mailbox to its unique
+                # Microsoft Entra object. Using it avoids Set-Mailbox having
+                # to resolve a potentially duplicated Name/Alias value.
+                $MailboxIdentity = $Mailbox.ExternalDirectoryObjectId
+
+                if ([string]::IsNullOrWhiteSpace($MailboxIdentity)) {
+                    throw "ExternalDirectoryObjectId is empty for mailbox '$($Mailbox.PrimarySmtpAddress)'. The mailbox was not modified."
+                }
+
                 $Attempt = 0
                 $UpdateSucceeded = $false
 
@@ -211,7 +209,7 @@ try {
 
                     try {
                         Set-Mailbox `
-                            -Identity $Mailbox.Identity `
+                            -Identity $MailboxIdentity `
                             -ExtensionCustomAttribute1 $LocationsToSet `
                             -ErrorAction Stop
 
@@ -219,6 +217,13 @@ try {
                     }
                     catch {
                         $SetMailboxError = $_
+                        $SetMailboxErrorMessage = $SetMailboxError.Exception.Message
+
+                        # Ambiguous identity is deterministic. Retrying will not
+                        # resolve it, so fail this mailbox immediately.
+                        if ($SetMailboxErrorMessage -match "matches multiple entries") {
+                            throw
+                        }
 
                         if ($Attempt -ge $MaxAttempts) {
                             throw
@@ -231,7 +236,7 @@ try {
                             $Attempt,
                             $MaxAttempts,
                             $Mailbox.PrimarySmtpAddress,
-                            $SetMailboxError.Exception.Message,
+                            $SetMailboxErrorMessage,
                             $DelaySeconds
                         )
 
@@ -272,7 +277,6 @@ try {
     # =========================
     # Summary
     # =========================
-
     Write-Output ""
     Write-Output "========================================="
     Write-Output "Office Location Synchronization Complete"
@@ -303,7 +307,6 @@ finally {
     # =========================
     # Disconnect
     # =========================
-
     Disconnect-ExchangeOnline `
         -Confirm:$false `
         -ErrorAction SilentlyContinue

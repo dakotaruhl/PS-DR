@@ -56,4 +56,50 @@ $env:AZURE_CLIENT_CERTIFICATE_THUMBPRINT
 $env:AZURE_CLIENT_CERTIFICATE_PATH
 $env:AZURE_TENANT_ID
 
-Update-MgGroup -GroupId "00a68b7a-3e61-4b6d-93e8-d8229bb21a18" -SecurityEnabled:$true
+#########################################################################################################
+##### General Testing #####
+
+$ProblemUsers = @(
+    "pfrederick@erock.com",
+    "rweston@erock.com"
+)
+
+foreach ($User in $ProblemUsers) {
+
+    Write-Host "`n========================================" -ForegroundColor Cyan
+    Write-Host "Checking $User" -ForegroundColor Cyan
+    Write-Host "========================================"
+
+    Get-Recipient -ResultSize Unlimited |
+        Where-Object {
+            $_.PrimarySmtpAddress -eq $User -or
+            $_.EmailAddresses -contains "smtp:$User" -or
+            $_.Alias -eq ($User -split "@")[0]
+        } |
+        Format-List DisplayName,
+                    Name,
+                    Alias,
+                    PrimarySmtpAddress,
+                    RecipientType,
+                    RecipientTypeDetails,
+                    ExternalDirectoryObjectId,
+                    DistinguishedName,
+                    EmailAddresses
+}
+
+########
+Get-Recipient -ResultSize Unlimited |
+    Where-Object {
+        $_.Name -eq "rwilliams" -or
+        $_.Alias -eq "rwilliams" -or
+        $_.EmailAddresses -match "rwilliams"
+    } |
+    Format-List DisplayName,
+                Name,
+                Alias,
+                PrimarySmtpAddress,
+                RecipientType,
+                RecipientTypeDetails,
+                ExternalDirectoryObjectId,
+                DistinguishedName,
+                EmailAddresses
