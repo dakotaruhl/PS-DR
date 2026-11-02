@@ -1,0 +1,384 @@
+[
+  {
+    "profile": {
+      "account_id": "dbid:AABem7aF1p6ZVpzfA5Ro_XK70UWRnExL9AY",
+      "email": "tmcandrew@erockhold.com",
+      "email_verified": true,
+      "groups": [
+        "g:b5661bdd01bc6b800000000000000004"
+      ],
+      "is_directory_restricted": false,
+      "joined_on": "2015-11-09T15:41:42Z",
+      "member_folder_id": "20283878",
+      "membership_type": {
+        ".tag": "full"
+      },
+      "name": {
+        "abbreviated_name": "TM",
+        "display_name": "Thomas McAndrew",
+        "familiar_name": "Thomas",
+        "given_name": "Thomas",
+        "surname": "McAndrew"
+      },
+      "root_folder_id": "2687793459",
+      "secondary_emails": [],
+      "status": {
+        ".tag": "suspended"
+      },
+      "suspended_on": "2026-09-11T23:07:09Z",
+      "team_member_id": "dbmid:AAABqWASfw5RJlksCfCCbYat7nCQRU0_noA"
+    },
+    "roles": []
+  },
+  {
+    "profile": {
+      "account_id": "dbid:AAChdIjvixnbudXOI_TWBDj27LPhJcQKNlU",
+      "email": "iblakely@erockhold.com",
+      "email_verified": true,
+      "groups": [
+        "g:b5661bdd01bc6b800000000000000004"
+      ],
+      "is_directory_restricted": false,
+      "joined_on": "2015-11-05T22:02:03Z",
+      "member_folder_id": "725967511",
+      "membership_type": {
+        ".tag": "full"
+      },
+      "name": {
+        "abbreviated_name": "IB",
+        "display_name": "Ian Blakely",
+        "familiar_name": "Ian",
+        "given_name": "Ian",
+        "surname": "Blakely"
+      },
+      "root_folder_id": "2687783523",
+      "secondary_emails": [],
+      "status": {
+        ".tag": "active"
+      },
+      "team_member_id": "dbmid:AAAqSIzpEn0QVdSFxgQp-HbM3n26ORcJO_Y"
+    },
+    "roles": []
+  },
+  {
+    "profile": {
+      "account_id": "dbid:AACh8AS3D5-MaafJBwbiP_swEsyj0KEnC0o",
+      "email": "camthor@erockhold.com",
+      "email_verified": true,
+      "groups": [
+        "g:b5661bdd01bc6b800000000000000004"
+      ],
+      "is_directory_restricted": false,
+      "joined_on": "2015-11-10T19:14:42Z",
+      "member_folder_id": "1062204797",
+      "membership_type": {
+        ".tag": "full"
+      },
+      "name": {
+        "abbreviated_name": "CC",
+        "display_name": "Corey camthor1@yahoo.com",
+        "familiar_name": "Corey",
+        "given_name": "Corey",
+        "surname": "camthor1@yahoo.com"
+      },
+      "root_folder_id": "2687698947",
+      "secondary_emails": [],
+      "status": {
+        ".tag": "active"
+      },
+      "team_member_id": "dbmid:AADs_XIVEqbxA0hkApSddViFyT-GW9n9TBI"
+    },
+    "roles": []
+  },
+  {
+    "profile": {
+      "account_id": "dbid:AAC9jHtrHA5XzHsykQYqHHHPB8p7XOSwtbg",
+      "email": "mmetivier@erockhold.com",
+      "email_verified": true,
+      "groups": [
+        "g:b5661bdd01bc6b800000000000000004"
+      ],
+      "is_directory_restricted": false,
+      "joined_on": "2015-11-05T17:27:57Z",
+      "member_folder_id": "260814366",
+      "membership_type": {
+        ".tag": "full"
+      },
+      "name": {
+        "abbreviated_name": "MM",
+        "display_name": "Mario Metivier",
+        "familiar_name": "Mario",
+        "given_name": "Mario",
+        "surname": "Metivier"
+      },
+      "root_folder_id": "2687772531",
+      "secondary_emails": [],
+      "status": {
+        ".tag": "active"
+      },
+      "team_member_id": "dbmid:AADGW2kWjbTYn1rGzedizs1P8DMw4Syk788"
+    },
+    "roles": []
+  },
+  {
+    "profile": {
+      "account_id": "dbid:AADzyMFoYUoez3dSZqe8fC_SZsFvoXtGJs8",
+      "email": "tgrossi@erockhold.com",
+      "email_verified": true,
+      "groups": [
+        "g:b5661bdd01bc6b800000000000000004"
+      ],
+      "is_directory_restricted": false,
+      "joined_on": "2016-05-16T14:04:10Z",
+      "member_folder_id": "1217537827",
+      "membership_type": {
+        ".tag": "full"
+      },
+      "name": {
+        "abbreviated_name": "TG",
+        "display_name": "Thais Grossi",
+        "familiar_name": "Thais",
+        "given_name": "Thais",
+        "surname": "Grossi"
+      },
+      "root_folder_id": "2687836211",
+      "secondary_emails": [],
+      "status": {
+        ".tag": "suspended"
+      },
+      "suspended_on": "2024-06-06T13:42:40Z",
+      "team_member_id": "dbmid:AAAVFmAI5x5wV8gYY1hn6-VfL5aLSSi68xQ"
+    },
+    "roles": []
+  },
+  {
+    "profile": {
+      "account_id": "dbid:AACCWf6Orlxr60HgceazJlPoxo8qM1Ni_GQ",
+      "email": "qgibson@enchantedrock.com",
+      "email_verified": true,
+      "groups": [
+        "g:b5661bdd01bc6b800000000000000004"
+      ],
+      "is_directory_restricted": false,
+      "joined_on": "2024-07-17T15:45:07Z",
+      "member_folder_id": "3349984515",
+      "membership_type": {
+        ".tag": "full"
+      },
+      "name": {
+        "abbreviated_name": "QG",
+        "display_name": "Quiana Gibson",
+        "familiar_name": "Quiana",
+        "given_name": "Quiana",
+        "surname": "Gibson"
+      },
+      "root_folder_id": "3349987459",
+      "secondary_emails": [],
+      "status": {
+        ".tag": "active"
+      },
+      "team_member_id": "dbmid:AABbbCp0Gzbi-ZTUgcRu6hTZ9a95uHp6zh4"
+    },
+    "roles": [
+      {
+        "description": "Manage everything and access all permissions",
+        "name": "Team",
+        "role_id": "pid_dbtmr:AAAAAFMcx6E0tax39Kb0H671TzWLeE07dwaqFQ5fDRy2"
+      }
+    ]
+  },
+  {
+    "profile": {
+      "account_id": "dbid:AAAE6mpPHAf2o-Plo27nE-Um3QMUUnOH2h4",
+      "email": "aschurr@erockhold.com",
+      "email_verified": true,
+      "groups": [
+        "g:b5661bdd01bc6b800000000000000004"
+      ],
+      "is_directory_restricted": false,
+      "joined_on": "2018-03-29T00:26:17Z",
+      "member_folder_id": "2764265152",
+      "membership_type": {
+        ".tag": "full"
+      },
+      "name": {
+        "abbreviated_name": "AS",
+        "display_name": "Allan Schurr",
+        "familiar_name": "Allan",
+        "given_name": "Allan",
+        "surname": "Schurr"
+      },
+      "root_folder_id": "2687760995",
+      "secondary_emails": [],
+      "status": {
+        ".tag": "active"
+      },
+      "team_member_id": "dbmid:AACZT_qfOmZRftfM0lrfF4QxWkXEz3-rRq8"
+    },
+    "roles": []
+  },
+  {
+    "profile": {
+      "account_id": "dbid:AABZQiTn9GwHutbpSGMu3QZHjROEWO2DFdE",
+      "email": "kparekh@enchantedrock.com",
+      "email_verified": true,
+      "groups": [
+        "g:b5661bdd01bc6b800000000000000004"
+      ],
+      "is_directory_restricted": false,
+      "joined_on": "2025-02-20T18:36:57Z",
+      "member_folder_id": "12320670017",
+      "membership_type": {
+        ".tag": "full"
+      },
+      "name": {
+        "abbreviated_name": "KP",
+        "display_name": "Ketul Parekh",
+        "familiar_name": "Ketul",
+        "given_name": "Ketul",
+        "surname": "Parekh"
+      },
+      "root_folder_id": "12311778225",
+      "secondary_emails": [],
+      "status": {
+        ".tag": "active"
+      },
+      "team_member_id": "dbmid:AADUJpdxt0bNuG4BvKIHsQKyV_aPS1LK-q0"
+    },
+    "roles": [
+      {
+        "description": "Manage everything and access all permissions",
+        "name": "Team",
+        "role_id": "pid_dbtmr:AAAAAFMcx6E0tax39Kb0H671TzWLeE07dwaqFQ5fDRy2"
+      }
+    ]
+  },
+  {
+    "profile": {
+      "account_id": "dbid:AAA8VeHkZo_5ry_zAnKGH5kQCMdHx6c30KM",
+      "email": "mlanda@enchantedrock.com",
+      "email_verified": true,
+      "groups": [
+        "g:b5661bdd01bc6b800000000000000004"
+      ],
+      "is_directory_restricted": false,
+      "joined_on": "2018-08-06T14:24:51Z",
+      "member_folder_id": "3672119008",
+      "membership_type": {
+        ".tag": "full"
+      },
+      "name": {
+        "abbreviated_name": "ML",
+        "display_name": "Maria Landa",
+        "familiar_name": "Maria",
+        "given_name": "Maria",
+        "surname": "Landa"
+      },
+      "root_folder_id": "2687705667",
+      "secondary_emails": [],
+      "status": {
+        ".tag": "suspended"
+      },
+      "suspended_on": "2025-10-14T13:27:25Z",
+      "team_member_id": "dbmid:AAAFMp3tjdySqJZ8kyJCorTr8GdTGQ1Oi_c"
+    },
+    "roles": []
+  },
+  {
+    "profile": {
+      "account_id": "dbid:AABSSijY9Yz28xG2hySc6sHE3wYBBKaY7Oo",
+      "email": "druhl@enchantedrock.com",
+      "email_verified": true,
+      "groups": [
+        "g:b5661bdd01bc6b800000000000000004"
+      ],
+      "is_directory_restricted": false,
+      "joined_on": "2026-11-02T18:06:45Z",
+      "member_folder_id": "13865980657",
+      "membership_type": {
+        ".tag": "full"
+      },
+      "name": {
+        "abbreviated_name": "DR",
+        "display_name": "Dakota Ruhl",
+        "familiar_name": "Dakota",
+        "given_name": "Dakota",
+        "surname": "Ruhl"
+      },
+      "root_folder_id": "13888982977",
+      "secondary_emails": [],
+      "status": {
+        ".tag": "active"
+      },
+      "team_member_id": "dbmid:AACmt7axfYBHpP5-3TiWF-Cg5BKEU4ZiYPQ"
+    },
+    "roles": [
+      {
+        "description": "Manage everything and access all permissions",
+        "name": "Team",
+        "role_id": "pid_dbtmr:AAAAAFMcx6E0tax39Kb0H671TzWLeE07dwaqFQ5fDRy2"
+      }
+    ]
+  },
+  {
+    "profile": {
+      "account_id": "dbid:AADq7Ld1ABV1FsXgGave4bCGwUSVIGzb0_8",
+      "email": "nsmith@erockhold.com",
+      "email_verified": true,
+      "groups": [
+        "g:b5661bdd01bc6b800000000000000004"
+      ],
+      "is_directory_restricted": false,
+      "joined_on": "2018-10-01T18:15:22Z",
+      "member_folder_id": "4061865936",
+      "membership_type": {
+        ".tag": "full"
+      },
+      "name": {
+        "abbreviated_name": "NS",
+        "display_name": "Norman Smith",
+        "familiar_name": "Norman",
+        "given_name": "Norman",
+        "surname": "Smith"
+      },
+      "root_folder_id": "2688187219",
+      "secondary_emails": [],
+      "status": {
+        ".tag": "suspended"
+      },
+      "suspended_on": "2024-06-06T13:48:05Z",
+      "team_member_id": "dbmid:AACJJX7y6zIZZRDxETRLGdev-g7Qx5baQ9Q"
+    },
+    "roles": []
+  },
+  {
+    "profile": {
+      "account_id": "dbid:AABFA6mJnBizdlvQAxPDhbgFQpo84piyap8",
+      "email": "dropboxarchive@enchantedrock.com",
+      "email_verified": true,
+      "groups": [
+        "g:b5661bdd01bc6b800000000000000004"
+      ],
+      "is_directory_restricted": false,
+      "joined_on": "2020-11-09T19:24:48Z",
+      "member_folder_id": "8632551712",
+      "membership_type": {
+        ".tag": "full"
+      },
+      "name": {
+        "abbreviated_name": "D",
+        "display_name": "DropBoxArchive",
+        "familiar_name": "DropBoxArchive",
+        "given_name": "DropBoxArchive",
+        "surname": ""
+      },
+      "root_folder_id": "2687822131",
+      "secondary_emails": [],
+      "status": {
+        ".tag": "active"
+      },
+      "team_member_id": "dbmid:AABoRsdMymbghrZWekYp7jAtj7eHrNgyikk"
+    },
+    "roles": []
+  }
+]

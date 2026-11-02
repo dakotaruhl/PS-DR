@@ -1,0 +1,16 @@
+{
+  "NamespaceId": "3111597936",
+  "NamespaceName": "2000KW Cummins",
+  "NamespaceType": "shared_folder",
+  "CanonicalAzurePrefix": "Shared-Folders/3111597936-2000KW Cummins",
+  "Cursor": "AAZqyw1LS9Sn8My7GQ4UFW2x3vRs_7w6ooV1qfDq5gVbCGP4B2BRwReb28kVGtFxlcmCB9JAyHNMMi9X3RcaczLkX-IgI4vXmjufHaSZv8giRkyyPJnWFJseh2y81BUajH15unR_ukMCe0eptKp__e3T3AvLHHtZaoeWNVw9zRu5QDd1YF6YrDzEWDc1e-G0nD4sVOJl_O9CQYoaqikITk4Z",
+  "Started": true,
+  "Completed": true,
+  "Failed": false,
+  "PagesCompleted": 1,
+  "FilesUploaded": 0,
+  "BytesUploaded": 0,
+  "FilesSkipped": 0,
+  "LastUpdated": "2026-11-02T15:19:16.2389413-06:00",
+  "LastError": null
+}

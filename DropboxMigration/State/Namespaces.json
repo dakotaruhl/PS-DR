@@ -1,0 +1,5090 @@
+[
+  {
+    "name": "NOC Backup",
+    "namespace_id": "1008132751",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Centaurus Loan",
+    "namespace_id": "100815629",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Vance Tarter Home Content",
+    "namespace_id": "101116217",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Thomas Video",
+    "namespace_id": "10163882800",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "IT Job Resumes",
+    "namespace_id": "1016408883",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Thomas Video",
+    "namespace_id": "10166293920",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Man Hours Worked",
+    "namespace_id": "1019540352",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Employee Handbook",
+    "namespace_id": "1019547480",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "0NG GENSET TECHNICAL",
+    "namespace_id": "1020656561",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Reliant Solar",
+    "namespace_id": "103399358",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Emissions",
+    "namespace_id": "103695921",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Direct File Share",
+    "namespace_id": "1039121748",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "ERock Solutions",
+    "namespace_id": "1041744650",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Costa Rica",
+    "namespace_id": "104511025",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Assorted content",
+    "namespace_id": "10499814176",
+    "namespace_type": {
+      ".tag": "team_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Gateway",
+    "namespace_id": "105383345",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Enchanted Rock Team Folder",
+    "namespace_id": "1062193352",
+    "namespace_type": {
+      ".tag": "team_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Root",
+    "namespace_id": "1062204797",
+    "namespace_type": {
+      ".tag": "team_member_folder"
+    },
+    "quota_limit": 0,
+    "team_member_id": "dbmid:AADs_XIVEqbxA0hkApSddViFyT-GW9n9TBI"
+  },
+  {
+    "name": "WATER GENERATION",
+    "namespace_id": "107081048",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "CC Mtg 120215",
+    "namespace_id": "1083881223",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "COH - Project Team Only",
+    "namespace_id": "1089453050",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "BBIP Deal Docs",
+    "namespace_id": "1093030808",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Year in Review 2024",
+    "namespace_id": "11239868627",
+    "namespace_type": {
+      ".tag": "team_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Marek",
+    "namespace_id": "114442523",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "SDG&E",
+    "namespace_id": "114790653",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "MCPE price data",
+    "namespace_id": "115417364",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Texas Microgrid LLC",
+    "namespace_id": "1157336348",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "200303_EE_CAD_DWGS",
+    "namespace_id": "1158565630",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "200303_PHASE_3_CAD_DWGS",
+    "namespace_id": "1175082250",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "PPS",
+    "namespace_id": "118042079",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Bay Access",
+    "namespace_id": "119961325",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Texas Microgrid Project",
+    "namespace_id": "1214787787",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Root",
+    "namespace_id": "1217537827",
+    "namespace_type": {
+      ".tag": "team_member_folder"
+    },
+    "quota_limit": 0,
+    "team_member_id": "dbmid:AAAVFmAI5x5wV8gYY1hn6-VfL5aLSSi68xQ"
+  },
+  {
+    "name": "Sales Leads",
+    "namespace_id": "1217694306",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "2015 QSE Audited Financials - BDO",
+    "namespace_id": "1219474473",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Provisional Patent_NG Genset",
+    "namespace_id": "1221647948",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "3Pi_PSI_Working Docs",
+    "namespace_id": "1222092028",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Ross Winship Home Content",
+    "namespace_id": "1222702357",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "kparekh@enchantedrock.com - TMR",
+    "namespace_id": "12311778225",
+    "namespace_type": {
+      ".tag": "team_member_root"
+    },
+    "quota_limit": 0,
+    "team_member_id": "dbmid:AADUJpdxt0bNuG4BvKIHsQKyV_aPS1LK-q0"
+  },
+  {
+    "name": "Root",
+    "namespace_id": "12320670017",
+    "namespace_type": {
+      ".tag": "team_member_folder"
+    },
+    "quota_limit": 0,
+    "team_member_id": "dbmid:AADUJpdxt0bNuG4BvKIHsQKyV_aPS1LK-q0"
+  },
+  {
+    "name": "CNP Electric Interconnect",
+    "namespace_id": "1233606237",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "ERE Projects",
+    "namespace_id": "1234999641",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Team Paper Docs",
+    "namespace_id": "12358878403",
+    "namespace_type": {
+      ".tag": "team_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Enchanted Rock Docs",
+    "namespace_id": "12368562947",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Air Permiting",
+    "namespace_id": "1240166426",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Patent Working Docs",
+    "namespace_id": "1241590492",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "ERE Admin",
+    "namespace_id": "1243910042",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Josh Bowron Home Content",
+    "namespace_id": "1245397775",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Dayce's ER Folder",
+    "namespace_id": "1246220154",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "HEB Files",
+    "namespace_id": "1247042715",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Documents for Nik",
+    "namespace_id": "1247156101",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Power Depot",
+    "namespace_id": "124729976",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "EnchantedRock Data Loggers",
+    "namespace_id": "1257564799",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Clear Lake Keelboat Fleet",
+    "namespace_id": "1257576748",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Eric Meyer Home Content",
+    "namespace_id": "1280866868",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Quotations",
+    "namespace_id": "1282593663",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Financials for Consolidation",
+    "namespace_id": "1293559574",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Partnership Documents for Thais",
+    "namespace_id": "1296953207",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "James Vasquez Home Content",
+    "namespace_id": "1307867516",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Pioneer FAT and Schedule Information",
+    "namespace_id": "1316359988",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Insurance Videos FG16011196",
+    "namespace_id": "1320141592",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Marketing",
+    "namespace_id": "1325442369",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "200363_EE_AS_BUILT_CAD_DWGS",
+    "namespace_id": "1326785274",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "George Giles",
+    "namespace_id": "1332814380",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Cauthen Documents",
+    "namespace_id": "1335551248",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Electranet Power, LLC",
+    "namespace_id": "1336072353",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Eder Montoya Home Content",
+    "namespace_id": "1336275298",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "ERE Engineering",
+    "namespace_id": "1336924441",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Enchanted Rock - GCP",
+    "namespace_id": "1337175216",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Kilgore Engineering Info",
+    "namespace_id": "1339680815",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "LZ Price",
+    "namespace_id": "134556020",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "CenterPoint Gas Status Matrix",
+    "namespace_id": "1353960893",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Ground Lease Informaiton HEB",
+    "namespace_id": "1355685682",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Data Xmittal ERock-3Pi",
+    "namespace_id": "1357029797",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "STP Images",
+    "namespace_id": "1365114076",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "ERock On-Site",
+    "namespace_id": "1366370182",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Construction Pictures",
+    "namespace_id": "1370850790",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Providence Engineering",
+    "namespace_id": "137178248",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Absolute Energy Solutions",
+    "namespace_id": "138346329",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "EXXON",
+    "namespace_id": "1385523802",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Power Depot Engineering Data",
+    "namespace_id": "138646000",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Root",
+    "namespace_id": "13865980657",
+    "namespace_type": {
+      ".tag": "team_member_folder"
+    },
+    "quota_limit": 0,
+    "team_member_id": "dbmid:AACmt7axfYBHpP5-3TiWF-Cg5BKEU4ZiYPQ"
+  },
+  {
+    "name": "200363_EE_ASBUILT_01_2017",
+    "namespace_id": "1386852980",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "TMR",
+    "namespace_id": "13888982977",
+    "namespace_type": {
+      ".tag": "team_member_root"
+    },
+    "quota_limit": 0,
+    "team_member_id": "dbmid:AACmt7axfYBHpP5-3TiWF-Cg5BKEU4ZiYPQ"
+  },
+  {
+    "name": "Texas Microgrid Invoices",
+    "namespace_id": "1390433243",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Civil Engineering Drawings",
+    "namespace_id": "1394152116",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Permit Files",
+    "namespace_id": "1394152305",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "3Pi Documents",
+    "namespace_id": "1395953707",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "TMG Operations and Safety",
+    "namespace_id": "1399107222",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "SEC MAIL ARCHIVED",
+    "namespace_id": "1401375156",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Eng - Grant",
+    "namespace_id": "1407534910",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Acceptance 3Pi",
+    "namespace_id": "1408401638",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "HEB - New Store Information",
+    "namespace_id": "1415043520",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Wortham",
+    "namespace_id": "1418171893",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Enchanted Rock",
+    "namespace_id": "1419815279",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "ERO budget",
+    "namespace_id": "1426673000",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Property Search",
+    "namespace_id": "1429024812",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Mike Buckalew Home Content",
+    "namespace_id": "1434030030",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Clifford Maness Home Content",
+    "namespace_id": "1436204112",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Temp Tests",
+    "namespace_id": "1437135394",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Permits",
+    "namespace_id": "1437591084",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "2016 QSE Audited Financials - BDO",
+    "namespace_id": "1441713254",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Kosta Papasideris Home Content",
+    "namespace_id": "1444284333",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "ERE Presentation",
+    "namespace_id": "1445488403",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Athena Tiliakos Home Content",
+    "namespace_id": "1447089591",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Kevin  Barber Home Content",
+    "namespace_id": "1447096932",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Dawn Amthor Home Content",
+    "namespace_id": "1448009224",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "TNM transition",
+    "namespace_id": "1449631720",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Parag Shah Home Content",
+    "namespace_id": "1456365166",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Deer Lease",
+    "namespace_id": "1457829245",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Operations & Maintenance",
+    "namespace_id": "1458800555",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Enchanted Rock",
+    "namespace_id": "1460812091",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Construction Pictures 2",
+    "namespace_id": "1469040175",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "HSE",
+    "namespace_id": "1470961540",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Site Survey Reports",
+    "namespace_id": "1471073898",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Atwell Survey Information",
+    "namespace_id": "1471117088",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "AEP Interconnection Applications",
+    "namespace_id": "1471117399",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "ONCOR Interconnection Applications",
+    "namespace_id": "1474364369",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Operations & Maintenance Admin",
+    "namespace_id": "1477280953",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Jonathan Dettenhaim Home Content",
+    "namespace_id": "1477337180",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Jesse Lyons Home Content",
+    "namespace_id": "1486216364",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Acclaim Sales",
+    "namespace_id": "1487527831",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "ATS Photos",
+    "namespace_id": "1491592064",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "New York Sales",
+    "namespace_id": "1492292120",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Time sheets",
+    "namespace_id": "1496003741",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Caleb Williams Home Content",
+    "namespace_id": "1496587587",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Safety Information",
+    "namespace_id": "1497352697",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Peter Lee Home Content",
+    "namespace_id": "1499600064",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Mitchell Thiele Home Content",
+    "namespace_id": "1499600430",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Jesus Huertas Home Content",
+    "namespace_id": "1501292472",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Personal Folder Transfer",
+    "namespace_id": "15037317779",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Decal Placement",
+    "namespace_id": "1514873250",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Warehouse Options",
+    "namespace_id": "1524166319",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "JBI Information",
+    "namespace_id": "1530744324",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Transfer Trip Analysis",
+    "namespace_id": "1536479629",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Gregg Williams Home Content",
+    "namespace_id": "1550369495",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Charles Kinnison Home Content",
+    "namespace_id": "1554172429",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "HR",
+    "namespace_id": "1555781451",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "ATS UL Documents",
+    "namespace_id": "1556008416",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Generator UL Documents",
+    "namespace_id": "1556008799",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Photos for Bill Nussey",
+    "namespace_id": "1559181374",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Ian Wharton Home Content",
+    "namespace_id": "1559234921",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "2017_APRIL_DWGS",
+    "namespace_id": "1560046472",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Patrick Cavazos Home Content",
+    "namespace_id": "1560484788",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "LJA Engineering",
+    "namespace_id": "1563668855",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Valley Civil work",
+    "namespace_id": "1567282421",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Small Genset Initiative",
+    "namespace_id": "1567474360",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "0AA_TMG_Support_Doc",
+    "namespace_id": "1567539307",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "0AA_PDA-Support_Doc",
+    "namespace_id": "1567539541",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Company Financials",
+    "namespace_id": "156815210",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "IOM",
+    "namespace_id": "1571618644",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Michael Branch Home Content",
+    "namespace_id": "1579371510",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Madison Ruta Home Content",
+    "namespace_id": "1581194031",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "RMR CONTRACTS",
+    "namespace_id": "162280794",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Black Start",
+    "namespace_id": "169407618",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "TAW engineering concepts",
+    "namespace_id": "173193009",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "HR Forms and Procedures",
+    "namespace_id": "1755735392",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Bryan Young Home Content",
+    "namespace_id": "1769996464",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Shared",
+    "namespace_id": "180327626",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "PD TXA - EPC",
+    "namespace_id": "183451927",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "PD TXA - EPC Fee",
+    "namespace_id": "183454043",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Regulatory",
+    "namespace_id": "186876229",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Wortham",
+    "namespace_id": "188500277",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "ERE - Procurement & Logistics (Shared)",
+    "namespace_id": "1915001760",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "AA_Eng Ref",
+    "namespace_id": "1915865072",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Asset Support",
+    "namespace_id": "1915929264",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "001_Support",
+    "namespace_id": "1916011376",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "ERE-3Pi Shared",
+    "namespace_id": "1916268128",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "TMG_Commissioning",
+    "namespace_id": "1916595728",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Commissioning",
+    "namespace_id": "1931657360",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Legal",
+    "namespace_id": "194949366",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Employee Unit Grants",
+    "namespace_id": "1960177040",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Lessons Learned",
+    "namespace_id": "1960382000",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Facility Agreement - Ground Leases",
+    "namespace_id": "2015099696",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "540",
+    "namespace_id": "2023935712",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "110",
+    "namespace_id": "2023953440",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Root",
+    "namespace_id": "20283878",
+    "namespace_type": {
+      ".tag": "team_member_folder"
+    },
+    "quota_limit": 0,
+    "team_member_id": "dbmid:AAABqWASfw5RJlksCfCCbYat7nCQRU0_noA"
+  },
+  {
+    "name": "ERE-Volvo (Shared)",
+    "namespace_id": "2029661488",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "EPC - O&M Turnover",
+    "namespace_id": "2031026048",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Arlene Black Home Content",
+    "namespace_id": "20484669",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Direct Energy",
+    "namespace_id": "206396654",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Shared Documents",
+    "namespace_id": "20669055",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Clark Thompson Home Content",
+    "namespace_id": "20767472",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "COH",
+    "namespace_id": "20770040",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Latest COH Pro Forma",
+    "namespace_id": "20996708",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "AK",
+    "namespace_id": "21235487",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Steven Wood Home Content",
+    "namespace_id": "2144503920",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Barksdale",
+    "namespace_id": "21469501",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Fire Island",
+    "namespace_id": "21469593",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Electranet",
+    "namespace_id": "21624078",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "MUD Data",
+    "namespace_id": "21827118",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Arlene",
+    "namespace_id": "218312213",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "EBC",
+    "namespace_id": "2189542192",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "QSE REP",
+    "namespace_id": "219977773",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "PSO Career Path",
+    "namespace_id": "2203959088",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "St Thomas",
+    "namespace_id": "22217396",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Constellation",
+    "namespace_id": "224369051",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Proposals",
+    "namespace_id": "22554988",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Nick Pehr Letter",
+    "namespace_id": "22648276",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Enchanted Rock 2012 Tax Returns",
+    "namespace_id": "228471842",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Electranet Services",
+    "namespace_id": "229215439",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "MUD Sales Prospects",
+    "namespace_id": "23079702",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Eaton Meter Replacement",
+    "namespace_id": "2308216656",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "NRG Agreements",
+    "namespace_id": "23088731",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Enchanted Rock Electric 2",
+    "namespace_id": "231563379",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Lucas Deloss Home Content",
+    "namespace_id": "2360164912",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Carlos Ramos Home Content",
+    "namespace_id": "2360373568",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Real Estate and Construction",
+    "namespace_id": "238616595",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "CORVUS Contract - Fully Executed",
+    "namespace_id": "2386308323",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Wind Balancing",
+    "namespace_id": "24026432",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Sales & Marketing",
+    "namespace_id": "24171919",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "GCWA",
+    "namespace_id": "242517091",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "NMF-05",
+    "namespace_id": "2431520432",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "EROCK Saftey Plan",
+    "namespace_id": "24330592",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "NDA's",
+    "namespace_id": "24332253",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "2018 ADI Forum Decks",
+    "namespace_id": "2469371856",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Daily Pricing Update",
+    "namespace_id": "250659099",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Generator Specification",
+    "namespace_id": "25198161",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Enchanted Rock Ops",
+    "namespace_id": "253831557",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Power Depot Group B",
+    "namespace_id": "253993718",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "PSI Engine file",
+    "namespace_id": "2541050064",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Elizabeth Yarbrough Home Content",
+    "namespace_id": "2541945152",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "2017 QSE Audited Financials - BDO",
+    "namespace_id": "2542194288",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "PUCT",
+    "namespace_id": "255049533",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "GDF Suez",
+    "namespace_id": "25876248",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "2017 ERock Audit",
+    "namespace_id": "2596480976",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Root",
+    "namespace_id": "260814366",
+    "namespace_type": {
+      ".tag": "team_member_folder"
+    },
+    "quota_limit": 0,
+    "team_member_id": "dbmid:AADGW2kWjbTYn1rGzedizs1P8DMw4Syk788"
+  },
+  {
+    "name": "ERO",
+    "namespace_id": "260876701",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "URS",
+    "namespace_id": "26593499",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "SmithOps",
+    "namespace_id": "26594363",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Jeromy Fowler Home Content",
+    "namespace_id": "2662246848",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Pavement Productions",
+    "namespace_id": "2662566640",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Corey camthor1yahoocom - TMR",
+    "namespace_id": "2687698947",
+    "namespace_type": {
+      ".tag": "team_member_root"
+    },
+    "quota_limit": 0,
+    "team_member_id": "dbmid:AADs_XIVEqbxA0hkApSddViFyT-GW9n9TBI"
+  },
+  {
+    "name": "Maria Landa - TMR",
+    "namespace_id": "2687705667",
+    "namespace_type": {
+      ".tag": "team_member_root"
+    },
+    "quota_limit": 0,
+    "team_member_id": "dbmid:AAAFMp3tjdySqJZ8kyJCorTr8GdTGQ1Oi_c"
+  },
+  {
+    "name": "Allan Schurr - TMR",
+    "namespace_id": "2687760995",
+    "namespace_type": {
+      ".tag": "team_member_root"
+    },
+    "quota_limit": 0,
+    "team_member_id": "dbmid:AACZT_qfOmZRftfM0lrfF4QxWkXEz3-rRq8"
+  },
+  {
+    "name": "Mario Metivier - TMR",
+    "namespace_id": "2687772531",
+    "namespace_type": {
+      ".tag": "team_member_root"
+    },
+    "quota_limit": 0,
+    "team_member_id": "dbmid:AADGW2kWjbTYn1rGzedizs1P8DMw4Syk788"
+  },
+  {
+    "name": "Ian Blakely - TMR",
+    "namespace_id": "2687783523",
+    "namespace_type": {
+      ".tag": "team_member_root"
+    },
+    "quota_limit": 0,
+    "team_member_id": "dbmid:AAAqSIzpEn0QVdSFxgQp-HbM3n26ORcJO_Y"
+  },
+  {
+    "name": "Thomas McAndrew - TMR",
+    "namespace_id": "2687793459",
+    "namespace_type": {
+      ".tag": "team_member_root"
+    },
+    "quota_limit": 0,
+    "team_member_id": "dbmid:AAABqWASfw5RJlksCfCCbYat7nCQRU0_noA"
+  },
+  {
+    "name": "DropBoxArchive - TMR",
+    "namespace_id": "2687822131",
+    "namespace_type": {
+      ".tag": "team_member_root"
+    },
+    "quota_limit": 0,
+    "team_member_id": "dbmid:AABoRsdMymbghrZWekYp7jAtj7eHrNgyikk"
+  },
+  {
+    "name": "Thais Grossi - TMR",
+    "namespace_id": "2687836211",
+    "namespace_type": {
+      ".tag": "team_member_root"
+    },
+    "quota_limit": 0,
+    "team_member_id": "dbmid:AAAVFmAI5x5wV8gYY1hn6-VfL5aLSSi68xQ"
+  },
+  {
+    "name": "Norman Smith - TMR",
+    "namespace_id": "2688187219",
+    "namespace_type": {
+      ".tag": "team_member_root"
+    },
+    "quota_limit": 0,
+    "team_member_id": "dbmid:AACJJX7y6zIZZRDxETRLGdev-g7Qx5baQ9Q"
+  },
+  {
+    "name": "Safety Mgmt",
+    "namespace_id": "2691910448",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Alarms page",
+    "namespace_id": "2694202592",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Asset Documentation & Maintenance Records",
+    "namespace_id": "2699779744",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Furniture Inventory",
+    "namespace_id": "2700160320",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "TMG Databooks",
+    "namespace_id": "2709764208",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Cooper Preso",
+    "namespace_id": "273320920",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Enchanted Rock Solutions",
+    "namespace_id": "273332214",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Deployment Application",
+    "namespace_id": "273476875",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Entergy RFP",
+    "namespace_id": "2747563872",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Vine Street Studios",
+    "namespace_id": "2753067488",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "O&M Accounting",
+    "namespace_id": "2754649312",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Andrew Cullather Home Content",
+    "namespace_id": "2761938112",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "operations & noc interface",
+    "namespace_id": "2763192256",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Root",
+    "namespace_id": "2764265152",
+    "namespace_type": {
+      ".tag": "team_member_folder"
+    },
+    "quota_limit": 0,
+    "team_member_id": "dbmid:AACZT_qfOmZRftfM0lrfF4QxWkXEz3-rRq8"
+  },
+  {
+    "name": "Matthew Webb Home Content",
+    "namespace_id": "2795056560",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "ERock Financials",
+    "namespace_id": "2805962080",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "LYC Seahorses",
+    "namespace_id": "28096700",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "William Parker Home Content",
+    "namespace_id": "2821604672",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "TMG Audit Info",
+    "namespace_id": "2829804320",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Cody Henessee Home Content",
+    "namespace_id": "2831343072",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "1Blank Mud Folder Stucture",
+    "namespace_id": "28372497",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "2017 ERock Audit - Sensitive Documents",
+    "namespace_id": "2850090464",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Diesel vs NG",
+    "namespace_id": "28767101",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "3PI-Volvo Genpac Specs",
+    "namespace_id": "2876854560",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Operations & Maintenance - Financials",
+    "namespace_id": "2912961568",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "RETAIL",
+    "namespace_id": "291393234",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Generate Capital - Enchanted Rock dataroom",
+    "namespace_id": "2985277968",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "ICP Modification",
+    "namespace_id": "3010061824",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "StratITsphere Scada Contract",
+    "namespace_id": "30120137",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "ERO IT",
+    "namespace_id": "3024191712",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "jerry hickl Home Content",
+    "namespace_id": "304763823",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Commissioning Data",
+    "namespace_id": "304836211",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Kelsey",
+    "namespace_id": "30827976",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Commisioning Eng",
+    "namespace_id": "31027328",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "2000KW Cummins",
+    "namespace_id": "3111597936",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "MUD Projects",
+    "namespace_id": "31117782",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "2017 PDA Audit",
+    "namespace_id": "3127263536",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Fender Pager",
+    "namespace_id": "31328382",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Facilities Admin",
+    "namespace_id": "3135173840",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Availability Meeting",
+    "namespace_id": "3136228000",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Processes",
+    "namespace_id": "3136862464",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Capstone",
+    "namespace_id": "313889744",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Christopher Bowen Home Content",
+    "namespace_id": "3167474784",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Sketchup Models",
+    "namespace_id": "3178244784",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Adam Rohan Home Content",
+    "namespace_id": "321365648",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Call Schedule",
+    "namespace_id": "3239807264",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Grant Holt Home Content",
+    "namespace_id": "3241492320",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Warehouse",
+    "namespace_id": "3241623760",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Intern Inventory",
+    "namespace_id": "3242325760",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "UGBP Project - Team Folder",
+    "namespace_id": "32451881",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Data Room for RKR",
+    "namespace_id": "3285569728",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "John Brandenburg Home Content",
+    "namespace_id": "329063579",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Reverse Power Impairment",
+    "namespace_id": "3293809392",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "AB O&M",
+    "namespace_id": "3309544720",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Staffing",
+    "namespace_id": "3332456400",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Root",
+    "namespace_id": "3349984515",
+    "namespace_type": {
+      ".tag": "team_member_folder"
+    },
+    "quota_limit": 0,
+    "team_member_id": "dbmid:AABbbCp0Gzbi-ZTUgcRu6hTZ9a95uHp6zh4"
+  },
+  {
+    "name": "qgibson@enchantedrock.com - TMR",
+    "namespace_id": "3349987459",
+    "namespace_type": {
+      ".tag": "team_member_root"
+    },
+    "quota_limit": 0,
+    "team_member_id": "dbmid:AABbbCp0Gzbi-ZTUgcRu6hTZ9a95uHp6zh4"
+  },
+  {
+    "name": "West June Inspections",
+    "namespace_id": "3376286464",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Final Contracts",
+    "namespace_id": "3379597088",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Luis Castillo Home Content",
+    "namespace_id": "339582980",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Xanadu II Pics",
+    "namespace_id": "3418872640",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "UGBP Project – ERRS Mgmt Folder",
+    "namespace_id": "34474632",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Clifton Shop Set Up",
+    "namespace_id": "3467840864",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "UPS Final Report",
+    "namespace_id": "3501343536",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Human Resources Management",
+    "namespace_id": "3502503568",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "ER-Volvo (Shared)",
+    "namespace_id": "3515797856",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Tavrida Rain Problem",
+    "namespace_id": "355414823",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Enchanted Rock Closing Documents (July 2018)",
+    "namespace_id": "3630358672",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Root",
+    "namespace_id": "3672119008",
+    "namespace_type": {
+      ".tag": "team_member_folder"
+    },
+    "quota_limit": 0,
+    "team_member_id": "dbmid:AAAFMp3tjdySqJZ8kyJCorTr8GdTGQ1Oi_c"
+  },
+  {
+    "name": "Knowledge is Power Library",
+    "namespace_id": "3689976656",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Knowledge is Power Management",
+    "namespace_id": "3690656448",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Greg Bowen Home Content",
+    "namespace_id": "3701119984",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "TMG SEL update",
+    "namespace_id": "3717738720",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Marisa Garcia Home Content",
+    "namespace_id": "3733924288",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "American Parking Control - Civil",
+    "namespace_id": "3742635456",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Enchanted Rock Rapid Fire",
+    "namespace_id": "3782999744",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Employment Documents",
+    "namespace_id": "3786351456",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Vehicles",
+    "namespace_id": "3813425104",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "EIP July 2018 Transaction Documents",
+    "namespace_id": "3815337536",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Expense Reports (Sales Team)",
+    "namespace_id": "3821276624",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "ATS",
+    "namespace_id": "3870349904",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Website",
+    "namespace_id": "39028236",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Large Files",
+    "namespace_id": "3922957088",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Gen output breaker failure",
+    "namespace_id": "3927951712",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "9470 videos",
+    "namespace_id": "3940562960",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Battery Charging Alternator",
+    "namespace_id": "3947289408",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Cory Wilkerson Home Content",
+    "namespace_id": "3978493088",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Operations & Maintenance Projects",
+    "namespace_id": "3988477568",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Melissa Buc-ee's ATMOS",
+    "namespace_id": "3989850560",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Final Contracts COH CWA",
+    "namespace_id": "4012476401",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Seth HP Photos",
+    "namespace_id": "4022338384",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "ICM Invoices",
+    "namespace_id": "4022363232",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Enchanted Rock Restructure Documents (July 2018)",
+    "namespace_id": "4032003376",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Madeline McAndrew Home Content",
+    "namespace_id": "4057110272",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Term Sheets_PDA Agreement",
+    "namespace_id": "4058597457",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Power Depot",
+    "namespace_id": "4058869857",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Bobak Fatemizadeh Home Content",
+    "namespace_id": "4059033809",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "bfatemizadeh@enchantedrock.com Home Content",
+    "namespace_id": "4059094129",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Root",
+    "namespace_id": "4061865936",
+    "namespace_type": {
+      ".tag": "team_member_folder"
+    },
+    "quota_limit": 0,
+    "team_member_id": "dbmid:AACJJX7y6zIZZRDxETRLGdev-g7Qx5baQ9Q"
+  },
+  {
+    "name": "Kenneth Ferguson Home Content",
+    "namespace_id": "4078143392",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "EILS - DI Model",
+    "namespace_id": "40806899",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Gina Holloway Home Content",
+    "namespace_id": "4086217904",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "CLWA",
+    "namespace_id": "41113884",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Degreening records",
+    "namespace_id": "4128365984",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "002-Lab",
+    "namespace_id": "4137693120",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Rates",
+    "namespace_id": "41525212",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Event Summaries",
+    "namespace_id": "4174844480",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Pictures for True North Marine",
+    "namespace_id": "4207973248",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Power Depot Database",
+    "namespace_id": "422286838",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Wiring pictures",
+    "namespace_id": "4257791920",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Pictures Vance Shop",
+    "namespace_id": "4267011952",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Reorg Docs",
+    "namespace_id": "4272531104",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Files for Leidos",
+    "namespace_id": "4281130992",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "CA Opps",
+    "namespace_id": "433691493",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Warehouse Pictures",
+    "namespace_id": "4350327440",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "EY Pics",
+    "namespace_id": "4365478384",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Permian Midstream Thomas McAndrew",
+    "namespace_id": "4385498208",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "2018 ERock Audit",
+    "namespace_id": "4436829280",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "BTG Pactual",
+    "namespace_id": "446163424",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Kelly Morgan Home Content",
+    "namespace_id": "4476311360",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "GLAs",
+    "namespace_id": "4483611808",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Core States - ERock",
+    "namespace_id": "4485558640",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Holiday Party Pictures",
+    "namespace_id": "4523131840",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Cheer",
+    "namespace_id": "454247563",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Ed Solar Home Content",
+    "namespace_id": "4566531552",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "John Dettenhaim Home Content",
+    "namespace_id": "4626500720",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Paris TX",
+    "namespace_id": "466623153",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "DSE Black - VS",
+    "namespace_id": "4685818288",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Thais' Visa Receipts",
+    "namespace_id": "4699008368",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Logan Alexander Home Content",
+    "namespace_id": "4721981232",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "American Express",
+    "namespace_id": "4739192352",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "CPS (HEB) Engineering - LJA",
+    "namespace_id": "4747483936",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Joshua Baker Home Content",
+    "namespace_id": "4753914304",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Databook Management",
+    "namespace_id": "4772555952",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "COH ONE LINE Drawings",
+    "namespace_id": "48204842",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "2019 PDA recovery",
+    "namespace_id": "4857758960",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Gruller Survey",
+    "namespace_id": "4864294896",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "2014-12-14 Pictures from V's Phone 12-14-14 2",
+    "namespace_id": "4898130401",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "ERock Management Team",
+    "namespace_id": "4927534064",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Seth Markowitz Home Content",
+    "namespace_id": "496443161",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Walmart Shared",
+    "namespace_id": "4967296384",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Viewstream Video for Steve 022019",
+    "namespace_id": "4972245024",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Warranty IOM - Mark Swinden",
+    "namespace_id": "4975070016",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Alexander Powell Home Content",
+    "namespace_id": "5005166352",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Operations & Maintenance Technical Library",
+    "namespace_id": "5005818128",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "DSE Software",
+    "namespace_id": "5006890720",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Central Services",
+    "namespace_id": "5021856416",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Enchanted Rock LLC Contracts",
+    "namespace_id": "5028979600",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Enchanted Rock Safety Doc.",
+    "namespace_id": "5069018016",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Wellhead Gas Conditioning",
+    "namespace_id": "5109746688",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Allan Schurr Presentation",
+    "namespace_id": "5124206464",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Clark's Photos",
+    "namespace_id": "51406899",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Metrologics BiPom",
+    "namespace_id": "5174236992",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Borough of Lavallette",
+    "namespace_id": "5175069040",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "EREJB191003_Walmart Gen Sale x 15",
+    "namespace_id": "5178757200",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Targa",
+    "namespace_id": "5196081504",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Company Photos",
+    "namespace_id": "5203040560",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Howard R",
+    "namespace_id": "52350443",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "HEB 562",
+    "namespace_id": "5245470720",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "PowerEng - Modeling",
+    "namespace_id": "5252310032",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Iberdrola",
+    "namespace_id": "528299091",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Files Too Large To Email",
+    "namespace_id": "5290676144",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Tech Library",
+    "namespace_id": "5305061328",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Jenna Khakoo Home Content",
+    "namespace_id": "5334774240",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Isabel Gonzalez Home Content",
+    "namespace_id": "5334788768",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Electranet Services",
+    "namespace_id": "533741030",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Jim Barbour Home Content",
+    "namespace_id": "5337796304",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Core States",
+    "namespace_id": "5377723104",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Company Documents",
+    "namespace_id": "53843909",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Jason Quilantan Home Content",
+    "namespace_id": "5392277504",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Executive Files",
+    "namespace_id": "5422235232",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Thais Amex Expenses",
+    "namespace_id": "5444231472",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "JBI Missing Purchase Orders",
+    "namespace_id": "5465878448",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "GC Hire",
+    "namespace_id": "5476281744",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "American Parking Control",
+    "namespace_id": "5488749408",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Quarterly Meeting Library",
+    "namespace_id": "5514813472",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Kilgore",
+    "namespace_id": "5520633040",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Presentation Photos",
+    "namespace_id": "5559133952",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Alec Senko Home Content",
+    "namespace_id": "5575262592",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Non-Standard Deals",
+    "namespace_id": "5609532448",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Cell Tower Backup",
+    "namespace_id": "56211357",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Larry Cox Home Content",
+    "namespace_id": "5622490912",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Chris Deaville Home Content",
+    "namespace_id": "563834698",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "2019 Electranet QSE Audit",
+    "namespace_id": "5645050464",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Robert  Cumm Home Content",
+    "namespace_id": "5681422848",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Sameer Desai Home Content",
+    "namespace_id": "5692089728",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Burts Construction - ERock",
+    "namespace_id": "5694350016",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Anne",
+    "namespace_id": "5698994080",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "giovanni  scarpetta Home Content",
+    "namespace_id": "5738421184",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "VFI Battery removal",
+    "namespace_id": "5742206576",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Jose Zavala Home Content",
+    "namespace_id": "5752096880",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "True North Marine",
+    "namespace_id": "575248723",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Eleuthera Renewables",
+    "namespace_id": "57602203",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Eliezer Anaya Home Content",
+    "namespace_id": "5785520752",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "EREJB161009_Installation Old VQ14",
+    "namespace_id": "5790525312",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "PDA Data Collection",
+    "namespace_id": "5809012224",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Houston Region",
+    "namespace_id": "5823305888",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Patrick Leek Home Content",
+    "namespace_id": "5824554768",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "FM 506 Recon",
+    "namespace_id": "584361745",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Miguel Aguilar Home Content",
+    "namespace_id": "5869812768",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Krystle Horace Home Content",
+    "namespace_id": "5884584320",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Franklin Perez Home Content",
+    "namespace_id": "5907364352",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Revon Williams Home Content",
+    "namespace_id": "5907589904",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Todd Price Home Content",
+    "namespace_id": "5908509968",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Victor  Robles Home Content",
+    "namespace_id": "5913569312",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Martin Demaret Home Content",
+    "namespace_id": "5913948528",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Brandon Baker Home Content",
+    "namespace_id": "5914150064",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Jonathan Dettenhaim Home Content",
+    "namespace_id": "5914647568",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "StoneGate ONE",
+    "namespace_id": "592064849",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "RESUMES - RECEPTIONIST",
+    "namespace_id": "5969575888",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "stefan nasstrom Home Content",
+    "namespace_id": "5977483776",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "CFO Review Files",
+    "namespace_id": "598430595",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Karla Ortega Home Content",
+    "namespace_id": "6040674704",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Clark Pictures",
+    "namespace_id": "6050464512",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "RaaS Biz Strategy",
+    "namespace_id": "60633944",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Kaity Reinertsen Home Content",
+    "namespace_id": "6075240928",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Kyle Baker Home Content",
+    "namespace_id": "6076146064",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Teri Ainslie Home Content",
+    "namespace_id": "6077100544",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "GE",
+    "namespace_id": "608254202",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "EPC Financials",
+    "namespace_id": "6098116336",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "The Shop",
+    "namespace_id": "6103489808",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "SVB Due Diligence Materials",
+    "namespace_id": "6106491536",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "ERCOT Settlement Invoices",
+    "namespace_id": "611061784",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Engineering_Drawings",
+    "namespace_id": "611756312",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Bobak Fatemizadeh Home Content",
+    "namespace_id": "6121888368",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "CPS HEB IC Applications",
+    "namespace_id": "6122030368",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Christy Pontious Home Content",
+    "namespace_id": "6124187776",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Tree Affidavits",
+    "namespace_id": "6134301360",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Generate Data Book Folder",
+    "namespace_id": "6135709552",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "TSU",
+    "namespace_id": "61396032",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "TMG Purchase Orders",
+    "namespace_id": "6141464928",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Enchanted Rock Customer Photos",
+    "namespace_id": "6148527760",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Acceptance Documents",
+    "namespace_id": "61585835",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "QSE Audited Financials - UHY",
+    "namespace_id": "617929905",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "JunSep Super Peak Option",
+    "namespace_id": "621059659",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "2018 PDA Audit",
+    "namespace_id": "6234179520",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "PD REP",
+    "namespace_id": "634343041",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "CONFIDENTIAL FACILITIES",
+    "namespace_id": "6350270784",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Accounting",
+    "namespace_id": "6356548896",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Entergy Databook",
+    "namespace_id": "6363184000",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "PSI Engine Software_08.2019",
+    "namespace_id": "6438628768",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Coastal region",
+    "namespace_id": "6519105328",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Vince Scalici Home Content",
+    "namespace_id": "654942352",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Quality Management",
+    "namespace_id": "6558296400",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "PDA Project",
+    "namespace_id": "6564079968",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Kroger Shared",
+    "namespace_id": "6607796944",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "California Webinar Draft",
+    "namespace_id": "6634522352",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "ERock California",
+    "namespace_id": "6640959952",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "San Antonio",
+    "namespace_id": "6654859328",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "EI-GB",
+    "namespace_id": "666101838",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Walmart Batch Packets",
+    "namespace_id": "6670844896",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Mongile Proposal",
+    "namespace_id": "6671550608",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Reicpts",
+    "namespace_id": "6692986768",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Gerardo Mendez Home Content",
+    "namespace_id": "6739320064",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Walmart Provided Drawings",
+    "namespace_id": "6762372848",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "ATT",
+    "namespace_id": "67936670",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Site Photos",
+    "namespace_id": "67953515",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Tri eagle",
+    "namespace_id": "682121370",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "everette johnson Home Content",
+    "namespace_id": "6885826288",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Marsh_Wortham_WC",
+    "namespace_id": "6888482336",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Marsh_Wortham",
+    "namespace_id": "6889172400",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Mads Adams Home Content",
+    "namespace_id": "6889323024",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Vibraton Study",
+    "namespace_id": "6911698080",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Acceptance 3Pi",
+    "namespace_id": "6913306128",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "SMSBackupRestore",
+    "namespace_id": "6914113696",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Free Bird",
+    "namespace_id": "693254986",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Collaterall requirements",
+    "namespace_id": "693536999",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Michael Morehead Home Content",
+    "namespace_id": "6950232816",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Environmental",
+    "namespace_id": "6950451664",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Generate Capital - Enchanted Rock dataroom - ERock Version",
+    "namespace_id": "6964102576",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Pete DiSanto Home Content",
+    "namespace_id": "6977226432",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Nissan Vehicle Leases",
+    "namespace_id": "6980347008",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "EIP 2017 Convertible Note Docs",
+    "namespace_id": "6989951536",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "EGPS _ Enchanted Rock",
+    "namespace_id": "7015741136",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "TAW Warranty Response_Coolant Temps",
+    "namespace_id": "703219454",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Marie Butler Home Content",
+    "namespace_id": "7066180320",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Casey Perry Home Content",
+    "namespace_id": "7079209568",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Omar Coronado Home Content",
+    "namespace_id": "7080021680",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Brian Spurlock Home Content",
+    "namespace_id": "7080242448",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Chris  Sharpless Home Content",
+    "namespace_id": "7081464512",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Cody Grant Home Content",
+    "namespace_id": "7081497664",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Chris  Dorflinger Home Content",
+    "namespace_id": "71265614",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Jorge Aguilar Home Content",
+    "namespace_id": "7137261744",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Volvo Manuals",
+    "namespace_id": "7144947008",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "DTran Documents",
+    "namespace_id": "714721084",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Air Permitting",
+    "namespace_id": "7172226208",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Andrejka Bernatova Home Content",
+    "namespace_id": "7194349760",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "PG&E Geotechnical Data",
+    "namespace_id": "7198728608",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "PG&E Infomation DEGEMS",
+    "namespace_id": "7204881360",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Finance Docs",
+    "namespace_id": "7244699504",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Felling Trailers",
+    "namespace_id": "7255240752",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Root",
+    "namespace_id": "725967511",
+    "namespace_type": {
+      ".tag": "team_member_folder"
+    },
+    "quota_limit": 0,
+    "team_member_id": "dbmid:AAAqSIzpEn0QVdSFxgQp-HbM3n26ORcJO_Y"
+  },
+  {
+    "name": "Financials",
+    "namespace_id": "726101335",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "CoreStates",
+    "namespace_id": "7285999760",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Finance",
+    "namespace_id": "7287474176",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Jonathan Bradshaw Home Content",
+    "namespace_id": "7325048992",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Enchanted Rock Data Room",
+    "namespace_id": "74268172",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Old pitches and market data",
+    "namespace_id": "7433336288",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "JBI",
+    "namespace_id": "7439126800",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Site Audit PDA West",
+    "namespace_id": "7462872160",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Site Audit PDA West",
+    "namespace_id": "7465051392",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Generac Supplemental Services",
+    "namespace_id": "7516778752",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Supplemental Information for Generac",
+    "namespace_id": "7525586176",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Archive",
+    "namespace_id": "754464968",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Pricing Models",
+    "namespace_id": "754465497",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Fundraising",
+    "namespace_id": "755433418",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "MEI Water Damage",
+    "namespace_id": "7561378704",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "O & M Technical Database",
+    "namespace_id": "7563054352",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Capital investments",
+    "namespace_id": "760102236",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Payroll Info - CONFIDENTIAL",
+    "namespace_id": "7695436016",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "SW288 pics 5.16.2020",
+    "namespace_id": "7698253728",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Sheldon Nebout Home Content",
+    "namespace_id": "7769673696",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Technology R&D",
+    "namespace_id": "7778034880",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "TMG Manuals",
+    "namespace_id": "7784435072",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Ashleigh Amthor Home Content",
+    "namespace_id": "7789161152",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "00. Procedures",
+    "namespace_id": "7803651056",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "01. Parts Manuals",
+    "namespace_id": "7805105792",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Training",
+    "namespace_id": "7847996864",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Quarterly Meeting Presentation",
+    "namespace_id": "7884523472",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "COVID",
+    "namespace_id": "7896240880",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Mary Caroline Schuster Home Content",
+    "namespace_id": "7949042464",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Tyler Vincent Home Content",
+    "namespace_id": "7951703248",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Chris Dickerson Home Content",
+    "namespace_id": "7953304352",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Maria Vizcaino Home Content",
+    "namespace_id": "7969011008",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Revon",
+    "namespace_id": "8034112192",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "FJs",
+    "namespace_id": "80351146",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "PQDATA",
+    "namespace_id": "80805409",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Ben Brewer Home Content",
+    "namespace_id": "8093140096",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Kevin Clothier Home Content",
+    "namespace_id": "8150360816",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Zackie  Reed Home Content",
+    "namespace_id": "8172616304",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Lavanya Bhenderu Home Content",
+    "namespace_id": "8204033008",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Generac Purchasing Agreement",
+    "namespace_id": "8210594560",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Videos for Joe",
+    "namespace_id": "8223346112",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Sitetracker Docs",
+    "namespace_id": "8248125776",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Market Analysis",
+    "namespace_id": "829225204",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "GIAB",
+    "namespace_id": "83113605",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Megan Kaufman Home Content",
+    "namespace_id": "8327841760",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Joseph Hernandez Home Content",
+    "namespace_id": "8331853424",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Office 2010 RTM 32-bit",
+    "namespace_id": "83396940",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Kaitai Li Home Content",
+    "namespace_id": "8346483008",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Ken Ashraph Home Content",
+    "namespace_id": "8351536064",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Marketing",
+    "namespace_id": "84306859",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "2014 QSE Audited Financials - BDO",
+    "namespace_id": "845696473",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "CWA Load Analysis",
+    "namespace_id": "84576900",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Kevin Barrios Home Content",
+    "namespace_id": "8489201488",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Althea Alonto Home Content",
+    "namespace_id": "8525826848",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "HR Confidential",
+    "namespace_id": "8525926688",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Root",
+    "namespace_id": "8632551712",
+    "namespace_type": {
+      ".tag": "team_member_folder"
+    },
+    "quota_limit": 0,
+    "team_member_id": "dbmid:AABoRsdMymbghrZWekYp7jAtj7eHrNgyikk"
+  },
+  {
+    "name": "Promissory Notes",
+    "namespace_id": "866388662",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "25.507",
+    "namespace_id": "87523553",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Theresa Monypeny Home Content",
+    "namespace_id": "8761954656",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Ian Walch Home Content",
+    "namespace_id": "8762781808",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "RNG",
+    "namespace_id": "8768943584",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Gen_Models",
+    "namespace_id": "8792136400",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "ER Solutions",
+    "namespace_id": "884225783",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Joel Yu Home Content",
+    "namespace_id": "8872398720",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "MRM - Dad Wt Loss Bet",
+    "namespace_id": "88805997",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "New Safety Procedures Folder",
+    "namespace_id": "892514952",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Abhishek Banerjee Home Content",
+    "namespace_id": "8951331744",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "NextEra Drop Folder Jan 2021",
+    "namespace_id": "8952268704",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Wartsila",
+    "namespace_id": "89893383",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Vance_FLIR_Pictures",
+    "namespace_id": "9001810256",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "VMC_Files",
+    "namespace_id": "9007260528",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Technician Folder",
+    "namespace_id": "902947239",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Wartsilla",
+    "namespace_id": "91317740",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "ORDC",
+    "namespace_id": "916399027",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Doosan",
+    "namespace_id": "91753270",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Jordan Strauss Home Content",
+    "namespace_id": "9182030528",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Volvo",
+    "namespace_id": "91910815",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "March 21 Credit Facility",
+    "namespace_id": "9253314208",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Shannon Sauerhage Home Content",
+    "namespace_id": "926627778",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "STHS FED Share",
+    "namespace_id": "9266490288",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "2020",
+    "namespace_id": "9294974896",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "To Do",
+    "namespace_id": "93454855",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Jason Cartwright Home Content",
+    "namespace_id": "9348564448",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "George Manrique Home Content",
+    "namespace_id": "9359637552",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "V2 Thermal Event Units - Pics",
+    "namespace_id": "9398557104",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Chelsea Juengling Home Content",
+    "namespace_id": "9481538752",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "WATT",
+    "namespace_id": "9513474064",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Uploads for Mads",
+    "namespace_id": "9529832576",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "DCL",
+    "namespace_id": "9551456080",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Corporate Forecast",
+    "namespace_id": "9559014272",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Enchanted Rock 2011 Tax Returns",
+    "namespace_id": "95628922",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Clear Energy",
+    "namespace_id": "95896335",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Jaafar AlSarray Home Content",
+    "namespace_id": "9659622896",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "jalsarray@enchantedrock.com Home Content",
+    "namespace_id": "9670125664",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "james kelly Home Content",
+    "namespace_id": "9689675600",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "6307 Clinton Dr",
+    "namespace_id": "9701698464",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Rob Cauthen Home Content",
+    "namespace_id": "982332165",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "200201 Enchanted Rock - 3PI",
+    "namespace_id": "986623374",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "DRV AVR Issues",
+    "namespace_id": "990107084",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  },
+  {
+    "name": "Vance Tarter",
+    "namespace_id": "99159068",
+    "namespace_type": {
+      ".tag": "shared_folder"
+    },
+    "quota_limit": 0
+  }
+]

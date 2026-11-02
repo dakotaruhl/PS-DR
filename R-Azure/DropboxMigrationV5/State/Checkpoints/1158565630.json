@@ -1,0 +1,16 @@
+{
+  "NamespaceId": "1158565630",
+  "NamespaceName": "200303_EE_CAD_DWGS",
+  "NamespaceType": "shared_folder",
+  "CanonicalAzurePrefix": "Shared-Folders/1158565630-200303_EE_CAD_DWGS",
+  "Cursor": null,
+  "Started": false,
+  "Completed": false,
+  "Failed": true,
+  "PagesCompleted": 0,
+  "FilesUploaded": 0,
+  "BytesUploaded": 0,
+  "FilesSkipped": 0,
+  "LastUpdated": "2026-11-02T15:31:24.0517541-06:00",
+  "LastError": "AzCopy failed with exit code 1 for 'C:\\Users\\DAKOTA~1\\AppData\\Local\\Temp\\ERock-Dropbox-Migration-v5\\d603bbe102f34fa0b1135aa6fe67ef54'."
+}

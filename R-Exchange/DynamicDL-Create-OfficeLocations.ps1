@@ -1,11 +1,11 @@
-
-$VineFilter = "(Office -like 'Vine*') -and (RecipientTypeDetails -eq 'UserMailbox') -and (HiddenFromAddressListsEnabled -eq `$false)"
-$TitanFilter = "(Office -like '*Titan*') -and (RecipientTypeDetails -eq 'UserMailbox') -and (HiddenFromAddressListsEnabled -eq `$false)"
-$HyperionFilter = "(Office -like '*Hyperion*') -and (RecipientTypeDetails -eq 'UserMailbox') -and (HiddenFromAddressListsEnabled -eq `$false)"
-$StocktonFilter = "(Office -like '*Stockton*') -and (RecipientTypeDetails -eq 'UserMailbox') -and (HiddenFromAddressListsEnabled -eq `$false)"
-$CliftonFilter = "(Office -like '*Clifton*') -and (RecipientTypeDetails -eq 'UserMailbox') -and (HiddenFromAddressListsEnabled -eq `$false)"
-$RemoteFilter = "(Office -like '*Remote*') -and (RecipientTypeDetails -eq 'UserMailbox') -and (HiddenFromAddressListsEnabled -eq `$false)"  
-$otherFilter = "(Office -like '*Other*') -and (RecipientTypeDetails -eq 'UserMailbox') -and (HiddenFromAddressListsEnabled -eq `$false)"
+##Filters
+$VineFilter = "(ExtensionCustomAttribute1 -eq 'Vine') -and (RecipientTypeDetails -eq 'UserMailbox') -and (HiddenFromAddressListsEnabled -eq `$false)"
+$TitanFilter = "(ExtensionCustomAttribute1 -eq 'Titan') -and (RecipientTypeDetails -eq 'UserMailbox') -and (HiddenFromAddressListsEnabled -eq `$false)"
+$HyperionFilter = "(ExtensionCustomAttribute1 -eq 'Hyperion') -and (RecipientTypeDetails -eq 'UserMailbox') -and (HiddenFromAddressListsEnabled -eq `$false)"
+$StocktonFilter = "(ExtensionCustomAttribute1 -eq 'Stockton') -and (RecipientTypeDetails -eq 'UserMailbox') -and (HiddenFromAddressListsEnabled -eq `$false)"
+$CliftonFilter = "(ExtensionCustomAttribute1 -eq 'Clifton') -and (RecipientTypeDetails -eq 'UserMailbox') -and (HiddenFromAddressListsEnabled -eq `$false)"
+$RemoteFilter = "(ExtensionCustomAttribute1 -eq 'Remote') -and (RecipientTypeDetails -eq 'UserMailbox') -and (HiddenFromAddressListsEnabled -eq `$false)"  
+$OtherFilter = "(ExtensionCustomAttribute1 -eq 'Other') -and (RecipientTypeDetails -eq 'UserMailbox') -and (HiddenFromAddressListsEnabled -eq `$false)"
 
 
 $VineUsers = Get-Recipient -ResultSize Unlimited -Filter $VineFilter
@@ -14,7 +14,7 @@ $HyperionUsers = Get-Recipient -ResultSize Unlimited -Filter $HyperionFilter
 $StocktonUsers = Get-Recipient -ResultSize Unlimited -Filter $StocktonFilter
 $CliftonUsers = Get-Recipient -ResultSize Unlimited -Filter $CliftonFilter
 $RemoteUsers = Get-Recipient -ResultSize Unlimited -Filter $RemoteFilter
-$OtherUsers = Get-Recipient -ResultSize Unlimited -Filter $otherFilter
+$OtherUsers = Get-Recipient -ResultSize Unlimited -Filter $OtherFilter
 $VineUsers.Count
 $TitanUsers.Count
 $HyperionUsers.Count
@@ -22,7 +22,6 @@ $StocktonUsers.Count
 $CliftonUsers.Count
 $RemoteUsers.Count
 $OtherUsers.Count
-
 
 # Export results into one workbook, with multiple sheets showing the different office locations
 $ExportPath = ".\output\OfficeLocationUsers.xlsx"
@@ -55,71 +54,167 @@ $OtherUsers |
     Export-Excel -Path $ExportPath -WorksheetName "Other" `
         -AutoSize -AutoFilter -FreezeTopRow -BoldTopRow
 
+<# 
+$titanCount = Get-Recipient -Filter $TitanFilter |
+    Select-Object DisplayName, Office, ExtensionCustomAttribute1, PrimarySmtpAddress |
+    Sort-Object DisplayName
+$titanCount.Count
 
-New-DynamicDistributionGroup `
-    -Name "Titan Users" `
-    -DisplayName "Titan Users" `
-    -Alias "TitanUsers" `
-    -PrimarySmtpAddress "TitanUsers@erock.com" `
-    -RecipientFilter $TitanFilter
+$vineCount = Get-Recipient -Filter $VineFilter |
+    Select-Object DisplayName, Office, ExtensionCustomAttribute1, PrimarySmtpAddress |
+    Sort-Object DisplayName
+$vineCount.Count
 
-New-DynamicDistributionGroup `
-    -Name "Hyperion Users" `
-    -DisplayName "Hyperion Users" `
-    -Alias "HyperionUsers" `
-    -PrimarySmtpAddress "HyperionUsers@erock.com" `
-    -RecipientFilter $HyperionFilter
+$hyperionCount = Get-Recipient -Filter $HyperionFilter |
+    Select-Object DisplayName, Office, ExtensionCustomAttribute1, PrimarySmtpAddress |
+    Sort-Object DisplayName
+$hyperionCount.Count
 
-New-DynamicDistributionGroup `
-    -Name "Stockton Users" `
-    -DisplayName "Stockton Users" `
-    -Alias "StocktonUsers" `
-    -PrimarySmtpAddress "StocktonUsers@erock.com" `
-    -RecipientFilter $StocktonFilter
+$stocktonCount = Get-Recipient -Filter $StocktonFilter |
+    Select-Object DisplayName, Office, ExtensionCustomAttribute1, PrimarySmtpAddress |
+    Sort-Object DisplayName
+$stocktonCount.Count
 
-New-DynamicDistributionGroup `
-    -Name "Clifton Users" `
-    -DisplayName "Clifton Users" `
-    -Alias "CliftonUsers" `
-    -PrimarySmtpAddress "CliftonUsers@erock.com" `
-    -RecipientFilter $CliftonFilter
+$cliftonCount = Get-Recipient -Filter $CliftonFilter |
+    Select-Object DisplayName, Office, ExtensionCustomAttribute1, PrimarySmtpAddress |
+    Sort-Object DisplayName
+$cliftonCount.Count
 
-New-DynamicDistributionGroup `
-    -Name "Remote Users" `
-    -DisplayName "Remote Users" `
-    -Alias "RemoteUsers" `
-    -PrimarySmtpAddress "RemoteUsers@erock.com" `
-    -RecipientFilter $RemoteFilter
+$remoteCount = Get-Recipient -Filter $RemoteFilter |
+    Select-Object DisplayName, Office, ExtensionCustomAttribute1, PrimarySmtpAddress |
+    Sort-Object DisplayName
+$remoteCount.Count
 
-New-DynamicDistributionGroup `
-    -Name "Other Users" `
-    -DisplayName "Other Users" `
-    -Alias "OtherUsers" `
-    -PrimarySmtpAddress "OtherUsers@erock.com" `
-    -RecipientFilter $otherFilter
-
+$otherCount = Get-Recipient -Filter $OtherFilter |
+    Select-Object DisplayName, Office, ExtensionCustomAttribute1, PrimarySmtpAddress |
+    Sort-Object DisplayName
+$otherCount.Count
+ #>       
+###################
+## Create Groups ##
+###################
+<# 
 New-DynamicDistributionGroup `
     -Name "Vine" `
     -DisplayName "Vine" `
     -Alias "Vine" `
     -PrimarySmtpAddress "Vine@erock.com" `
-    -RecipientFilter $VineFilter
+    -RecipientFilter $VineFilter       
 
-    Get-DynamicDistributionGroup -Identity "Vine" |
-    Format-List Name,DisplayName,PrimarySmtpAddress,RecipientFilter
+New-DynamicDistributionGroup `
+    -Name "Titan" `
+    -DisplayName "Titan" `
+    -Alias "Titan" `
+    -PrimarySmtpAddress "Titan@erock.com" `
+    -RecipientFilter $TitanFilter 
+#>
 
 
-Set-Mailbox druhl@erock.com -ExtensionCustomAttribute1 @( 
-    "Titan"
-    "Hyperion"
-    "Vine"
-    )
-Get-Mailbox druhl@erock.com |
-Select-Object DisplayName, ExtensionCustomAttribute1
+New-DynamicDistributionGroup `
+    -Name "Hyperion" `
+    -DisplayName "Hyperion" `
+    -Alias "Hyperion" `
+    -PrimarySmtpAddress "Hyperion@erock.com" `
+    -RecipientFilter $HyperionFilter
 
-$VineFilter = "(ExtensionCustomAttribute1 -eq 'Vine') -and (RecipientTypeDetails -eq 'UserMailbox') -and (HiddenFromAddressListsEnabled -eq `$false)"
+New-DynamicDistributionGroup `
+    -Name "Stockton" `
+    -DisplayName "Stockton" `
+    -Alias "Stockton" `
+    -PrimarySmtpAddress "Stockton@erock.com" `
+    -RecipientFilter $StocktonFilter
 
-Get-Recipient -Filter $VineFilter |
-    Select-Object DisplayName, Office, ExtensionCustomAttribute1, PrimarySmtpAddress |
+New-DynamicDistributionGroup `
+    -Name "Clifton" `
+    -DisplayName "Clifton" `
+    -Alias "Clifton" `
+    -PrimarySmtpAddress "Clifton@erock.com" `
+    -RecipientFilter $CliftonFilter
+
+New-DynamicDistributionGroup `
+    -Name "Remote" `
+    -DisplayName "Remote" `
+    -Alias "Remote" `
+    -PrimarySmtpAddress "Remote@erock.com" `
+    -RecipientFilter $RemoteFilter
+
+New-DynamicDistributionGroup `
+    -Name "Other" `
+    -DisplayName "Other" `
+    -Alias "Other" `
+    -PrimarySmtpAddress "Other@erock.com" `
+    -RecipientFilter $OtherFilter
+
+##########################
+# Existing Hyperion distribution list members
+$CurrentMembers = Get-DistributionGroupMember `
+    -Identity "hyperion@erock.com" `
+    -ResultSize Unlimited
+
+# Users currently matching your proposed dynamic filter
+$DynamicMembers = Get-Recipient `
+    -Filter $HyperionFilter `
+    -ResultSize Unlimited
+
+# Compare using ExternalDirectoryObjectId
+$DynamicIds = @(
+    $DynamicMembers |
+        Where-Object { $_.ExternalDirectoryObjectId } |
+        ForEach-Object { $_.ExternalDirectoryObjectId }
+)
+
+$MissingMembers = $CurrentMembers |
+    Where-Object {
+        $_.ExternalDirectoryObjectId -notin $DynamicIds
+    } |
+    Select-Object DisplayName,
+        PrimarySmtpAddress,
+        RecipientTypeDetails,
+        ExternalDirectoryObjectId |
     Sort-Object DisplayName
+
+$MissingMembers
+
+Write-Host ""
+Write-Host "Current DL members:  $($CurrentMembers.Count)"
+Write-Host "Dynamic matches:      $($DynamicMembers.Count)"
+Write-Host "Missing from filter:  $($MissingMembers.Count)"
+
+$MissingMemberDetails = foreach ($Member in $MissingMembers) {
+
+    Get-Recipient `
+        -Identity $Member.ExternalDirectoryObjectId |
+        Select-Object DisplayName,
+            PrimarySmtpAddress,
+            RecipientTypeDetails,
+            Office,
+            ExtensionCustomAttribute1,
+            ExternalDirectoryObjectId
+}
+
+$MissingMemberDetails |
+    Sort-Object DisplayName |
+    Format-Table -AutoSize
+
+## Check reverse
+$CurrentIds = @(
+    $CurrentMembers |
+        Where-Object { $_.ExternalDirectoryObjectId } |
+        ForEach-Object { $_.ExternalDirectoryObjectId }
+)
+
+$ExtraDynamicMembers = $DynamicMembers |
+    Where-Object {
+        $_.ExternalDirectoryObjectId -notin $CurrentIds
+    } |
+    Select-Object DisplayName,
+        PrimarySmtpAddress,
+        RecipientTypeDetails,
+        Office,
+        ExtensionCustomAttribute1 |
+    Sort-Object DisplayName
+
+$ExtraDynamicMembers
+
+Write-Host "Dynamic matches not in current DL: $($ExtraDynamicMembers.Count)"
 

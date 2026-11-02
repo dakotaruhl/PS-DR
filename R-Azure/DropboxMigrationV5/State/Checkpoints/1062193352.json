@@ -1,0 +1,16 @@
+{
+  "NamespaceId": "1062193352",
+  "NamespaceName": "Enchanted Rock Team Folder",
+  "NamespaceType": "team_folder",
+  "CanonicalAzurePrefix": "Team-Folders/1062193352-Enchanted Rock Team Folder",
+  "Cursor": "AAY5HEDniGPdTKqp9vCLktBjLvsPRNZLzL5mdGF5-LshcpYRcyegA3s5TzLGA8WZktm_qg9KDUnFGd6oYgKAIFGlQIqQzbRS8QrpkoYSlGI3IZ0_e58f-jjerwvQrztkkEvaBwxBFsAzfYCJWacSCFp4mouoE-JkENWsdyy48NuaU1vwiYkqFeqhkNZZHktyu2cNNA3RUKuZO1ht6e-bZhoUhFBPh5zITf4H4WONJqnIqpiHpkzgCwxwr7e1iT9IyHVARwRkxFX9U3od5VtV8t3M_YS1sw5dL55Vi-3BLHdbYQfyaNfzWvNB5dYFiehdDcbF4GWdl8Nd3FIECnaZf10NCd1ZEKaEM3ZKVKr_FkR9NH2UaRTLam1GZJWCfE8FhWVQBDyY-NGKKBBa3a0evr8Mth92_L9b30ZUQeDlojxjlVtzMzwsrl3YP7SM_5D-LEFDWpWTNbTJQyCXxpBVvK-VWK474l_49fqkC_Bvd_4_6JU8rD_02FyB8dyXIzq-zMRHfEzURRzxAjpnYmqMiuHoHO4mU3ijs-iv9s9U7Z_Bp6-G4z8t5pQwEhF4SQuhsx-zMq2RU6H5nNk9NQWrRIA6j1cw5iYvCCt7Olc_zm869hN60RdBlRkPSS6JXwoZxlYT6-InaQBQxv5L82txcutI9hRsTiiiFhoJ9oOPtS5o5jvyKN-Csq3rqqyGNNOZ-5EFhCrKinFEgzRcNS2RdkxWE0bzBVD4Y3HD3TEYwSkzywW1x-OZ1VeAPGIeJF6RxgSwLMAMGIkS4S5pbmuLjutx54xbGXcUs4wZgC69JmySC1K3q6DSo1_MgZ3LAccGVXuNy3X9Rdd09K38AqU-AMQr",
+  "Started": true,
+  "Completed": false,
+  "Failed": true,
+  "PagesCompleted": 1,
+  "FilesUploaded": 224,
+  "BytesUploaded": 937779843,
+  "FilesSkipped": 0,
+  "LastUpdated": "2026-11-02T14:57:55.6136977-06:00",
+  "LastError": "AzCopy failed with exit code 1 for 'C:\\Users\\DAKOTA~1\\AppData\\Local\\Temp\\ERock-Dropbox-Migration-v5\\24cc7b94286443388a2dba32dec6779a'."
+}

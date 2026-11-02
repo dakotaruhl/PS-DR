@@ -1,7 +1,7 @@
 Connect-PowerBIServiceAccount
 
 # Use the reportId from the URL/email
-$reportId = "77e5def2-77e2-47be-aa71-d5a6b949df79"
+$reportId = "ec7e3af7-d9e1-4dbe-8650-2721528e0fd6"
 
 # Optional: shut up the MSAL warnings for this session
 $WarningPreference = "SilentlyContinue"
@@ -15,5 +15,5 @@ $result.value | Select-Object id, name, workspaceId, webUrl
 $workspaceId = $result.value[0].workspaceId
 Get-PowerBIWorkspace -Scope Organization -Id $workspaceId | Select-Object Id, Name, State
 
-Add-PowerBIWorkspaceUser -Id $workspaceId -UserPrincipalName "admin-dr@enchantedrock.com" -AccessRight Admin
-77e5def2-77e2-47be-aa71-d5a6b949df79
+Add-PowerBIWorkspaceUser -Id $workspaceId -UserPrincipalName "admin-dr@erock.com" -AccessRight Admin
+

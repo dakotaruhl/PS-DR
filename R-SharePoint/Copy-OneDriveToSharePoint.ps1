@@ -130,11 +130,11 @@ connection, source discovery, or destination validation terminates the migration
 Copies the user's OneDrive Documents content to the specified SharePoint archive folder.
 
 .EXAMPLE
-.\Copy-OneDriveToSharePoint.ps1 `
-    -SourceUserUPN "kclothier@erock.com" `
+.\R-SharePoint\Copy-OneDriveToSharePoint.ps1 `
+    -SourceUserUPN "sstraight@erock.com" `
     -DestinationSiteUrl "https://enchantedrock.sharepoint.com/sites/Safety" `
-    -DestinationSiteRelativeFolder "Shared Documents/Archive/Kevin Clothier - OneDrive" `
-    -excludeFolders "Forms,Temporary" `
+    -DestinationSiteRelativeFolder "Shared Documents/Archive/Serena Straight - OneDrive" `
+    -excludeFolders "Forms,Temporary, Apps, downloads, attachments, desktop, documents" `
     -excludeFiles "desktop.ini,test.txt"
 
 Performs the migration while excluding the specified top-level files and folders.

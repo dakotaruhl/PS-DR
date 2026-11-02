@@ -1,0 +1,16 @@
+{
+  "NamespaceId": "1916011376",
+  "NamespaceName": "001_Support",
+  "NamespaceType": "shared_folder",
+  "CanonicalAzurePrefix": "Shared-Folders/1916011376-001_Support",
+  "Cursor": "AAZbvU0YSQFUwfJ0fb-jDeuuEElVBKwOZrNVDbFgyYGJhQnvV_FajaDwZw4ngsWniVoRlSJUQxb2GzMoO9Mf63cPxjZXFzF78rac70ydt83wrO5idDhNSgP-ywmr3Xyxl8R8wB0Y4yEAyY9S4wqD71gv9az5aY1rrO7-iEMYOT2EQT-cLZc2P-wJoH5ybEW_kRstBNJe5kxaZ1ZqbUWsHHwT",
+  "Started": true,
+  "Completed": true,
+  "Failed": false,
+  "PagesCompleted": 1,
+  "FilesUploaded": 216,
+  "BytesUploaded": 368911423,
+  "FilesSkipped": 0,
+  "LastUpdated": "2026-11-02T15:17:23.9259611-06:00",
+  "LastError": null
+}
