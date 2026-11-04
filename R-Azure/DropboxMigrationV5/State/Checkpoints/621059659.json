@@ -1,0 +1,16 @@
+{
+  "NamespaceId": "621059659",
+  "NamespaceName": "JunSep Super Peak Option",
+  "NamespaceType": "shared_folder",
+  "CanonicalAzurePrefix": "Shared-Folders/621059659-JunSep Super Peak Option",
+  "Cursor": null,
+  "Started": false,
+  "Completed": false,
+  "Failed": true,
+  "PagesCompleted": 0,
+  "FilesUploaded": 0,
+  "BytesUploaded": 0,
+  "FilesSkipped": 0,
+  "LastUpdated": "2026-11-03T00:10:51.6371980-06:00",
+  "LastError": "Response status code does not indicate success: 401 (Unauthorized)."
+}

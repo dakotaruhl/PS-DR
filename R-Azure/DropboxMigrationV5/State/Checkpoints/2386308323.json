@@ -1,0 +1,16 @@
+{
+  "NamespaceId": "2386308323",
+  "NamespaceName": "CORVUS Contract - Fully Executed",
+  "NamespaceType": "shared_folder",
+  "CanonicalAzurePrefix": "Shared-Folders/2386308323-CORVUS Contract - Fully Executed",
+  "Cursor": null,
+  "Started": false,
+  "Completed": false,
+  "Failed": true,
+  "PagesCompleted": 0,
+  "FilesUploaded": 0,
+  "BytesUploaded": 0,
+  "FilesSkipped": 0,
+  "LastUpdated": "2026-11-03T00:09:34.9425812-06:00",
+  "LastError": "Response status code does not indicate success: 401 (Unauthorized)."
+}

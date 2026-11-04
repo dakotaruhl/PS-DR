@@ -1,0 +1,16 @@
+{
+  "NamespaceId": "6121888368",
+  "NamespaceName": "Bobak Fatemizadeh Home Content",
+  "NamespaceType": "shared_folder",
+  "CanonicalAzurePrefix": "Shared-Folders/6121888368-Bobak Fatemizadeh Home Content",
+  "Cursor": null,
+  "Started": false,
+  "Completed": false,
+  "Failed": true,
+  "PagesCompleted": 0,
+  "FilesUploaded": 0,
+  "BytesUploaded": 0,
+  "FilesSkipped": 0,
+  "LastUpdated": "2026-11-03T00:09:08.9640927-06:00",
+  "LastError": "Response status code does not indicate success: 401 (Unauthorized)."
+}

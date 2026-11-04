@@ -1,0 +1,16 @@
+{
+  "NamespaceId": "3241623760",
+  "NamespaceName": "Warehouse",
+  "NamespaceType": "shared_folder",
+  "CanonicalAzurePrefix": "Shared-Folders/3241623760-Warehouse",
+  "Cursor": null,
+  "Started": false,
+  "Completed": false,
+  "Failed": true,
+  "PagesCompleted": 0,
+  "FilesUploaded": 0,
+  "BytesUploaded": 0,
+  "FilesSkipped": 0,
+  "LastUpdated": "2026-11-03T00:12:23.3483550-06:00",
+  "LastError": "Response status code does not indicate success: 401 (Unauthorized)."
+}

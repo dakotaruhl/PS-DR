@@ -1,0 +1,16 @@
+{
+  "NamespaceId": "829225204",
+  "NamespaceName": "Market Analysis",
+  "NamespaceType": "shared_folder",
+  "CanonicalAzurePrefix": "Shared-Folders/829225204-Market Analysis",
+  "Cursor": null,
+  "Started": false,
+  "Completed": false,
+  "Failed": true,
+  "PagesCompleted": 0,
+  "FilesUploaded": 0,
+  "BytesUploaded": 0,
+  "FilesSkipped": 0,
+  "LastUpdated": "2026-11-03T00:11:05.8878903-06:00",
+  "LastError": "Response status code does not indicate success: 401 (Unauthorized)."
+}

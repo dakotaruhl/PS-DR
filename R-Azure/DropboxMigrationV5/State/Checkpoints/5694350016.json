@@ -1,0 +1,16 @@
+{
+  "NamespaceId": "5694350016",
+  "NamespaceName": "Burts Construction - ERock",
+  "NamespaceType": "shared_folder",
+  "CanonicalAzurePrefix": "Shared-Folders/5694350016-Burts Construction - ERock",
+  "Cursor": null,
+  "Started": false,
+  "Completed": false,
+  "Failed": true,
+  "PagesCompleted": 0,
+  "FilesUploaded": 0,
+  "BytesUploaded": 0,
+  "FilesSkipped": 0,
+  "LastUpdated": "2026-11-03T00:09:11.1898760-06:00",
+  "LastError": "Response status code does not indicate success: 401 (Unauthorized)."
+}

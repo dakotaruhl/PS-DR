@@ -1,0 +1,16 @@
+{
+  "NamespaceId": "5908509968",
+  "NamespaceName": "Todd Price Home Content",
+  "NamespaceType": "shared_folder",
+  "CanonicalAzurePrefix": "Shared-Folders/5908509968-Todd Price Home Content",
+  "Cursor": null,
+  "Started": false,
+  "Completed": false,
+  "Failed": true,
+  "PagesCompleted": 0,
+  "FilesUploaded": 0,
+  "BytesUploaded": 0,
+  "FilesSkipped": 0,
+  "LastUpdated": "2026-11-03T00:12:11.2885260-06:00",
+  "LastError": "Response status code does not indicate success: 401 (Unauthorized)."
+}

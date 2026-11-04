@@ -1,0 +1,16 @@
+{
+  "NamespaceId": "41113884",
+  "NamespaceName": "CLWA",
+  "NamespaceType": "shared_folder",
+  "CanonicalAzurePrefix": "Shared-Folders/41113884-CLWA",
+  "Cursor": null,
+  "Started": false,
+  "Completed": false,
+  "Failed": true,
+  "PagesCompleted": 0,
+  "FilesUploaded": 0,
+  "BytesUploaded": 0,
+  "FilesSkipped": 0,
+  "LastUpdated": "2026-11-03T00:09:25.1410779-06:00",
+  "LastError": "Response status code does not indicate success: 401 (Unauthorized)."
+}

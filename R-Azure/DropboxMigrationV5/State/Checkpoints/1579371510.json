@@ -1,0 +1,16 @@
+{
+  "NamespaceId": "1579371510",
+  "NamespaceName": "Michael Branch Home Content",
+  "NamespaceType": "shared_folder",
+  "CanonicalAzurePrefix": "Shared-Folders/1579371510-Michael Branch Home Content",
+  "Cursor": null,
+  "Started": false,
+  "Completed": false,
+  "Failed": true,
+  "PagesCompleted": 0,
+  "FilesUploaded": 0,
+  "BytesUploaded": 0,
+  "FilesSkipped": 0,
+  "LastUpdated": "2026-11-03T00:11:10.4313390-06:00",
+  "LastError": "Response status code does not indicate success: 401 (Unauthorized)."
+}

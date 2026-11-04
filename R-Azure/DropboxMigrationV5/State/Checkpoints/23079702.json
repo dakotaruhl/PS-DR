@@ -1,0 +1,16 @@
+{
+  "NamespaceId": "23079702",
+  "NamespaceName": "MUD Sales Prospects",
+  "NamespaceType": "shared_folder",
+  "CanonicalAzurePrefix": "Shared-Folders/23079702-MUD Sales Prospects",
+  "Cursor": null,
+  "Started": false,
+  "Completed": false,
+  "Failed": true,
+  "PagesCompleted": 0,
+  "FilesUploaded": 0,
+  "BytesUploaded": 0,
+  "FilesSkipped": 0,
+  "LastUpdated": "2026-11-03T00:11:13.8687572-06:00",
+  "LastError": "Response status code does not indicate success: 401 (Unauthorized)."
+}

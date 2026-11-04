@@ -1,0 +1,16 @@
+{
+  "NamespaceId": "1559181374",
+  "NamespaceName": "Photos for Bill Nussey",
+  "NamespaceType": "shared_folder",
+  "CanonicalAzurePrefix": "Shared-Folders/1559181374-Photos for Bill Nussey",
+  "Cursor": null,
+  "Started": false,
+  "Completed": false,
+  "Failed": true,
+  "PagesCompleted": 0,
+  "FilesUploaded": 0,
+  "BytesUploaded": 0,
+  "FilesSkipped": 0,
+  "LastUpdated": "2026-11-03T00:11:29.6625105-06:00",
+  "LastError": "Response status code does not indicate success: 401 (Unauthorized)."
+}

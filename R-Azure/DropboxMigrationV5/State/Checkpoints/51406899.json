@@ -1,0 +1,16 @@
+{
+  "NamespaceId": "51406899",
+  "NamespaceName": "Clark's Photos",
+  "NamespaceType": "shared_folder",
+  "CanonicalAzurePrefix": "Shared-Folders/51406899-Clark's Photos",
+  "Cursor": null,
+  "Started": false,
+  "Completed": false,
+  "Failed": true,
+  "PagesCompleted": 0,
+  "FilesUploaded": 0,
+  "BytesUploaded": 0,
+  "FilesSkipped": 0,
+  "LastUpdated": "2026-11-03T00:09:23.3659942-06:00",
+  "LastError": "Response status code does not indicate success: 401 (Unauthorized)."
+}

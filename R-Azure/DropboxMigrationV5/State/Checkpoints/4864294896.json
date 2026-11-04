@@ -1,0 +1,16 @@
+{
+  "NamespaceId": "4864294896",
+  "NamespaceName": "Gruller Survey",
+  "NamespaceType": "shared_folder",
+  "CanonicalAzurePrefix": "Shared-Folders/4864294896-Gruller Survey",
+  "Cursor": null,
+  "Started": false,
+  "Completed": false,
+  "Failed": true,
+  "PagesCompleted": 0,
+  "FilesUploaded": 0,
+  "BytesUploaded": 0,
+  "FilesSkipped": 0,
+  "LastUpdated": "2026-11-03T00:10:28.3490252-06:00",
+  "LastError": "Response status code does not indicate success: 401 (Unauthorized)."
+}

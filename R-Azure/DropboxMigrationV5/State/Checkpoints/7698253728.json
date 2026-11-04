@@ -1,0 +1,16 @@
+{
+  "NamespaceId": "7698253728",
+  "NamespaceName": "SW288 pics 5.16.2020",
+  "NamespaceType": "shared_folder",
+  "CanonicalAzurePrefix": "Shared-Folders/7698253728-SW288 pics 5.16.2020",
+  "Cursor": null,
+  "Started": false,
+  "Completed": false,
+  "Failed": true,
+  "PagesCompleted": 0,
+  "FilesUploaded": 0,
+  "BytesUploaded": 0,
+  "FilesSkipped": 0,
+  "LastUpdated": "2026-11-03T00:12:00.3478355-06:00",
+  "LastError": "Response status code does not indicate success: 401 (Unauthorized)."
+}

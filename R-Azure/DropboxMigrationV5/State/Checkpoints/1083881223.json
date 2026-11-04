@@ -1,0 +1,16 @@
+{
+  "NamespaceId": "1083881223",
+  "NamespaceName": "CC Mtg 120215",
+  "NamespaceType": "shared_folder",
+  "CanonicalAzurePrefix": "Shared-Folders/1083881223-CC Mtg 120215",
+  "Cursor": null,
+  "Started": false,
+  "Completed": false,
+  "Failed": true,
+  "PagesCompleted": 0,
+  "FilesUploaded": 0,
+  "BytesUploaded": 0,
+  "FilesSkipped": 0,
+  "LastUpdated": "2026-11-03T00:09:16.5422474-06:00",
+  "LastError": "Response status code does not indicate success: 401 (Unauthorized)."
+}

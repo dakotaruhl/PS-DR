@@ -1,0 +1,16 @@
+{
+  "NamespaceId": "5790525312",
+  "NamespaceName": "EREJB161009_Installation Old VQ14",
+  "NamespaceType": "shared_folder",
+  "CanonicalAzurePrefix": "Shared-Folders/5790525312-EREJB161009_Installation Old VQ14",
+  "Cursor": null,
+  "Started": false,
+  "Completed": false,
+  "Failed": true,
+  "PagesCompleted": 0,
+  "FilesUploaded": 0,
+  "BytesUploaded": 0,
+  "FilesSkipped": 0,
+  "LastUpdated": "2026-11-03T00:10:05.0970279-06:00",
+  "LastError": "Response status code does not indicate success: 401 (Unauthorized)."
+}

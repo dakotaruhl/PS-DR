@@ -1,0 +1,16 @@
+{
+  "NamespaceId": "4365478384",
+  "NamespaceName": "EY Pics",
+  "NamespaceType": "shared_folder",
+  "CanonicalAzurePrefix": "Shared-Folders/4365478384-EY Pics",
+  "Cursor": null,
+  "Started": false,
+  "Completed": false,
+  "Failed": true,
+  "PagesCompleted": 0,
+  "FilesUploaded": 0,
+  "BytesUploaded": 0,
+  "FilesSkipped": 0,
+  "LastUpdated": "2026-11-03T00:10:11.1570938-06:00",
+  "LastError": "Response status code does not indicate success: 401 (Unauthorized)."
+}

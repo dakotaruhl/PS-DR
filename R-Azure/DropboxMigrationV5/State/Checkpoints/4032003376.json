@@ -1,0 +1,16 @@
+{
+  "NamespaceId": "4032003376",
+  "NamespaceName": "Enchanted Rock Restructure Documents (July 2018)",
+  "NamespaceType": "shared_folder",
+  "CanonicalAzurePrefix": "Shared-Folders/4032003376-Enchanted Rock Restructure Documents (July 2018)",
+  "Cursor": null,
+  "Started": false,
+  "Completed": false,
+  "Failed": true,
+  "PagesCompleted": 0,
+  "FilesUploaded": 0,
+  "BytesUploaded": 0,
+  "FilesSkipped": 0,
+  "LastUpdated": "2026-11-03T00:09:57.1008702-06:00",
+  "LastError": "Response status code does not indicate success: 401 (Unauthorized)."
+}

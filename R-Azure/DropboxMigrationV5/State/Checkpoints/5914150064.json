@@ -1,0 +1,16 @@
+{
+  "NamespaceId": "5914150064",
+  "NamespaceName": "Brandon Baker Home Content",
+  "NamespaceType": "shared_folder",
+  "CanonicalAzurePrefix": "Shared-Folders/5914150064-Brandon Baker Home Content",
+  "Cursor": null,
+  "Started": false,
+  "Completed": false,
+  "Failed": true,
+  "PagesCompleted": 0,
+  "FilesUploaded": 0,
+  "BytesUploaded": 0,
+  "FilesSkipped": 0,
+  "LastUpdated": "2026-11-03T00:09:09.7924993-06:00",
+  "LastError": "Response status code does not indicate success: 401 (Unauthorized)."
+}

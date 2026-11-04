@@ -1,0 +1,16 @@
+{
+  "NamespaceId": "4281130992",
+  "NamespaceName": "Files for Leidos",
+  "NamespaceType": "shared_folder",
+  "CanonicalAzurePrefix": "Shared-Folders/4281130992-Files for Leidos",
+  "Cursor": null,
+  "Started": false,
+  "Completed": false,
+  "Failed": true,
+  "PagesCompleted": 0,
+  "FilesUploaded": 0,
+  "BytesUploaded": 0,
+  "FilesSkipped": 0,
+  "LastUpdated": "2026-11-03T00:10:13.2294433-06:00",
+  "LastError": "Response status code does not indicate success: 401 (Unauthorized)."
+}

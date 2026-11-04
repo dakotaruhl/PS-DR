@@ -1,0 +1,16 @@
+{
+  "NamespaceId": "2203959088",
+  "NamespaceName": "PSO Career Path",
+  "NamespaceType": "shared_folder",
+  "CanonicalAzurePrefix": "Shared-Folders/2203959088-PSO Career Path",
+  "Cursor": null,
+  "Started": false,
+  "Completed": false,
+  "Failed": true,
+  "PagesCompleted": 0,
+  "FilesUploaded": 0,
+  "BytesUploaded": 0,
+  "FilesSkipped": 0,
+  "LastUpdated": "2026-11-03T00:11:39.2585432-06:00",
+  "LastError": "Response status code does not indicate success: 401 (Unauthorized)."
+}

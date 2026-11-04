@@ -1,0 +1,16 @@
+{
+  "NamespaceId": "7137261744",
+  "NamespaceName": "Jorge Aguilar Home Content",
+  "NamespaceType": "shared_folder",
+  "CanonicalAzurePrefix": "Shared-Folders/7137261744-Jorge Aguilar Home Content",
+  "Cursor": null,
+  "Started": false,
+  "Completed": false,
+  "Failed": true,
+  "PagesCompleted": 0,
+  "FilesUploaded": 0,
+  "BytesUploaded": 0,
+  "FilesSkipped": 0,
+  "LastUpdated": "2026-11-03T00:10:49.7301600-06:00",
+  "LastError": "Response status code does not indicate success: 401 (Unauthorized)."
+}

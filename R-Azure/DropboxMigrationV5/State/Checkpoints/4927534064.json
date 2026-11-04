@@ -1,0 +1,16 @@
+{
+  "NamespaceId": "4927534064",
+  "NamespaceName": "ERock Management Team",
+  "NamespaceType": "shared_folder",
+  "CanonicalAzurePrefix": "Shared-Folders/4927534064-ERock Management Team",
+  "Cursor": null,
+  "Started": false,
+  "Completed": false,
+  "Failed": true,
+  "PagesCompleted": 0,
+  "FilesUploaded": 0,
+  "BytesUploaded": 0,
+  "FilesSkipped": 0,
+  "LastUpdated": "2026-11-03T00:10:08.0290663-06:00",
+  "LastError": "Response status code does not indicate success: 401 (Unauthorized)."
+}

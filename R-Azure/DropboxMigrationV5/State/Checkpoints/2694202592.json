@@ -1,0 +1,16 @@
+{
+  "NamespaceId": "2694202592",
+  "NamespaceName": "Alarms page",
+  "NamespaceType": "shared_folder",
+  "CanonicalAzurePrefix": "Shared-Folders/2694202592-Alarms page",
+  "Cursor": null,
+  "Started": false,
+  "Completed": false,
+  "Failed": true,
+  "PagesCompleted": 0,
+  "FilesUploaded": 0,
+  "BytesUploaded": 0,
+  "FilesSkipped": 0,
+  "LastUpdated": "2026-11-03T00:08:56.5299865-06:00",
+  "LastError": "Response status code does not indicate success: 401 (Unauthorized)."
+}

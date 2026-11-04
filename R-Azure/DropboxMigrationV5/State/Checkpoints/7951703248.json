@@ -1,0 +1,16 @@
+{
+  "NamespaceId": "7951703248",
+  "NamespaceName": "Tyler Vincent Home Content",
+  "NamespaceType": "shared_folder",
+  "CanonicalAzurePrefix": "Shared-Folders/7951703248-Tyler Vincent Home Content",
+  "Cursor": null,
+  "Started": false,
+  "Completed": false,
+  "Failed": true,
+  "PagesCompleted": 0,
+  "FilesUploaded": 0,
+  "BytesUploaded": 0,
+  "FilesSkipped": 0,
+  "LastUpdated": "2026-11-03T00:12:13.7947637-06:00",
+  "LastError": "Response status code does not indicate success: 401 (Unauthorized)."
+}

@@ -1,0 +1,16 @@
+{
+  "NamespaceId": "1399107222",
+  "NamespaceName": "TMG Operations and Safety",
+  "NamespaceType": "shared_folder",
+  "CanonicalAzurePrefix": "Shared-Folders/1399107222-TMG Operations and Safety",
+  "Cursor": null,
+  "Started": false,
+  "Completed": false,
+  "Failed": true,
+  "PagesCompleted": 0,
+  "FilesUploaded": 0,
+  "BytesUploaded": 0,
+  "FilesSkipped": 0,
+  "LastUpdated": "2026-11-03T00:12:09.0776495-06:00",
+  "LastError": "Response status code does not indicate success: 401 (Unauthorized)."
+}

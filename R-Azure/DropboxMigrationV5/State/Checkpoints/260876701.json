@@ -1,0 +1,16 @@
+{
+  "NamespaceId": "260876701",
+  "NamespaceName": "ERO",
+  "NamespaceType": "shared_folder",
+  "CanonicalAzurePrefix": "Shared-Folders/260876701-ERO",
+  "Cursor": null,
+  "Started": false,
+  "Completed": false,
+  "Failed": true,
+  "PagesCompleted": 0,
+  "FilesUploaded": 0,
+  "BytesUploaded": 0,
+  "FilesSkipped": 0,
+  "LastUpdated": "2026-11-03T00:10:06.1253453-06:00",
+  "LastError": "Response status code does not indicate success: 401 (Unauthorized)."
+}

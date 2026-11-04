@@ -1,0 +1,16 @@
+{
+  "NamespaceId": "8952268704",
+  "NamespaceName": "NextEra Drop Folder Jan 2021",
+  "NamespaceType": "shared_folder",
+  "CanonicalAzurePrefix": "Shared-Folders/8952268704-NextEra Drop Folder Jan 2021",
+  "Cursor": null,
+  "Started": false,
+  "Completed": false,
+  "Failed": true,
+  "PagesCompleted": 0,
+  "FilesUploaded": 0,
+  "BytesUploaded": 0,
+  "FilesSkipped": 0,
+  "LastUpdated": "2026-11-03T00:11:15.2714908-06:00",
+  "LastError": "Response status code does not indicate success: 401 (Unauthorized)."
+}

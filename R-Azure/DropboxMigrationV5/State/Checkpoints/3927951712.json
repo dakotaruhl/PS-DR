@@ -1,0 +1,16 @@
+{
+  "NamespaceId": "3927951712",
+  "NamespaceName": "Gen output breaker failure",
+  "NamespaceType": "shared_folder",
+  "CanonicalAzurePrefix": "Shared-Folders/3927951712-Gen output breaker failure",
+  "Cursor": null,
+  "Started": false,
+  "Completed": false,
+  "Failed": true,
+  "PagesCompleted": 0,
+  "FilesUploaded": 0,
+  "BytesUploaded": 0,
+  "FilesSkipped": 0,
+  "LastUpdated": "2026-11-03T00:10:21.3349473-06:00",
+  "LastError": "Response status code does not indicate success: 401 (Unauthorized)."
+}

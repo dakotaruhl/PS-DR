@@ -1,0 +1,16 @@
+{
+  "NamespaceId": "760102236",
+  "NamespaceName": "Capital investments",
+  "NamespaceType": "shared_folder",
+  "CanonicalAzurePrefix": "Shared-Folders/760102236-Capital investments",
+  "Cursor": null,
+  "Started": false,
+  "Completed": false,
+  "Failed": true,
+  "PagesCompleted": 0,
+  "FilesUploaded": 0,
+  "BytesUploaded": 0,
+  "FilesSkipped": 0,
+  "LastUpdated": "2026-11-03T00:09:13.0593877-06:00",
+  "LastError": "Response status code does not indicate success: 401 (Unauthorized)."
+}

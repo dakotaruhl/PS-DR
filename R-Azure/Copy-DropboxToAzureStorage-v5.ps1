@@ -3,8 +3,8 @@
 ## Set azcopypath *this is an EXE not a module*
 # $azcopypath = "C:\Users\DakotaRuhl\AppData\Local\Microsoft\WinGet\Packages\Microsoft.Azure.AZCopy.10_Microsoft.Winget.Source_8wekyb3d8bbwe\azcopy_windows_amd64_10.34.1\azcopy.exe"
 ## Set your enviromnet variable to access token
-# $env:DROPBOX_ACCESS_TOKEN = 'PASTE-NEW-TOKEN-HERE'
 
+###
 # 1. Run discovery
 .\R-Azure\Copy-DropboxToAzureStorage-v5.ps1 `
     -Mode Discover `
@@ -70,8 +70,7 @@
         -SkipAzCopyLogin
     
 # Monitor
-    .\R-Azure\Copy-DropboxToAzureStorage-v5.ps1 `
-        -Mode Status
+    .\R-Azure\Copy-DropboxToAzureStorage-v5.ps1 -Mode Status
 # Check failed namespaces
     $CheckpointPath = ".\R-Azure\DropboxMigrationV5\State\Checkpoints"
 
@@ -95,17 +94,18 @@
         Format-Table -Wrap
 
 # resume later 
+    $env:AZCOPY_AUTO_LOGIN_TYPE = "AZCLI"
     .\R-Azure\Copy-DropboxToAzureStorage-v5.ps1 `
-        -Mode Migrate `
-        -AdminEmail 'druhl@enchantedrock.com' `
-        -StorageAccountName 'erockdropboxstorage' `
-        -ContainerName 'dropbox-migration' `
-        -AzCopyPath $azcopypath `
-        -BatchSizeGB 25 `
-        -BatchFileLimit 5000 `
-        -VerifyContentHash `
-        -SkipAzCopyLogin `
-        -ResetFailedNamespaces
+    -Mode Migrate `
+    -AdminEmail 'druhl@enchantedrock.com' `
+    -StorageAccountName 'erockdropboxstorage' `
+    -ContainerName 'dropbox-migration' `
+    -AzCopyPath $azcopypath `
+    -BatchSizeGB 25 `
+    -BatchFileLimit 5000 `
+    -VerifyContentHash `
+    -SkipAzCopyLogin `
+    -ResetFailedNamespaces
 #>
 
 #requires -Version 7.2
@@ -270,11 +270,29 @@ function Get-TeamNamespaces {
 }
 
 function ConvertTo-SafeName {
-    param([string]$Value)
-    $safe = if ([string]::IsNullOrWhiteSpace($Value)) { '_' } else { $Value }
-    foreach ($character in [IO.Path]::GetInvalidFileNameChars()) { $safe = $safe.Replace([string]$character,'_') }
+    param(
+        [AllowNull()]
+        [AllowEmptyString()]
+        [string]$Value
+    )
+
+    $safe = if ([string]::IsNullOrWhiteSpace($Value)) {
+        '_'
+    }
+    else {
+        $Value
+    }
+
+    foreach ($character in [IO.Path]::GetInvalidFileNameChars()) {
+        $safe = $safe.Replace([string]$character, '_')
+    }
+
     $safe = $safe.Trim().TrimEnd('.')
-    if ([string]::IsNullOrWhiteSpace($safe)) { return '_' }
+
+    if ([string]::IsNullOrWhiteSpace($safe)) {
+        return '_'
+    }
+
     return $safe
 }
 
@@ -541,13 +559,32 @@ $admin=$members | Where-Object { $_.profile.email -eq $AdminEmail } | Select-Obj
 if (-not $admin) { throw "Admin '$AdminEmail' was not returned by Dropbox." }
 $adminMemberId=[string]$admin.profile.team_member_id
 
-$namespaceReport=foreach($ns in $namespaces){
-    $type=[string]$ns.namespace_type.'.tag'
+$namespaceReport = foreach ($ns in $namespaces) {
+
+    $type = [string]$ns.namespace_type.'.tag'
+
     [pscustomobject]@{
-        Name=$ns.name; NamespaceId=$ns.namespace_id; Type=$type; Category=Get-NamespaceCategory $type
-        Priority=Get-NamespacePriority $type; CanonicalAzurePrefix=Get-CanonicalAzurePrefix $ns
-        TeamMemberId=Get-OptionalProperty $ns 'team_member_id'
-        DefaultMigrationSource=($type -in @('team_folder','shared_folder','team_member_folder'))
+        Name = if ([string]::IsNullOrWhiteSpace([string]$ns.name)) {
+            "_unnamed_$($ns.namespace_id)"
+        }
+        else {
+            [string]$ns.name
+        }
+
+        NamespaceId = $ns.namespace_id
+        Type = $type
+        Category = Get-NamespaceCategory $type
+        Priority = Get-NamespacePriority $type
+        CanonicalAzurePrefix = Get-CanonicalAzurePrefix $ns
+        TeamMemberId = Get-OptionalProperty $ns 'team_member_id'
+
+        DefaultMigrationSource = (
+            $type -in @(
+                'team_folder',
+                'shared_folder',
+                'team_member_folder'
+            )
+        )
     }
 }
 $stamp=Get-Date -Format 'yyyyMMdd-HHmmss'
@@ -558,7 +595,20 @@ $namespaces | Group-Object { $_.namespace_type.'.tag' } | Sort-Object Count -Des
 Write-Host "Discovery report: $discoveryPath"
 if ($Mode -eq 'Discover') { return }
 
-$plan=@($namespaceReport | Where-Object DefaultMigrationSource | Sort-Object Priority,Name)
+$plan = @(
+    $namespaceReport |
+        Where-Object DefaultMigrationSource |
+        Sort-Object `
+            @{ Expression = { [int]$_.Priority } },
+            @{ Expression = {
+                if ([string]::IsNullOrWhiteSpace([string]$_.Name)) {
+                    ''
+                }
+                else {
+                    [string]$_.Name
+                }
+            } }
+)
 $planPath=Join-Path $ReportPath "MigrationPlan-$stamp.csv"
 $plan | Export-Csv -LiteralPath $planPath -NoTypeInformation -Encoding utf8
 if ($Mode -eq 'Plan') {
@@ -576,7 +626,29 @@ elseif ($NamespaceType) { $selected=@($namespaces|Where-Object{$NamespaceType -c
 else { $selected=@($namespaces|Where-Object{$_.namespace_type.'.tag' -in @('team_folder','shared_folder','team_member_folder')}) }
 if (-not $IncludeMemberRoots) { $selected=@($selected|Where-Object{$_.namespace_type.'.tag' -ne 'team_member_root'}) }
 if (-not $IncludeAppFolders) { $selected=@($selected|Where-Object{$_.namespace_type.'.tag' -ne 'app_folder'}) }
-$selected=@($selected|Sort-Object @{Expression={Get-NamespacePriority ([string]$_.namespace_type.'.tag')}},name)
+$selected = @(
+    $selected |
+        Sort-Object `
+            @{
+                Expression = {
+                    Get-NamespacePriority `
+                        ([string]$_.namespace_type.'.tag')
+                }
+            },
+            @{
+                Expression = {
+                    if (
+                        $_.PSObject.Properties.Name -contains 'name' -and
+                        -not [string]::IsNullOrWhiteSpace([string]$_.name)
+                    ) {
+                        [string]$_.name
+                    }
+                    else {
+                        ''
+                    }
+                }
+            }
+)
 if($MaxNamespaces -gt 0){$selected=@($selected|Select-Object -First $MaxNamespaces)}
 if($selected.Count -eq 0){throw 'No namespaces matched the migration filters.'}
 
@@ -616,3 +688,5 @@ for($index=0;$index -lt $selected.Count;$index++){
     }
 }
 Write-Host 'Migration pass finished. Re-run the same command to resume, or use -Mode Status.'
+
+

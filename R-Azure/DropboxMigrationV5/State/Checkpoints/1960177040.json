@@ -1,0 +1,16 @@
+{
+  "NamespaceId": "1960177040",
+  "NamespaceName": "Employee Unit Grants",
+  "NamespaceType": "shared_folder",
+  "CanonicalAzurePrefix": "Shared-Folders/1960177040-Employee Unit Grants",
+  "Cursor": null,
+  "Started": false,
+  "Completed": false,
+  "Failed": true,
+  "PagesCompleted": 0,
+  "FilesUploaded": 0,
+  "BytesUploaded": 0,
+  "FilesSkipped": 0,
+  "LastUpdated": "2026-11-03T00:09:51.8769221-06:00",
+  "LastError": "Response status code does not indicate success: 401 (Unauthorized)."
+}

@@ -1,0 +1,16 @@
+{
+  "NamespaceId": "8525826848",
+  "NamespaceName": "Althea Alonto Home Content",
+  "NamespaceType": "shared_folder",
+  "CanonicalAzurePrefix": "Shared-Folders/8525826848-Althea Alonto Home Content",
+  "Cursor": null,
+  "Started": false,
+  "Completed": false,
+  "Failed": true,
+  "PagesCompleted": 0,
+  "FilesUploaded": 0,
+  "BytesUploaded": 0,
+  "FilesSkipped": 0,
+  "LastUpdated": "2026-11-03T00:08:58.0622699-06:00",
+  "LastError": "Response status code does not indicate success: 401 (Unauthorized)."
+}

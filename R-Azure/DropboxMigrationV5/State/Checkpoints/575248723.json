@@ -1,0 +1,16 @@
+{
+  "NamespaceId": "575248723",
+  "NamespaceName": "True North Marine",
+  "NamespaceType": "shared_folder",
+  "CanonicalAzurePrefix": "Shared-Folders/575248723-True North Marine",
+  "Cursor": null,
+  "Started": false,
+  "Completed": false,
+  "Failed": true,
+  "PagesCompleted": 0,
+  "FilesUploaded": 0,
+  "BytesUploaded": 0,
+  "FilesSkipped": 0,
+  "LastUpdated": "2026-11-03T00:12:13.0357267-06:00",
+  "LastError": "Response status code does not indicate success: 401 (Unauthorized)."
+}

@@ -1,0 +1,16 @@
+{
+  "NamespaceId": "7953304352",
+  "NamespaceName": "Chris Dickerson Home Content",
+  "NamespaceType": "shared_folder",
+  "CanonicalAzurePrefix": "Shared-Folders/7953304352-Chris Dickerson Home Content",
+  "Cursor": null,
+  "Started": false,
+  "Completed": false,
+  "Failed": true,
+  "PagesCompleted": 0,
+  "FilesUploaded": 0,
+  "BytesUploaded": 0,
+  "FilesSkipped": 0,
+  "LastUpdated": "2026-11-03T00:09:21.0133733-06:00",
+  "LastError": "Response status code does not indicate success: 401 (Unauthorized)."
+}

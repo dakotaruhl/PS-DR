@@ -1,0 +1,16 @@
+{
+  "NamespaceId": "273332214",
+  "NamespaceName": "Enchanted Rock Solutions",
+  "NamespaceType": "shared_folder",
+  "CanonicalAzurePrefix": "Shared-Folders/273332214-Enchanted Rock Solutions",
+  "Cursor": null,
+  "Started": false,
+  "Completed": false,
+  "Failed": true,
+  "PagesCompleted": 0,
+  "FilesUploaded": 0,
+  "BytesUploaded": 0,
+  "FilesSkipped": 0,
+  "LastUpdated": "2026-11-03T00:09:57.8240099-06:00",
+  "LastError": "Response status code does not indicate success: 401 (Unauthorized)."
+}

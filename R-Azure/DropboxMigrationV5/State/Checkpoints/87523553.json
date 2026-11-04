@@ -1,0 +1,16 @@
+{
+  "NamespaceId": "87523553",
+  "NamespaceName": "25.507",
+  "NamespaceType": "shared_folder",
+  "CanonicalAzurePrefix": "Shared-Folders/87523553-25.507",
+  "Cursor": null,
+  "Started": false,
+  "Completed": false,
+  "Failed": true,
+  "PagesCompleted": 0,
+  "FilesUploaded": 0,
+  "BytesUploaded": 0,
+  "FilesSkipped": 0,
+  "LastUpdated": "2026-11-03T00:08:48.8538251-06:00",
+  "LastError": "Response status code does not indicate success: 401 (Unauthorized)."
+}

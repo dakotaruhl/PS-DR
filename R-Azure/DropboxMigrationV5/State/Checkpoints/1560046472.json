@@ -1,0 +1,16 @@
+{
+  "NamespaceId": "1560046472",
+  "NamespaceName": "2017_APRIL_DWGS",
+  "NamespaceType": "shared_folder",
+  "CanonicalAzurePrefix": "Shared-Folders/1560046472-2017_APRIL_DWGS",
+  "Cursor": null,
+  "Started": false,
+  "Completed": false,
+  "Failed": true,
+  "PagesCompleted": 0,
+  "FilesUploaded": 0,
+  "BytesUploaded": 0,
+  "FilesSkipped": 0,
+  "LastUpdated": "2026-11-03T00:08:46.2542731-06:00",
+  "LastError": "Response status code does not indicate success: 401 (Unauthorized)."
+}

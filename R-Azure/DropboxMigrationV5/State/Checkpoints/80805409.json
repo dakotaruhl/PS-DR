@@ -1,0 +1,16 @@
+{
+  "NamespaceId": "80805409",
+  "NamespaceName": "PQDATA",
+  "NamespaceType": "shared_folder",
+  "CanonicalAzurePrefix": "Shared-Folders/80805409-PQDATA",
+  "Cursor": null,
+  "Started": false,
+  "Completed": false,
+  "Failed": true,
+  "PagesCompleted": 0,
+  "FilesUploaded": 0,
+  "BytesUploaded": 0,
+  "FilesSkipped": 0,
+  "LastUpdated": "2026-11-03T00:11:34.3476569-06:00",
+  "LastError": "Response status code does not indicate success: 401 (Unauthorized)."
+}

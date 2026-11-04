@@ -1,0 +1,16 @@
+{
+  "NamespaceId": "9529832576",
+  "NamespaceName": "Uploads for Mads",
+  "NamespaceType": "shared_folder",
+  "CanonicalAzurePrefix": "Shared-Folders/9529832576-Uploads for Mads",
+  "Cursor": null,
+  "Started": false,
+  "Completed": false,
+  "Failed": true,
+  "PagesCompleted": 0,
+  "FilesUploaded": 0,
+  "BytesUploaded": 0,
+  "FilesSkipped": 0,
+  "LastUpdated": "2026-11-03T00:12:14.8490095-06:00",
+  "LastError": "Response status code does not indicate success: 401 (Unauthorized)."
+}

@@ -1,0 +1,16 @@
+{
+  "NamespaceId": "3742635456",
+  "NamespaceName": "American Parking Control - Civil",
+  "NamespaceType": "shared_folder",
+  "CanonicalAzurePrefix": "Shared-Folders/3742635456-American Parking Control - Civil",
+  "Cursor": null,
+  "Started": false,
+  "Completed": false,
+  "Failed": true,
+  "PagesCompleted": 0,
+  "FilesUploaded": 0,
+  "BytesUploaded": 0,
+  "FilesSkipped": 0,
+  "LastUpdated": "2026-11-03T00:08:59.1893519-06:00",
+  "LastError": "Response status code does not indicate success: 401 (Unauthorized)."
+}

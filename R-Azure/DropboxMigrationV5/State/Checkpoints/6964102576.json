@@ -1,0 +1,16 @@
+{
+  "NamespaceId": "6964102576",
+  "NamespaceName": "Generate Capital - Enchanted Rock dataroom - ERock Version",
+  "NamespaceType": "shared_folder",
+  "CanonicalAzurePrefix": "Shared-Folders/6964102576-Generate Capital - Enchanted Rock dataroom - ERock Version",
+  "Cursor": null,
+  "Started": false,
+  "Completed": false,
+  "Failed": true,
+  "PagesCompleted": 0,
+  "FilesUploaded": 0,
+  "BytesUploaded": 0,
+  "FilesSkipped": 0,
+  "LastUpdated": "2026-11-03T00:10:23.1113236-06:00",
+  "LastError": "Response status code does not indicate success: 401 (Unauthorized)."
+}

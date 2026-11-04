@@ -1,0 +1,16 @@
+{
+  "NamespaceId": "114790653",
+  "NamespaceName": "SDG&E",
+  "NamespaceType": "shared_folder",
+  "CanonicalAzurePrefix": "Shared-Folders/114790653-SDG&E",
+  "Cursor": null,
+  "Started": false,
+  "Completed": false,
+  "Failed": true,
+  "PagesCompleted": 0,
+  "FilesUploaded": 0,
+  "BytesUploaded": 0,
+  "FilesSkipped": 0,
+  "LastUpdated": "2026-11-03T00:11:50.2039160-06:00",
+  "LastError": "Response status code does not indicate success: 401 (Unauthorized)."
+}

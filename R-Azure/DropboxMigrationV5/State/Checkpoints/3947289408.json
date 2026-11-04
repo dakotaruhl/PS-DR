@@ -1,0 +1,16 @@
+{
+  "NamespaceId": "3947289408",
+  "NamespaceName": "Battery Charging Alternator",
+  "NamespaceType": "shared_folder",
+  "CanonicalAzurePrefix": "Shared-Folders/3947289408-Battery Charging Alternator",
+  "Cursor": null,
+  "Started": false,
+  "Completed": false,
+  "Failed": true,
+  "PagesCompleted": 0,
+  "FilesUploaded": 0,
+  "BytesUploaded": 0,
+  "FilesSkipped": 0,
+  "LastUpdated": "2026-11-03T00:09:06.3220693-06:00",
+  "LastError": "Response status code does not indicate success: 401 (Unauthorized)."
+}

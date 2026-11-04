@@ -1,0 +1,16 @@
+{
+  "NamespaceId": "2912961568",
+  "NamespaceName": "Operations & Maintenance - Financials",
+  "NamespaceType": "shared_folder",
+  "CanonicalAzurePrefix": "Shared-Folders/2912961568-Operations & Maintenance - Financials",
+  "Cursor": null,
+  "Started": false,
+  "Completed": false,
+  "Failed": true,
+  "PagesCompleted": 0,
+  "FilesUploaded": 0,
+  "BytesUploaded": 0,
+  "FilesSkipped": 0,
+  "LastUpdated": "2026-11-03T00:11:20.2619446-06:00",
+  "LastError": "Response status code does not indicate success: 401 (Unauthorized)."
+}

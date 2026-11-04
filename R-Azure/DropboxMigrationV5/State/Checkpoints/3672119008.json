@@ -1,0 +1,16 @@
+{
+  "NamespaceId": "3672119008",
+  "NamespaceName": "Root",
+  "NamespaceType": "team_member_folder",
+  "CanonicalAzurePrefix": "Member-Content/3672119008-Root",
+  "Cursor": null,
+  "Started": false,
+  "Completed": false,
+  "Failed": true,
+  "PagesCompleted": 0,
+  "FilesUploaded": 0,
+  "BytesUploaded": 0,
+  "FilesSkipped": 0,
+  "LastUpdated": "2026-11-03T00:12:31.0097029-06:00",
+  "LastError": "Response status code does not indicate success: 401 (Unauthorized)."
+}

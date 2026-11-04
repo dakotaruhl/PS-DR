@@ -1,0 +1,16 @@
+{
+  "NamespaceId": "5334788768",
+  "NamespaceName": "Isabel Gonzalez Home Content",
+  "NamespaceType": "shared_folder",
+  "CanonicalAzurePrefix": "Shared-Folders/5334788768-Isabel Gonzalez Home Content",
+  "Cursor": null,
+  "Started": false,
+  "Completed": false,
+  "Failed": true,
+  "PagesCompleted": 0,
+  "FilesUploaded": 0,
+  "BytesUploaded": 0,
+  "FilesSkipped": 0,
+  "LastUpdated": "2026-11-03T00:10:36.4516620-06:00",
+  "LastError": "Response status code does not indicate success: 401 (Unauthorized)."
+}

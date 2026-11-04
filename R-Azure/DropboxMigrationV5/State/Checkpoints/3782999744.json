@@ -1,0 +1,16 @@
+{
+  "NamespaceId": "3782999744",
+  "NamespaceName": "Enchanted Rock Rapid Fire",
+  "NamespaceType": "shared_folder",
+  "CanonicalAzurePrefix": "Shared-Folders/3782999744-Enchanted Rock Rapid Fire",
+  "Cursor": null,
+  "Started": false,
+  "Completed": false,
+  "Failed": true,
+  "PagesCompleted": 0,
+  "FilesUploaded": 0,
+  "BytesUploaded": 0,
+  "FilesSkipped": 0,
+  "LastUpdated": "2026-11-03T00:09:56.7484576-06:00",
+  "LastError": "Response status code does not indicate success: 401 (Unauthorized)."
+}

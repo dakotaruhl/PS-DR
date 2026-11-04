@@ -3,14 +3,14 @@
   "NamespaceName": "Enchanted Rock Team Folder",
   "NamespaceType": "team_folder",
   "CanonicalAzurePrefix": "Team-Folders/1062193352-Enchanted Rock Team Folder",
-  "Cursor": "AAY5HEDniGPdTKqp9vCLktBjLvsPRNZLzL5mdGF5-LshcpYRcyegA3s5TzLGA8WZktm_qg9KDUnFGd6oYgKAIFGlQIqQzbRS8QrpkoYSlGI3IZ0_e58f-jjerwvQrztkkEvaBwxBFsAzfYCJWacSCFp4mouoE-JkENWsdyy48NuaU1vwiYkqFeqhkNZZHktyu2cNNA3RUKuZO1ht6e-bZhoUhFBPh5zITf4H4WONJqnIqpiHpkzgCwxwr7e1iT9IyHVARwRkxFX9U3od5VtV8t3M_YS1sw5dL55Vi-3BLHdbYQfyaNfzWvNB5dYFiehdDcbF4GWdl8Nd3FIECnaZf10NCd1ZEKaEM3ZKVKr_FkR9NH2UaRTLam1GZJWCfE8FhWVQBDyY-NGKKBBa3a0evr8Mth92_L9b30ZUQeDlojxjlVtzMzwsrl3YP7SM_5D-LEFDWpWTNbTJQyCXxpBVvK-VWK474l_49fqkC_Bvd_4_6JU8rD_02FyB8dyXIzq-zMRHfEzURRzxAjpnYmqMiuHoHO4mU3ijs-iv9s9U7Z_Bp6-G4z8t5pQwEhF4SQuhsx-zMq2RU6H5nNk9NQWrRIA6j1cw5iYvCCt7Olc_zm869hN60RdBlRkPSS6JXwoZxlYT6-InaQBQxv5L82txcutI9hRsTiiiFhoJ9oOPtS5o5jvyKN-Csq3rqqyGNNOZ-5EFhCrKinFEgzRcNS2RdkxWE0bzBVD4Y3HD3TEYwSkzywW1x-OZ1VeAPGIeJF6RxgSwLMAMGIkS4S5pbmuLjutx54xbGXcUs4wZgC69JmySC1K3q6DSo1_MgZ3LAccGVXuNy3X9Rdd09K38AqU-AMQr",
+  "Cursor": "AAb-BA_hmPXTWn0xZslBoP4vjjd4fkWfzSVZAEIZ8TyFLXJtbDmsEnqmjAFsL528k61-8G2WtpMWQWZP6zBvFp7iIWrukiRUoPvJbh94gwHGDEhfWtZolkPdlkUapnR4lJJq_Ug2agxy0wBEa3PlqiReooeLat0UWJztZc9CvfI3OX4dD06tBG-i-h6QxJZ559cqJ5KDpwPgY-7zGcRFXndXeLpm7zcz-xZcopQVbg4Ax3biWQTNy8j3MsP2y4Vx6DCvgMCwEGScdcK3TiPXQ4YF83S9389CE0ggQQ5_3_8rGfklSEA612YwBwUVf-0XNlBQ8dd4R7LN29B5up-Q9AEse-axqzJGBN23e9AxuPpQGpOAAFPulgCqt0xcYYzBxOSiw-ctu5sGbIoENDj2bQezCmB0WMvONxeVC-tiIfwQBjdt5m6m7KAQURNRCPGiJP_sFN4aclpLREOL89V0cWr6edZcEzRHQ8qV9eSfbC7Q4uAJTUwfa7QX1E17jHEIK5yMvQPN_OJDMGMwqMvN7_aVvg_CR8Rs8X0NFo_FAXyE0Y15cA2-tSmdDVTQmLlbAZywUUcKqfAcik6b1PoHtlRt5IQnBr1k8rEhvrc53QR_6VzpYqgLVLNu47Q9ZlfamEPRITtVpzYzPZWQyOWpg2p7HJF8fmc-Vq5I3kk70K74HEzJrMFAzAgyGGtN-gJ-NdgFHODc88_IrwGy06QoommKfiwXcr2zxLMFf3FoNzaJxaN5XQ3ddDtgz8dinmVQNttgwe4N0Wg1Cfe8aobnv7eMpdCSNLxUkC7dA40lpCQ_1plO716r4e5k4ffc3CgwQtTSj9n2HUKTOn6I6g6iz7lCxTd8WSHyOoz0bhJSRoC3BoK50wGXTOWmW2i01a8ENCOseIkeCirSdx9j__rDlMnw-5kR-M7xOQ8ekLJNWyQ_r_LvEEozQJK281FtxP-7e08BIvznEZT5c7BftIa4rAC6Fdo5s2Hn0_wFEZ4zuwgAdQ",
   "Started": true,
   "Completed": false,
-  "Failed": true,
-  "PagesCompleted": 1,
-  "FilesUploaded": 224,
-  "BytesUploaded": 937779843,
+  "Failed": false,
+  "PagesCompleted": 28,
+  "FilesUploaded": 28779,
+  "BytesUploaded": 30224425920,
   "FilesSkipped": 0,
-  "LastUpdated": "2026-11-02T14:57:55.6136977-06:00",
-  "LastError": "AzCopy failed with exit code 1 for 'C:\\Users\\DAKOTA~1\\AppData\\Local\\Temp\\ERock-Dropbox-Migration-v5\\24cc7b94286443388a2dba32dec6779a'."
+  "LastUpdated": "2026-11-03T15:54:59.1035237-06:00",
+  "LastError": null
 }

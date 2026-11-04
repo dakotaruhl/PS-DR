@@ -1,0 +1,16 @@
+{
+  "NamespaceId": "5609532448",
+  "NamespaceName": "Non-Standard Deals",
+  "NamespaceType": "shared_folder",
+  "CanonicalAzurePrefix": "Shared-Folders/5609532448-Non-Standard Deals",
+  "Cursor": null,
+  "Started": false,
+  "Completed": false,
+  "Failed": true,
+  "PagesCompleted": 0,
+  "FilesUploaded": 0,
+  "BytesUploaded": 0,
+  "FilesSkipped": 0,
+  "LastUpdated": "2026-11-03T00:11:17.0995745-06:00",
+  "LastError": "Response status code does not indicate success: 401 (Unauthorized)."
+}

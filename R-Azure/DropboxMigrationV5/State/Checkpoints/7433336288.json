@@ -1,0 +1,16 @@
+{
+  "NamespaceId": "7433336288",
+  "NamespaceName": "Old pitches and market data",
+  "NamespaceType": "shared_folder",
+  "CanonicalAzurePrefix": "Shared-Folders/7433336288-Old pitches and market data",
+  "Cursor": null,
+  "Started": false,
+  "Completed": false,
+  "Failed": true,
+  "PagesCompleted": 0,
+  "FilesUploaded": 0,
+  "BytesUploaded": 0,
+  "FilesSkipped": 0,
+  "LastUpdated": "2026-11-03T00:11:18.8961641-06:00",
+  "LastError": "Response status code does not indicate success: 401 (Unauthorized)."
+}

@@ -1,0 +1,74 @@
+**********************
+PowerShell transcript start
+Start time: 20261103135239
+Username: AzureAD\DakotaRuhl
+RunAs User: AzureAD\DakotaRuhl
+Configuration Name: 
+Machine: 22397HM-DRUHL (Microsoft Windows NT 10.0.26300.0)
+Host Application: C:\Program Files\WindowsApps\Microsoft.PowerShell_7.6.9.0_x64__8wekyb3d8bbwe\pwsh.dll -noexit -command try { . "c:\Users\DakotaRuhl\AppData\Local\Programs\Microsoft VS Code\261c84cb1e\resources\app\out\vs\workbench\contrib\terminal\common\scripts\shellIntegration.ps1" } catch {}
+Process ID: 42868
+PSVersion: 7.6.9
+PSEdition: Core
+GitCommitId: 7.6.9
+OS: Microsoft Windows 10.0.26300
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Run started: 11/03/2026 01:52:39 PM -06:00
+Excel output: C:\Users\DakotaRuhl\Documents\PS-DR\output\SecGroup_Memberships_2026-11-03_13-52-39.xlsx
+Transcript: C:\Users\DakotaRuhl\Documents\PS-DR\output\SecGroup_Memberships_2026-11-03_13-52-39.log
+Finding security groups whose display name begins with 'BC-ROLE'...
+Found 42 matching security groups.
+[1/42] Processing BC-ROLE-Accounting Basic
+[2/42] Processing BC-ROLE-Accounting External
+[3/42] Processing BC-ROLE-Accounts Payable
+[4/42] Processing BC-ROLE-Accounts Receivable
+[5/42] Processing BC-ROLE-Administrator
+[6/42] Processing BC-ROLE-Approvers
+[7/42] Processing BC-ROLE-Banking
+[8/42] Processing BC-ROLE-BC Contractor
+[9/42] Processing BC-ROLE-BI Developer
+[10/42] Processing BC-ROLE-Contracts Manager
+[11/42] Processing BC-ROLE-Controller
+[12/42] Processing BC-ROLE-Engineering
+[13/42] Processing BC-ROLE-Executive
+[14/42] Processing BC-ROLE-External Developer
+[15/42] Processing BC-ROLE-Finance
+[16/42] Processing BC-ROLE-Financial Reporting
+[17/42] Processing BC-ROLE-Fixed Assets
+[18/42] Processing BC-ROLE-Gen Journal
+[19/42] Processing BC-ROLE-Inventory
+[20/42] Processing BC-ROLE-Inventory Mgr
+[21/42] Processing BC-ROLE-IT Support
+[22/42] Processing BC-ROLE-Item Master Maintain
+[23/42] Processing BC-ROLE-Manufacturing
+[24/42] Processing BC-ROLE-Mfg Acct
+[25/42] Processing BC-ROLE-Planning
+[26/42] Processing BC-ROLE-PQUOTES
+[27/42] Processing BC-ROLE-Procurement
+[28/42] Processing BC-ROLE-Procurement Manager
+[29/42] Processing BC-ROLE-Production
+[30/42] Processing BC-ROLE-Project Acct
+[31/42] Processing BC-ROLE-Project Mgmt
+[32/42] Processing BC-ROLE-Quality
+[33/42] Processing BC-ROLE-RCV Only
+[34/42] Processing BC-ROLE-Sales Invoicing
+[35/42] Processing BC-ROLE-Sales Mgmt
+[36/42] Processing BC-ROLE-Service
+[37/42] Processing BC-ROLE-SPV Accountant
+[38/42] Processing BC-ROLE-Team Member
+[39/42] Processing BC-ROLE-Treasury
+[40/42] Processing BC-ROLE-UOM Maintenance
+[41/42] Processing BC-ROLE-Warehouse
+[42/42] Processing BC-ROLE-Warehouse-Temp
+Export complete.
+Groups found: 42
+Groups with errors: 0
+Excel output: C:\Users\DakotaRuhl\Documents\PS-DR\output\SecGroup_Memberships_2026-11-03_13-52-39.xlsx
+**********************
+PowerShell transcript end
+End time: 20261103135302
+**********************

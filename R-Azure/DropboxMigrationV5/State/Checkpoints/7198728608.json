@@ -1,0 +1,16 @@
+{
+  "NamespaceId": "7198728608",
+  "NamespaceName": "PG&E Geotechnical Data",
+  "NamespaceType": "shared_folder",
+  "CanonicalAzurePrefix": "Shared-Folders/7198728608-PG&E Geotechnical Data",
+  "Cursor": null,
+  "Started": false,
+  "Completed": false,
+  "Failed": true,
+  "PagesCompleted": 0,
+  "FilesUploaded": 0,
+  "BytesUploaded": 0,
+  "FilesSkipped": 0,
+  "LastUpdated": "2026-11-03T00:11:28.9984980-06:00",
+  "LastError": "Response status code does not indicate success: 401 (Unauthorized)."
+}

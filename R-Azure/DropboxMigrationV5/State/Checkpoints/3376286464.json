@@ -1,0 +1,16 @@
+{
+  "NamespaceId": "3376286464",
+  "NamespaceName": "West June Inspections",
+  "NamespaceType": "shared_folder",
+  "CanonicalAzurePrefix": "Shared-Folders/3376286464-West June Inspections",
+  "Cursor": null,
+  "Started": false,
+  "Completed": false,
+  "Failed": true,
+  "PagesCompleted": 0,
+  "FilesUploaded": 0,
+  "BytesUploaded": 0,
+  "FilesSkipped": 0,
+  "LastUpdated": "2026-11-03T00:12:27.0930658-06:00",
+  "LastError": "Response status code does not indicate success: 401 (Unauthorized)."
+}

@@ -1,0 +1,16 @@
+{
+  "NamespaceId": "6692986768",
+  "NamespaceName": "Reicpts",
+  "NamespaceType": "shared_folder",
+  "CanonicalAzurePrefix": "Shared-Folders/6692986768-Reicpts",
+  "Cursor": null,
+  "Started": false,
+  "Completed": false,
+  "Failed": true,
+  "PagesCompleted": 0,
+  "FilesUploaded": 0,
+  "BytesUploaded": 0,
+  "FilesSkipped": 0,
+  "LastUpdated": "2026-11-03T00:11:43.4091560-06:00",
+  "LastError": "Response status code does not indicate success: 401 (Unauthorized)."
+}

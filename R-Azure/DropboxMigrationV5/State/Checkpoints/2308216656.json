@@ -1,0 +1,16 @@
+{
+  "NamespaceId": "2308216656",
+  "NamespaceName": "Eaton Meter Replacement",
+  "NamespaceType": "shared_folder",
+  "CanonicalAzurePrefix": "Shared-Folders/2308216656-Eaton Meter Replacement",
+  "Cursor": null,
+  "Started": false,
+  "Completed": false,
+  "Failed": true,
+  "PagesCompleted": 0,
+  "FilesUploaded": 0,
+  "BytesUploaded": 0,
+  "FilesSkipped": 0,
+  "LastUpdated": "2026-11-03T00:09:45.2547535-06:00",
+  "LastError": "Response status code does not indicate success: 401 (Unauthorized)."
+}

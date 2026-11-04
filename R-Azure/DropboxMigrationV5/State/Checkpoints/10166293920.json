@@ -1,0 +1,16 @@
+{
+  "NamespaceId": "10166293920",
+  "NamespaceName": "Thomas Video",
+  "NamespaceType": "shared_folder",
+  "CanonicalAzurePrefix": "Shared-Folders/10166293920-Thomas Video",
+  "Cursor": null,
+  "Started": false,
+  "Completed": false,
+  "Failed": true,
+  "PagesCompleted": 0,
+  "FilesUploaded": 0,
+  "BytesUploaded": 0,
+  "FilesSkipped": 0,
+  "LastUpdated": "2026-11-03T00:12:06.8831936-06:00",
+  "LastError": "Response status code does not indicate success: 401 (Unauthorized)."
+}

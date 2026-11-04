@@ -1,0 +1,16 @@
+{
+  "NamespaceId": "183454043",
+  "NamespaceName": "PD TXA - EPC Fee",
+  "NamespaceType": "shared_folder",
+  "CanonicalAzurePrefix": "Shared-Folders/183454043-PD TXA - EPC Fee",
+  "Cursor": null,
+  "Started": false,
+  "Completed": false,
+  "Failed": true,
+  "PagesCompleted": 0,
+  "FilesUploaded": 0,
+  "BytesUploaded": 0,
+  "FilesSkipped": 0,
+  "LastUpdated": "2026-11-03T00:11:25.7993317-06:00",
+  "LastError": "Response status code does not indicate success: 401 (Unauthorized)."
+}

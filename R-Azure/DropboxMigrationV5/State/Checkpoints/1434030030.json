@@ -1,0 +1,16 @@
+{
+  "NamespaceId": "1434030030",
+  "NamespaceName": "Mike Buckalew Home Content",
+  "NamespaceType": "shared_folder",
+  "CanonicalAzurePrefix": "Shared-Folders/1434030030-Mike Buckalew Home Content",
+  "Cursor": null,
+  "Started": false,
+  "Completed": false,
+  "Failed": true,
+  "PagesCompleted": 0,
+  "FilesUploaded": 0,
+  "BytesUploaded": 0,
+  "FilesSkipped": 0,
+  "LastUpdated": "2026-11-03T00:11:11.4873362-06:00",
+  "LastError": "Response status code does not indicate success: 401 (Unauthorized)."
+}

@@ -1,0 +1,16 @@
+{
+  "NamespaceId": "1563668855",
+  "NamespaceName": "LJA Engineering",
+  "NamespaceType": "shared_folder",
+  "CanonicalAzurePrefix": "Shared-Folders/1563668855-LJA Engineering",
+  "Cursor": null,
+  "Started": false,
+  "Completed": false,
+  "Failed": true,
+  "PagesCompleted": 0,
+  "FilesUploaded": 0,
+  "BytesUploaded": 0,
+  "FilesSkipped": 0,
+  "LastUpdated": "2026-11-03T00:11:00.3941339-06:00",
+  "LastError": "Response status code does not indicate success: 401 (Unauthorized)."
+}

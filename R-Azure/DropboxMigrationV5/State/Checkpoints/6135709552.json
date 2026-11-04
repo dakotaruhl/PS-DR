@@ -1,0 +1,16 @@
+{
+  "NamespaceId": "6135709552",
+  "NamespaceName": "Generate Data Book Folder",
+  "NamespaceType": "shared_folder",
+  "CanonicalAzurePrefix": "Shared-Folders/6135709552-Generate Data Book Folder",
+  "Cursor": null,
+  "Started": false,
+  "Completed": false,
+  "Failed": true,
+  "PagesCompleted": 0,
+  "FilesUploaded": 0,
+  "BytesUploaded": 0,
+  "FilesSkipped": 0,
+  "LastUpdated": "2026-11-03T00:10:23.4505008-06:00",
+  "LastError": "Response status code does not indicate success: 401 (Unauthorized)."
+}

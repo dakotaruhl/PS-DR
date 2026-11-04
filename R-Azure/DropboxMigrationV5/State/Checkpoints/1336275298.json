@@ -1,0 +1,16 @@
+{
+  "NamespaceId": "1336275298",
+  "NamespaceName": "Eder Montoya Home Content",
+  "NamespaceType": "shared_folder",
+  "CanonicalAzurePrefix": "Shared-Folders/1336275298-Eder Montoya Home Content",
+  "Cursor": null,
+  "Started": false,
+  "Completed": false,
+  "Failed": true,
+  "PagesCompleted": 0,
+  "FilesUploaded": 0,
+  "BytesUploaded": 0,
+  "FilesSkipped": 0,
+  "LastUpdated": "2026-11-03T00:09:46.2777269-06:00",
+  "LastError": "Response status code does not indicate success: 401 (Unauthorized)."
+}

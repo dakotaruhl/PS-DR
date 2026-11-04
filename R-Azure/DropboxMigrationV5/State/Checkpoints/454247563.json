@@ -1,0 +1,16 @@
+{
+  "NamespaceId": "454247563",
+  "NamespaceName": "Cheer",
+  "NamespaceType": "shared_folder",
+  "CanonicalAzurePrefix": "Shared-Folders/454247563-Cheer",
+  "Cursor": null,
+  "Started": false,
+  "Completed": false,
+  "Failed": true,
+  "PagesCompleted": 0,
+  "FilesUploaded": 0,
+  "BytesUploaded": 0,
+  "FilesSkipped": 0,
+  "LastUpdated": "2026-11-03T00:09:19.2467287-06:00",
+  "LastError": "Response status code does not indicate success: 401 (Unauthorized)."
+}

@@ -1,0 +1,16 @@
+{
+  "NamespaceId": "3379597088",
+  "NamespaceName": "Final Contracts",
+  "NamespaceType": "shared_folder",
+  "CanonicalAzurePrefix": "Shared-Folders/3379597088-Final Contracts",
+  "Cursor": null,
+  "Started": false,
+  "Completed": false,
+  "Failed": true,
+  "PagesCompleted": 0,
+  "FilesUploaded": 0,
+  "BytesUploaded": 0,
+  "FilesSkipped": 0,
+  "LastUpdated": "2026-11-03T00:10:14.1909862-06:00",
+  "LastError": "Response status code does not indicate success: 401 (Unauthorized)."
+}

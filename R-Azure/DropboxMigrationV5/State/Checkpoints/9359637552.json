@@ -1,0 +1,16 @@
+{
+  "NamespaceId": "9359637552",
+  "NamespaceName": "George Manrique Home Content",
+  "NamespaceType": "shared_folder",
+  "CanonicalAzurePrefix": "Shared-Folders/9359637552-George Manrique Home Content",
+  "Cursor": null,
+  "Started": false,
+  "Completed": false,
+  "Failed": true,
+  "PagesCompleted": 0,
+  "FilesUploaded": 0,
+  "BytesUploaded": 0,
+  "FilesSkipped": 0,
+  "LastUpdated": "2026-11-03T00:10:24.8984783-06:00",
+  "LastError": "Response status code does not indicate success: 401 (Unauthorized)."
+}

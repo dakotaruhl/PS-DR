@@ -1,0 +1,16 @@
+{
+  "NamespaceId": "6234179520",
+  "NamespaceName": "2018 PDA Audit",
+  "NamespaceType": "shared_folder",
+  "CanonicalAzurePrefix": "Shared-Folders/6234179520-2018 PDA Audit",
+  "Cursor": null,
+  "Started": false,
+  "Completed": false,
+  "Failed": true,
+  "PagesCompleted": 0,
+  "FilesUploaded": 0,
+  "BytesUploaded": 0,
+  "FilesSkipped": 0,
+  "LastUpdated": "2026-11-03T00:08:47.3546778-06:00",
+  "LastError": "Response status code does not indicate success: 401 (Unauthorized)."
+}

@@ -1,0 +1,16 @@
+{
+  "NamespaceId": "5977483776",
+  "NamespaceName": "stefan nasstrom Home Content",
+  "NamespaceType": "shared_folder",
+  "CanonicalAzurePrefix": "Shared-Folders/5977483776-stefan nasstrom Home Content",
+  "Cursor": null,
+  "Started": false,
+  "Completed": false,
+  "Failed": true,
+  "PagesCompleted": 0,
+  "FilesUploaded": 0,
+  "BytesUploaded": 0,
+  "FilesSkipped": 0,
+  "LastUpdated": "2026-11-03T00:11:57.0365983-06:00",
+  "LastError": "Response status code does not indicate success: 401 (Unauthorized)."
+}

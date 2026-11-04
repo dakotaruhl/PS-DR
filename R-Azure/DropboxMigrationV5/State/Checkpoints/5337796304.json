@@ -1,0 +1,16 @@
+{
+  "NamespaceId": "5337796304",
+  "NamespaceName": "Jim Barbour Home Content",
+  "NamespaceType": "shared_folder",
+  "CanonicalAzurePrefix": "Shared-Folders/5337796304-Jim Barbour Home Content",
+  "Cursor": null,
+  "Started": false,
+  "Completed": false,
+  "Failed": true,
+  "PagesCompleted": 0,
+  "FilesUploaded": 0,
+  "BytesUploaded": 0,
+  "FilesSkipped": 0,
+  "LastUpdated": "2026-11-03T00:10:45.8580495-06:00",
+  "LastError": "Response status code does not indicate success: 401 (Unauthorized)."
+}

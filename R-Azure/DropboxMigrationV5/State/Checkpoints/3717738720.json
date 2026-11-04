@@ -1,0 +1,16 @@
+{
+  "NamespaceId": "3717738720",
+  "NamespaceName": "TMG SEL update",
+  "NamespaceType": "shared_folder",
+  "CanonicalAzurePrefix": "Shared-Folders/3717738720-TMG SEL update",
+  "Cursor": null,
+  "Started": false,
+  "Completed": false,
+  "Failed": true,
+  "PagesCompleted": 0,
+  "FilesUploaded": 0,
+  "BytesUploaded": 0,
+  "FilesSkipped": 0,
+  "LastUpdated": "2026-11-03T00:12:09.8782997-06:00",
+  "LastError": "Response status code does not indicate success: 401 (Unauthorized)."
+}

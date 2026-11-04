@@ -1,0 +1,16 @@
+{
+  "NamespaceId": "6040674704",
+  "NamespaceName": "Karla Ortega Home Content",
+  "NamespaceType": "shared_folder",
+  "CanonicalAzurePrefix": "Shared-Folders/6040674704-Karla Ortega Home Content",
+  "Cursor": null,
+  "Started": false,
+  "Completed": false,
+  "Failed": true,
+  "PagesCompleted": 0,
+  "FilesUploaded": 0,
+  "BytesUploaded": 0,
+  "FilesSkipped": 0,
+  "LastUpdated": "2026-11-03T00:10:52.6860090-06:00",
+  "LastError": "Response status code does not indicate success: 401 (Unauthorized)."
+}

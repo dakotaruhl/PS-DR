@@ -11,6 +11,6 @@
   "FilesUploaded": 0,
   "BytesUploaded": 0,
   "FilesSkipped": 0,
-  "LastUpdated": "2026-11-02T15:31:24.0517541-06:00",
-  "LastError": "AzCopy failed with exit code 1 for 'C:\\Users\\DAKOTA~1\\AppData\\Local\\Temp\\ERock-Dropbox-Migration-v5\\d603bbe102f34fa0b1135aa6fe67ef54'."
+  "LastUpdated": "2026-11-03T00:08:43.6961624-06:00",
+  "LastError": "Response status code does not indicate success: 401 (Unauthorized)."
 }

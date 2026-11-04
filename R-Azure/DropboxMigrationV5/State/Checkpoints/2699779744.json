@@ -1,0 +1,16 @@
+{
+  "NamespaceId": "2699779744",
+  "NamespaceName": "Asset Documentation & Maintenance Records",
+  "NamespaceType": "shared_folder",
+  "CanonicalAzurePrefix": "Shared-Folders/2699779744-Asset Documentation & Maintenance Records",
+  "Cursor": null,
+  "Started": false,
+  "Completed": false,
+  "Failed": true,
+  "PagesCompleted": 0,
+  "FilesUploaded": 0,
+  "BytesUploaded": 0,
+  "FilesSkipped": 0,
+  "LastUpdated": "2026-11-03T00:09:02.5591830-06:00",
+  "LastError": "Response status code does not indicate success: 401 (Unauthorized)."
+}

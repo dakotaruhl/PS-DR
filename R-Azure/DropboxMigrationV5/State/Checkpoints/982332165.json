@@ -1,0 +1,16 @@
+{
+  "NamespaceId": "982332165",
+  "NamespaceName": "Rob Cauthen Home Content",
+  "NamespaceType": "shared_folder",
+  "CanonicalAzurePrefix": "Shared-Folders/982332165-Rob Cauthen Home Content",
+  "Cursor": null,
+  "Started": false,
+  "Completed": false,
+  "Failed": true,
+  "PagesCompleted": 0,
+  "FilesUploaded": 0,
+  "BytesUploaded": 0,
+  "FilesSkipped": 0,
+  "LastUpdated": "2026-11-03T00:11:46.9945119-06:00",
+  "LastError": "Response status code does not indicate success: 401 (Unauthorized)."
+}

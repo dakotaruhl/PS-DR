@@ -1,0 +1,16 @@
+{
+  "NamespaceId": "9001810256",
+  "NamespaceName": "Vance_FLIR_Pictures",
+  "NamespaceType": "shared_folder",
+  "CanonicalAzurePrefix": "Shared-Folders/9001810256-Vance_FLIR_Pictures",
+  "Cursor": null,
+  "Started": false,
+  "Completed": false,
+  "Failed": true,
+  "PagesCompleted": 0,
+  "FilesUploaded": 0,
+  "BytesUploaded": 0,
+  "FilesSkipped": 0,
+  "LastUpdated": "2026-11-03T00:12:17.5152485-06:00",
+  "LastError": "Response status code does not indicate success: 401 (Unauthorized)."
+}

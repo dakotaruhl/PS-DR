@@ -1,0 +1,16 @@
+{
+  "NamespaceId": "598430595",
+  "NamespaceName": "CFO Review Files",
+  "NamespaceType": "shared_folder",
+  "CanonicalAzurePrefix": "Shared-Folders/598430595-CFO Review Files",
+  "Cursor": null,
+  "Started": false,
+  "Completed": false,
+  "Failed": true,
+  "PagesCompleted": 0,
+  "FilesUploaded": 0,
+  "BytesUploaded": 0,
+  "FilesSkipped": 0,
+  "LastUpdated": "2026-11-03T00:09:18.5617431-06:00",
+  "LastError": "Response status code does not indicate success: 401 (Unauthorized)."
+}
