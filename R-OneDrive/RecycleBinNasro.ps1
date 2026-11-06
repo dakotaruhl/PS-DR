@@ -1,7 +1,7 @@
 Import-module ImportExcel
 
-$SiteURL="https://enchantedrock.sharepoint.com/sites/erintranet"
-Connect-PnPOnline -URL $SiteURL -Interactive -ClientId 4ac6eede-e81e-4d22-abad-0d43c51486f2
+$SiteURL="https://enchantedrock.sharepoint.com/sites/safety"
+Connect-PnPOnline -Url $SiteURL -ClientId $env:AZURE_CLIENT_ID -Tenant $env:AZURE_TENANT_ID -thumbprint $env:AZURE_CLIENT_CERTIFICATE_THUMBPRINT
 
 $ReportFile = "C:\Users\DakotaRuhl\Documents\Reports\RecycleBin\RecycleBinReport"
 
@@ -15,32 +15,26 @@ $recycleBinItemsSecondStage = Get-PnPRecycleBinItem -SecondStage
 # Where-Object { $_.Title -or $_.DeletedByName -or $_.DeletedDate -or $_.ItemType -or $_.DirName -or $_.Size } 
 #>
 
- 
+
 # Sort by Name of person who deleted item
-$deletedBy = "Shreeram Kalyanakrishnan"
+$deletedBy = "Samuel Stell"
 $recycleBinItemsFirstStage | Where-Object { $_.DeletedByName -eq $deletedBy} | Export-Excel -Path "$ReportFile-$($deletedBy -replace ' ','-').xlsx" -WorkSheetname 'FirstStage'
 $recycleBinItemsSecondStage | Where-Object { $_.DeletedByName -eq $deletedBy} | Export-Excel -Path "$ReportFile-$($deletedBy -replace ' ','-').xlsx" -WorkSheetname 'SecondStage'
 
 
 
-$ShreeramKalyanakrishnanDeletesFS = $recycleBinItemsFirstStage | Where-Object { $_.DeletedByName -eq $deletedBy}
-$ShreeramKalyanakrishnanDeletesSS = $recycleBinItemsSecondStage | Where-Object { $_.DeletedByName -eq $deletedBy}
+$SamuelStellDeletesFS = $recycleBinItemsFirstStage | Where-Object { $_.DeletedByName -eq $deletedBy}
+$SamuelStellDeletesSS = $recycleBinItemsSecondStage | Where-Object { $_.DeletedByName -eq $deletedBy}
 
-###BETA - No Profile temp load in session needed for -itemID
-pwsh -NoProfile
-Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass -Force
-Import-Module "C:\Temp\PnP-Nightly\PnP.PowerShell.psd1" -Force
-# Check it worked
-Get-Module PnP.PowerShell | Select Name, Version, Path
-Get-Command Restore-PnPRecycleBinItem -Syntax
-###
 
-$itemIds = $PaulAndrewDeletesFS | Select-Object -ExpandProperty Id
-$itemIds = $PaulAndrewDeletesSS | Select-Object -ExpandProperty Id
+pwsh.exe -NoProfile -ExecutionPolicy Bypass -File .\R-OneDrive\Restore-RecycleBinItems.ps1
+
+$itemIdsFS = $SamuelStellDeletesFS | Select-Object -ExpandProperty Id
+$itemIdsSS = $SamuelStellDeletesSS | Select-Object -ExpandProperty Id
 
 #Break into batches of 1000 to avoid throttling and restore items deleted by Paul Andrews, and track progress in console
 $batchSize     = 1000
-$itemIds       = @($itemIds)  # ensure it's an array
+$itemIds       = @($itemIdsFS + $itemIdsSS)  # ensure it's an array
 $totalItems    = $itemIds.Count
 $totalBatches  = [math]::Ceiling($totalItems / $batchSize)
 
@@ -129,8 +123,8 @@ Write-Progress -Completed -Id 1
 
 
 # Sort by directory path of deleted items
-$directory = "sites/erintranet/"
-$library = "Accounting and Finance/1. Accounting - General/Sales Tax/Sales Tax Filings/ER LLC"
+$directory = "sites/safety/"
+$library = "Shared Documents"
 $recycleBinItemsFirstStage | Where-Object { $_.DirName -eq "$directory$library" } | Export-Excel -Path "$ReportFile-$($library -replace '/','-').xlsx" -WorkSheetname 'FirstStage'
 $recycleBinItemsSecondStage | Where-Object { $_.DirName -eq "$directory$library" } | Export-Excel -Path "$ReportFile-$($library -replace '/','-').xlsx" -WorkSheetname 'SecondStage'
 

@@ -48,6 +48,8 @@ $Cert = Get-ChildItem Cert:\CurrentUser\My, Cert:\LocalMachine\My |
 
 $Cert | Select-Object Subject, Thumbprint, HasPrivateKey, PSPath
 
+#set environment variable for AZURE_CERTIFICATE_PATH
+$env:AZURE_CERTIFICATE_PATH = $Cert.PSPath[1]
 
 #these credentials can be used by other scripts or modules to authenticate with Azure services
 $env:AZURE_CLIENT_ID

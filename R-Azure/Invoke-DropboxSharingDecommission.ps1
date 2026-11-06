@@ -96,9 +96,39 @@ $StatePath = Join-Path $WorkPath 'State'
 $LedgerPath = Join-Path $StatePath 'OperationLedger.csv'
 New-Item -ItemType Directory -Path $ReportPath,$StatePath -Force | Out-Null
 
-$script:RefreshToken = [Environment]::GetEnvironmentVariable('DROPBOX_REFRESH_TOKEN')
-$script:AppKey = [Environment]::GetEnvironmentVariable('DROPBOX_APP_KEY')
-$script:AppSecret = [Environment]::GetEnvironmentVariable('DROPBOX_APP_SECRET')
+function Get-ConfiguredEnvironmentVariable {
+    param([Parameter(Mandatory)][string]$Name)
+
+    foreach ($scope in @('User','Process','Machine')) {
+        $value = [Environment]::GetEnvironmentVariable($Name, $scope)
+        if (-not [string]::IsNullOrWhiteSpace($value)) {
+            return [pscustomobject]@{
+                Name  = $Name
+                Value = [string]$value
+                Scope = $scope
+            }
+        }
+    }
+
+    return [pscustomobject]@{
+        Name  = $Name
+        Value = $null
+        Scope = 'Missing'
+    }
+}
+
+$refreshTokenSetting = Get-ConfiguredEnvironmentVariable -Name 'DROPBOX_REFRESH_TOKEN'
+$appKeySetting = Get-ConfiguredEnvironmentVariable -Name 'DROPBOX_APP_KEY'
+$appSecretSetting = Get-ConfiguredEnvironmentVariable -Name 'DROPBOX_APP_SECRET'
+
+$script:RefreshToken = $refreshTokenSetting.Value
+$script:AppKey = $appKeySetting.Value
+$script:AppSecret = $appSecretSetting.Value
+$script:CredentialScopes = @{
+    DROPBOX_REFRESH_TOKEN = $refreshTokenSetting.Scope
+    DROPBOX_APP_KEY       = $appKeySetting.Scope
+    DROPBOX_APP_SECRET    = $appSecretSetting.Scope
+}
 $script:AccessToken = $null
 $script:TokenExpiresAt = [datetime]::MinValue
 $script:SuccessKeys = [Collections.Generic.HashSet[string]]::new([StringComparer]::Ordinal)
@@ -123,7 +153,10 @@ function Assert-Credentials {
     if ([string]::IsNullOrWhiteSpace($script:AppKey)) { $missing += 'DROPBOX_APP_KEY' }
     if ([string]::IsNullOrWhiteSpace($script:AppSecret)) { $missing += 'DROPBOX_APP_SECRET' }
     if ($missing.Count -gt 0) {
-        throw "Missing environment variables: $($missing -join ', ')"
+        $scopeSummary = ($script:CredentialScopes.GetEnumerator() | Sort-Object Name | ForEach-Object {
+            "$($_.Name)=$($_.Value)"
+        }) -join '; '
+        throw "Missing environment variables: $($missing -join ', '). Checked User, Process, and Machine scopes. Detected scopes: $scopeSummary"
     }
 }
 
@@ -264,8 +297,10 @@ function Complete-DropboxSharingOperation {
 }
 
 function Get-TeamMembers {
+    param([bool]$IncludeRemoved = $IncludeRemovedMembers.IsPresent)
+
     $response = Invoke-DropboxApi -Uri 'https://api.dropboxapi.com/2/team/members/list_v2' `
-        -Body @{ include_removed=$IncludeRemovedMembers.IsPresent; limit=1000 }
+        -Body @{ include_removed=$IncludeRemoved; limit=1000 }
 
     $items = [Collections.Generic.List[object]]::new()
     foreach ($item in $response.members) { $items.Add($item) }
@@ -448,7 +483,7 @@ function Get-ApprovalRowHash {
     $fields = switch ($Action) {
         'RevokeLink' { @('Action','OperationKey','OwnerTeamMemberId','Url','EligibleForRevocation') }
         'RemoveMember' { @('Action','OperationKey','SharedFolderId','PrincipalType','PrincipalId','Email','EligibleForRemoval','IsOwner','IsInherited','LeaveACopy') }
-        'UnshareFolder' { @('Action','OperationKey','SharedFolderId','OwnerTeamMemberId','EligibleForUnshare','LeaveACopy') }
+        'UnshareFolder' { @('Action','OperationKey','SharedFolderId','OwnerTeamMemberId','OwnerStatus','OwnerClassification','UnshareClassification','AccessInheritance','ParentSharedFolderId','ParentFolderName','IsInsideTeamFolder','IsTeamFolder','EligibleForUnshare','LeaveACopy') }
         default { throw "Unsupported approval action '$Action'." }
     }
 
@@ -497,7 +532,7 @@ function Get-RequiredApprovalColumns {
     switch ($Action) {
         'RevokeLink' { return @('Action','Approval','OperationKey','RowHash','OwnerTeamMemberId','Url','EligibleForRevocation') }
         'RemoveMember' { return @('Action','Approval','OperationKey','RowHash','SharedFolderId','PrincipalType','PrincipalId','Email','EligibleForRemoval','IsOwner','IsInherited','LeaveACopy') }
-        'UnshareFolder' { return @('Action','Approval','OperationKey','RowHash','SharedFolderId','OwnerTeamMemberId','EligibleForUnshare','LeaveACopy') }
+        'UnshareFolder' { return @('Action','Approval','OperationKey','RowHash','SharedFolderId','OwnerTeamMemberId','OwnerStatus','OwnerClassification','UnshareClassification','AccessInheritance','ParentSharedFolderId','ParentFolderName','IsInsideTeamFolder','IsTeamFolder','EligibleForUnshare','LeaveACopy') }
         default { throw "Unsupported approval action '$Action'." }
     }
 }
@@ -554,8 +589,25 @@ function Invoke-Audit {
     param([string]$Label='Audit')
 
     $stamp = Get-Date -Format 'yyyyMMdd-HHmmss'
-    $members = @(Get-TeamMembers)
-    $admin = $members | Where-Object { $_.profile.email -eq $AdminEmail } | Select-Object -First 1
+    # Always include removed members for owner-state classification. The switch still controls
+    # whether removed members are included in shared-link enumeration later in the audit.
+    $allMembers = @(Get-TeamMembers -IncludeRemoved $true)
+    $members = if ($IncludeRemovedMembers.IsPresent) {
+        $allMembers
+    }
+    else {
+        @($allMembers | Where-Object { [string]$_.profile.status.'.tag' -ne 'removed' })
+    }
+
+    $memberById = @{}
+    foreach ($member in $allMembers) {
+        $memberId = [string]$member.profile.team_member_id
+        if (-not [string]::IsNullOrWhiteSpace($memberId)) {
+            $memberById[$memberId] = $member
+        }
+    }
+
+    $admin = $allMembers | Where-Object { $_.profile.email -eq $AdminEmail } | Select-Object -First 1
     if (-not $admin) { throw "Admin '$AdminEmail' was not returned by Dropbox." }
     $adminId = [string]$admin.profile.team_member_id
 
@@ -671,14 +723,114 @@ function Invoke-Audit {
                 }
             }
 
+            $ownerRecord = if (-not [string]::IsNullOrWhiteSpace($ownerMemberId) -and $memberById.ContainsKey($ownerMemberId)) {
+                $memberById[$ownerMemberId]
+            }
+            else {
+                $null
+            }
+
+            $ownerStatus = if ($ownerRecord) {
+                [string]$ownerRecord.profile.status.'.tag'
+            }
+            else {
+                ''
+            }
+
+            $ownerClassification = if ([string]::IsNullOrWhiteSpace($ownerMemberId)) {
+                'MissingOwner'
+            }
+            elseif (-not $ownerRecord) {
+                'UnknownOwner'
+            }
+            else {
+                switch ($ownerStatus.ToLowerInvariant()) {
+                    'active'    { 'ActiveOwner' }
+                    'suspended' { 'SuspendedOwner' }
+                    'removed'   { 'RemovedOwner' }
+                    default     { 'UnknownOwner' }
+                }
+            }
+
+            $folderMetadata = $null
+            $accessInheritance = ''
+            $parentSharedFolderId = ''
+            $parentFolderName = ''
+            $isInsideTeamFolder = $false
+            $isTeamFolder = $false
+            $metadataError = ''
+
+            if ($ownerClassification -eq 'ActiveOwner') {
+                try {
+                    $folderMetadata = Get-SharedFolderMetadata `
+                        -SharedFolderId ([string]$folder.namespace_id) `
+                        -OwnerTeamMemberId $ownerMemberId
+
+                    $accessInheritance = [string]$folderMetadata.access_inheritance.'.tag'
+                    $parentSharedFolderId = [string](Get-OptionalProperty $folderMetadata 'parent_shared_folder_id')
+                    $parentFolderName = [string](Get-OptionalProperty $folderMetadata 'parent_folder_name')
+                    $isInsideTeamFolder = [bool](Get-OptionalProperty $folderMetadata 'is_inside_team_folder')
+                    $isTeamFolder = [bool](Get-OptionalProperty $folderMetadata 'is_team_folder')
+                }
+                catch {
+                    if ($_.Exception.Message -like 'AUTH_FATAL:*') { throw }
+                    $metadataError = $_.Exception.Message
+                }
+            }
+
+            $unshareClassification = if ($ownerClassification -ne 'ActiveOwner') {
+                $ownerClassification
+            }
+            elseif (-not [string]::IsNullOrWhiteSpace($metadataError)) {
+                'MetadataUnavailable'
+            }
+            elseif ($accessInheritance -eq 'inherit') {
+                'InheritedAccess'
+            }
+            elseif ($isTeamFolder) {
+                'TeamFolder'
+            }
+            elseif ($isInsideTeamFolder) {
+                'InsideTeamFolder'
+            }
+            elseif (-not [string]::IsNullOrWhiteSpace($parentSharedFolderId)) {
+                'NestedSharedFolder'
+            }
+            else {
+                'IndependentActiveOwner'
+            }
+
+            $eligibleForUnshare = $unshareClassification -eq 'IndependentActiveOwner'
+            $isArchiveOwner = $ownerEmail -eq 'dropboxarchive@enchantedrock.com'
+            $ownerNote = switch ($unshareClassification) {
+                'IndependentActiveOwner' { if ($isArchiveOwner) { 'Independent folder owned by the archive account. Confirm retention and backup requirements before approval.' } else { 'Independent folder with an active owner.' } }
+                'InheritedAccess' { "Cannot be independently unshared because access is inherited from '$parentFolderName'. Remove access at the controlling parent or remove explicit members and links." }
+                'TeamFolder' { 'Team folder. Manage access through the team-folder structure instead of unsharing this namespace.' }
+                'InsideTeamFolder' { 'Folder is inside a team folder. Manage access at the controlling team-folder level.' }
+                'NestedSharedFolder' { "Nested shared folder controlled by parent shared-folder ID '$parentSharedFolderId'." }
+                'MetadataUnavailable' { "Folder metadata could not be inspected: $metadataError" }
+                'SuspendedOwner' { 'Orphaned-owner remediation required: owner is suspended.' }
+                'RemovedOwner' { 'Orphaned-owner remediation required: owner is removed.' }
+                'MissingOwner' { 'Orphaned-owner remediation required: no team-member owner was returned.' }
+                default { 'Orphaned-owner remediation required: owner is not an active selectable team member.' }
+            }
+
             $unshareRow = [pscustomobject]@{
                 Action='UnshareFolder'; Approval=''
                 OperationKey="UnshareFolder|$($folder.namespace_id)"
                 FolderName=$folder.name; SharedFolderId=$folder.namespace_id
                 OwnerEmail=$ownerEmail; OwnerTeamMemberId=$ownerMemberId
-                EligibleForUnshare=(-not [string]::IsNullOrWhiteSpace($ownerMemberId))
+                OwnerStatus=$ownerStatus; OwnerClassification=$ownerClassification
+                UnshareClassification=$unshareClassification
+                AccessInheritance=$accessInheritance
+                ParentSharedFolderId=$parentSharedFolderId
+                ParentFolderName=$parentFolderName
+                IsInsideTeamFolder=$isInsideTeamFolder
+                IsTeamFolder=$isTeamFolder
+                IsArchiveOwner=$isArchiveOwner
+                EligibleForUnshare=$eligibleForUnshare
                 LeaveACopy=$false
-                Notes=if($ownerMemberId){'Review nested-folder limitations before approval.'}else{'No team-member owner found.'}
+                Notes=$ownerNote
             }
             $unshareRows.Add((Add-RowHash -Row $unshareRow -Action 'UnshareFolder'))
         }
@@ -764,6 +916,12 @@ function Invoke-Audit {
         SharedLinks=$linkRows.Count
         RevocableLinks=@($linkRows | Where-Object EligibleForRevocation).Count
         MembershipApprovalCsv=$membershipPath; LinkApprovalCsv=$linksPath
+        ActiveOwnerFolders=@($unshareRows | Where-Object OwnerClassification -eq 'ActiveOwner').Count
+        OrphanedOwnerFolders=@($unshareRows | Where-Object OwnerClassification -ne 'ActiveOwner').Count
+        IndependentlyUnshareableFolders=@($unshareRows | Where-Object UnshareClassification -eq 'IndependentActiveOwner').Count
+        InheritedAccessFolders=@($unshareRows | Where-Object UnshareClassification -eq 'InheritedAccess').Count
+        TeamManagedFolders=@($unshareRows | Where-Object { $_.UnshareClassification -in @('TeamFolder','InsideTeamFolder') }).Count
+        ArchiveOwnedFolders=@($unshareRows | Where-Object IsArchiveOwner).Count
         UnshareApprovalCsv=$unsharePath; AuditFailureCsv=$failurePath
     }
 
@@ -831,6 +989,18 @@ function Invoke-ApprovedOperations {
                 }
 
                 'UnshareFolder' {
+                    if ([string]$row.OwnerClassification -ne 'ActiveOwner') {
+                        throw "Folder owner classification is '$($row.OwnerClassification)'. Orphaned-owner remediation is required before unsharing."
+                    }
+                    if ([string]$row.UnshareClassification -ne 'IndependentActiveOwner') {
+                        throw "Folder unshare classification is '$($row.UnshareClassification)'. This namespace cannot be independently unshared."
+                    }
+                    if ([string]$row.AccessInheritance -eq 'inherit') {
+                        throw "Folder access is inherited from '$($row.ParentFolderName)' and cannot be independently unshared."
+                    }
+                    if ([string]$row.OwnerStatus -ne 'active') {
+                        throw "Folder owner status is '$($row.OwnerStatus)'. Only active owners can be selected for unsharing."
+                    }
                     if (-not (ConvertTo-Boolean $row.EligibleForUnshare)) {
                         throw 'Approval row is not eligible for unsharing.'
                     }
@@ -860,8 +1030,25 @@ function Invoke-ApprovedOperations {
     Write-Progress -Activity $Action -Completed
 }
 
+function Get-SharedFolderMetadata {
+    param(
+        [Parameter(Mandatory)]
+        [string]$SharedFolderId,
+
+        [Parameter(Mandatory)]
+        [string]$OwnerTeamMemberId
+    )
+
+    Invoke-DropboxApi `
+        -Uri 'https://api.dropboxapi.com/2/sharing/get_folder_metadata' `
+        -SelectUser $OwnerTeamMemberId `
+        -Body @{
+            shared_folder_id = $SharedFolderId
+        }
+}
+
 Assert-Credentials
-$membersForAdmin = @(Get-TeamMembers)
+$membersForAdmin = @(Get-TeamMembers -IncludeRemoved $false)
 $adminForRun = $membersForAdmin |
     Where-Object { $_.profile.email -eq $AdminEmail } |
     Select-Object -First 1
@@ -890,11 +1077,11 @@ switch ($Mode) {
             MembersRemoved=@($rows | Where-Object { $_.Action -eq 'RemoveMember' -and $_.Status -eq 'Success' }).Count
             FoldersUnshared=@($rows | Where-Object { $_.Action -eq 'UnshareFolder' -and $_.Status -eq 'Success' }).Count
             AsyncJobsCompleted=@($rows | Where-Object { $_.Status -eq 'Success' -and -not [string]::IsNullOrWhiteSpace($_.AsyncJobId) }).Count
+            DropboxRefreshTokenScope=$script:CredentialScopes.DROPBOX_REFRESH_TOKEN
+            DropboxAppKeyScope=$script:CredentialScopes.DROPBOX_APP_KEY
+            DropboxAppSecretScope=$script:CredentialScopes.DROPBOX_APP_SECRET
             WorkPath=$WorkPath
             LedgerPath=$LedgerPath
         } | Format-List
     }
 }
-
-
-## Testing
