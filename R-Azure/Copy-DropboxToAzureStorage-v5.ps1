@@ -1,7 +1,5 @@
 <# 
 
-## Set azcopypath *this is an EXE not a module*
-# $azcopypath = "C:\Users\DakotaRuhl\AppData\Local\Microsoft\WinGet\Packages\Microsoft.Azure.AZCopy.10_Microsoft.Winget.Source_8wekyb3d8bbwe\azcopy_windows_amd64_10.34.1\azcopy.exe"
 ## Set your enviromnet variable to access token
 
 ###
@@ -161,6 +159,8 @@ param(
 Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
 
+## Set azcopypath *this is an EXE not a module*
+$azcopypath = "C:\Users\DakotaRuhl\AppData\Local\Microsoft\WinGet\Packages\Microsoft.Azure.AZCopy.10_Microsoft.Winget.Source_8wekyb3d8bbwe\azcopy_windows_amd64_10.34.1\azcopy.exe"
 $StatePath = Join-Path $WorkPath 'State'
 $CheckpointPath = Join-Path $StatePath 'Checkpoints'
 $CommittedBatchPath = Join-Path $StatePath 'CommittedBatches'

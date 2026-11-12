@@ -25,8 +25,11 @@ $TargetSites = $AllSites | Where-Object { $_.Url -notlike "https://enchantedrock
 ###REPORT JOBS - IN PROGRESS###
 $siteUrl = "https://enchantedrock.sharepoint.com/sites/erintranet"
 $reportLibName = "Titan"
-$reportUrl = "https://enchantedrock.sharepoint.com/sites/erintranet/Titan/VersionStorageReport/TitanReport.csv"
+$reportUrl = "https://enchantedrock.sharepoint.com/sites/erintranet/Titan/VersionStorageReport/TitanReport2.csv"
 
+$siteUrl = "https://enchantedrock.sharepoint.com/sites/marketing"
+$reportLibName = "Marketing Library"
+$reportUrl = "https://enchantedrock.sharepoint.com/sites/marketing/Shared Documents/Programs/Version Storage Report/MarketingReport.csv"
 #Generate a version storage usage report for a library 
 New-SPOListFileVersionExpirationReportJob -Site $siteUrl -List $reportLibName -ReportUrl $reportUrl
 #Track progress of the job to generate report for a library 
@@ -44,7 +47,7 @@ $trimLibName = "Titan"
 New-SPOListFileVersionBatchDeleteJob -Site $siteUrl -List $trimLibName -Automatic
 
 #Trim Versions using version limits for a library
-New-SPOListFileVersionBatchDeleteJob -Site $siteUrl -List $trimLibName -MajorVersionLimit 30 -MajorWithMinorVersionsLimit 10
+New-SPOListFileVersionBatchDeleteJob -Site $siteUrl -List $trimLibName -MajorVersionLimit 10
 
 #Stop processing an in-progress library level trim job:
 Remove-SPOListFileVersionBatchDeleteJob -Site $siteUrl -List $trimLibName
@@ -82,3 +85,28 @@ Add-PnPFile `
 
 $list.EnableVersioning
 $list.MajorVersionLimit
+
+
+## Tenant wide version trim!
+
+# Trim existing versions AND set version policy on all libraries
+New-SPOTenantApplyFileVersionPolicyJob -TrimVersions -SetVersionPolicy
+
+# Or trim only (without updating library policies)
+New-SPOTenantApplyFileVersionPolicyJob -TrimVersions
+
+# Or set policy only (without trimming existing versions)
+New-SPOTenantApplyFileVersionPolicyJob -SetVersionPolicy
+
+# Or specify a custom version policy object
+$policy = Get-SPOVersionPolicyWithChanges -VersionPolicy (Get-SPOTenantVersionPolicy) -EnableAutoExpirationVersionTrim $true
+New-SPOTenantApplyFileVersionPolicyJob -VersionPolicy $policy -TrimVersions
+
+## Monitor
+Get-SPOTenantApplyFileVersionPolicyJobProgress
+
+## Cancel
+Remove-SPOTenantApplyFileVersionPolicyJob
+
+$siteUrl = "https://enchantedrock.sharepoint.com/sites/SOC"
+Get-SPOSite -Identity $siteUrl | FL *archive*

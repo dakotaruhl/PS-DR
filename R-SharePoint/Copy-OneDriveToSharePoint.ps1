@@ -122,20 +122,20 @@ and processing continues with the remaining items. A failure during initializati
 connection, source discovery, or destination validation terminates the migration.
 
 .EXAMPLE
-.\Copy-OneDriveToSharePoint.ps1 `
-    -SourceUserUPN "kclothier@erock.com" `
-    -DestinationSiteUrl "https://enchantedrock.sharepoint.com/sites/Safety" `
-    -DestinationSiteRelativeFolder "Shared Documents/Archive/Kevin Clothier - OneDrive"
+.\R-SharePoint\Copy-OneDriveToSharePoint.ps1 `
+    -SourceUserUPN "RJung@erock.com" `
+    -DestinationSiteUrl "https://enchantedrock.sharepoint.com/sites/EEs/" `
+    -DestinationSiteRelativeFolder "Shared Documents/Archive/Robyn Jung - OneDrive"
 
 Copies the user's OneDrive Documents content to the specified SharePoint archive folder.
 
 .EXAMPLE
 .\R-SharePoint\Copy-OneDriveToSharePoint.ps1 `
-    -SourceUserUPN "sstraight@erock.com" `
-    -DestinationSiteUrl "https://enchantedrock.sharepoint.com/sites/Safety" `
-    -DestinationSiteRelativeFolder "Shared Documents/Archive/Serena Straight - OneDrive" `
-    -excludeFolders "Forms,Temporary, Apps, downloads, attachments, desktop, documents" `
-    -excludeFiles "desktop.ini,test.txt"
+    -SourceUserUPN "RJung@erock.com" `
+    -DestinationSiteUrl "https://enchantedrock.sharepoint.com/sites/EEs/" `
+    -DestinationSiteRelativeFolder "Shared Documents/Archive/Robyn Jung - OneDrive" `
+    -excludeFolders "Forms,Temporary,Apps,downloads,attachments" `
+    -excludeFiles "desktop.ini"
 
 Performs the migration while excluding the specified top-level files and folders.
 #>
