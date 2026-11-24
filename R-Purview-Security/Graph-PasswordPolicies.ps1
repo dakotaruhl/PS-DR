@@ -10,11 +10,25 @@ Connect-MgGraph `
     -CertificateThumbprint $Thumbprint `
     -NoWelcome
 
-$user = "svc_FAT_SPSync5@erock.com"
+$user = "svc-powerplatform-exchange@erock.com"
 
 Update-MgUser -UserId $user -passwordProfile @{forceChangePasswordNextSignIn = $false}
 Update-MgUser -UserId $user -PasswordPolicies "DisablePasswordExpiration"
 
 Get-MgUser -UserId $user | select-object DisplayName, UserPrincipalName
 Get-MgUser -UserId $user -Property PasswordPolicies | Select-Object PasswordPolicies
-Get-MgUser -UserId $user -Property PasswordProfile | Select-Object -ExpandProperty PasswordProfile
+
+#check password policy worked 
+try {
+    Update-MgUser `
+        -UserId $user `
+        -PasswordProfile @{
+            ForceChangePasswordNextSignIn = $false
+        } `
+        -ErrorAction Stop
+
+    Write-Host "SUCCESS: PasswordProfile update was accepted by Microsoft Graph." -ForegroundColor Green
+}
+catch {
+    Write-Host "FAILED: $($_.Exception.Message)" -ForegroundColor Red
+}
